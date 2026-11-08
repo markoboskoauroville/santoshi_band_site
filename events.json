@@ -53,6 +53,10 @@
     "credit": {
      "en": "Stills from our concert video.",
      "hr": "Kadrovi iz našeg videa s koncerta."
+    },
+    "video": {
+     "src": "img/report/2026-11-07/diwali-9x16.mp4",
+     "poster": "img/report/2026-11-07/diwali-9x16.jpg"
     }
    }
   },
