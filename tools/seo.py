@@ -12,23 +12,23 @@ J = lambda f: json.load(open(os.path.join(ROOT, f)))
 e = html.escape
 
 PAGES = {  # path: (route, title, description)
- "": ("coming", "Santoshi Kirtan Band · kirtan and bhajans in Zagreb",
+ "": ("coming", "Santoshi Band",
       "Santoshi Kirtan Band from Zagreb sings kirtan and bhajans: where to sing with us next, and every concert so far. Listen to our live concerts and sing along."),
- "player/": ("player", "Live at the Navaratri Celebration · Santoshi Kirtan Band",
+ "player/": ("player", "Live at the Navaratri Celebration · Santoshi Band",
       "Listen to the whole Navaratri concert of Santoshi Kirtan Band, 17 October 2026, Czech National House, Zagreb: eight bhajans, 1 h 41 min."),
- "video/": ("video", "Video · Santoshi Kirtan Band live",
+ "video/": ("video", "Video · Santoshi Band live",
       "Watch Santoshi Kirtan Band: the Navaratri concert in Zagreb, 17 October 2026, and every video of the band, by theme."),
- "coming-up/": ("coming", "Coming up · Santoshi Kirtan Band concerts in Zagreb",
+ "coming-up/": ("coming", "Coming up · Santoshi Band concerts in Zagreb",
       "Where to hear Santoshi Kirtan Band next: kirtan and bhajan nights in Zagreb, entry free, donations welcome. Come, sit, sing along."),
- "songs/": ("songs", "The mantras we sing · Santoshi Kirtan Band",
+ "songs/": ("songs", "The mantras we sing · Santoshi Band",
       "Kirtan explained and every mantra we sing: the words in Sanskrit, what they mean in English and Croatian, and a recording of each."),
- "band/": ("band", "The band · Santoshi Kirtan Band, Zagreb",
+ "band/": ("band", "The band · Santoshi Band, Zagreb",
       "Seven musicians from Zagreb: voices, guitars, bass, mridangam, harmonium, djembe and tambourine. Meet Santoshi Kirtan Band."),
- "equipment/": ("equipment", "Our sound and video rack · Santoshi Kirtan Band",
+ "equipment/": ("equipment", "Our sound and video rack · Santoshi Band",
       "How a kirtan band records every concert: one rolling rack with the mixer, the camera tablet, microphones and cables, and the full list."),
- "photos/": ("photos", "Photos · Santoshi Kirtan Band",
+ "photos/": ("photos", "Photos · Santoshi Band",
       "Photographs from Santoshi Kirtan Band's concerts in Zagreb."),
- "donate/": ("donate", "Support the band · Santoshi Kirtan Band",
+ "donate/": ("donate", "Support the band · Santoshi Band",
       "Help Santoshi Kirtan Band keep singing and recording: how to give."),
 }
 
