@@ -673,7 +673,6 @@ function load(i, play, at = 0) {
   $("nowK").textContent = `${n} / ${String(TRACKS.length).padStart(2, "0")}` + (so.to ? (document.documentElement.lang === "hr" ? ` · za ${so.to.hr}` : ` · to ${so.to.en}`) : "");
   $("nowS").textContent = so.medley ? (document.documentElement.lang === "hr" ? so.medley.hr : so.medley.en) : "Santoshi Kirtan Band · Navaratri 17.10.2026";
   $("dur").textContent = fmt(d);
-  document.title = `${title} · Santoshi Kirtan Band`;
   rows.forEach((li, j) => li.classList.toggle("on", j === i));
   $("prev").disabled = false; $("next").disabled = i === TRACKS.length - 1;
   getPeaks(n).then(() => draw());
