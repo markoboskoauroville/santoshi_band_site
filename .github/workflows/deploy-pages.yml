@@ -1,0 +1,20 @@
+name: Deploy to Cloudflare Pages
+# santoshi_band_site (public, 8.11.2026): only the published files of the Santoshi sites, so GitHub Actions runs free.
+# The workshop (notes, drafts, build tools) stays in the private repo santoshi_band, whose tools/publish_site.sh copies
+# the built page here and pushes.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy both sites
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then echo "::error::CLOUDFLARE_API_TOKEN secret is not set"; exit 1; fi
+          bash tools/deploy.sh

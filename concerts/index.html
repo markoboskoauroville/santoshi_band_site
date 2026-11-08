@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mantra Santoshi Concerts</title>
+<meta name="description" content="The Santoshi kirtan concert of 17.10.2026: how the multitrack was prepared in Ableton Live, played back into an Allen &amp; Heath CQ-12T for a virtual soundcheck, and mixed and recorded on the desk.">
+<meta property="og:title" content="Mantra Santoshi Concerts">
+<meta property="og:description" content="One kirtan evening, ten recorded channels, one small mixer: the preparation, the virtual soundcheck and the mix.">
+<meta property="og:image" content="https://mantrasantoshiconcerts.pages.dev/img/10.jpg">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;1,300&family=IBM+Plex+Sans:wght@300;500&family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --night: #0d0a0b; --card: rgba(30,22,20,.72); --edge: rgba(224,162,87,.20);
+    --ink: #f2ece4; --ink2: #b9ad9d; --quiet: #85796f;
+    --brass: #e0a257; --brass-hi: #f3c97a; --cushion: #a8432f; --sky: #7fb2d9;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; color: var(--ink); background: var(--night);
+    font: 300 17px/1.7 "IBM Plex Sans", system-ui, sans-serif;
+  }
+  body::before {
+    content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background:
+      radial-gradient(60vw 50vh at 85% 0%, rgba(224,162,87,.14), transparent 70%),
+      radial-gradient(50vw 60vh at 0% 45%, rgba(168,67,47,.12), transparent 70%),
+      radial-gradient(70vw 40vh at 50% 100%, rgba(224,162,87,.08), transparent 70%);
+  }
+  a { color: var(--brass-hi); }
+  b, strong { font-weight: 500; color: var(--ink); }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+  h1, h2, h3 { font-family: Spectral, Georgia, serif; font-weight: 300; margin: 0; }
+  h1 { font-size: clamp(42px, 7vw, 76px); line-height: 1.02; }
+  h1 em, h2 em { color: var(--brass); }
+  h2 { font-size: clamp(28px, 4.2vw, 42px); line-height: 1.15; margin-bottom: 14px; }
+  h3 { font-size: 23px; margin-bottom: 6px; }
+  .eyebrow { font: 400 11px/1 "IBM Plex Mono", monospace; letter-spacing: .26em; text-transform: uppercase; color: var(--brass); margin-bottom: 16px; }
+  section { padding: 84px 0; }
+  p { margin: 0 0 14px; color: var(--ink2); }
+  .lead { font-size: 19px; color: var(--ink2); max-width: 36em; }
+  .card { background: var(--card); border: 1px solid var(--edge); border-radius: 22px; padding: 26px; box-shadow: 0 24px 60px rgba(0,0,0,.45); }
+  .card p:last-child { margin-bottom: 0; }
+  .quiet { color: var(--quiet); font-size: 14.5px; }
+  .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--brass-hi); box-shadow: 0 0 10px var(--brass); margin-right: 8px; vertical-align: middle; }
+  .num { font: 400 11px/1 "IBM Plex Mono", monospace; letter-spacing: .22em; color: var(--brass); margin-bottom: 12px; }
+  .mono { font-family: "IBM Plex Mono", monospace; font-size: .92em; }
+
+  header { padding: 56px 0 30px; }
+  .hero { display: grid; grid-template-columns: 1fr 1.15fr; gap: 44px; align-items: center; }
+  .hero .status { font-size: 14.5px; color: var(--quiet); margin-top: 22px; }
+  .photo { position: relative; border-radius: 22px; overflow: hidden; border: 1px solid var(--edge); box-shadow: 0 30px 80px rgba(0,0,0,.6); background: radial-gradient(circle at 30% 30%, rgba(224,162,87,.22), rgba(30,22,20,.9) 70%); aspect-ratio: 16/9; }
+  .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .split { display: grid; grid-template-columns: 1.1fr 1fr; gap: 36px; align-items: center; margin-top: 30px; }
+  .mt { margin-top: 30px; }
+  .hero > *, .grid2 > *, .grid3 > *, .split > * { min-width: 0; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  th, td { text-align: left; padding: 11px 10px; border-bottom: 1px solid rgba(255,255,255,.06); vertical-align: top; }
+  th { font: 400 11px/1.3 "IBM Plex Mono", monospace; letter-spacing: .18em; text-transform: uppercase; color: var(--brass); }
+  td { color: var(--ink2); }
+  td:first-child { color: var(--ink); white-space: nowrap; }
+  td.t { font-family: "IBM Plex Mono", monospace; font-size: 14px; color: var(--brass-hi); white-space: nowrap; }
+  .scroll { overflow-x: auto; }
+
+  /* diagrams: drawn, never photographed */
+  .dia-wrap { overflow-x: auto; }
+  svg.dia { width: 100%; min-width: 640px; height: auto; display: block; }
+  svg.dia.small { min-width: 0; }
+  svg.dia text { font-family: "IBM Plex Mono", monospace; fill: var(--ink2); font-size: 12px; }
+  svg.dia .t-big { fill: var(--ink); font-size: 15px; }
+  svg.dia .t-small { font-size: 11.5px; fill: var(--quiet); }
+  svg.dia .t-brass { fill: var(--brass-hi); }
+  svg.dia .box { fill: rgba(30,22,20,.92); stroke: rgba(224,162,87,.35); }
+  svg.dia .box.hi { stroke: var(--brass-hi); filter: drop-shadow(0 0 8px rgba(224,162,87,.35)); }
+  svg.dia .box.dim { stroke: rgba(255,255,255,.12); }
+  svg.dia .w { stroke: var(--brass); stroke-width: 2; fill: none; }
+  svg.dia .w2 { stroke: var(--sky); stroke-width: 2; fill: none; }
+  svg.dia .wd { stroke: var(--quiet); stroke-width: 1.6; fill: none; stroke-dasharray: 6 5; }
+  svg.dia .grid { stroke: rgba(255,255,255,.07); }
+  .key-line { display: flex; flex-wrap: wrap; gap: 6px 22px; font: 400 12px/1.6 "IBM Plex Mono", monospace; color: var(--ink2); margin-top: 12px; }
+  .key-line i { display: inline-block; width: 26px; height: 0; border-top: 2px solid var(--c); vertical-align: middle; margin-right: 8px; }
+  .key-line i.d { border-top-style: dashed; }
+
+  ol.road { list-style: none; counter-reset: r; padding: 0; margin: 0; }
+  ol.road li { counter-increment: r; position: relative; padding: 0 0 20px 58px; color: var(--ink2); }
+  ol.road li::before { content: counter(r, decimal-leading-zero); position: absolute; left: 0; top: 3px; font: 400 12px/1 "IBM Plex Mono", monospace; letter-spacing: .2em; color: var(--brass); }
+  ol.road li > b:first-child { display: block; color: var(--ink); font-weight: 500; }
+  ol.road li b { color: var(--ink); font-weight: 500; }
+
+  .rule { border-left: 2px solid var(--brass); padding: 4px 0 4px 20px; margin: 26px 0 0; font-family: Spectral, Georgia, serif; font-style: italic; font-size: 21px; color: var(--ink); max-width: 38em; }
+  .rule small { display: block; font: 300 14.5px/1.6 "IBM Plex Sans", sans-serif; font-style: normal; color: var(--quiet); margin-top: 6px; }
+
+  .vals { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 14px; }
+  .vals div { background: rgba(255,240,220,.035); border: 1px solid rgba(255,255,255,.07); border-radius: 12px; padding: 10px 12px; }
+  .vals span { display: block; font: 400 10.5px/1.3 "IBM Plex Mono", monospace; letter-spacing: .16em; text-transform: uppercase; color: var(--quiet); }
+  .vals b { font: 400 17px/1.4 "IBM Plex Mono", monospace; color: var(--brass-hi); }
+
+  .lessons { columns: 2; column-gap: 36px; padding: 0; margin: 18px 0 0; list-style: none; }
+  .lessons li { break-inside: avoid; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,.05); color: var(--ink2); }
+  .lessons li span { font: 400 11px/1 "IBM Plex Mono", monospace; color: var(--brass); margin-right: 10px; letter-spacing: .14em; }
+
+  .kit { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 22px; }
+  .kit .card { display: flex; flex-direction: column; }
+  .kit .card p { flex: 1; }
+  .kit .price { font: 400 12px/1 "IBM Plex Mono", monospace; letter-spacing: .14em; color: var(--brass); margin-bottom: 12px; }
+  .kit .fit { font: 400 10.5px/1.3 "IBM Plex Mono", monospace; letter-spacing: .16em; text-transform: uppercase; color: var(--quiet); margin: -4px 0 10px; }
+  .buy { align-self: flex-start; text-decoration: none; font: 500 15px/1 "IBM Plex Sans", sans-serif; color: #22150a; background: linear-gradient(90deg, #f6d394, #e0a257); padding: 13px 20px; border-radius: 999px; box-shadow: 0 6px 22px rgba(224,162,87,.25); }
+  @media (max-width: 860px) { .kit { grid-template-columns: 1fr; } }
+
+  footer { padding: 50px 0 70px; color: var(--quiet); font-size: 14px; border-top: 1px solid rgba(255,255,255,.05); }
+
+  @media (max-width: 860px) {
+    .hero, .grid2, .split { grid-template-columns: 1fr; }
+    .grid3 { grid-template-columns: 1fr; }
+    .vals { grid-template-columns: 1fr 1fr; }
+    .lessons { columns: 1; }
+    section { padding: 60px 0; }
+    .card { padding: 20px; }
+  }
+</style>
+<script src="https://speechifykeys.pages.dev/speechify-keys.js" defer></script>
+</head>
+<body>
+
+<header>
+  <div class="wrap hero">
+    <div>
+      <div class="eyebrow">Santoshi · kirtan · 17.10.2026</div>
+      <h1>The Santoshi<br><em>Concert Mix</em></h1>
+      <p class="lead" style="margin-top:22px">One evening of kirtan, eight songs, ten recorded channels. How the multitrack was prepared, played back into a small digital mixer as if the band were on stage again, and mixed by hand on its faders.</p>
+      <p class="status"><span class="dot"></span>Prepared 23 and 24 October 2026. The levelling on the faders is Marko's, and it is his ears that finish the mix.</p>
+    </div>
+    <div class="photo"><img src="img/10.jpg" alt="A kirtan band in a warm hall: singers at the front, guitars, a mridangam and a djembe, a tapestry behind them"></div>
+  </div>
+</header>
+
+<section id="concert">
+  <div class="wrap">
+    <div class="eyebrow">01 · The concert</div>
+    <h2>Eight songs, about two hours, <em>every voice on its own track</em></h2>
+    <p class="lead">On 17 October 2026 the Santoshi band played a kirtan evening for Navratri. The venue's Behringer XR18 mixed the sound for the room and, at the same time, sent each input to Ableton Live on a Windows PC, which recorded them as separate files: 24-bit, 48 kHz, about 11 GB.</p>
+    <div class="split">
+      <div>
+        <p>The evening was recorded in two halves. In the middle of the concert Igor's guitar broke. Its pickup (<b>Igor DI</b>) goes silent, and the new guitar was caught on a microphone (<b>Igor MIC</b>) for the second half. That is why there are ten mono channels. The venue's own stereo mix was recorded too, as an eleventh track, and is kept as a backup and a reference.</p>
+        <p class="quiet">Three inputs of the XR18 were not recorded: krist VOC, snoopy MIC and petra.</p>
+      </div>
+      <div class="photo"><img src="img/9.jpg" alt="Singers in a hall, lit by warm light" loading="lazy"></div>
+    </div>
+
+    <div class="card scroll mt" id="songs">
+      <h3>The eight songs</h3>
+      <p class="quiet">Each one has a locator in Live, so one click jumps to its start.</p>
+      <table>
+        <tr><th>#</th><th>Starts at</th><th>Song</th></tr>
+        <tr><td>1</td><td class="t">7:54</td><td>Jai Ganesha Pahi Mam</td></tr>
+        <tr><td>2</td><td class="t">16:52</td><td>Ambe Jagadambe</td></tr>
+        <tr><td>3</td><td class="t">26:45</td><td>Kali Kali Maha Maya (Sarva Mangala, He Mata Kali, Jaya Jagadambe)</td></tr>
+        <tr><td>4</td><td class="t">49:04</td><td>Sarasvati Maha Lakšmi (a soft voice intro until 50:54)</td></tr>
+        <tr><td>5</td><td class="t">62:40</td><td>Kailasha Vasa Maha deva</td></tr>
+        <tr><td>6</td><td class="t">72:00</td><td>Uma Parvati Ananda Ma</td></tr>
+        <tr><td>7</td><td class="t">88:16</td><td>Rama Rama Jaya Raja Ram</td></tr>
+        <tr><td>8</td><td class="t">104:09</td><td>Asatoma Sadgamaya (after the words "for the end we always play one beautiful mantra")</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="prepare">
+  <div class="wrap">
+    <div class="eyebrow">02 · Preparing the multitrack</div>
+    <h2>Before any fader moves, <em>the recording is made ready</em></h2>
+    <p class="lead">The Live set came from Windows, with every file offline and every track called "1-Audio", "2-Audio" and so on. Four things were done to it on the Mac.</p>
+
+    <div class="grid2 mt">
+      <div class="card"><div class="num">01 · RELINK</div><h3>The files found again</h3><p>Every file reference in the set pointed at <span class="mono">D:/Documents/…</span>. The paths were rewritten inside the saved set, and the recordings were hard-linked into the project's Samples folder, so nothing was copied and no extra 11 GB were used.</p></div>
+      <div class="card"><div class="num">02 · NAMES</div><h3>Named after the XR18's labels</h3><p>A photo of the venue's X AIR Edit screen gave the label of every input. Each track was named after the input it actually recorded, not after its position: the first attempt was one channel off, so the recorded input number now comes first, then the label for that number.</p></div>
+      <div class="card"><div class="num">03 · BY EAR AND BY MEASURE</div><h3>The percussion identified</h3><p>Three labels said little ("mic_3", "mic_4", "harm"). A sound analysis (how percussive, how much energy under 250 Hz, what pitch) showed a hand drum and a high and a low percussion. Marko then named them: the <b>mridangam's</b> two heads and the <b>djembe</b>.</p></div>
+      <div class="card"><div class="num">04 · MARKERS</div><h3>The songs found by their silences</h3><p>The venue mix was measured for its quiet gaps (−45 dB and under, smoothed over 20 seconds), each start walked back so a soft intro stays with its song. Then speech recognition (Whisper) listened to the first words after each gap to confirm which song begins there. The eight locators were written into the set at those times.</p></div>
+    </div>
+
+    <div class="split" style="margin-top:50px">
+      <div>
+        <h3>Every channel to the same level</h3>
+        <p>Almost every recording already touched 0 dBFS, and the two mridangam microphones clipped at the concert itself; that distortion is in the files. Peak normalizing does nothing to files that already reach the top, and making them all equally <em>loud</em> would push the short, spiky drums over the ceiling again.</p>
+        <p>So each clip was cut into 100 ms windows and the level that 99 % of their peaks stay under was found: its <b>typical peak</b>. Each clip's gain sets that typical peak to <b>−12 dBFS</b> (the gains came out between −4.6 and −12.0 dB), and every Live track fader stays at 0 dB. Every channel now reaches the mixer at the same working level, with 12 dB of headroom above it.</p>
+      </div>
+      <div class="card">
+        <svg class="dia small" viewBox="0 0 420 300" role="img" aria-label="Diagram: the typical peak of every channel set to minus 12 dBFS, leaving 12 dB of headroom under 0 dBFS">
+          <line class="grid" x1="40" y1="40" x2="400" y2="40"/>
+          <line class="grid" x1="40" y1="250" x2="400" y2="250"/>
+          <rect x="40" y="40" width="360" height="70" fill="rgba(224,162,87,.08)"/>
+          <text x="46" y="34" class="t-small">0 dBFS · the ceiling</text>
+          <text x="396" y="66" text-anchor="end" class="t-brass">12 dB of headroom</text>
+          <line x1="40" y1="110" x2="400" y2="110" stroke="#f3c97a" stroke-width="2" stroke-dasharray="7 5"/>
+          <text x="396" y="102" text-anchor="end" class="t-small">−12 dBFS · every typical peak</text>
+          <g fill="rgba(224,162,87,.55)">
+            <rect x="70" y="110" width="22" height="140" rx="3"/><rect x="104" y="110" width="22" height="140" rx="3"/>
+            <rect x="138" y="110" width="22" height="140" rx="3"/><rect x="172" y="110" width="22" height="140" rx="3"/>
+            <rect x="206" y="110" width="22" height="140" rx="3"/><rect x="240" y="110" width="22" height="140" rx="3"/>
+            <rect x="274" y="110" width="22" height="140" rx="3"/><rect x="308" y="110" width="22" height="140" rx="3"/>
+            <rect x="342" y="110" width="22" height="140" rx="3"/>
+          </g>
+          <g fill="#f3c97a"><rect x="81" y="70" width="2" height="40"/><rect x="149" y="84" width="2" height="26"/><rect x="183" y="62" width="2" height="48"/><rect x="115" y="78" width="2" height="32"/></g>
+          <text x="220" y="275" text-anchor="middle" class="t-small">ten channels, ten clip gains, faders at 0 dB</text>
+          <text x="220" y="292" text-anchor="middle" class="t-small">the rare loud hits still have room</text>
+        </svg>
+      </div>
+    </div>
+
+    <p class="rule">"This normalization of the sound should be before every mix. When I bring in a mix, you need to put all the channels to −12 dB."<small>Marko, 24.10.2026. Now the first step with any new multitrack.</small></p>
+
+    <div class="grid2 mt">
+      <div class="photo"><img src="img/5.jpg" alt="A laptop showing a multitrack arrangement" loading="lazy"></div>
+      <div class="photo"><img src="img/6.jpg" alt="Level meters glowing on a mixer" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+<section id="soundcheck">
+  <div class="wrap">
+    <div class="eyebrow">03 · The virtual soundcheck</div>
+    <h2>The band plays again, <em>from a laptop into a mixer</em></h2>
+    <p class="lead">One USB cable joins the Mac and Marko's Allen &amp; Heath CQ-12T, and it carries sixteen channels each way. Live sends every recorded track to its own output, and each CQ input listens to the USB channel of its number instead of its socket. On the desk, the ten musicians arrive on ten faders, exactly as if they were on stage.</p>
+
+    <div class="card mt">
+      <div class="dia-wrap">
+      <svg class="dia" viewBox="0 0 1000 400" role="img" aria-label="Signal flow: ten Live tracks to Ext. Out 1 to 10, over USB to CQ inputs 1 to 10, processed and summed to Main LR with the glue compressor, to the speakers and the SD card; the venue mix, one stereo track on Ext. Out 11/12, to the CQ's ST IN channel named House, heard only in the headphones">
+        <rect class="box" x="10" y="30" width="230" height="200" rx="14"/>
+        <text class="t-big" x="125" y="62" text-anchor="middle">Ableton Live</text>
+        <text class="t-small" x="125" y="86" text-anchor="middle">10 mono tracks</text>
+        <text class="t-small" x="125" y="106" text-anchor="middle">clip gains to −12 dBFS</text>
+        <text class="t-small" x="125" y="126" text-anchor="middle">faders 0 dB</text>
+        <text x="125" y="160" text-anchor="middle" class="t-brass">Ext. Out 1 – 10</text>
+        <text class="t-small" x="125" y="182" text-anchor="middle">track N → output N</text>
+        <rect class="box dim" x="10" y="270" width="230" height="100" rx="14"/>
+        <text class="t-big" x="125" y="302" text-anchor="middle">Venue Mix</text>
+        <text class="t-small" x="125" y="326" text-anchor="middle">one stereo track</text>
+        <text x="125" y="350" text-anchor="middle" fill="#7fb2d9">Ext. Out 11 / 12</text>
+
+        <path class="w" d="M240 130 L320 130"/><path class="w2" d="M240 320 L320 320"/>
+        <rect class="box" x="320" y="70" width="90" height="290" rx="12"/>
+        <text class="t-big" x="365" y="205" text-anchor="middle">USB</text>
+        <text class="t-small" x="365" y="226" text-anchor="middle">16 ⇄ 16</text>
+        <path class="w" d="M410 130 L470 130"/><path class="w2" d="M410 320 L470 320"/>
+
+        <rect class="box hi" x="470" y="40" width="220" height="180" rx="14"/>
+        <text class="t-big" x="580" y="72" text-anchor="middle">CQ-12T · Ip1 – Ip10</text>
+        <text class="t-small" x="580" y="96" text-anchor="middle">source SD/USB</text>
+        <text class="t-small" x="580" y="118" text-anchor="middle">Quick preset + compressor</text>
+        <text class="t-small" x="580" y="140" text-anchor="middle">voices → FX1 reverb</text>
+        <text x="580" y="174" text-anchor="middle" class="t-brass">Marko's faders</text>
+        <rect class="box dim" x="470" y="270" width="220" height="100" rx="14"/>
+        <text class="t-big" x="580" y="302" text-anchor="middle">CQ ST IN · House</text>
+        <text class="t-small" x="580" y="326" text-anchor="middle">source SD/USB · fader Off</text>
+        <text class="t-small" x="580" y="348" text-anchor="middle">never in the mix</text>
+
+        <path class="w" d="M690 130 L740 130"/>
+        <rect class="box hi" x="740" y="70" width="110" height="120" rx="12"/>
+        <text class="t-big" x="795" y="118" text-anchor="middle">Main LR</text>
+        <text class="t-small" x="795" y="142" text-anchor="middle">glue</text>
+        <text class="t-small" x="795" y="160" text-anchor="middle">compressor</text>
+        <path class="w" d="M850 100 L880 70"/><path class="w" d="M850 160 L880 180"/>
+        <rect class="box" x="880" y="40" width="110" height="56" rx="10"/><text class="t-big" x="935" y="74" text-anchor="middle">Speakers</text>
+        <rect class="box" x="880" y="150" width="110" height="64" rx="10"/><text class="t-big" x="935" y="178" text-anchor="middle">SD card</text><text class="t-small" x="935" y="198" text-anchor="middle">the recording</text>
+        <rect class="box" x="760" y="280" width="230" height="80" rx="12"/>
+        <text class="t-big" x="875" y="312" text-anchor="middle">Headphones</text>
+        <text class="t-small" x="875" y="336" text-anchor="middle">House's Listen key</text>
+        <path class="w2" d="M690 320 L760 320"/>
+        <path class="wd" d="M800 190 L840 280"/>
+      </svg>
+      </div>
+      <div class="key-line">
+        <span><i style="--c:var(--brass)"></i>the ten channels and your mix</span>
+        <span><i style="--c:var(--sky)"></i>the venue mix, for comparing only</span>
+        <span><i class="d" style="--c:var(--quiet)"></i>the main mix in the headphones when no Listen key is pressed</span>
+      </div>
+    </div>
+
+    <div class="card scroll mt" id="channels">
+      <h3>The ten channels</h3>
+      <p class="quiet">Live track, the XR18 input it was recorded from, its name on the CQ (six characters at most) and the Quick preset chosen for it. The last row is the venue's own mix, for listening only.</p>
+      <table>
+        <tr><th>Live · Ext. Out</th><th>Track</th><th>XR18 input</th><th>What it is</th><th>CQ</th><th>Quick preset</th></tr>
+        <tr><td>1</td><td>svemir VOC</td><td>1</td><td>male voice</td><td>SvmVOC</td><td>Vocal · Lo Pitch · Comp</td></tr>
+        <tr><td>2</td><td>bas</td><td>2</td><td>bass</td><td>bas</td><td>Bass · Clean · Comp</td></tr>
+        <tr><td>3</td><td>Mridangam</td><td>3 (mic_3)</td><td>mridangam, the high head</td><td>Mrdngm</td><td>Drums/Perc · Acoustic Perc. · Full · Comp</td></tr>
+        <tr><td>4</td><td>Mridangam Low</td><td>4 (mic_4)</td><td>mridangam, the low head</td><td>MrdLow</td><td>Drums/Perc · Tom · 16" · Comp</td></tr>
+        <tr><td>5</td><td>Djembe</td><td>5 (harm)</td><td>djembe</td><td>Djembe</td><td>Drums/Perc · Acoustic Perc. · Warm · Comp</td></tr>
+        <tr><td>6</td><td>Igor VOC</td><td>7</td><td>male voice</td><td>IgVOC</td><td>Vocal · Lo Pitch · Comp</td></tr>
+        <tr><td>7</td><td>Igor DI</td><td>8</td><td>Igor's guitar pickup, first half</td><td>IgDI</td><td>Guitar · Acoustic · Comp</td></tr>
+        <tr><td>8</td><td>tajana</td><td>10</td><td>female lead voice</td><td>tajana</td><td>Vocal · Hi Pitch · Comp</td></tr>
+        <tr><td>9</td><td>snoopy DI</td><td>11</td><td>Snoopy's guitar pickup</td><td>SnpDI</td><td>Guitar · Acoustic · Comp</td></tr>
+        <tr><td>10</td><td>Igor MIC</td><td>9</td><td>the new guitar on a microphone, second half</td><td>IgMIC</td><td>Guitar · Acoustic · Comp</td></tr>
+        <tr><td>11 / 12</td><td>Venue Mix (stereo)</td><td>17 / 18</td><td>the venue's stereo mix, the house mix, reference only</td><td>House (ST IN, source SD/USB)</td><td>fader Off, Listen only</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="desk">
+  <div class="wrap">
+    <div class="eyebrow">04 · The desk</div>
+    <h2>Names, presets, one reverb, <em>one gentle glue</em></h2>
+    <p class="lead">The CQ was set from CQ MixPad on the Mac. The tone of each channel is a starting point chosen by its sound; the balance between them is left to the faders.</p>
+
+    <div class="grid3 mt">
+      <div class="card"><div class="num">INPUTS 1–10</div><h3>A preset for each instrument</h3><p>Every input on source SD/USB, named after its Live track, with the CQ's Quick preset that fits it: low-pitch vocal for Svemir and Igor, high-pitch vocal for Tajana, clean bass, acoustic guitar for the two pickups and the guitar microphone, and percussion presets for the mridangam and the djembe. Each preset carries its own compressor.</p></div>
+      <div class="card"><div class="num">FX1</div><h3>Reverb on a send</h3><p>The easyVERB, type <b>Vocal Classic</b>, shared. Only the three voices send to it, SvmVOC, IgVOC and tajana, each at <b>−13.3 dB</b>. The drums and the bass send nothing: reverb on them would blur the rhythm. All voices share one room, and the reverb has one fader of its own.</p></div>
+      <div class="card"><div class="num">MAIN LR</div><h3>The glue compressor</h3><p>The CQ has one plain compressor type, no special "glue" model, so it is set gently enough to act as one: it only works in the loud parts, and the whole band breathes together.</p>
+        <div class="vals">
+          <div><span>Detect</span><b>RMS</b></div><div><span>Knee</span><b>Soft</b></div><div><span>Ratio</span><b>1.9:1</b></div>
+          <div><span>Threshold</span><b>−14.4 dB</b></div><div><span>Attack</span><b>24.5 ms</b></div><div><span>Release</span><b>184 ms</b></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="split" style="margin-top:44px">
+      <div class="card">
+        <svg class="dia small" viewBox="0 0 480 470" role="img" aria-label="The Main LR compressor's curve: one to one below minus 14.4 dB, then 1.9 to 1 above it, with a soft knee">
+          <g class="grid">
+            <line x1="60" y1="40" x2="60" y2="440"/><line x1="60" y1="440" x2="460" y2="440"/>
+            <line x1="160" y1="40" x2="160" y2="440"/><line x1="260" y1="40" x2="260" y2="440"/><line x1="360" y1="40" x2="360" y2="440"/><line x1="460" y1="40" x2="460" y2="440"/>
+            <line x1="60" y1="140" x2="460" y2="140"/><line x1="60" y1="240" x2="460" y2="240"/><line x1="60" y1="340" x2="460" y2="340"/><line x1="60" y1="40" x2="460" y2="40"/>
+          </g>
+          <path class="wd" d="M60 440 L460 40"/>
+          <line x1="316" y1="40" x2="316" y2="440" stroke="rgba(243,201,122,.35)" stroke-dasharray="4 5"/>
+          <path d="M60 440 L276 224 Q316 184 356 162.9 L460 108.2" fill="none" stroke="#f3c97a" stroke-width="3"/>
+          <circle cx="316" cy="184" r="4" fill="#f3c97a"/>
+          <text x="322" y="200" class="t-brass">threshold −14.4 dB</text>
+          <text x="370" y="96" class="t-small">1.9 : 1</text>
+          <text x="380" y="60" class="t-small">1 : 1</text>
+          <text x="60" y="462" class="t-small">−40</text><text x="452" y="462" class="t-small">0</text>
+          <text x="200" y="462" class="t-small">input, dB</text>
+          <text x="8" y="44" class="t-small">0</text><text x="8" y="444" class="t-small">−40</text>
+          <text x="8" y="246" class="t-small">out</text>
+        </svg>
+        <p class="quiet" style="margin-top:10px">Drawn from the values on the CQ. Above the threshold, 1.9 dB in gives 1 dB out; a full-scale peak comes out about 7 dB lower.</p>
+      </div>
+      <div>
+        <div class="photo"><img src="img/8.jpg" alt="A mridangam played by hand" loading="lazy"></div>
+        <p class="quiet" style="margin-top:14px">The attack of 24.5 ms is slow enough to let the first hit of the mridangam through, so the drums stay alive; the release of 184 ms lets go in time with the music.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="usb">
+  <div class="wrap">
+    <div class="eyebrow">05 · Sixteen channels each way</div>
+    <h2>What the USB cable carries, <em>measured on the meters</em></h2>
+    <p class="lead">The user guide does not say plainly where the computer's channels 11 to 16 arrive. Allen &amp; Heath's support article <a href="https://support.allen-heath.com/hc/en-gb/articles/31464715078929" target="_blank" rel="noopener">"CQ. USB-B Routing"</a> does: from the computer to the CQ-12T the sixteen channels are fixed, and only the way back to the computer can be chosen. Then each pair was tried from Live, watching the meters in CQ MixPad.</p>
+    <div class="grid2 mt">
+      <div class="card">
+        <div class="num">CQ → MAC</div>
+        <svg class="dia small" viewBox="0 0 460 300" role="img" aria-label="From the CQ to the computer: channels 1 to 10 are the ten inputs, 11/12 ST IN, 13/14 Out5/Out6, 15/16 Main LR">
+          <rect class="box hi" x="10" y="10" width="440" height="80" rx="12"/>
+          <text class="t-big" x="30" y="44">1 – 10</text><text class="t-small" x="30" y="68">the ten inputs, one channel each, fixed</text>
+          <rect class="box" x="10" y="110" width="440" height="52" rx="12"/><text class="t-big" x="30" y="142">11 / 12</text><text x="150" y="142" class="t-small">ST IN</text>
+          <rect class="box" x="10" y="174" width="440" height="52" rx="12"/><text class="t-big" x="30" y="206">13 / 14</text><text x="150" y="206" class="t-small">Out5 / Out6</text>
+          <rect class="box" x="10" y="238" width="440" height="52" rx="12"/><text class="t-big" x="30" y="270">15 / 16</text><text x="150" y="270" class="t-small">Main LR</text>
+        </svg>
+        <p class="quiet" style="margin-top:12px">11 to 16 are chosen on the CQ (CONFIG › USB/SD › Channel Assignment). This is what the computer can record.</p>
+      </div>
+      <div class="card">
+        <div class="num">MAC → CQ</div>
+        <svg class="dia small" viewBox="0 0 460 300" role="img" aria-label="From the computer to the CQ, fixed: Ext. Out 1 to 10 play on inputs 1 to 10, 11/12 on ST IN, the House channel with the venue mix, 13/14 on the USB channel, 15/16 on BT (USB), where no meter moved">
+          <rect class="box hi" x="10" y="10" width="440" height="80" rx="12"/>
+          <text class="t-big" x="30" y="44">Ext. Out 1 – 10</text><text class="t-small" x="30" y="68">inputs 1–10, when their source is SD/USB · fixed</text>
+          <rect class="box hi" x="10" y="110" width="440" height="52" rx="12"/><text class="t-big" x="30" y="142">11 / 12</text><text x="150" y="142" class="t-brass">→ ST IN · House · the venue mix</text>
+          <rect class="box" x="10" y="174" width="440" height="52" rx="12"/><text class="t-big" x="30" y="206">13 / 14</text><text x="150" y="206" class="t-small">→ the USB channel · free</text>
+          <rect class="box dim" x="10" y="238" width="440" height="52" rx="12"/><text class="t-big" x="30" y="270">15 / 16</text><text x="150" y="270" class="t-small">→ BT (USB) · no meter moved yet</text>
+        </svg>
+        <p class="quiet" style="margin-top:12px">Fixed by Allen &amp; Heath; measured on Marko's CQ on 24.10.2026. 11/12 plays on ST IN only once its Input Source is SD/USB instead of Analogue. 15/16 should play on BT, but no meter moved there: still an open question.</p>
+      </div>
+    </div>
+    <p class="quiet" style="margin-top:18px">One honest note: "17/18", which first looked like a mystery on the CQ, is not the CQ at all. It is the XR18 input pair the venue mix was recorded from, still shown as the Venue Mix track's input in Live.</p>
+  </div>
+</section>
+
+<section id="compare">
+  <div class="wrap">
+    <div class="eyebrow">06 · Recording and comparing</div>
+    <h2>Two roads <em>that never touch</em></h2>
+    <p class="lead">Marko mixes in real time and records the CQ's Main LR to its SD card (HOME › RECORD). At the same time he can hear the mix the venue made that night, and go back and forth during a whole song.</p>
+    <div class="split">
+      <div>
+        <ol class="road">
+          <li><b>The venue mix, in stereo</b>In Live's Output Config, 11/12, 13/14 and 15/16 are stereo pairs. The venue's stereo file plays on one stereo track, Venue Mix, to Ext. Out 11/12.</li>
+          <li><b>On the House channel, fader at Off</b>It arrives on the CQ's ST IN channel (bank ST IN/FX), its Input Source switched from Analogue to SD/USB and renamed <b>House</b>. With its fader at Off it never enters Main LR, so it never reaches the speakers or the SD card.</li>
+          <li><b>House's Listen key</b>Pressed, the headphones play the venue mix alone. Released, they play Marko's main mix. The recording always takes Main LR; the Listen key changes only what the headphones hear.</li>
+          <li><b>Solo</b>The CQ has no solo-in-place: Listen is for the headphones only (its whole user guide was read to be sure). Because every channel has its own USB return, Live's <b>S</b> button is the solo in the CQ's mix, while not recording.</li>
+        </ol>
+      </div>
+      <div class="photo"><img src="img/4.jpg" alt="A sound engineer with headphones at a small digital mixer during a kirtan concert" loading="lazy"></div>
+    </div>
+    <div class="card mt">
+      <div class="dia-wrap">
+      <svg class="dia" viewBox="0 0 1000 300" role="img" aria-label="Your mix goes to the SD card always; the headphones take the venue mix when House's Listen key is pressed, otherwise your mix">
+        <rect class="box hi" x="20" y="30" width="270" height="100" rx="14"/><text class="t-big" x="155" y="72" text-anchor="middle">Your mix</text><text class="t-small" x="155" y="98" text-anchor="middle">inputs 1–10 → Main LR</text>
+        <rect class="box" x="20" y="170" width="270" height="100" rx="14"/><text class="t-big" x="155" y="212" text-anchor="middle">The venue's mix</text><text class="t-small" x="155" y="238" text-anchor="middle">House (ST IN), fader Off</text>
+        <rect class="box hi" x="710" y="30" width="270" height="100" rx="14"/><text class="t-big" x="845" y="72" text-anchor="middle">SD card</text><text class="t-small" x="845" y="98" text-anchor="middle">records Main LR: always your mix</text>
+        <rect class="box" x="710" y="170" width="270" height="100" rx="14"/><text class="t-big" x="845" y="206" text-anchor="middle">Headphones</text><text class="t-small" x="845" y="230" text-anchor="middle">House Listen on: the venue</text><text class="t-small" x="845" y="250" text-anchor="middle">House Listen off: your mix</text>
+        <path class="w" d="M290 80 L710 80"/><text x="500" y="70" text-anchor="middle" class="t-brass">recording</text>
+        <path class="w2" d="M290 220 L710 220"/><text x="500" y="210" text-anchor="middle" fill="#7fb2d9">Listen key</text>
+        <path class="wd" d="M290 115 L710 195"/><text x="500" y="150" text-anchor="middle" class="t-small">no Listen key</text>
+      </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="scene">
+  <div class="wrap">
+    <div class="eyebrow">07 · Keeping it</div>
+    <h2>One scene called <em>Santoshi Mix</em></h2>
+    <div class="split" style="margin-top:10px">
+      <div>
+        <p class="lead">A scene on the CQ holds the names, the preamps, the processing, the sends and the effects. Scene 1, "Santoshi Mix", was stored before the levelling and overwritten on 23.10.2026 with the named percussion and its new presets.</p>
+        <p>After Marko's levelling: HOME › SCENES › Santoshi Mix › <b>Overwrite</b>. A whole Show (every scene and library) can go to a USB stick from HOME › DATA › Shows › Store New.</p>
+        <p>And if anything is ever lost, the Live set or the CQ's memory, every step and every value is written down in the project's repository, so the whole setup can be repeated from nothing.</p>
+      </div>
+      <div class="photo"><img src="img/11.jpg" alt="Hands on the faders of a small mixer" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+<section id="tutorial">
+  <div class="wrap">
+    <div class="eyebrow">08 · Learning it</div>
+    <h2>The CQ MixPad Tutorial, <em>with this concert as the lesson</em></h2>
+    <div class="split" style="margin-top:10px">
+      <div>
+        <p class="lead">Everything on this page is also taught by a small Mac app: eleven lessons, spoken aloud, with diagrams that light up as the voice speaks and a hand that points to the real controls in CQ MixPad and Ableton Live.</p>
+        <p>It is a Swift app that works offline: the voice is made beforehand, sentence by sentence, never streamed. Its clicks only change pages and banks; nothing in the mix is changed by it. The examples are the Santoshi settings above.</p>
+      </div>
+      <div class="photo"><img src="img/3.jpg" alt="A desk with two screens, a mixer app on one and a lesson on the other" loading="lazy"></div>
+    </div>
+    <ol class="lessons">
+      <li><span>01</span>One cable, two directions</li>
+      <li><span>02</span>From the computer back to the mixer</li>
+      <li><span>03</span>How everything is routed right now</li>
+      <li><span>04</span>The USB preview while you record</li>
+      <li><span>05</span>Preparing the concert in Live: names, markers, −12 dB</li>
+      <li><span>06</span>Gain staging, the level before the mix</li>
+      <li><span>07</span>Equaliser and the high pass filter</li>
+      <li><span>08</span>The compressor on each channel</li>
+      <li><span>09</span>Reverb on a send</li>
+      <li><span>10</span>The glue compressor on the main</li>
+      <li><span>11</span>Balancing the Santoshi mix: voices first, then rhythm, then colour</li>
+    </ol>
+  </div>
+</section>
+
+<section id="stand">
+  <div class="wrap">
+    <div class="eyebrow">09 · A stand for the desk</div>
+    <h2>The CQ-12T off the table, <em>tilted toward the hands</em></h2>
+    <p class="lead">The CQ-12T is 370 × 305 × 190 mm and weighs 3.2 kg. It has no stand thread and no VESA plate. What it has are free M4 holes on its sides, near the rubber feet, made for Allen &amp; Heath's own rack ears. So there are two ways to lift it: rack ears and a small rack stand, or simply a laptop shelf that is big and strong enough.</p>
+
+    <div class="grid2 mt">
+      <div class="card"><div class="num">CONFIRMED BY THE MAKER</div><h3>The rack ears CQ12T-RK19</h3><p>Allen &amp; Heath's rack ear kit screws into the unused M4 holes on the CQ's sides with four M4 × 8 mm screws (fitting note AP12813), and turns the desk into a 19" unit six rack units high. These are probably the "four free screws" on the back. The kit is not sold on Amazon.de: ask an Allen &amp; Heath dealer (in the UK it is about £55).</p></div>
+      <div class="card"><div class="num">AN IMPROVISED IDEA</div><h3>A shelf, not a screw</h3><p>The other stands below hold the CQ on a laptop shelf. None of their makers names the CQ-12T: they fit by size and load, each rated 10 kg or more, three times the CQ's weight. Use the shelf's pins or front lip, so the desk cannot slide when it is tilted. And measure the screw holes first before you screw anything into the CQ: the rack-ear holes take M4, and nothing else is documented.</p></div>
+    </div>
+
+    <div class="kit">
+      <div class="card"><div class="price">ABOUT €25</div><div class="fit">With the rack ears</div><h3>Adam Hall 19-inch rack stand, 6U</h3><p>A steel tabletop 19-inch frame, six units high, tilting from 65° to 90°: the CQ in its rack ears stands on the table like a small console. Check the seller: the cheapest offer comes from a marketplace seller.</p><a class="buy" href="https://www.amazon.de/dp/B0FW5LC61T?tag=markomantresh-21" target="_blank" rel="noopener sponsored">On Amazon.de →</a></div>
+      <div class="card"><div class="price">ABOUT €42</div><div class="fit">Improvised · tripod</div><h3>Pyle PLPTS4 tripod stand</h3><p>A floor tripod, 85 to 125 cm high, with a non-slip shelf of 50.8 × 40.6 cm and a load of 18 kg: the CQ's 37 × 30.5 cm sits on it with room to spare.</p><a class="buy" href="https://www.amazon.de/dp/B003GEJ5J4?tag=markomantresh-21" target="_blank" rel="noopener sponsored">On Amazon.de →</a></div>
+      <div class="card"><div class="price">ABOUT €72</div><div class="fit">Improvised · tripod</div><h3>Gravity LTS T 01</h3><p>A tripod laptop stand with a tilting shelf of 480 × 330 mm and adjustable holding pins that stop the desk sliding forward. Rated 15 kg on the Adam Hall data sheet.</p><a class="buy" href="https://www.amazon.de/dp/B09BNSYCZ3?tag=markomantresh-21" target="_blank" rel="noopener sponsored">On Amazon.de →</a></div>
+    </div>
+    <div class="kit">
+      <div class="card"><div class="price">ABOUT €96</div><div class="fit">Improvised · tripod</div><h3>König &amp; Meyer 12185</h3><p>A steel tripod, 70 to 125 cm, with a removable shelf of 480 × 310 mm, rubber-capped clamping bolts and a guaranteed load of 10 kg. The best-sized shelf for the CQ's 305 mm depth.</p><a class="buy" href="https://www.amazon.de/dp/B06W5KTTS3?tag=markomantresh-21" target="_blank" rel="noopener sponsored">On Amazon.de →</a></div>
+      <div class="card"><div class="price">ABOUT €79</div><div class="fit">Improvised · on the table</div><h3>Hercules DG400B</h3><p>A folding table stand for laptops and mixers, at 22, 26.5 or 31.5 cm, rated 10 kg: it lifts the back of the CQ toward the operator. Its arm spread is not published: measure it against the 370 mm width.</p><a class="buy" href="https://www.amazon.de/dp/B00J0823FI?tag=markomantresh-21" target="_blank" rel="noopener sponsored">On Amazon.de →</a></div>
+    </div>
+    <p class="quiet" style="margin-top:16px">Prices on Amazon.de, October 2026. Check the price on more than one site before you buy.</p>
+  </div>
+</section>
+
+<section id="honest">
+  <div class="wrap">
+    <div class="eyebrow">What is measured, what is chosen</div>
+    <h2>Said <em>plainly</em></h2>
+    <div class="grid3 mt">
+      <div class="card"><div class="num">MEASURED</div><p>The clip gains (typical peak of each file), the song starts (silences in the venue mix, confirmed by the words), the USB return channels (by the meters, against Allen &amp; Heath's fixed routing), the percussive share and pitch of each channel. The mridangam clipping is counted in the files: over a thousand 100 ms windows.</p></div>
+      <div class="card"><div class="num">CHOSEN</div><p>The Quick presets, the reverb type and its −13.3 dB sends, the Main LR compressor's values. They are a starting point by ear and by experience. Values set by dragging in MixPad land near, not exactly, and were checked on screen.</p></div>
+      <div class="card"><div class="num">MARKO'S</div><p>The faders, the balance, and the final recording to the SD card. The levelling is his, and so is the last word on every sound in this mix.</p></div>
+    </div>
+    <div class="grid2 mt">
+      <div class="photo"><img src="img/7.jpg" alt="A singer at a microphone in warm light" loading="lazy"></div>
+      <div class="photo"><img src="img/1.jpg" alt="A small digital mixer joined to a laptop by one USB cable" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    The Santoshi Concert Mix · Mantra Productions · Marko Boško, October 2026.
+    Recorded live on 17.10.2026; prepared and mixed on 23 and 24.10.2026.
+    Allen &amp; Heath, CQ, Behringer, XR18 and Ableton Live are trademarks of their owners; this page is independent of them.
+    The photographs are illustrations made with Google's Nano Banana, not pictures of the concert; the diagrams are drawn from the real settings.
+    As an Amazon Associate I earn from qualifying purchases: the Amazon links on this page are affiliate links.
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+{
+ "note": {
+  "en": "Seven of us, from Zagreb. The portraits are photographic renderings made from our real photos, all in one concert hall.",
+  "hr": "Sedmero nas, iz Zagreba. Portreti su fotografske izrade iz naših pravih fotografija, svi u istoj koncertnoj dvorani."
+ },
+ "players": [
+  {
+   "img": "a-bass.jpg",
+   "name": "Svemir Vranko",
+   "role": {
+    "en": "bass guitar · voice",
+    "hr": "bas-gitara · glas"
+   }
+  },
+  {
+   "img": "b-djembe.jpg",
+   "name": "Marko Boško",
+   "role": {
+    "en": "djembe",
+    "hr": "džembe"
+   }
+  },
+  {
+   "img": "c-mridangam.jpg",
+   "name": "Kristian Nasteski",
+   "role": {
+    "en": "mridangam · harmonium · voice",
+    "hr": "mridangam · harmonij · glas"
+   }
+  },
+  {
+   "img": "d-guitar.jpg",
+   "name": "Igor Pavlić",
+   "role": {
+    "en": "voice · guitar",
+    "hr": "glas · gitara"
+   }
+  },
+  {
+   "img": "e-voice.jpg",
+   "name": "Tajana Stipetić",
+   "role": {
+    "en": "voice",
+    "hr": "glas"
+   }
+  },
+  {
+   "img": "f-nylon.jpg",
+   "name": "Tomislav Tenšek Snoopy",
+   "role": {
+    "en": "guitar",
+    "hr": "gitara"
+   }
+  },
+  {
+   "img": "g-bells.jpg",
+   "name": "Petra Belamarić",
+   "role": {
+    "en": "tambourine",
+    "hr": "tamburin"
+   }
+  }
+ ]
+}

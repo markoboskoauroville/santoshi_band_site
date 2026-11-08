@@ -1,0 +1,116 @@
+{
+ "note": "From band/COMING_UP.md and band/CONCERTS.md (the band's Instagram and WhatsApp, read by the Mac session 25.10.2026).",
+ "events": [
+  {
+   "date": {
+    "en": "Saturday 21 November 2026 · 19:00–21:00",
+    "hr": "Subota, 21. studenoga 2026. · 19:00–21:00"
+   },
+   "title": {
+    "en": "Kirtan & bhajan night",
+    "hr": "Večer kirtana i bhadžana"
+   },
+   "place": "Velika dvorana, Češki narodni dom · Pavla Šubića 20, Zagreb",
+   "about": {
+    "en": "Come and experience joy, love and connection with the divine, singing together with us.",
+    "hr": "Dođite doživjeti radost, ljubav i povezanost s božanskim, pjevajući zajedno s nama."
+   },
+   "entry": {
+    "en": "Entry free, donations welcome.",
+    "hr": "Ulaz slobodan, donacije dobrodošle."
+   },
+   "link": "https://www.instagram.com/santoshi_kirtan_band/reel/DepTZeONJxN/",
+   "poster": "img/coming/2026-11-21.jpg",
+   "start": "2026-11-21T19:00",
+   "end": "2026-11-21T21:00"
+  }
+ ],
+ "past": [
+  {
+   "start": "2026-11-07",
+   "title": {
+    "en": "Diwali at the Embassy of India",
+    "hr": "Diwali u Veleposlanstvu Indije"
+   },
+   "place": "Veleposlanstvo Indije · Bijenik 152b, Zagreb",
+   "poster": "img/report/2026-11-07/diwali-3300.jpg",
+   "report": {
+    "kicker": {
+     "en": "Concert report",
+     "hr": "Izvještaj s koncerta"
+    },
+    "text": {
+     "en": "On Saturday evening, 7 November 2026, we sang kirtan outdoors at the Embassy of India in Zagreb, for Diwali, the Festival of Lights. Under the festival banner, with guitars, djembe, tambourine and many voices, the evening filled with mantras and warmth. Thank you to the Embassy of India, and to everyone who came and sang with us.",
+     "hr": "U subotu navečer, 7. studenoga 2026., pjevali smo kirtan na otvorenom, u Veleposlanstvu Indije u Zagrebu, za Diwali, festival svjetla. Pod festivalskim plakatom, uz gitare, džembe, tamburin i mnogo glasova, večer se ispunila mantrama i toplinom. Hvala Veleposlanstvu Indije i svima koji su došli i pjevali s nama."
+    },
+    "photos": [
+     "img/report/2026-11-07/diwali-3300.jpg",
+     "img/report/2026-11-07/diwali-120.jpg",
+     "img/report/2026-11-07/diwali-30.jpg",
+     "img/report/2026-11-07/diwali-600.jpg",
+     "img/report/2026-11-07/diwali-1500.jpg"
+    ],
+    "credit": {
+     "en": "Stills from our concert video.",
+     "hr": "Kadrovi iz našeg videa s koncerta."
+    }
+   }
+  },
+  {
+   "start": "2026-10-17",
+   "title": {
+    "en": "Navaratri Celebration · bhajan jamming & garba night",
+    "hr": "Proslava Navaratrija · bhadžani i garba"
+   },
+   "place": "Velika dvorana, Češki narodni dom · Pavla Šubića 20, Zagreb",
+   "poster": "img/poster.jpg",
+   "links": [
+    {
+     "href": "#player",
+     "en": "Listen",
+     "hr": "Slušaj"
+    },
+    {
+     "href": "#video",
+     "en": "Watch",
+     "hr": "Gledaj"
+    },
+    {
+     "href": "#photos",
+     "en": "Photos",
+     "hr": "Fotografije"
+    }
+   ]
+  },
+  {
+   "start": "2026-09-19",
+   "title": {
+    "en": "Concert",
+    "hr": "Koncert"
+   },
+   "place": "Velika dvorana, Češki narodni dom · Pavla Šubića 20, Zagreb",
+   "poster": "img/history/2026-09-19.jpg",
+   "full": "img/history/2026-09-19-full.jpg",
+   "source": "Instagram @santoshi_kirtan_band, \"Govinda Ram\", our 4th concert"
+  },
+  {
+   "start": "2026-06-13",
+   "title": {
+    "en": "Concert",
+    "hr": "Koncert"
+   },
+   "place": "Zagreb",
+   "poster": "img/history/2026-06-13.jpg",
+   "full": "img/history/2026-06-13-full.jpg",
+   "source": "Instagram @santoshi_kirtan_band, \"Sita Ram Jaya Jaya Sita Ram\", our third concert"
+  },
+  {
+   "start": "2026-05-09",
+   "title": {
+    "en": "Concert",
+    "hr": "Koncert"
+   },
+   "place": "Zagreb"
+  }
+ ]
+}

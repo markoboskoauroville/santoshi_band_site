@@ -1,0 +1,839 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Santoshi Kirtan Band · Live</title>
+<meta name="description" content="Santoshi Kirtan Band, live at the Navaratri Celebration, 17 October 2026, Czech National House, Zagreb. Listen to the whole concert.">
+<meta property="og:title" content="Santoshi Kirtan Band · Live at Navaratri Celebration">
+<meta property="og:description" content="Eight bhajans, 1 h 41 min, recorded live in Zagreb on 17.10.2026. Listen to the whole concert.">
+<meta property="og:image" content="https://santoshi-band.pages.dev/img/og.jpg">
+<meta property="og:url" content="https://santoshi-band.pages.dev/">
+<meta property="og:type" content="music.album">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f6ecd8">
+<link rel="icon" href="img/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f6ecd8; --bg2: #efe0c2; --card: #fffaf0; --ink: #3b2416; --soft: #7a5a40;
+  --gold: #b07a1e; --saffron: #d9631e; --line: #e2cfa8; --wave: #d8c09a; --wave-on: #d9631e;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1d130d; --bg2: #24180f; --card: #2a1c12; --ink: #f4e6cc; --soft: #c6a982;
+    --gold: #e0ac4a; --saffron: #f08a3c; --line: #43301f; --wave: #5a4330; --wave-on: #f08a3c;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1d130d; --bg2: #24180f; --card: #2a1c12; --ink: #f4e6cc; --soft: #c6a982;
+  --gold: #e0ac4a; --saffron: #f08a3c; --line: #43301f; --wave: #5a4330; --wave-on: #f08a3c;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; color: var(--ink); font: 19px/1.5 "EB Garamond", Georgia, serif;
+  background: radial-gradient(1200px 600px at 50% -10%, var(--bg2), var(--bg)) no-repeat, var(--bg);
+  padding-bottom: 20px;
+}
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+header.hero { display: grid; grid-template-columns: minmax(0, 380px) 1fr; gap: 40px; align-items: center; padding: 48px 0 32px; }
+.poster { display: block; border: 0; padding: 0; background: none; cursor: zoom-in; border-radius: 6px; overflow: hidden;
+  box-shadow: 0 18px 50px -18px rgba(70, 35, 5, .55), 0 0 0 1px var(--line); }
+.poster img { display: block; width: 100%; height: auto; }
+.kicker { font: 600 13px/1 "Cinzel", serif; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); margin: 0 0 14px; }
+h1 { font: 700 clamp(34px, 6vw, 58px)/1.05 "Cinzel", serif; margin: 0 0 10px; color: var(--ink); }
+.sub { font-size: 22px; font-style: italic; color: var(--soft); margin: 0 0 22px; }
+.meta { list-style: none; padding: 0; margin: 0 0 26px; color: var(--soft); }
+.meta li { padding: 2px 0; }
+.meta b { color: var(--ink); font-weight: 500; }
+.actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; gap: 10px; font: 600 14px/1 "Cinzel", serif; letter-spacing: .12em; text-transform: uppercase;
+  padding: 14px 22px; border-radius: 999px; border: 1px solid var(--gold); color: var(--ink); background: transparent; cursor: pointer; text-decoration: none; }
+.btn.primary { background: var(--saffron); border-color: var(--saffron); color: #fff; }
+.btn:hover { filter: brightness(1.06); }
+.btn svg { width: 16px; height: 16px; fill: currentColor; }
+.lotus { text-align: center; color: var(--gold); margin: 8px 0 6px; font-size: 22px; letter-spacing: .4em; }
+h2 { font: 700 15px/1 "Cinzel", serif; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin: 28px 0 12px; }
+ol.tracks { list-style: none; margin: 0; padding: 0; background: var(--card); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.track { display: grid; grid-template-columns: 44px 1fr auto; align-items: center; gap: 12px; padding: 14px 18px; cursor: pointer; border-top: 1px solid var(--line); }
+.track:first-child { border-top: 0; }
+.track:hover { background: color-mix(in srgb, var(--saffron) 6%, transparent); }
+.track .n { font: 500 16px/1 "Cinzel", serif; color: var(--soft); text-align: center; }
+.track .t { font-size: 21px; }
+.track .d { color: var(--soft); font-variant-numeric: tabular-nums; }
+.track.on { background: color-mix(in srgb, var(--saffron) 11%, transparent); }
+.track.on .t, .track.on .n { color: var(--saffron); }
+.eq { display: none; gap: 2px; height: 14px; align-items: flex-end; justify-content: center; }
+.track.on .eq { display: flex; } .track.on .num { display: none; }
+.eq i { width: 3px; background: var(--saffron); animation: eq 1s ease-in-out infinite; }
+.eq i:nth-child(2) { animation-delay: -.4s; } .eq i:nth-child(3) { animation-delay: -.7s; }
+.paused .eq i { animation-play-state: paused; }
+@keyframes eq { 0%, 100% { height: 4px; } 50% { height: 14px; } }
+.about { color: var(--soft); max-width: 680px; }
+footer { color: var(--soft); font-size: 16px; padding: 30px 0; text-align: center; }
+footer a { color: inherit; }
+
+/* the player: a deck at the top of the Player tab, the playlist under it (Winamp's order, DJ Mantra's look) */
+.amp { --wave: #4a3a52; --wave-on: #f3a43c; margin: 26px 0 10px; border-radius: 16px; overflow: hidden; color: #f4e6cc;
+  background: linear-gradient(180deg, #221722, #160f16); border: 1px solid #3a2a34; box-shadow: 0 24px 60px -28px rgba(40, 10, 0, .7); }
+.amp-top { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: #1b121b; border-bottom: 1px solid #3a2a34; }
+.amp-brand { font: 700 14px/1 "Cinzel", serif; letter-spacing: .14em; }
+.amp-brand b { color: #f3a43c; font-weight: 700; }
+.amp-album { font: 500 11px/1.2 ui-monospace, Menlo, monospace; letter-spacing: .16em; text-transform: uppercase; color: #a98d74; }
+.amp-lcd { margin-left: auto; font: 500 30px/1 ui-monospace, Menlo, "SF Mono", monospace; color: #f7c46a; text-shadow: 0 0 14px rgba(247, 180, 80, .35); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.amp-lcd small { font-size: 14px; color: #a98d74; text-shadow: none; }
+.amp canvas.wave { width: 100%; height: 84px; display: block; cursor: pointer; touch-action: none; background: #120c12; }
+.amp-mid { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 14px; align-items: center; padding: 14px 16px; }
+.amp-now { min-width: 0; border-left: 3px solid #f3a43c; background: #241925; border-radius: 10px; padding: 10px 14px; }
+.amp-k { font: 500 11px/1.2 ui-monospace, Menlo, monospace; letter-spacing: .14em; text-transform: uppercase; color: #f3a43c; }
+.amp-t { font: 600 20px/1.25 "Cinzel", serif; margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.amp-s { font-size: 15px; color: #a98d74; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ctl { display: flex; gap: 6px; align-items: center; }
+.ic { width: 44px; height: 44px; border: 0; border-radius: 12px; background: #2c2030; color: #f4e6cc; cursor: pointer; display: grid; place-items: center; }
+.ic:hover { background: #3a2a3e; }
+.ic svg { width: 22px; height: 22px; fill: currentColor; }
+.ic.big { width: 56px; height: 56px; background: #f3a43c; color: #1b1008; }
+.ic.big svg { width: 28px; height: 28px; }
+.ic:disabled { opacity: .35; cursor: default; }
+.amp-vol { display: flex; align-items: center; gap: 8px; font: 500 11px/1 ui-monospace, Menlo, monospace; letter-spacing: .14em; color: #a98d74; }
+.amp-vol input { width: 90px; accent-color: #f3a43c; }
+.amp-pl { display: flex; align-items: center; gap: 10px; padding: 10px 16px; border-top: 1px solid #3a2a34; background: #1b121b; }
+.amp-pl button { background: none; border: 0; color: #f4e6cc; font: 600 12px/1 ui-monospace, Menlo, monospace; letter-spacing: .18em; cursor: pointer; padding: 6px 0; }
+.amp-pl button i { display: inline-block; transition: transform .2s; font-style: normal; margin-right: 6px; color: #f3a43c; }
+.amp.closed .amp-pl button i { transform: rotate(-90deg); }
+.amp-pl span { margin-left: auto; font: 500 12px/1 ui-monospace, Menlo, monospace; color: #a98d74; letter-spacing: .1em; }
+.amp.closed ol.tracks { display: none; }
+.amp ol.tracks { background: transparent; border: 0; border-radius: 0; }
+.amp .track { grid-template-columns: 36px 1fr auto 40px; border-top: 1px solid #2c2030; padding: 10px 16px; }
+.amp .track:hover { background: #241925; }
+.amp .track.on { background: #2e2131; }
+.amp .track .n { color: #a98d74; font: 500 13px/1 ui-monospace, Menlo, monospace; }
+.amp .track .t { font-size: 18px; color: #f4e6cc; } .amp .track .t small { display: block; font-size: 14px; color: #a98d74; }
+.amp .track.on .t, .amp .track.on .n { color: #f7c46a; }
+.amp .track .d { color: #a98d74; font: 500 13px/1 ui-monospace, Menlo, monospace; }
+.amp .eq i { background: #f3a43c; }
+.lyr { width: 36px; height: 36px; border-radius: 10px; border: 1px solid #3a2a34; background: transparent; color: #a98d74; cursor: pointer; display: grid; place-items: center; }
+.lyr svg { width: 18px; height: 18px; fill: currentColor; }
+.lyr:hover, .lyr[aria-expanded="true"] { color: #1b1008; background: #f3a43c; border-color: #f3a43c; }
+.amp li.lyrics { padding: 4px 16px 18px 68px; background: #1d141d; border-top: 1px solid #2c2030; color: #e9d9bf; }
+.amp li.lyrics[hidden] { display: none; }
+.amp .lyrics .medley { color: #a98d74; font-size: 15px; margin: 10px 0 0; }
+.amp .lyrics blockquote { margin: 12px 0; padding-left: 14px; border-left: 3px solid #f3a43c; font-style: italic; font-size: 18px; line-height: 1.6; }
+.amp .lyrics p { font-size: 16px; color: #d6c3a6; margin: 8px 0; }
+.amp .lyrics dl { display: grid; grid-template-columns: minmax(90px, max-content) 1fr; gap: 6px 14px; font-size: 15px; margin: 12px 0 0; }
+.amp .lyrics dt { color: #f7c46a; font-style: italic; } .amp .lyrics dd { margin: 0; color: #cdb999; }
+.amp .lyrics h4 { font: 600 11px/1 ui-monospace, Menlo, monospace; letter-spacing: .16em; text-transform: uppercase; color: #f3a43c; margin: 16px 0 6px; }
+
+dialog { border: 0; padding: 0; background: transparent; max-width: 96vw; max-height: 96vh; }
+dialog::backdrop { background: rgba(20, 10, 4, .85); }
+dialog img { display: block; max-width: 96vw; max-height: 92vh; border-radius: 6px; cursor: zoom-out; }
+
+/* the menu */
+nav.top { position: sticky; top: 0; z-index: 6; background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+nav.top .wrap { display: flex; align-items: center; gap: 6px; height: 58px; max-width: 1240px; }
+nav.top .lang { flex-shrink: 0; }
+.wrap[id] { scroll-margin-top: 400px; }
+nav.top .brand { font: 700 15px/1 "Cinzel", serif; letter-spacing: .14em; color: var(--ink); text-decoration: none; margin-right: auto; white-space: nowrap; }
+nav.top .brand span { color: var(--gold); }
+nav.top .brand[aria-current="page"] { text-decoration: underline; text-decoration-color: var(--saffron); text-decoration-thickness: 2px; text-underline-offset: 7px; }
+.photogrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; margin: 18px 0; }
+.photogrid img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 8px; display: block; }
+.home-cta { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 8px; }
+nav.top a.tab { font: 600 13px/1 "Cinzel", serif; letter-spacing: .16em; text-transform: uppercase; color: var(--soft);
+  text-decoration: none; padding: 10px 11px; border-radius: 999px; white-space: nowrap; letter-spacing: .12em; }
+/* seven tabs + the language switch: below 1180 px the menu goes to two rows, as on the phone */
+@media (max-width: 1180px) {
+  nav.top .wrap { flex-wrap: wrap; height: auto; padding-top: 8px; padding-bottom: 6px; row-gap: 4px; gap: 0; }
+  nav.top .brand { order: 0; flex: 1 0 calc(100% - 110px); }
+  nav.top .lang { order: 1; }
+  nav.top a.tab { order: 2; flex: 1 1 auto; text-align: center; padding: 9px 6px; letter-spacing: .06em; font-size: 12px; }
+}
+nav.top a.tab:hover { color: var(--ink); }
+nav.top a.tab[aria-current="page"] { color: #fff; background: var(--saffron); }
+section.page[hidden] { display: none; }
+html[lang="hr"] .en, html[lang="en"] .hr { display: none !important; }
+.lang { display: flex; border: 1px solid var(--gold); border-radius: 999px; overflow: hidden; margin-left: 6px; }
+.lang button { font: 600 12px/1 "Cinzel", serif; letter-spacing: .1em; border: 0; background: transparent; color: var(--soft); padding: 8px 10px; cursor: pointer; }
+html[lang="en"] .lang [data-lang="en"], html[lang="hr"] .lang [data-lang="hr"] { background: var(--gold); color: #fff; }
+.btn.small { padding: 9px 14px; font-size: 12px; }
+.songs { display: grid; gap: 14px; }
+.song { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; }
+.song-head { display: flex; align-items: center; gap: 14px; }
+.song-head > div { flex: 1; min-width: 0; }
+.song-n { font: 700 22px/1 "Cinzel", serif; color: var(--gold); width: 30px; text-align: center; }
+.song h3 { font: 700 21px/1.2 "Cinzel", serif; margin: 0; }
+.song-to { margin: 2px 0 0; color: var(--soft); font-style: italic; }
+.medley { margin: 12px 0 0; color: var(--soft); }
+/* the dictionary under every song (26.10.2026, Marko: "a dictionary that explains every word in detail") */
+details.dict { margin: 12px 0 0; border-top: 1px solid var(--line); padding-top: 10px; }
+details.dict summary { cursor: pointer; color: var(--gold); font-weight: 700; letter-spacing: .04em; }
+details.dict dl { margin: 10px 0 0; display: grid; grid-template-columns: minmax(90px, max-content) 1fr; gap: 8px 16px; }
+details.dict dt { font: italic 700 18px/1.35 "Cinzel", serif; color: var(--ink); }
+details.dict dd { margin: 0; color: var(--soft); line-height: 1.5; }
+@media (max-width: 560px) { details.dict dl { grid-template-columns: 1fr; gap: 2px; } details.dict dd { margin-bottom: 10px; } }
+blockquote.mantra { margin: 14px 0 10px; padding: 10px 0 10px 18px; border-left: 3px solid var(--saffron); font-size: 21px; font-style: italic; color: var(--ink); }
+.players { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; margin-top: 18px; }
+.player { margin: 0; background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.player img, .player .nopic { display: block; width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
+.player .nopic { display: grid; place-items: center; font-size: 54px; color: var(--gold); background: radial-gradient(circle at 50% 40%, color-mix(in srgb, var(--saffron) 22%, var(--card)), var(--card)); }
+.player figcaption { padding: 12px 14px; } .player b { display: block; font: 700 17px/1.2 "Cinzel", serif; }
+.player figcaption span { color: var(--soft); font-size: 16px; }
+.events { display: grid; gap: 16px; }
+.event { display: grid; grid-template-columns: minmax(0, 220px) 1fr; gap: 22px; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px; }
+.event:not(:has(.ev-poster)) { grid-template-columns: 1fr; }
+.ev-poster { width: 100%; border-radius: 8px; display: block; }
+.ev-date { font: 700 14px/1.3 "Cinzel", serif; letter-spacing: .12em; text-transform: uppercase; color: var(--saffron); margin: 0 0 6px; }
+.event h3 { font: 700 24px/1.2 "Cinzel", serif; margin: 0 0 6px; }
+.ev-place { margin: 0 0 8px; color: var(--soft); }
+.past { padding-left: 20px; } .past li { padding: 4px 0; } .past b { font-weight: 500; margin-right: 6px; }
+footer a { color: inherit; }
+.vconcept { margin-bottom: 30px; }
+.vstage { border-radius: 16px; background-size: cover; background-position: center; padding: clamp(18px, 5vw, 64px); box-shadow: 0 20px 50px -24px rgba(60, 20, 0, .55); }
+.vplayer { position: relative; aspect-ratio: 16 / 9; border-radius: 10px; overflow: hidden; background: #000; box-shadow: 0 18px 50px -12px rgba(0, 0, 0, .6); cursor: pointer; }
+.vplayer img, .vplayer iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; object-fit: cover; display: block; }
+.vplay { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: clamp(64px, 10vw, 96px); height: clamp(64px, 10vw, 96px);
+  border-radius: 50%; border: 0; background: var(--saffron); color: #fff; display: grid; place-items: center; cursor: pointer;
+  box-shadow: 0 0 0 8px rgba(255, 255, 255, .25), 0 10px 30px rgba(0, 0, 0, .45); transition: transform .2s; }
+.vplayer:hover .vplay { transform: translate(-50%, -50%) scale(1.07); }
+.vplay svg { width: 45%; height: 45%; fill: currentColor; margin-left: 6%; }
+.vconcept .note a { color: var(--saffron); }
+.vtitle { font: 600 17px/1.4 "Cinzel", serif; margin: 14px 0 4px; }
+.pl-head { text-align: center; padding: 34px 0 0; }
+.pl-head h1 { margin: 0 0 6px; font-size: clamp(28px, 5vw, 44px); }
+.pl-date { margin: 0; color: var(--soft); font-size: 19px; }
+.pl-head + .amp { margin-top: 18px; }
+.history { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+.h-item { display: grid; grid-template-columns: 84px 1fr; gap: 16px; align-items: center; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 16px; }
+.h-item img { width: 84px; height: 84px; object-fit: cover; border-radius: 8px; }
+.h-dot { width: 84px; height: 84px; display: grid; place-items: center; font-size: 30px; color: var(--gold); background: radial-gradient(circle, color-mix(in srgb, var(--saffron) 16%, var(--card)), var(--card)); border-radius: 8px; }
+.h-date { font: 700 13px/1.3 "Cinzel", serif; letter-spacing: .12em; text-transform: uppercase; color: var(--saffron); margin: 0 0 4px; }
+.h-item h3 { font: 700 20px/1.25 "Cinzel", serif; margin: 0 0 2px; }
+.h-links { display: flex; gap: 8px; flex-wrap: wrap; margin: 8px 0 0; }
+.report { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; margin: 0 0 16px; }
+.report .kicker { margin: 0 0 6px; } .report h3 { font: 700 22px/1.25 "Cinzel", serif; margin: 0 0 2px; }
+.report-gallery { margin-top: 14px; } .report-gallery figure:first-child { grid-column: 1 / -1; }
+nav.sub { display: flex; justify-content: center; gap: 6px; padding: 10px 16px; position: sticky; top: 58px; z-index: 5;
+  background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+nav.sub[hidden] { display: none; }
+nav.sub a { font: 600 12px/1 "Cinzel", serif; letter-spacing: .14em; text-transform: uppercase; text-decoration: none; color: var(--soft);
+  padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); }
+nav.sub a[aria-current="page"] { color: #fff; background: var(--saffron); border-color: var(--saffron); }
+.band-hero { display: block; width: 100%; border-radius: 12px; margin: 10px 0 6px; }
+
+/* equipment */
+.lead { font-size: 21px; max-width: 760px; }
+.rules { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
+.rules li { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; }
+.rules b { display: block; font: 700 14px/1.3 "Cinzel", serif; letter-spacing: .06em; color: var(--saffron); margin-bottom: 6px; }
+.rack { display: grid; grid-template-columns: minmax(0, 340px) 1fr; gap: 32px; align-items: center; }
+.rack svg { width: 100%; height: auto; display: block; }
+.rack dl { margin: 0; } .rack dt { font: 700 14px/1.3 "Cinzel", serif; letter-spacing: .08em; color: var(--gold); margin-top: 14px; }
+.rack dd { margin: 4px 0 0; }
+.gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+.gallery figure { margin: 0; background: var(--card); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.gallery img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+.gallery figcaption { padding: 10px 14px; font-size: 16px; color: var(--soft); }
+.tablewrap { overflow-x: auto; background: var(--card); border: 1px solid var(--line); border-radius: 10px; }
+table.list { width: 100%; border-collapse: collapse; font-size: 17px; }
+table.list th { font: 700 12px/1.2 "Cinzel", serif; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+table.list td { padding: 10px 14px; border-top: 1px solid var(--line); vertical-align: middle; }
+table.list tr.group td { background: color-mix(in srgb, var(--gold) 9%, transparent); font: 700 13px/1.2 "Cinzel", serif; letter-spacing: .12em; text-transform: uppercase; color: var(--soft); }
+table.list .num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+table.list a { color: var(--ink); text-decoration-color: var(--gold); text-underline-offset: 3px; }
+table.list img { width: 44px; height: 44px; object-fit: contain; background: #fff; border-radius: 6px; display: block; }
+table.list .why { color: var(--soft); font-size: 15px; }
+table.list tfoot td { font-weight: 500; font-size: 19px; border-top: 2px solid var(--gold); }
+.note { color: var(--soft); font-size: 16px; }
+.alt a { color: var(--ink); text-decoration-color: var(--gold); }
+.alt { background: var(--card); border: 1px dashed var(--gold); border-radius: 10px; padding: 14px 18px; }
+@media (max-width: 760px) {
+  .amp-mid { grid-template-columns: 1fr; }
+  .amp-vol { display: none; }
+  .ctl { justify-content: center; }
+  .amp-lcd { font-size: 22px; } .amp-album { display: none; }
+  .amp .track { grid-template-columns: 26px 1fr auto 36px; padding: 10px 12px; gap: 8px; }
+  .amp li.lyrics { padding: 4px 14px 16px; }
+  .amp .lyrics dl { grid-template-columns: 1fr; gap: 0 0; } .amp .lyrics dd { margin-bottom: 8px; }
+  nav.top .wrap { flex-wrap: wrap; height: auto; padding-top: 8px; padding-bottom: 6px; row-gap: 4px; gap: 0; }
+  nav.top .brand { font-size: 13px; letter-spacing: .08em; order: 0; flex: 1 0 calc(100% - 110px); }
+  nav.top .lang { order: 1; }
+  nav.top a.tab { order: 2; flex: 1 1 auto; text-align: center; padding: 9px 4px; letter-spacing: .04em; font-size: 11px; white-space: nowrap; }
+  .rack, .event { grid-template-columns: 1fr; }
+  .ev-poster { max-width: 320px; }
+  .rack svg { max-width: 320px; margin: 0 auto; }
+  table.list { font-size: 16px; }
+  table.list .why, table.list .img { display: none; }
+}
+
+@media (max-width: 760px) {
+  body { font-size: 18px; padding-bottom: 20px; }
+  header.hero { grid-template-columns: 1fr; gap: 24px; padding-top: 24px; text-align: center; }
+  .poster { max-width: 420px; margin: 0 auto; }
+  .actions { justify-content: center; }
+  .track { grid-template-columns: 34px 1fr auto; padding: 13px 12px; gap: 8px; }
+  .track .t { font-size: 19px; }
+  .ic.skip { display: none; }
+}
+/* lightbox: every picture opens large */
+section.page img { cursor: zoom-in; }
+#lightbox { position: fixed; inset: 0; z-index: 1000; background: rgba(10,6,4,.94); display: flex; align-items: center;
+  justify-content: center; padding: 16px; cursor: zoom-out; }
+#lightbox[hidden] { display: none; }
+#lightbox img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,.6); }
+#lightbox button { position: absolute; top: 12px; right: 16px; font: 600 32px/1 sans-serif; color: #fff; background: none;
+  border: 0; cursor: pointer; padding: 8px; }
+.visits { text-align: center; color: var(--soft); font-size: 15px; margin: 10px 0 0; letter-spacing: .04em; }
+</style>
+</head>
+<body>
+<nav class="top" aria-label="Menu">
+  <div class="wrap">
+    <a class="brand" href="#coming" data-page="coming">Santoshi <span>Kirtan Band</span></a>
+    <a class="tab" href="#coming" data-page="coming"><span class="en">Coming up</span><span class="hr">Uskoro</span></a>
+    <a class="tab" href="#band" data-page="band"><span class="en">Band</span><span class="hr">Bend</span></a>
+    <a class="tab" href="#player" data-page="media"><span class="en">Media</span><span class="hr">Mediji</span></a>
+    <a class="tab" href="#songs" data-page="songs"><span class="en">Songs</span><span class="hr">Pjesme</span></a>
+    <a class="tab" href="#equipment" data-page="equipment"><span class="en">Equipment</span><span class="hr">Oprema</span></a>
+    <a class="tab" href="#donate" data-page="donate"><span class="en">Donate</span><span class="hr">Donacije</span></a>
+    <div class="lang" role="group" aria-label="Language / Jezik"><button data-lang="hr">HR</button><button data-lang="en">EN</button></div>
+  </div>
+</nav>
+<nav class="sub" id="mediaNav" aria-label="Media" hidden>
+  <a href="#player" data-sub="player">Player</a><a href="#video" data-sub="video">Video</a><a href="#photos" data-sub="photos"><span class="en">Photos</span><span class="hr">Fotografije</span></a>
+</nav>
+
+<section class="page" id="page-player" hidden>
+<div class="wrap">
+  <header class="pl-head">
+    <h1><span class="en">Navaratri Celebration · Live</span><span class="hr">Proslava Navaratrija · uživo</span></h1>
+    <p class="pl-date"><span class="en">17 October 2026 · Czech National House, Zagreb</span><span class="hr">17. listopada 2026. · Češki narodni dom, Zagreb</span></p>
+  </header>
+  <div class="amp paused" id="bar">
+    <div class="amp-top"><span class="amp-brand">SANTOSHI <b>LIVE</b></span><span class="amp-album">Navaratri · Zagreb · 17.10.2026</span>
+      <span class="amp-lcd"><span id="cur">0:00</span> <small>/ <span id="dur">0:00</span></small></span></div>
+    <canvas class="wave" id="wave" aria-label="Song position, click to jump"></canvas>
+    <div class="amp-mid">
+      <div class="amp-now"><div class="amp-k" id="nowK">Live album · 8</div><div class="amp-t" id="now">Santoshi Kirtan Band · Live</div><div class="amp-s" id="nowS"><span class="en">Press play, or choose a song</span><span class="hr">Pritisnite play ili odaberite pjesmu</span></div></div>
+      <div class="ctl">
+        <button class="ic" id="back" aria-label="Back 15 seconds"><svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7a6 6 0 1 1-6 6H4a8 8 0 1 0 8-8z"/></svg></button>
+        <button class="ic" id="prev" aria-label="Previous song"><svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/></svg></button>
+        <button class="ic big" id="play" aria-label="Play"><svg viewBox="0 0 24 24"><path id="playIcon" d="M8 5v14l11-7z"/></svg></button>
+        <button class="ic" id="next" aria-label="Next song"><svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6zM16 6h2v12h-2z"/></svg></button>
+        <button class="ic" id="fwd" aria-label="Forward 15 seconds"><svg viewBox="0 0 24 24"><path d="M12 5V1l5 5-5 5V7a6 6 0 1 0 6 6h2a8 8 0 1 1-8-8z"/></svg></button>
+      </div>
+      <label class="amp-vol">VOL <input type="range" id="vol" min="0" max="1" step="0.01" value="1" aria-label="Volume"></label>
+    </div>
+    <div class="amp-pl"><button id="plToggle" aria-expanded="true"><i>▾</i>PLAYLIST</button><span>8 · <span id="total">1 h 41 min</span></span></div>
+    <ol class="tracks" id="tracks"></ol>
+  </div>
+</div>
+</section>
+
+<section class="page" id="page-video" hidden>
+<div class="wrap" id="video">
+  <header style="padding:40px 0 8px">
+    <p class="kicker">Video</p>
+    <h1><span class="en">Watch us sing</span><span class="hr">Gledajte nas</span></h1>
+    <p class="lead"><span class="en">Our videos, gathered by theme. The channel has just opened: the first one is from the Navaratri concert.</span><span class="hr">Naši videi, složeni po temama. Kanal je tek otvoren: prvi je s koncerta za Navaratri.</span></p>
+  </header>
+
+  <section class="vconcept">
+    <h2><span class="en">Navaratri concert · Zagreb, 17.10.2026</span><span class="hr">Navaratri koncert · Zagreb, 17.10.2026.</span></h2>
+    <div class="vstage" style="background-image:url(img/video/poster-blur.jpg)">
+      <div class="vplayer" data-yt="mj3qLdatyws">
+        <img src="img/video/cover-navaratri.jpg" alt="Santoshi Kirtan Band seen from behind, playing to the dancing hall, 17.10.2026" loading="lazy">
+        <button class="vplay" type="button" aria-label="Play the video"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+      </div>
+    </div>
+    <p class="vtitle">Santoshi Kirtan Band · <span class="en">Live Navaratri Concert · Zagreb 17.10.2026</span><span class="hr">Navaratri koncert uživo · Zagreb 17.10.2026.</span></p>
+    <p class="note"><span class="en">Moments from every song of the evening.</span><span class="hr">Trenutci iz svake pjesme te večeri.</span>
+      <a href="https://www.youtube.com/@SantoshiKirtanBand?sub_confirmation=1" target="_blank" rel="noopener"><span class="en">Subscribe on YouTube</span><span class="hr">Pretplatite se na YouTubeu</span></a></p>
+  </section>
+  <footer>Santoshi Kirtan Band · <a href="https://www.youtube.com/@SantoshiKirtanBand" target="_blank" rel="noopener">YouTube</a></footer>
+</div>
+</section>
+
+<section class="page" id="page-coming" hidden>
+<div class="wrap" id="coming">
+  <header style="padding:40px 0 8px">
+    <p class="kicker"><span class="en">Coming up</span><span class="hr">Uskoro</span></p>
+    <h1><span class="en">Sing with us</span><span class="hr">Pjevajte s nama</span></h1>
+    <p class="lead"><span class="en">Where you can hear Santoshi Kirtan Band next. Come, sit, sing along.</span><span class="hr">Gdje možete sljedeći put čuti Santoshi Kirtan Band. Dođite, sjednite, pjevajte s nama.</span></p>
+  </header>
+  <div class="events"><article class="event" data-end="2026-11-21T21:00" data-start="2026-11-21T19:00"><img class="ev-poster" src="img/coming/2026-11-21.jpg" alt="" loading="lazy"><div>
+  <p class="ev-date"><span class="en">Saturday 21 November 2026 · 19:00–21:00</span><span class="hr">Subota, 21. studenoga 2026. · 19:00–21:00</span></p>
+  <h3><span class="en">Kirtan &amp; bhajan night</span><span class="hr">Večer kirtana i bhadžana</span></h3>
+  <p class="ev-place">Velika dvorana, Češki narodni dom · Pavla Šubića 20, Zagreb</p>
+  <p><span class="en">Come and experience joy, love and connection with the divine, singing together with us.</span><span class="hr">Dođite doživjeti radost, ljubav i povezanost s božanskim, pjevajući zajedno s nama.</span></p>
+  <p class="note"><span class="en">Entry free, donations welcome.</span><span class="hr">Ulaz slobodan, donacije dobrodošle.</span></p>
+  <p><a class="btn small" href="https://www.instagram.com/santoshi_kirtan_band/reel/DepTZeONJxN/" target="_blank" rel="noopener"><span class="en">More</span><span class="hr">Više</span></a></p></div></article></div>
+  <h2><span class="en">Past events</span><span class="hr">Prošli događaji</span></h2>
+  <article class="report">
+  <p class="kicker"><span class="en">Concert report</span><span class="hr">Izvještaj s koncerta</span></p>
+  <p class="ev-date"><span class="en">7 November 2026</span><span class="hr">7. studenoga 2026.</span></p>
+  <h3><span class="en">Diwali at the Embassy of India</span><span class="hr">Diwali u Veleposlanstvu Indije</span></h3>
+  <p class="ev-place">Veleposlanstvo Indije · Bijenik 152b, Zagreb</p>
+  <p><span class="en">On Saturday evening, 7 November 2026, we sang kirtan outdoors at the Embassy of India in Zagreb, for Diwali, the Festival of Lights. Under the festival banner, with guitars, djembe, tambourine and many voices, the evening filled with mantras and warmth. Thank you to the Embassy of India, and to everyone who came and sang with us.</span><span class="hr">U subotu navečer, 7. studenoga 2026., pjevali smo kirtan na otvorenom, u Veleposlanstvu Indije u Zagrebu, za Diwali, festival svjetla. Pod festivalskim plakatom, uz gitare, džembe, tamburin i mnogo glasova, večer se ispunila mantrama i toplinom. Hvala Veleposlanstvu Indije i svima koji su došli i pjevali s nama.</span></p>
+  <div class="gallery report-gallery"><figure><img src="img/report/2026-11-07/diwali-3300.jpg" alt="Santoshi Kirtan Band, Diwali at the Embassy of India" loading="lazy"></figure><figure><img src="img/report/2026-11-07/diwali-120.jpg" alt="Santoshi Kirtan Band, Diwali at the Embassy of India" loading="lazy"></figure><figure><img src="img/report/2026-11-07/diwali-30.jpg" alt="Santoshi Kirtan Band, Diwali at the Embassy of India" loading="lazy"></figure><figure><img src="img/report/2026-11-07/diwali-600.jpg" alt="Santoshi Kirtan Band, Diwali at the Embassy of India" loading="lazy"></figure><figure><img src="img/report/2026-11-07/diwali-1500.jpg" alt="Santoshi Kirtan Band, Diwali at the Embassy of India" loading="lazy"></figure></div><p class="note"><span class="en">Stills from our concert video.</span><span class="hr">Kadrovi iz našeg videa s koncerta.</span></p></article>
+  <ol class="history"><li class="h-item" data-start="2026-11-07"><img src="img/report/2026-11-07/diwali-3300.jpg" alt="" loading="lazy"><div>
+  <p class="h-date"><span class="en">7 November 2026</span><span class="hr">7. studenoga 2026.</span></p>
+  <h3><span class="en">Diwali at the Embassy of India</span><span class="hr">Diwali u Veleposlanstvu Indije</span></h3><p class="ev-place">Veleposlanstvo Indije · Bijenik 152b, Zagreb</p>
+  </div></li><li class="h-item" data-start="2026-10-17"><img src="img/poster.jpg" alt="" loading="lazy"><div>
+  <p class="h-date"><span class="en">17 October 2026</span><span class="hr">17. listopada 2026.</span></p>
+  <h3><span class="en">Navaratri Celebration · bhajan jamming &amp; garba night</span><span class="hr">Proslava Navaratrija · bhadžani i garba</span></h3><p class="ev-place">Velika dvorana, Češki narodni dom · Pavla Šubića 20, Zagreb</p>
+  <p class="h-links"><a class="btn small" href="#player"><span class="en">Listen</span><span class="hr">Slušaj</span></a><a class="btn small" href="#video"><span class="en">Watch</span><span class="hr">Gledaj</span></a><a class="btn small" href="#photos"><span class="en">Photos</span><span class="hr">Fotografije</span></a></p></div></li><li class="h-item" data-start="2026-09-19"><img src="img/history/2026-09-19.jpg" alt="" data-full="img/history/2026-09-19-full.jpg" loading="lazy"><div>
+  <p class="h-date"><span class="en">19 September 2026</span><span class="hr">19. rujna 2026.</span></p>
+  <p class="ev-place">Velika dvorana, Češki narodni dom · Pavla Šubića 20, Zagreb</p>
+  </div></li><li class="h-item" data-start="2026-06-13"><img src="img/history/2026-06-13.jpg" alt="" data-full="img/history/2026-06-13-full.jpg" loading="lazy"><div>
+  <p class="h-date"><span class="en">13 June 2026</span><span class="hr">13. lipnja 2026.</span></p>
+  <p class="ev-place">Zagreb</p>
+  </div></li><li class="h-item" data-start="2026-05-09"><span class="h-dot" aria-hidden="true">❀</span><div>
+  <p class="h-date"><span class="en">9 May 2026</span><span class="hr">9. svibnja 2026.</span></p>
+  <p class="ev-place">Zagreb</p>
+  </div></li></ol>
+  <footer>Santoshi Kirtan Band · <a href="https://www.instagram.com/santoshi_kirtan_band/" target="_blank" rel="noopener">Instagram</a></footer>
+</div>
+</section>
+
+<section class="page" id="page-songs" hidden>
+<div class="wrap" id="songs">
+  <header style="padding:40px 0 8px">
+    <p class="kicker"><span class="en">Songs · our repertoire</span><span class="hr">Pjesme · naš repertoar</span></p>
+    <h1><span class="en">The mantras we sing</span><span class="hr">Mantre koje pjevamo</span></h1>
+    <p class="lead"><span class="en">Kirtan is singing together: one voice calls a line, everyone answers. The words are mantras, names of the divine in Sanskrit, repeated until the mind goes quiet and the heart opens. You do not need to know the words to join; after two rounds you will be singing along.</span><span class="hr">Kirtan je zajedničko pjevanje: jedan glas zapjeva stih, svi odgovaraju. Riječi su mantre, imena božanskog na sanskrtu, koje se ponavljaju dok se um ne umiri i srce ne otvori. Ne morate znati riječi da biste se pridružili; nakon dva kruga pjevat ćete s nama.</span></p><p class="lead"><span class="en">Navaratri, the nine nights, is the festival of the Goddess. Traditionally the first three nights belong to Durga and Kali, who take away fear, the next three to Lakshmi, who brings abundance, and the last three to Sarasvati, who brings wisdom and music. Our concert of 17 October 2026 followed that path, after first greeting Ganesha.</span><span class="hr">Navaratri, devet noći, blagdan je Božice. Po tradiciji prve tri noći pripadaju Durgi i Kali, koje odnose strah, sljedeće tri Lakšmi, koja donosi obilje, a posljednje tri Sarasvati, koja donosi mudrost i glazbu. Naš koncert 17. listopada 2026. išao je tim putem, nakon što smo najprije pozdravili Ganešu.</span></p>
+  </header>
+  <h2><span class="en">Navaratri concert, 17.10.2026</span><span class="hr">Koncert za Navaratri, 17.10.2026.</span></h2>
+  <div class="songs"><article class="song">
+  <div class="song-head"><span class="song-n">1</span><div><h3>Jai Ganesha Pahi Mam</h3>
+  <p class="song-to"><span class="en">to</span><span class="hr">za</span> <span class="en">Ganesha</span><span class="hr">Ganešu</span></p></div>
+  <button class="btn small" data-play="0">▶ <span class="en">Listen</span><span class="hr">Slušaj</span></button></div>
+  <blockquote class="mantra"><div>Jaya Gaṇeśa, Gaṇeśa, pāhi mām</div><div>Śrī Gaṇeśa, Gaṇeśa, rakṣa mām</div><div>Gaṃ Gaṇapataye namo namaḥ</div></blockquote>
+  <p><span class="en">“Victory to Ganesha, protect me; holy Ganesha, guard me. Gam: to Ganapati, salutations again and again.” Ganesha, with the elephant head, removes obstacles and opens every beginning, so a kirtan starts with him.</span><span class="hr">„Slava Ganeši, zaštiti me; sveti Ganeša, čuvaj me. Gam: Ganapatiju, poklon i opet poklon.“ Ganeša sa slonovskom glavom uklanja prepreke i otvara svaki početak, pa kirtan počinje s njim.</span></p>
+  <details class="dict"><summary><span class="en">Dictionary · every word</span><span class="hr">Rječnik · svaka riječ</span> (9)</summary><dl><dt>jaya</dt><dd><span class="en">Victory, triumph. As a call it means “glory to …!”, “victory to …!”. From the root ji, “to conquer”. It shortens to jai in Hindi, as in the song&#x27;s title.</span><span class="hr">Pobjeda, trijumf. Kao zaziv znači „slava …!”, „pobjeda …!”. Od korijena ji, „pobijediti”. U hindskom se skraćuje u jai, kao u naslovu pjesme.</span></dd><dt>Gaṇeśa</dt><dd><span class="en">Gaṇa, “the host, the crowd” (Shiva&#x27;s attendants), + īśa, “lord”: the Lord of the hosts. The elephant-headed son of Shiva and Parvati, remover of obstacles, honoured first at every beginning.</span><span class="hr">Gaṇa, „mnoštvo, četa” (Šivini pratioci), + īśa, „gospodar”: Gospodar mnoštva. Sin Šive i Parvati sa slonovskom glavom, onaj koji uklanja prepreke; slavi se prvi na svakom početku.</span></dd><dt>pāhi</dt><dd><span class="en">“Protect!” The imperative of the root pā, “to protect, to keep”.</span><span class="hr">„Zaštiti!” Imperativ korijena pā, „štititi, čuvati”.</span></dd><dt>mām</dt><dd><span class="en">“Me”: the accusative of aham, “I”. Pāhi mām: “protect me”.</span><span class="hr">„Mene”: akuzativ od aham, „ja”. Pāhi mām: „zaštiti me”.</span></dd><dt>Śrī</dt><dd><span class="en">Radiance, beauty, good fortune, holiness. Placed before a divine name as a mark of honour (“holy”, “revered”); it is also a name of the goddess Lakshmi.</span><span class="hr">Sjaj, ljepota, blagostanje, svetost. Stavlja se pred božansko ime kao znak poštovanja („sveti”, „časni”); to je i ime božice Lakšmi.</span></dd><dt>rakṣa</dt><dd><span class="en">“Guard! Preserve!” The imperative of the root rakṣ, “to guard, to save”; rakṣā is “protection”. Rakṣa mām: “guard me”.</span><span class="hr">„Čuvaj! Sačuvaj!” Imperativ korijena rakṣ, „čuvati, spasiti”; rakṣā je „zaštita”. Rakṣa mām: „čuvaj me”.</span></dd><dt>Gaṃ</dt><dd><span class="en">The seed sound (bīja) of Ganesha: one syllable that holds his whole power, sung before his name.</span><span class="hr">Sjemeni zvuk (bīja) Ganeše: jedan slog koji nosi svu njegovu snagu, pjeva se prije njegova imena.</span></dd><dt>Gaṇapataye</dt><dd><span class="en">“To Ganapati”: gaṇa, “the host, the band of followers”, + pati, “lord”: Ganesha as lord of all beings; the ending -aye means “to”.</span><span class="hr">„Ganapatiju“: gaṇa, „mnoštvo, družina“, + pati, „gospodar“: Ganeša kao gospodar svih bića; nastavak -aye znači „komu“.</span></dd><dt>namo namaḥ</dt><dd><span class="en">Namaḥ, “bow, salutation” (literally “not mine”): said twice, “salutations again and again”.</span><span class="hr">Namaḥ, „naklon, pozdrav“ (doslovno „ne moje“): rečeno dvaput, „poklon i opet poklon“.</span></dd></dl></details>
+</article><article class="song">
+  <div class="song-head"><span class="song-n">2</span><div><h3>Ambe Jagadambe</h3>
+  <p class="song-to"><span class="en">to</span><span class="hr">za</span> <span class="en">the Divine Mother</span><span class="hr">Božansku Majku</span></p></div>
+  <button class="btn small" data-play="1">▶ <span class="en">Listen</span><span class="hr">Slušaj</span></button></div>
+  <blockquote class="mantra"><div>Ambe, Jagadambe</div></blockquote>
+  <p><span class="en">Ambā is “mother”, Jagadambā “mother of the whole world”. The song calls the Goddess whom Navaratri celebrates, the one mother behind all her forms.</span><span class="hr">Ambā znači „majka“, Jagadambā „majka cijelog svijeta“. Pjesma zaziva Božicu koju Navaratri slavi, jednu majku iza svih njezinih oblika.</span></p>
+  <details class="dict"><summary><span class="en">Dictionary · every word</span><span class="hr">Rječnik · svaka riječ</span> (2)</summary><dl><dt>Ambe</dt><dd><span class="en">“O Mother!”: the vocative (the form used to call someone) of Ambā, “mother”. A name of the Goddess, Durga.</span><span class="hr">„O Majko!”: vokativ (oblik za dozivanje) od Ambā, „majka”. Ime Božice, Durge.</span></dd><dt>Jagadambe</dt><dd><span class="en">Jagat, “the world, all that moves” (from gam, “to go”), + ambā, “mother”: “O Mother of the world!”, in the vocative.</span><span class="hr">Jagat, „svijet, sve što se kreće” (od gam, „ići”), + ambā, „majka”: „O Majko svijeta!”, u vokativu.</span></dd></dl></details>
+</article><article class="song">
+  <div class="song-head"><span class="song-n">3</span><div><h3>Kali Kali Maha Maya</h3>
+  <p class="song-to"><span class="en">to</span><span class="hr">za</span> <span class="en">Kali</span><span class="hr">Kali</span></p></div>
+  <button class="btn small" data-play="2">▶ <span class="en">Listen</span><span class="hr">Slušaj</span></button></div>
+  <p class="medley"><span class="en">A medley: Kali Kali Mahamaya · Sarva Mangala · He Mata Kali · Kali Ma, Durga Ma · Jaya Jagadambe</span><span class="hr">Splet: Kali Kali Mahamaya · Sarva Mangala · He Mata Kali · Kali Ma, Durga Ma · Jaya Jagadambe</span></p><blockquote class="mantra"><div>Kālī Kālī Mahāmāyā Oṃ</div><div>Bhavānī Śaṅkarī Oṃ</div><div>Devī Devī Girijā, Hara Hara Devī</div><div>Sarva maṅgala māṅgalye śive sarvārtha sādhike</div><div>śaraṇye tryambake gauri nārāyaṇi namo&#x27;stu te</div><div>He Mātā Kālī, He Mātā Durgā</div><div>Kālī Durgā namo namaḥ</div><div>Kālī Mā Kālī Mā, Kālī Kālī Kālī Mā</div><div>Durgā Mā Durgā Mā, Durgā Durgā Durgā Mā</div><div>Jaya Jaya Jagadambe, Jagadambe Mā Durgā</div><div>Oṃ Nārāyaṇī Oṃ</div><div>He Mā Durgā</div></blockquote>
+  <p><span class="en">Kali is the fierce, loving mother who cuts away fear and the small self; Mahāmāyā is her great power that makes and unmakes the world. The verse Sarva Mangala, from the Devī Māhātmya, bows to her: “O auspicious one, source of all good, who fulfils every aim, our refuge, three-eyed Gauri, Narayani, we bow to you.”</span><span class="hr">Kali je žestoka i nježna majka koja odsijeca strah i malo ja; Mahāmāyā je njezina velika moć koja stvara i rastvara svijet. Stih Sarva Mangala iz Devī Māhātmye klanja joj se: „O blagoslovljena, izvore svakog dobra, koja ispunjavaš svaku težnju, naše utočište, trooka Gauri, Narayani, klanjamo ti se.“</span></p>
+  <details class="dict"><summary><span class="en">Dictionary · every word</span><span class="hr">Rječnik · svaka riječ</span> (28)</summary><dl><dt>Kālī</dt><dd><span class="en">“The dark one”, and “she who is time”: kāla means both “black” and “time”. The fierce form of the Goddess who ends what must end.</span><span class="hr">„Tamna”, i „ona koja je vrijeme”: kāla znači i „crn” i „vrijeme”. Silni oblik Božice koja dovršava ono što mora završiti.</span></dd><dt>Mahā</dt><dd><span class="en">“Great”. Mahā Māyā: “the great Māyā”.</span><span class="hr">„Velik, velika”. Mahā Māyā: „velika Māyā”.</span></dd><dt>Māyā</dt><dd><span class="en">The power by which the One appears as the many: the Goddess&#x27;s creative power, also called illusion, because the world is not what it seems.</span><span class="hr">Moć kojom se Jedno pojavljuje kao mnoštvo: stvaralačka moć Božice, zvana i iluzija, jer svijet nije ono što se čini.</span></dd><dt>sarva</dt><dd><span class="en">“All, every, whole”.</span><span class="hr">„Sve, svaki, cijel”.</span></dd><dt>maṅgala</dt><dd><span class="en">Auspiciousness, blessing, good fortune; whatever brings well-being.</span><span class="hr">Blagoslov, sreća, ono što donosi dobro i napredak.</span></dd><dt>māṅgalye</dt><dd><span class="en">Vocative of māṅgalyā, “she who is auspiciousness itself”. Sarva maṅgala māṅgalye: “O blessing of all blessings!”</span><span class="hr">Vokativ od māṅgalyā, „ona koja je sam blagoslov”. Sarva maṅgala māṅgalye: „O blagoslove svih blagoslova!”</span></dd><dt>śive</dt><dd><span class="en">Vocative of Śivā, “the kind, the benevolent one”, the feminine of Śiva: the Goddess as Shiva&#x27;s own power.</span><span class="hr">Vokativ od Śivā, „dobrostiva, milostiva”, ženski oblik od Śiva: Božica kao Šivina vlastita moć.</span></dd><dt>sarvārtha</dt><dd><span class="en">Sarva, “every”, + artha, “aim, purpose, wealth, meaning”: every aim of life.</span><span class="hr">Sarva, „svaki”, + artha, „cilj, svrha, bogatstvo, smisao”: svaki cilj života.</span></dd><dt>sādhike</dt><dd><span class="en">Vocative of sādhikā, “she who brings to fulfilment” (from sādh, “to accomplish”). Sarvārtha sādhike: “O you who fulfil every aim!”</span><span class="hr">Vokativ od sādhikā, „ona koja dovodi do ispunjenja” (od sādh, „ostvariti”). Sarvārtha sādhike: „O ti koja ispunjavaš svaki cilj!”</span></dd><dt>śaraṇye</dt><dd><span class="en">Vocative of śaraṇyā, “she who gives refuge” (śaraṇa, “shelter, refuge”).</span><span class="hr">Vokativ od śaraṇyā, „ona koja daje utočište” (śaraṇa, „zaklon, utočište”).</span></dd><dt>tryambake</dt><dd><span class="en">Tri, “three”, + ambaka, “eye”: “O three-eyed one!”, the eye of wisdom on the forehead, in the vocative.</span><span class="hr">Tri, „tri”, + ambaka, „oko”: „O trooka!”, oko mudrosti na čelu, u vokativu.</span></dd><dt>gauri</dt><dd><span class="en">Vocative of Gaurī, “the fair, the shining one”: a name of Parvati.</span><span class="hr">Vokativ od Gaurī, „svijetla, blistava”: ime Parvati.</span></dd><dt>nārāyaṇi</dt><dd><span class="en">Vocative of Nārāyaṇī, the power (śakti) of Nārāyaṇa, that is, of Vishnu.</span><span class="hr">Vokativ od Nārāyaṇī, moć (śakti) Nārāyaṇe, to jest Višnua.</span></dd><dt>namo&#x27;stu</dt><dd><span class="en">Namaḥ, “bowing, salutation”, + astu, “let it be” (from as, “to be”): “salutation be (to you)”.</span><span class="hr">Namaḥ, „naklon, pozdrav”, + astu, „neka bude” (od as, „biti”): „neka je pozdrav (tebi)”.</span></dd><dt>te</dt><dd><span class="en">“To you” (dative of tvam, “you”). The whole verse comes from the Devī Māhātmya (11.10), the great hymn to the Goddess.</span><span class="hr">„Tebi” (dativ od tvam, „ti”). Cijeli stih je iz Devī Māhātmye (11.10), velikog hvalospjeva Božici.</span></dd><dt>Oṃ</dt><dd><span class="en">The sacred syllable, the sound of the whole: beginning, middle and end in one breath. Every mantra opens and rests in it.</span><span class="hr">Sveti slog, zvuk cjeline: početak, sredina i kraj u jednom dahu. Svaka mantra se njime otvara i u njemu počiva.</span></dd><dt>Bhavānī</dt><dd><span class="en">“She who gives life”, from bhava, “being, becoming”: the Goddess as Śiva&#x27;s wife, the mother of all that comes to be.</span><span class="hr">„Ona koja daje život”, od bhava, „bivanje, nastajanje”: Božica kao Šivina supruga, majka svega što nastaje.</span></dd><dt>Śaṅkarī</dt><dd><span class="en">The feminine of Śaṅkara, “the one who brings peace and good”, a name of Śiva: the Goddess as his gentle power.</span><span class="hr">Ženski oblik od Śaṅkara, „onaj koji donosi mir i dobro”, ime Šive: Božica kao njegova blaga moć.</span></dd><dt>Devī</dt><dd><span class="en">“The shining one”, the Goddess; devī is the feminine of deva, from div, “to shine”.</span><span class="hr">„Sjajna”, Božica; devī je ženski oblik od deva, od div, „sjati”.</span></dd><dt>Girijā</dt><dd><span class="en">“Born of the mountain”: Pārvatī, daughter of the Himālaya, Śiva&#x27;s wife.</span><span class="hr">„Rođena od planine”: Pārvatī, kći Himalaje, Šivina supruga.</span></dd><dt>Hara</dt><dd><span class="en">“The one who takes away” (sorrow, fear, sin), a name of Śiva; here sung with the Goddess, who is his power: Hara Hara Devī.</span><span class="hr">„Onaj koji odnosi” (tugu, strah, grijeh), ime Šive; ovdje pjevano s Božicom, koja je njegova moć: Hara Hara Devī.</span></dd><dt>He</dt><dd><span class="en">“O!”: the call that opens a prayer or a name. He Mātā Kālī: “O Mother Kālī!”</span><span class="hr">„O!”: zaziv kojim počinje molitva ili ime. He Mātā Kālī: „O Majko Kali!”</span></dd><dt>Mātā</dt><dd><span class="en">“Mother”. The Goddess is called first of all as mother.</span><span class="hr">„Majka”. Božicu se prije svega zaziva kao majku.</span></dd><dt>Durgā</dt><dd><span class="en">“The one hard to reach”, the invincible: the Goddess as the warrior who defeats every demon, riding a lion.</span><span class="hr">„Ona do koje je teško doći”, nepobjediva: Božica kao ratnica koja pobjeđuje svakog demona, jašući lava.</span></dd><dt>namo namaḥ</dt><dd><span class="en">“Bow, bow again”: namaḥ is “a bow, salutation”, said twice for full devotion. Kālī Durgā namo namaḥ: “to Kālī and Durgā, again and again our bow.”</span><span class="hr">„Naklon, opet naklon”: namaḥ je „naklon, pozdrav”, rečeno dvaput za puninu predanosti. Kālī Durgā namo namaḥ: „Kali i Durgi, iznova naš naklon.”</span></dd><dt>Mā</dt><dd><span class="en">“Mother, Ma”: the short, tender word a child says. Kālī Mā, Durgā Mā: “Mother Kālī, Mother Durgā”.</span><span class="hr">„Mama, majka”: kratka, nježna riječ koju kaže dijete. Kālī Mā, Durgā Mā: „Majko Kali, Majko Durga”.</span></dd><dt>Jaya</dt><dd><span class="en">“Victory!”, “glory to”: Jaya Jaya, “glory, glory”.</span><span class="hr">„Pobjeda!”, „slava”: Jaya Jaya, „slava, slava”.</span></dd><dt>Jagadambe</dt><dd><span class="en">Vocative of Jagadambā: jagat, “the world, all that moves”, + ambā, “mother”: “O Mother of the world!”</span><span class="hr">Vokativ od Jagadambā: jagat, „svijet, sve što se kreće”, + ambā, „majka”: „O Majko svijeta!”</span></dd></dl></details>
+</article><article class="song">
+  <div class="song-head"><span class="song-n">4</span><div><h3>Sarasvati Maha Lakshmi</h3>
+  <p class="song-to"><span class="en">to</span><span class="hr">za</span> <span class="en">Sarasvati and Lakshmi</span><span class="hr">Sarasvati i Lakšmi</span></p></div>
+  <button class="btn small" data-play="3">▶ <span class="en">Listen</span><span class="hr">Slušaj</span></button></div>
+  <blockquote class="mantra"><div>Sarasvatī, Mahā Lakṣmī</div></blockquote>
+  <p><span class="en">Sarasvati is the goddess of knowledge, speech and music, the patron of every singer; Lakshmi brings abundance, beauty and grace. The song begins with a soft voice alone before the band comes in.</span><span class="hr">Sarasvati je božica znanja, govora i glazbe, zaštitnica svakog pjevača; Lakšmi donosi obilje, ljepotu i milost. Pjesma počinje tihim glasom samim, prije nego što uđe bend.</span></p>
+  <details class="dict"><summary><span class="en">Dictionary · every word</span><span class="hr">Rječnik · svaka riječ</span> (3)</summary><dl><dt>Sarasvatī</dt><dd><span class="en">Saras, “lake, flowing water”, + -vatī, “she who has”: “she who flows”. The goddess of knowledge, speech, music and the arts, and a sacred river of the Veda.</span><span class="hr">Saras, „jezero, tekuća voda”, + -vatī, „ona koja ima”: „ona koja teče”. Božica znanja, govora, glazbe i umjetnosti, i sveta rijeka Veda.</span></dd><dt>Mahā</dt><dd><span class="en">“Great”.</span><span class="hr">„Velik, velika”.</span></dd><dt>Lakṣmī</dt><dd><span class="en">From lakṣ, “to mark, to aim”: “the auspicious sign”, good fortune. The goddess of prosperity, beauty and abundance, wife of Vishnu.</span><span class="hr">Od lakṣ, „označiti, ciljati”: „sretan znak”, blagostanje. Božica obilja, ljepote i napretka, Višnuova žena.</span></dd></dl></details>
+</article><article class="song">
+  <div class="song-head"><span class="song-n">5</span><div><h3>Kailasha Vasa Maha Deva</h3>
+  <p class="song-to"><span class="en">to</span><span class="hr">za</span> <span class="en">Shiva</span><span class="hr">Šivu</span></p></div>
+  <button class="btn small" data-play="4">▶ <span class="en">Listen</span><span class="hr">Slušaj</span></button></div>
+  <blockquote class="mantra"><div>Kailāsa vāsa, Mahā Deva</div></blockquote>
+  <p><span class="en">“Great God who dwells on Kailash.” Shiva sits in stillness on the sacred mountain in the Himalaya: the silence from which all the music comes.</span><span class="hr">„Veliki Bože koji prebivaš na Kailašu.“ Šiva sjedi u tišini na svetoj planini na Himalaji: u tišini iz koje dolazi sva glazba.</span></p>
+  <details class="dict"><summary><span class="en">Dictionary · every word</span><span class="hr">Rječnik · svaka riječ</span> (4)</summary><dl><dt>Kailāsa</dt><dd><span class="en">Mount Kailash in Tibet, the snow peak where Shiva dwells.</span><span class="hr">Planina Kailaš na Tibetu, snježni vrh na kojem prebiva Šiva.</span></dd><dt>vāsa</dt><dd><span class="en">“Dwelling, abode” (from vas, “to live, to stay”). Kailāsa vāsa: “you who dwell on Kailash”.</span><span class="hr">„Prebivalište, boravak” (od vas, „živjeti, boraviti”). Kailāsa vāsa: „ti koji prebivaš na Kailašu”.</span></dd><dt>Mahā</dt><dd><span class="en">“Great”.</span><span class="hr">„Velik”.</span></dd><dt>Deva</dt><dd><span class="en">“God”, literally “the shining one” (from div, “to shine”). Mahā Deva: “the great God”, Shiva.</span><span class="hr">„Bog”, doslovno „onaj koji sja” (od div, „sjati”). Mahā Deva: „veliki Bog”, Šiva.</span></dd></dl></details>
+</article><article class="song">
+  <div class="song-head"><span class="song-n">6</span><div><h3>Uma Parvati Ananda Ma</h3>
+  <p class="song-to"><span class="en">to</span><span class="hr">za</span> <span class="en">Parvati</span><span class="hr">Parvati</span></p></div>
+  <button class="btn small" data-play="5">▶ <span class="en">Listen</span><span class="hr">Slušaj</span></button></div>
+  <blockquote class="mantra"><div>Umā, Pārvatī, Ānanda Mā</div></blockquote>
+  <p><span class="en">Uma and Parvati are names of Shiva&#x27;s beloved, the daughter of the mountain; Ānanda Mā is “mother of bliss”. After Shiva&#x27;s song, his other half.</span><span class="hr">Uma i Parvati imena su Šivine voljene, kćeri planine; Ānanda Mā je „majka blaženstva“. Nakon Šivine pjesme, njegova druga polovica.</span></p>
+  <details class="dict"><summary><span class="en">Dictionary · every word</span><span class="hr">Rječnik · svaka riječ</span> (4)</summary><dl><dt>Umā</dt><dd><span class="en">A name of Parvati. The old story reads it as u mā, “oh, do not!”, her mother&#x27;s plea when the girl went to the forest for her austerities; it also means light and calm.</span><span class="hr">Ime Parvati. Stara priča tumači ga kao u mā, „oh, nemoj!”, molbu njezine majke kad je djevojka otišla u šumu na pokoru; znači i svjetlost i mir.</span></dd><dt>Pārvatī</dt><dd><span class="en">“Daughter of the mountain” (parvata, “mountain”): the daughter of the Himalaya, Shiva&#x27;s wife, mother of Ganesha.</span><span class="hr">„Kći planine” (parvata, „planina”): kći Himalaje, Šivina žena, Ganešina majka.</span></dd><dt>Ānanda</dt><dd><span class="en">“Bliss, joy” (ā + nand, “to rejoice”); the joy that is our true nature.</span><span class="hr">„Blaženstvo, radost” (ā + nand, „radovati se”); radost koja je naša prava narav.</span></dd><dt>Mā</dt><dd><span class="en">“Mother”, the loving word of Hindi and Bengali. Ānanda Mā: “Mother of bliss”.</span><span class="hr">„Majka”, nježna riječ hindskog i bengalskog. Ānanda Mā: „Majko blaženstva”.</span></dd></dl></details>
+</article><article class="song">
+  <div class="song-head"><span class="song-n">7</span><div><h3>Rama Rama Jaya Raja Ram</h3>
+  <p class="song-to"><span class="en">to</span><span class="hr">za</span> <span class="en">Rama</span><span class="hr">Ramu</span></p></div>
+  <button class="btn small" data-play="6">▶ <span class="en">Listen</span><span class="hr">Slušaj</span></button></div>
+  <p class="medley"><span class="en">Three parts, each back to the first: Rama Rama Jaya Raja Ram · Sri Krishna Govinda · Sri Ram Jay Ram</span><span class="hr">Tri dijela, svaki se vraća prvom: Rama Rama Jaya Raja Ram · Sri Krishna Govinda · Sri Ram Jay Ram</span></p><blockquote class="mantra"><div>Rāma Rāma jaya rājā Rām</div><div>Rāma Rāma jaya Sītā Rām</div><div>Śrī Kṛṣṇa Govinda Hare Murāre</div><div>He Nātha Nārāyaṇa Vāsudeva</div><div>Śrī Rām jaya Rām jaya jaya Rām</div><div>Sītā Rām</div></blockquote>
+  <p><span class="en">“Rama, Rama, victory to Rama the king; victory to Sita and Rama.” In the middle the song turns to Krishna: “Holy Krishna, Govinda, Hari, who defeated the demon Mura; O Lord, Narayana, son of Vasudeva”, and comes back to Rama with the old mantra Śrī Rām jaya Rām. Rama and Krishna are two faces of the same Vishnu, the one who keeps the world.</span><span class="hr">„Rama, Rama, slava Rami kralju; slava Siti i Rami.“ U sredini se pjesma okreće Krišni: „Sveti Krišna, Govinda, Hari, koji je pobijedio demona Muru; o Gospodine, Narayana, sine Vasudeve“, i vraća se Rami starom mantrom Śrī Rām jaya Rām. Rama i Krišna dva su lica istog Višnua, onoga koji čuva svijet.</span></p>
+  <details class="dict"><summary><span class="en">Dictionary · every word</span><span class="hr">Rječnik · svaka riječ</span> (14)</summary><dl><dt>Rāma</dt><dd><span class="en">“He who delights, who gives joy” (from ram, “to delight, to rest”). Vishnu&#x27;s seventh coming, the hero of the Rāmāyaṇa.</span><span class="hr">„Onaj koji raduje, koji daje radost” (od ram, „radovati se, počivati”). Sedmi Višnuov dolazak, junak Rāmāyaṇe.</span></dd><dt>jaya</dt><dd><span class="en">“Victory, glory to …!”, from ji, “to conquer”.</span><span class="hr">„Pobjeda, slava …!”, od ji, „pobijediti”.</span></dd><dt>rājā</dt><dd><span class="en">“King” (from rāj, “to rule, to shine”). Rājā Rām: “King Rama”.</span><span class="hr">„Kralj” (od rāj, „vladati, sjati”). Rājā Rām: „kralj Rama”.</span></dd><dt>Rām</dt><dd><span class="en">The same name as Rāma, spoken the Hindi way, without the last a.</span><span class="hr">Isto ime kao Rāma, izgovoreno na hindski način, bez završnog a.</span></dd><dt>Sītā</dt><dd><span class="en">Rama&#x27;s wife, daughter of the earth; love and faithfulness. Sītā Rām: the two named together, as one.</span><span class="hr">Ramina žena, kći zemlje; ljubav i vjernost. Sītā Rām: oboje imenovani zajedno, kao jedno.</span></dd><dt>Śrī</dt><dd><span class="en">“Holy, radiant, beautiful”: a word of honour before a divine name.</span><span class="hr">„Sveti, sjajni, lijepi“: riječ poštovanja ispred božanskog imena.</span></dd><dt>Kṛṣṇa</dt><dd><span class="en">“The dark one, the all-attractive”: Vishnu born as the cowherd who plays the flute and speaks the Bhagavad Gita.</span><span class="hr">„Tamni, svima privlačni“: Višnu rođen kao pastir koji svira frulu i izgovara Bhagavad Gitu.</span></dd><dt>Govinda</dt><dd><span class="en">“The one who finds and protects the cows”: Krishna as the cowherd, protector of all that lives.</span><span class="hr">„Onaj koji pronalazi i štiti krave“: Krišna kao pastir, zaštitnik svega živoga.</span></dd><dt>Hare</dt><dd><span class="en">“O Hari!”: the one who takes away (sorrow); a name of Vishnu and Krishna, in the form used to call him.</span><span class="hr">„O Hari!“: onaj koji odnosi (tugu); ime Višnua i Krišne, u obliku kojim ga se zaziva.</span></dd><dt>Murāre</dt><dd><span class="en">“O enemy of Mura!”: Krishna, who defeated the demon Mura.</span><span class="hr">„O neprijatelju Mure!“: Krišna, koji je pobijedio demona Muru.</span></dd><dt>He</dt><dd><span class="en">“O!”: the call before a name.</span><span class="hr">„O!“: zaziv ispred imena.</span></dd><dt>Nātha</dt><dd><span class="en">“Lord, protector, refuge”.</span><span class="hr">„Gospodin, zaštitnik, utočište“.</span></dd><dt>Nārāyaṇa</dt><dd><span class="en">“The refuge of all beings”, or “the one who rests on the waters”: Vishnu.</span><span class="hr">„Utočište svih bića“, ili „onaj koji počiva na vodama“: Višnu.</span></dd><dt>Vāsudeva</dt><dd><span class="en">“Son of Vasudeva”, Krishna; also “the god who dwells in all”.</span><span class="hr">„Sin Vasudeve“, Krišna; također „bog koji prebiva u svemu“.</span></dd></dl></details>
+</article><article class="song">
+  <div class="song-head"><span class="song-n">8</span><div><h3>Asatoma Sadgamaya</h3>
+  <p class="song-to"><span class="en">to</span><span class="hr">za</span> <span class="en">everyone</span><span class="hr">sve</span></p></div>
+  <button class="btn small" data-play="7">▶ <span class="en">Listen</span><span class="hr">Slušaj</span></button></div>
+  <blockquote class="mantra"><div>Asato mā sad gamaya</div><div>tamaso mā jyotir gamaya</div><div>mṛtyor mā amṛtaṁ gamaya</div><div>Oṁ śāntiḥ śāntiḥ śāntiḥ</div></blockquote>
+  <p><span class="en">From the Brihadaranyaka Upanishad, one of the oldest prayers there is: “Lead me from the unreal to the real, from darkness to light, from death to immortality. Om, peace, peace, peace.” We always end with it.</span><span class="hr">Iz Brihadaranyaka Upanišade, jedna od najstarijih molitvi: „Vodi me od nestvarnog k stvarnom, od tame k svjetlu, od smrti k besmrtnosti. Om, mir, mir, mir.“ Uvijek završavamo s njom.</span></p>
+  <details class="dict"><summary><span class="en">Dictionary · every word</span><span class="hr">Rječnik · svaka riječ</span> (10)</summary><dl><dt>asato</dt><dd><span class="en">Asataḥ, “from the unreal”: the ablative (the “from” case) of asat, non-being (a-, “not”, + sat, “being”).</span><span class="hr">Asataḥ, „od nestvarnog”: ablativ (padež „od”) od asat, nebitak (a-, „ne”, + sat, „bitak”).</span></dd><dt>mā</dt><dd><span class="en">“Me”, a short form of mām.</span><span class="hr">„Mene”, kratki oblik od mām.</span></dd><dt>sad</dt><dd><span class="en">Sat, “being, the real, the true”; it sounds sad before the g of gamaya.</span><span class="hr">Sat, „bitak, stvarno, istinito”; ispred g u gamaya izgovara se sad.</span></dd><dt>gamaya</dt><dd><span class="en">“Lead! Make go!”, the causative imperative of gam, “to go”. Asato mā sad gamaya: “lead me from the unreal to the real”.</span><span class="hr">„Vodi! Učini da idem!”, kauzativni imperativ od gam, „ići”. Asato mā sad gamaya: „vodi me od nestvarnog k stvarnom”.</span></dd><dt>tamaso</dt><dd><span class="en">Tamasaḥ, “from darkness” (tamas, “darkness, inertia”).</span><span class="hr">Tamasaḥ, „od tame” (tamas, „tama, tromost”).</span></dd><dt>jyotir</dt><dd><span class="en">Jyotiḥ, “light”.</span><span class="hr">Jyotiḥ, „svjetlost”.</span></dd><dt>mṛtyor</dt><dd><span class="en">Mṛtyoḥ, “from death” (mṛtyu, “death”).</span><span class="hr">Mṛtyoḥ, „od smrti” (mṛtyu, „smrt”).</span></dd><dt>amṛtaṁ</dt><dd><span class="en">A-, “not”, + mṛta, “dead”: deathlessness, immortality; also the nectar of the gods.</span><span class="hr">A-, „ne”, + mṛta, „mrtav”: besmrtnost; i nektar bogova.</span></dd><dt>Oṁ</dt><dd><span class="en">The sacred syllable, the sound of the whole of being, said at the start and the end of prayers.</span><span class="hr">Sveti slog, zvuk cjelokupnog bitka, izgovara se na početku i na kraju molitve.</span></dd><dt>śāntiḥ</dt><dd><span class="en">“Peace”. Said three times: peace in ourselves, peace with the world around us, peace from the powers above. The verse is from the Bṛhadāraṇyaka Upaniṣad (1.3.28).</span><span class="hr">„Mir”. Izgovara se tri puta: mir u nama, mir sa svijetom oko nas, mir od viših sila. Stih je iz Bṛhadāraṇyaka Upaniṣade (1.3.28).</span></dd></dl></details>
+</article></div>
+  <p class="note"><span class="en">The lines shown are the heart of each mantra; the full words as we sing them are being written down from the recording.</span><span class="hr">Prikazani stihovi srce su svake mantre; cijele riječi kako ih pjevamo upravo zapisujemo sa snimke.</span></p>
+  <footer>Santoshi Kirtan Band</footer>
+</div>
+</section>
+
+<section class="page" id="page-band" hidden>
+<div class="wrap" id="band">
+  <header style="padding:40px 0 8px">
+    <p class="kicker"><span class="en">The band</span><span class="hr">Bend</span></p>
+    <h1>Santoshi Kirtan Band</h1>
+    <p class="lead"><span class="en">Seven of us, from Zagreb. The portraits are photographic renderings made from our real photos, all in one concert hall.</span><span class="hr">Sedmero nas, iz Zagreba. Portreti su fotografske izrade iz naših pravih fotografija, svi u istoj koncertnoj dvorani.</span></p>
+  </header>
+  <img class="band-hero" src="img/band/hero.jpg" alt="">
+  <div class="players"><figure class="player"><img src="img/band/a-bass.jpg" alt="" loading="lazy"><figcaption><b>Svemir Vranko</b><span><span class="en">bass guitar · voice</span><span class="hr">bas-gitara · glas</span></span></figcaption></figure><figure class="player"><img src="img/band/b-djembe.jpg" alt="" loading="lazy"><figcaption><b>Marko Boško</b><span><span class="en">djembe</span><span class="hr">džembe</span></span></figcaption></figure><figure class="player"><img src="img/band/c-mridangam.jpg" alt="" loading="lazy"><figcaption><b>Kristian Nasteski</b><span><span class="en">mridangam · harmonium · voice</span><span class="hr">mridangam · harmonij · glas</span></span></figcaption></figure><figure class="player"><img src="img/band/d-guitar.jpg" alt="" loading="lazy"><figcaption><b>Igor Pavlić</b><span><span class="en">voice · guitar</span><span class="hr">glas · gitara</span></span></figcaption></figure><figure class="player"><img src="img/band/e-voice.jpg" alt="" loading="lazy"><figcaption><b>Tajana Stipetić</b><span><span class="en">voice</span><span class="hr">glas</span></span></figcaption></figure><figure class="player"><img src="img/band/f-nylon.jpg" alt="" loading="lazy"><figcaption><b>Tomislav Tenšek Snoopy</b><span><span class="en">guitar</span><span class="hr">gitara</span></span></figcaption></figure><figure class="player"><img src="img/band/g-bells.jpg" alt="" loading="lazy"><figcaption><b>Petra Belamarić</b><span><span class="en">tambourine</span><span class="hr">tamburin</span></span></figcaption></figure></div>
+  <footer>Santoshi Kirtan Band · Zagreb</footer>
+</div>
+</section>
+
+<section class="page" id="page-equipment" hidden>
+<div class="wrap" id="equipment">
+  <header style="padding:40px 0 8px">
+    <p class="kicker"><span class="en">Equipment · the Santoshi rack</span><span class="hr">Oprema · Santoshi rack</span></p>
+    <h1><span class="en">One case. Ten minutes.</span><span class="hr">Jedna kutija. Deset minuta.</span></h1>
+    <p class="lead"><span class="en">Everything the band needs to sound good and record every concert travels in one rolling rack: the camera tablet in the top drawer, the mixer under it, then the microphones, the cables and a drawer for everything else. Open it, plug in, play.</span><span class="hr">Sve što bendu treba da dobro zvuči i snimi svaki koncert putuje u jednom racku na kotačima: tablet za kamere u gornjoj ladici, ispod njega mikseta, zatim mikrofoni, kabeli i ladica za sve ostalo. Otvori, uključi, sviraj.</span></p>
+  </header>
+  <h2><span class="en">How we keep it fast</span><span class="hr">Kako to ide brzo</span></h2>
+  <ul class="rules"><li><b><span class="en">One static setup</span><span class="hr">Jedna stalna postava</span></b><span class="en">The same ten channels every time, in the same order. The mixer remembers the mix (a stored scene), so a soundcheck is a check, not a new mix.</span><span class="hr">Istih deset kanala svaki put, istim redom. Mikseta pamti miks (spremljena scena), pa je tonska proba provjera, a ne novi miks.</span></li><li><b><span class="en">One stage box, one run</span><span class="hr">Jedan stage box, jedan vod</span></b><span class="en">The stage box sits behind the band; everyone plugs in with a cable of 2 m at most. One run of four network cables, 10 m, goes to the mixer on the left of the stage (seen from the hall). No long cables between the players.</span><span class="hr">Stage box stoji iza benda; svatko se uključuje kabelom od najviše 2 m. Jedan vod od četiri mrežna kabela, 10 m, ide do miksete na lijevoj strani pozornice (gledano iz dvorane). Nema dugih kabela među sviračima.</span></li><li><b><span class="en">Mixed from a tablet</span><span class="hr">Miks s tableta</span></b><span class="en">The CQ-12T has its own Wi-Fi: the mix is made walking around the hall with the CQ MixPad or CQ4You app.</span><span class="hr">CQ-12T ima vlastiti Wi-Fi: miks se radi šetajući dvoranom s aplikacijom CQ MixPad ili CQ4You.</span></li><li><b><span class="en">Every concert recorded</span><span class="hr">Svaki koncert snimljen</span></b><span class="en">The CQ-12T records all channels to its SD card. That is where the concerts on the Player come from.</span><span class="hr">CQ-12T snima sve kanale na svoju SD karticu. Odatle dolaze koncerti u Playeru.</span></li><li><b><span class="en">Numbered cables</span><span class="hr">Numerirani kabeli</span></b><span class="en">Each cable and each mixer input carries the same number and colour: no searching, no swapping.</span><span class="hr">Svaki kabel i svaki ulaz miksete nose isti broj i boju: bez traženja, bez zamjena.</span></li><li><b><span class="en">Packed in reverse</span><span class="hr">Pakiranje unatrag</span></b><span class="en">Mics back in their foam, cables coiled with their velcro, drawers shut, lids on, rolled out.</span><span class="hr">Mikrofoni natrag u spužvu, kabeli namotani s čičkom, ladice zatvorene, poklopci na mjesto, i van.</span></li></ul>
+  <h2><span class="en">The rack</span><span class="hr">Rack</span></h2>
+  <div class="rack">
+    <svg viewBox="0 0 340 428" role="img" aria-label="Santoshi rack, 12U on wheels: 1 camera tablet 1U, 2 mixer 3U, 3 microphones 2U, 4 cables 2U, 5 empty 3U, power 1U"><rect x="20" y="36" width="300" height="352" rx="22" fill="var(--card)" stroke="currentColor" stroke-width="4"/><rect x="6" y="160" width="14" height="40" rx="4" fill="currentColor"/><rect x="320" y="160" width="14" height="40" rx="4" fill="currentColor"/><rect x="44" y="60" width="252" height="22" rx="4" fill="color-mix(in srgb, var(--saffron) 14%, transparent)" stroke="var(--saffron)" stroke-width="2"/><text class="en" x="170" y="76" text-anchor="middle" font-family="Cinzel, serif" font-size="12" font-weight="700" fill="currentColor">1 · CAMERA TABLET · 1U</text><text class="hr" x="170" y="76" text-anchor="middle" font-family="Cinzel, serif" font-size="12" font-weight="700" fill="currentColor">1 · TABLET ZA KAMERE · 1U</text><rect x="44" y="86" width="252" height="74" rx="4" fill="color-mix(in srgb, var(--saffron) 14%, transparent)" stroke="var(--saffron)" stroke-width="2"/><text class="en" x="170" y="120" text-anchor="middle" font-family="Cinzel, serif" font-size="14" font-weight="700" fill="currentColor">2 · MIXER · 3U</text><text class="hr" x="170" y="120" text-anchor="middle" font-family="Cinzel, serif" font-size="14" font-weight="700" fill="currentColor">2 · MIKSETA · 3U</text><text class="en" x="170" y="138" text-anchor="middle" font-family="EB Garamond, serif" font-size="13" font-weight="400" fill="currentColor">Allen &amp; Heath CQ-12T</text><text class="hr" x="170" y="138" text-anchor="middle" font-family="EB Garamond, serif" font-size="13" font-weight="400" fill="currentColor">Allen &amp; Heath CQ-12T</text><rect x="130" y="149" width="80" height="6" rx="3" fill="var(--saffron)"/><rect x="44" y="164" width="252" height="48" rx="4" fill="color-mix(in srgb, var(--gold) 14%, transparent)" stroke="var(--gold)" stroke-width="2"/><text class="en" x="170" y="185" text-anchor="middle" font-family="Cinzel, serif" font-size="14" font-weight="700" fill="currentColor">3 · MICROPHONES · 2U</text><text class="hr" x="170" y="185" text-anchor="middle" font-family="Cinzel, serif" font-size="14" font-weight="700" fill="currentColor">3 · MIKROFONI · 2U</text><text class="en" x="170" y="203" text-anchor="middle" font-family="EB Garamond, serif" font-size="13" font-weight="400" fill="currentColor">7 mics · 3 DI boxes</text><text class="hr" x="170" y="203" text-anchor="middle" font-family="EB Garamond, serif" font-size="13" font-weight="400" fill="currentColor">7 mikrofona · 3 DI kutije</text><rect x="44" y="216" width="252" height="48" rx="4" fill="color-mix(in srgb, var(--gold) 14%, transparent)" stroke="var(--gold)" stroke-width="2"/><text class="en" x="170" y="237" text-anchor="middle" font-family="Cinzel, serif" font-size="14" font-weight="700" fill="currentColor">4 · CABLES · 2U</text><text class="hr" x="170" y="237" text-anchor="middle" font-family="Cinzel, serif" font-size="14" font-weight="700" fill="currentColor">4 · KABELI · 2U</text><text class="en" x="170" y="255" text-anchor="middle" font-family="EB Garamond, serif" font-size="13" font-weight="400" fill="currentColor">Cat snake · short cables</text><text class="hr" x="170" y="255" text-anchor="middle" font-family="EB Garamond, serif" font-size="13" font-weight="400" fill="currentColor">Cat multikabel · kratki kabeli</text><rect x="44" y="268" width="252" height="74" rx="4" fill="color-mix(in srgb, var(--line) 14%, transparent)" stroke="var(--line)" stroke-width="2"/><text class="en" x="170" y="302" text-anchor="middle" font-family="Cinzel, serif" font-size="14" font-weight="700" fill="currentColor">5 · EMPTY · 3U</text><text class="hr" x="170" y="302" text-anchor="middle" font-family="Cinzel, serif" font-size="14" font-weight="700" fill="currentColor">5 · PRAZNA · 3U</text><text class="en" x="170" y="320" text-anchor="middle" font-family="EB Garamond, serif" font-size="13" font-weight="400" fill="currentColor">for everything else</text><text class="hr" x="170" y="320" text-anchor="middle" font-family="EB Garamond, serif" font-size="13" font-weight="400" fill="currentColor">za sve ostalo</text><rect x="44" y="346" width="252" height="22" rx="4" fill="color-mix(in srgb, var(--line) 14%, transparent)" stroke="var(--line)" stroke-width="2"/><text class="en" x="170" y="362" text-anchor="middle" font-family="Cinzel, serif" font-size="12" font-weight="700" fill="currentColor">POWER · 1U</text><text class="hr" x="170" y="362" text-anchor="middle" font-family="Cinzel, serif" font-size="12" font-weight="700" fill="currentColor">STRUJA · 1U</text><circle cx="70" cy="402" r="14" fill="currentColor"/><circle cx="270" cy="402" r="14" fill="currentColor"/></svg>
+    <dl>
+      <dt><span class="en">12U on wheels, a lid front and back</span><span class="hr">12U na kotačima, poklopac sprijeda i straga</span></dt><dd><span class="en">A Flyht Pro Live rack with four folding handles: it rolls in, the lids come off, and five drawers and a power strip are ready.</span><span class="hr">Flyht Pro Live rack s četiri sklopive ručke: dogura se, poklopci se skinu i pet ladica i razdjelnik struje su spremni.</span></dd>
+      <dt><span class="en">Drawer 1 · the camera tablet</span><span class="hr">Ladica 1 · tablet za kamere</span></dt><dd><span class="en">Open it and the tablet runs every camera: the picture of each, the recording, focus, exposure and colour. See Video below.</span><span class="hr">Otvori je i tablet upravlja svim kamerama: slika svake, snimanje, fokus, ekspozicija i boja. Vidi Video ispod.</span></dd>
+      <dt><span class="en">Drawer 2 · the mixer</span><span class="hr">Ladica 2 · mikseta</span></dt><dd><span class="en">Allen &amp; Heath CQ-12T (290 × 88 × 242 mm) lying in a 3U drawer. To play, pull the drawer out, or lift the mixer onto the closed rack; its sockets are at the back.</span><span class="hr">Allen &amp; Heath CQ-12T (290 × 88 × 242 mm) leži u ladici od 3U. Za sviranje izvuci ladicu ili podigni miksetu na zatvoreni rack; priključci su joj straga.</span></dd>
+      <dt><span class="en">Drawer 3 · the microphones</span><span class="hr">Ladica 3 · mikrofoni</span></dt><dd><span class="en">Five vocal mics, two drum mics, three DI boxes, each in foam.</span><span class="hr">Pet vokalnih mikrofona, dva za bubnjeve, tri DI kutije, svaki u spužvi.</span></dd>
+      <dt><span class="en">Drawer 4 · the cables</span><span class="hr">Ladica 4 · kabeli</span></dt><dd><span class="en">The network snake (8 small boxes, four 10 m network cables), fourteen short XLR cables and three guitar cables, coiled, tied, numbered.</span><span class="hr">Mrežni multikabel (8 malih kutija, četiri mrežna kabela od 10 m), četrnaest kratkih XLR kabela i tri gitarska kabela, namotani, vezani, numerirani.</span></dd>
+      <dt><span class="en">Drawer 5 · empty</span><span class="hr">Ladica 5 · prazna</span></dt><dd><span class="en">3U for everything else: tape, batteries, spare strings, the tripod plates. Under it a power strip with USB: one cable to the wall.</span><span class="hr">3U za sve ostalo: traka, baterije, rezervne žice, pločice za stative. Ispod nje razdjelnik struje s USB-om: jedan kabel do zida.</span></dd>
+    </dl>
+  </div>
+  <div class="gallery"><figure><img src="img/equipment/01-closed.jpg" alt="" loading="lazy"><figcaption><span class="en">Packed: one case, the handle up, rolled in</span><span class="hr">Spakirano: jedna kutija, ručka gore, dogura se</span></figcaption></figure><figure><img src="img/equipment/06-tablet.jpg" alt="" loading="lazy"><figcaption><span class="en">Drawer 1: the tablet that runs the cameras</span><span class="hr">Ladica 1: tablet koji upravlja kamerama</span></figcaption></figure><figure><img src="img/equipment/02-mixer.jpg" alt="" loading="lazy"><figcaption><span class="en">Drawer 2: the CQ-12T, mixed from a tablet</span><span class="hr">Ladica 2: CQ-12T, miksa se s tableta</span></figcaption></figure><figure><img src="img/equipment/04-cables.jpg" alt="" loading="lazy"><figcaption><span class="en">Drawer 4: the cables, coiled and numbered</span><span class="hr">Ladica 4: kabeli, namotani i numerirani</span></figcaption></figure></div><p class="note"><span class="en">Illustrations made with AI (Gemini), to show the idea; the real rack follows the list below.</span><span class="hr">Ilustracije napravljene umjetnom inteligencijom (Gemini), da pokažu ideju; pravi rack slijedi popis ispod.</span></p>
+  <h2><span class="en">The stage</span><span class="hr">Pozornica</span></h2>
+  <p class="note"><span class="en">The stage box behind the band is four small Cat Snake boxes strapped together: three take the ten microphones and DI boxes (inputs 1–12), the fourth gives back the main L/R and two monitors. Four shielded network cables, tied into one, run 10 m to the CQ-12T on the left of the stage, seen from the hall. Each network cable carries four analogue channels, phantom power included; it is not a network, only the wires.</span><span class="hr">Stage box iza benda čine četiri male Cat Snake kutije spojene zajedno: tri primaju deset mikrofona i DI kutija (ulazi 1–12), četvrta vraća glavni L/D i dva monitora. Četiri oklopljena mrežna kabela, vezana u jedan, idu 10 m do CQ-12T na lijevoj strani pozornice, gledano iz dvorane. Svaki mrežni kabel nosi četiri analogna kanala, uključujući phantom napajanje; to nije mreža, samo žice.</span></p>
+  <h2><span class="en">Video: one drawer, every camera</span><span class="hr">Video: jedna ladica, sve kamere</span></h2>
+  <div class="alt video">
+    <p><span class="en">The first drawer holds a tablet. Open it, and the tablet becomes the camera desk: the picture of every camera side by side, recording started and stopped for all, and every parameter of the picture (focus, exposure, white balance, the look) from one place. One person sets up the shots, nobody has to stand behind a camera.</span><span class="hr">U prvoj ladici leži tablet. Otvori je i tablet postaje kamerni stol: slika svake kamere jedna uz drugu, snimanje pokrenuto i zaustavljeno za sve, i svaki parametar slike (fokus, ekspozicija, balans bijele, izgled) s jednog mjesta. Jedna osoba postavi kadrove, nitko ne mora stajati iza kamere.</span></p>
+    <p style="margin:12px 0 4px"><b><span class="en">Two ways to record a concert</span><span class="hr">Dva načina snimanja koncerta</span></b></p>
+    <ol style="margin:0;padding-left:22px">
+      <li><span class="en">Phones and Sony cameras together: phones on tripods as cameras, the Sony cameras beside them, all on the tablet.</span><span class="hr">Mobiteli i Sony kamere zajedno: mobiteli na stativima kao kamere, Sony kamere uz njih, sve na tabletu.</span></li>
+      <li><span class="en">The cameras alone, steered from a phone: the remote app on one phone runs the cameras, no tablet needed.</span><span class="hr">Samo kamere, upravljane s mobitela: aplikacija za daljinsko upravljanje na jednom mobitelu vodi kamere, tablet nije potreban.</span></li>
+    </ol>
+    <ul style="margin:10px 0 0;padding-left:20px">
+      <li><span class="en">Sony cameras</span><span class="hr">Sony kamere</span>: <a href="https://mantrasonyremote.pages.dev" target="_blank" rel="noopener">Mantra Sony Remote</a></li>
+      <li><span class="en">Phones as cameras, with their own remote and NDI</span><span class="hr">Mobiteli kao kamere, s vlastitim daljinskim upravljanjem i NDI-jem</span>: <a href="https://mantramanualcamera.pages.dev" target="_blank" rel="noopener">Mantra Manual Camera</a></li>
+    </ul>
+    <p class="note" style="margin:10px 0 0"><span class="en">The apps we use for our productions, made by Mantra Productions.</span><span class="hr">Aplikacije koje koristimo za naše produkcije, izradio Mantra Productions.</span></p>
+  </div>
+
+  <h2><span class="en">The channels</span><span class="hr">Kanali</span></h2>
+  <p class="note"><span class="en">Seven players, ten inputs on the CQ-12T. Petra's tambourine is heard through the vocal mics.</span><span class="hr">Sedam svirača, deset ulaza na CQ-12T. Petrin tamburin čuje se kroz vokalne mikrofone.</span></p>
+  <div class="tablewrap"><table class="list">
+    <thead><tr><th class="num"><span class="en">Ch</span><span class="hr">Kan</span></th><th><span class="en">Who</span><span class="hr">Tko</span></th><th><span class="en">What</span><span class="hr">Što</span></th><th><span class="en">Microphone / DI</span><span class="hr">Mikrofon / DI</span></th></tr></thead>
+    <tbody><tr><td class="num">1</td><td><span class="en">Tajana</span><span class="hr">Tajana</span></td><td><span class="en">lead voice</span><span class="hr">glavni glas</span></td><td><span class="en">SM58 on a boom</span><span class="hr">SM58 na stalku s krakom</span></td></tr><tr><td class="num">2</td><td><span class="en">Igor</span><span class="hr">Igor</span></td><td><span class="en">voice</span><span class="hr">glas</span></td><td><span class="en">SM58 on a boom</span><span class="hr">SM58 na stalku s krakom</span></td></tr><tr><td class="num">3</td><td><span class="en">Svemir</span><span class="hr">Svemir</span></td><td><span class="en">voice</span><span class="hr">glas</span></td><td><span class="en">SM58 on a boom</span><span class="hr">SM58 na stalku s krakom</span></td></tr><tr><td class="num">4</td><td><span class="en">Kristian</span><span class="hr">Kristian</span></td><td><span class="en">voice</span><span class="hr">glas</span></td><td><span class="en">SM58 on a boom</span><span class="hr">SM58 na stalku s krakom</span></td></tr><tr><td class="num">5</td><td><span class="en">Kristian</span><span class="hr">Kristian</span></td><td><span class="en">harmonium</span><span class="hr">harmonij</span></td><td><span class="en">SM58 on a boom, over the harmonium</span><span class="hr">SM58 na stalku s krakom, iznad harmonija</span></td></tr><tr><td class="num">6</td><td><span class="en">Igor</span><span class="hr">Igor</span></td><td><span class="en">acoustic guitar</span><span class="hr">akustična gitara</span></td><td><span class="en">pickup → BSS AR133</span><span class="hr">pickup → BSS AR133</span></td></tr><tr><td class="num">7</td><td><span class="en">Snoopy</span><span class="hr">Snoopy</span></td><td><span class="en">nylon-string guitar</span><span class="hr">gitara s najlonskim žicama</span></td><td><span class="en">pickup → BSS AR133</span><span class="hr">pickup → BSS AR133</span></td></tr><tr><td class="num">8</td><td><span class="en">Svemir</span><span class="hr">Svemir</span></td><td><span class="en">5-string bass</span><span class="hr">bas s 5 žica</span></td><td><span class="en">bass → BSS AR133 (the amp stays on stage as his monitor)</span><span class="hr">bas → BSS AR133 (pojačalo ostaje na pozornici kao njegov monitor)</span></td></tr><tr><td class="num">9</td><td><span class="en">Kristian</span><span class="hr">Kristian</span></td><td><span class="en">mridangam</span><span class="hr">mridangam</span></td><td><span class="en">SM57 on a short stand, between the two heads</span><span class="hr">SM57 na niskom stalku, između dvije opne</span></td></tr><tr><td class="num">10</td><td><span class="en">Marko</span><span class="hr">Marko</span></td><td><span class="en">djembe</span><span class="hr">džembe</span></td><td><span class="en">SM57 on a short stand, from above</span><span class="hr">SM57 na niskom stalku, odozgo</span></td></tr></tbody></table></div>
+  <h2><span class="en">Shopping list · Thomann</span><span class="hr">Popis za kupnju · Thomann</span></h2>
+  <p class="note"><span class="en">Prices from thomann.de on 25.10.2026; they change. The Allen &amp; Heath CQ-12T is not on the list: Marko has it.</span><span class="hr">Cijene s thomann.de na dan 25.10.2026.; mijenjaju se. Allen &amp; Heath CQ-12T nije na popisu: Marko ga ima.</span></p>
+  <div class="tablewrap"><table class="list">
+    <thead><tr><th class="img"></th><th class="num"><span class="en">Qty</span><span class="hr">Kom</span></th><th><span class="en">Item</span><span class="hr">Artikl</span></th><th class="num"><span class="en">Each</span><span class="hr">Cijena</span></th><th class="num"><span class="en">Total</span><span class="hr">Ukupno</span></th></tr></thead>
+    <tbody><tr class="group"><td colspan="4"><span class="en">The rack</span><span class="hr">Rack</span></td><td class="num">584,50 €</td></tr><tr><td class="img"><img src="https://www.thomann.de/thumb/opengraph/pics/prod/432045.jpg" alt="" loading="lazy"></td><td class="num">1×</td><td><a href="https://www.thomann.de/de/flyht_pro_rack_12u_live_45_wheels.htm" target="_blank" rel="noopener"><span class="en">Flyht Pro Rack 12U Live 45 Wheels</span><span class="hr">Flyht Pro Rack 12U Live 45 Wheels</span></a><div class="why"><span class="en">the case: 12U on four wheels (two with brakes), front and back lid, four folding handles, screws included</span><span class="hr">kućište: 12U na četiri kotača (dva s kočnicom), poklopac sprijeda i straga, četiri sklopive ručke, vijci uključeni</span></div></td><td class="num">222,00 €</td><td class="num">222,00 €</td></tr><tr><td class="img"><img src="https://www.thomann.de/thumb/opengraph/pics/prod/441222.jpg" alt="" loading="lazy"></td><td class="num">1×</td><td><a href="https://www.thomann.de/de/thon_rackdrawer_1.htm" target="_blank" rel="noopener"><span class="en">Thon Rackdrawer 1U — drawer 1, the camera tablet</span><span class="hr">Thon ladica 1U — ladica 1, tablet za kamere</span></a><div class="why"><span class="en">a flat 412 × 380 mm tray at the top: open it and the tablet runs every camera</span><span class="hr">ravna ploha 412 × 380 mm na vrhu: otvori je i tablet upravlja svim kamerama</span></div></td><td class="num">29,00 €</td><td class="num">29,00 €</td></tr><tr><td class="img"><img src="https://www.thomann.de/thumb/opengraph/pics/prod/578009.jpg" alt="" loading="lazy"></td><td class="num">1×</td><td><a href="https://www.thomann.de/de/flyht_pro_rack_drawer_19_3u_alu_38_cm.htm" target="_blank" rel="noopener"><span class="en">Flyht Pro Rack Drawer 3U Alu 38 cm — drawer 2, the mixer</span><span class="hr">Flyht Pro ladica 3U Alu 38 cm — ladica 2, mikseta</span></a><div class="why"><span class="en">the CQ-12T is 290 × 88 × 242 mm; it lies in it with room behind for the plugs</span><span class="hr">CQ-12T ima 290 × 88 × 242 mm; leži u ladici s mjestom iza za utikače</span></div></td><td class="num">75,00 €</td><td class="num">75,00 €</td></tr><tr><td class="img"><img src="https://www.thomann.de/thumb/opengraph/pics/prod/578005.jpg" alt="" loading="lazy"></td><td class="num">1×</td><td><a href="https://www.thomann.de/de/flyht_pro_rack_drawer_19_2u_alu_38_cm.htm" target="_blank" rel="noopener"><span class="en">Flyht Pro Rack Drawer 2U Alu 38 cm — drawer 3, the microphones</span><span class="hr">Flyht Pro ladica 2U Alu 38 cm — ladica 3, mikrofoni</span></a><div class="why"><span class="en">7 mics and 3 DI boxes lying in foam</span><span class="hr">7 mikrofona i 3 DI kutije u spužvi</span></div></td><td class="num">69,00 €</td><td class="num">69,00 €</td></tr><tr><td class="img"><img src="https://www.thomann.de/thumb/opengraph/pics/prod/578005.jpg" alt="" loading="lazy"></td><td class="num">1×</td><td><a href="https://www.thomann.de/de/flyht_pro_rack_drawer_19_2u_alu_38_cm.htm" target="_blank" rel="noopener"><span class="en">Flyht Pro Rack Drawer 2U Alu 38 cm — drawer 4, the cables</span><span class="hr">Flyht Pro ladica 2U Alu 38 cm — ladica 4, kabeli</span></a><div class="why"><span class="en">the network snake and the short cables</span><span class="hr">mrežni multikabel i kratki kabeli</span></div></td><td class="num">69,00 €</td><td class="num">69,00 €</td></tr><tr><td class="img"><img src="https://www.thomann.de/thumb/opengraph/pics/prod/578009.jpg" alt="" loading="lazy"></td><td class="num">1×</td><td><a href="https://www.thomann.de/de/flyht_pro_rack_drawer_19_3u_alu_38_cm.htm" target="_blank" rel="noopener"><span class="en">Flyht Pro Rack Drawer 3U Alu 38 cm — drawer 5, empty</span><span class="hr">Flyht Pro ladica 3U Alu 38 cm — ladica 5, prazna</span></a><div class="why"><span class="en">for everything else: gaffer tape, batteries, spare strings, the camera tripods&#x27; plates</span><span class="hr">za sve ostalo: ljepljiva traka, baterije, rezervne žice, pločice za stative</span></div></td><td class="num">75,00 €</td><td class="num">75,00 €</td></tr><tr><td class="img"><img src="https://www.thomann.de/thumb/opengraph/pics/prod/395636.jpg" alt="" loading="lazy"></td><td class="num">1×</td><td><a href="https://www.thomann.de/de/the_t_racks_power_8_s_usb.htm" target="_blank" rel="noopener"><span class="en">the t.racks Power 8 S USB — 1U power strip</span><span class="hr">the t.racks Power 8 S USB — razdjelnik struje 1U</span></a><div class="why"><span class="en">the last 1U: one cable to the wall powers the mixer, the tablet and the phones</span><span class="hr">zadnji 1U: jedan kabel do zida napaja miksetu, tablet i mobitele</span></div></td><td class="num">35,00 €</td><td class="num">35,00 €</td></tr><tr><td class="img"><img src="https://www.thomann.de/thumb/opengraph/pics/prod/415356.jpg" alt="" loading="lazy"></td><td class="num">5×</td><td><a href="https://www.thomann.de/de/thon_rack_drawer_mat.htm" target="_blank" rel="noopener"><span class="en">Thon rack drawer mat</span><span class="hr">Thon podloga za ladicu</span></a><div class="why"><span class="en">nothing slides or rattles</span><span class="hr">ništa ne klizi i ne zvecka</span></div></td><td class="num">2,10 €</td><td class="num">10,50 €</td></tr><tr class="group"><td colspan="4"><span class="en">Microphones and DI boxes</span><span class="hr">Mikrofoni i DI kutije</span></td><td class="num">1 154,00 €</td></tr><tr><td class="img"><img src="https://www.thomann.de/thumb/opengraph/pics/prod/105767.jpg" alt="" loading="lazy"></td><td class="num">5×</td><td><a href="https://www.thomann.de/de/shure_sm58.htm" target="_blank" rel="noopener"><span class="en">Shure SM58 — vocals and harmonium</span><span class="hr">Shure SM58 — vokali i harmonij</span></a><div class="why"><span class="en">Tajana, Igor, Svemir, Kristian&#x27;s voice and his harmonium: the stage standard, survives everything</span><span class="hr">Tajana, Igor, Svemir, Kristianov glas i njegov harmonij: standard pozornice, preživi sve</span></div></td><td class="num">115,00 €</td><td class="num">575,00 €</td></tr><tr><td class="img"><img src="https://www.thomann.de/thumb/opengraph/pics/prod/105768.jpg" alt="" loading="lazy"></td><td class="num">2×</td><td><a href="https://www.thomann.de/de/shure_sm57_lc.htm" target="_blank" rel="noopener"><span class="en">Shure SM57 — mridangam and djembe</span><span class="hr">Shure SM57 — mridangam i džembe</span></a><div class="why"><span class="en">Kristian&#x27;s mridangam and Marko&#x27;s djembe; on 17.10 the mridangam mics clipped, so gain low</span><span class="hr">Kristianov mridangam i Markov džembe; 17.10. mikrofoni mridangama su se izobličili, zato nisko pojačanje</span></div></td><td class="num">111,00 €</td><td class="num">222,00 €</td></tr><tr><td class="img"><img src="https://www.thomann.de/thumb/opengraph/pics/prod/122350.jpg" alt="" loading="lazy"></td><td class="num">3×</td><td><a href="https://www.thomann.de/de/bss_ar133.htm" target="_blank" rel="noopener"><span class="en">BSS AR133 active DI — Igor&#x27;s guitar, Snoopy&#x27;s guitar, the bass</span><span class="hr">BSS AR133 aktivna DI — Igorova gitara, Snoopyjeva gitara, bas</span></a><div class="why"><span class="en">pickup → balanced XLR, no hum on a 10 m cable; runs on phantom power from the CQ</span><span class="hr">pickup → simetrični XLR, bez brujanja na 10 m kabelu; napaja se phantom napajanjem iz CQ-a</span></div></td><td class="num">119,00 €</td><td class="num">357,00 €</td></tr><tr class="group"><td colspan="4"><span class="en">Stands</span><span class="hr">Stalci</span></td><td class="num">422,00 €</td></tr><tr><td class="img"><img src="https://www.thomann.de/thumb/opengraph/pics/prod/104942.jpg" alt="" loading="lazy"></td><td class="num">5×</td><td><a href="https://www.thomann.de/de/km_210-9_stativ.htm" target="_blank" rel="noopener"><span class="en">K&amp;M 210/9 boom stand</span><span class="hr">K&amp;M 210/9 stalak s krakom</span></a><div class="why"><span class="en">one per vocal mic (they travel in a stand bag, not in the rack)</span><span class="hr">jedan za svaki vokalni mikrofon (putuju u torbi za stalke, ne u racku)</span></div></td><td class="num">58,00 €</td><td class="num">290,00 €</td></tr><tr><td class="img"><img src="https://www.thomann.de/thumb/opengraph/pics/prod/180073.jpg" alt="" loading="lazy"></td><td class="num">2×</td><td><a href="https://www.thomann.de/de/km_25900_basaltgrau.htm" target="_blank" rel="noopener"><span class="en">K&amp;M 25900 short boom stand</span><span class="hr">K&amp;M 25900 niski stalak s krakom</span></a><div class="why"><span class="en">for the drums on the floor</span><span class="hr">za bubnjeve na podu</span></div></td><td class="num">66,00 €</td><td class="num">132,00 €</td></tr><tr class="group"><td colspan="4"><span class="en">The network snake</span><span class="hr">Mrežni multikabel</span></td><td class="num">303,60 €</td></tr><tr><td class="img"><img src="https://www.thomann.de/thumb/opengraph/pics/prod/465521.jpg" alt="" loading="lazy"></td><td class="num">3×</td><td><a href="https://www.thomann.de/de/the_sssnake_cat_snake_3fb.htm" target="_blank" rel="noopener"><span class="en">the sssnake Cat Snake 3FB — the stage box, inputs 1–12</span><span class="hr">the sssnake Cat Snake 3FB — stage box, ulazi 1–12</span></a><div class="why"><span class="en">each box takes 4 microphones (XLR female) onto one network cable; 3 boxes = 12 inputs, 10 used, 2 spare</span><span class="hr">svaka kutija prima 4 mikrofona (XLR female) na jedan mrežni kabel; 3 kutije = 12 ulaza, 10 u upotrebi, 2 rezervna</span></div></td><td class="num">29,00 €</td><td class="num">87,00 €</td></tr><tr><td class="img"><img src="https://www.thomann.de/thumb/opengraph/pics/prod/465525.jpg" alt="" loading="lazy"></td><td class="num">1×</td><td><a href="https://www.thomann.de/de/the_sssnake_cat_snake_3mb.htm" target="_blank" rel="noopener"><span class="en">the sssnake Cat Snake 3MB — the stage box, returns</span><span class="hr">the sssnake Cat Snake 3MB — stage box, povratni kanali</span></a><div class="why"><span class="en">the 4 outputs of the mixer come back to the stage here: main L/R and two monitors</span><span class="hr">4 izlaza miksete vraćaju se ovdje na pozornicu: glavni L/D i dva monitora</span></div></td><td class="num">29,00 €</td><td class="num">29,00 €</td></tr><tr><td class="img"><img src="https://www.thomann.de/thumb/opengraph/pics/prod/465522.jpg" alt="" loading="lazy"></td><td class="num">3×</td><td><a href="https://www.thomann.de/de/the_sssnake_cat_snake_3mc.htm" target="_blank" rel="noopener"><span class="en">the sssnake Cat Snake 3MC — fan-out at the mixer, inputs</span><span class="hr">the sssnake Cat Snake 3MC — rasplet kod miksete, ulazi</span></a><div class="why"><span class="en">network cable in, 4 XLR male tails straight into the CQ-12T inputs</span><span class="hr">mrežni kabel ulazi, 4 XLR male repa idu ravno u ulaze CQ-12T</span></div></td><td class="num">29,00 €</td><td class="num">87,00 €</td></tr><tr><td class="img"><img src="https://www.thomann.de/thumb/opengraph/pics/prod/465519.jpg" alt="" loading="lazy"></td><td class="num">1×</td><td><a href="https://www.thomann.de/de/the_sssnake_cat_snake_3fc.htm" target="_blank" rel="noopener"><span class="en">the sssnake Cat Snake 3FC — fan-out at the mixer, outputs</span><span class="hr">the sssnake Cat Snake 3FC — rasplet kod miksete, izlazi</span></a><div class="why"><span class="en">the mixer&#x27;s main L/R and two monitor outputs plug in here</span><span class="hr">glavni L/D i dva monitorska izlaza miksete uključuju se ovdje</span></div></td><td class="num">29,00 €</td><td class="num">29,00 €</td></tr><tr><td class="img"><img src="https://www.thomann.de/thumb/opengraph/pics/prod/615018.jpg" alt="" loading="lazy"></td><td class="num">4×</td><td><a href="https://www.thomann.de/de/pro_snake_cat6e_cc_cable_100m_red.htm" target="_blank" rel="noopener"><span class="en">pro snake CAT6E network cable, shielded, 10 m</span><span class="hr">pro snake CAT6E mrežni kabel, oklopljen, 10 m</span></a><div class="why"><span class="en">the only long run: four network cables tied together every metre, from the stage box behind the band to the mixer on the left</span><span class="hr">jedini dugi vod: četiri mrežna kabela vezana svaki metar, od stage boxa iza benda do miksete s lijeve strane</span></div></td><td class="num">17,90 €</td><td class="num">71,60 €</td></tr><tr class="group"><td colspan="4"><span class="en">Short cables</span><span class="hr">Kratki kabeli</span></td><td class="num">127,30 €</td></tr><tr><td class="img"><img src="https://www.thomann.de/thumb/opengraph/pics/prod/418722.jpg" alt="" loading="lazy"></td><td class="num">10×</td><td><a href="https://www.thomann.de/de/pro_snake_tpm_20_cc_micro_cable_heavebl.htm" target="_blank" rel="noopener"><span class="en">pro snake TPM 2,0 CC XLR cable, 2 m</span><span class="hr">pro snake TPM 2,0 CC XLR kabel, 2 m</span></a><div class="why"><span class="en">every microphone and DI box to the stage box: never longer than 2 m</span><span class="hr">svaki mikrofon i DI kutija do stage boxa: nikad dulje od 2 m</span></div></td><td class="num">6,10 €</td><td class="num">61,00 €</td></tr><tr><td class="img"><img src="https://www.thomann.de/thumb/opengraph/pics/prod/418725.jpg" alt="" loading="lazy"></td><td class="num">4×</td><td><a href="https://www.thomann.de/de/pro_snake_tpm_50_cc_micro_cable_green.htm" target="_blank" rel="noopener"><span class="en">pro snake TPM 5,0 CC XLR cable, 5 m</span><span class="hr">pro snake TPM 5,0 CC XLR kabel, 5 m</span></a><div class="why"><span class="en">from the stage box returns to the two speakers and two monitors at the sides</span><span class="hr">od povratnih kanala stage boxa do dva zvučnika i dva monitora sa strane</span></div></td><td class="num">8,10 €</td><td class="num">32,40 €</td></tr><tr><td class="img"><img src="https://www.thomann.de/thumb/opengraph/pics/prod/213370.jpg" alt="" loading="lazy"></td><td class="num">3×</td><td><a href="https://www.thomann.de/de/pro_snake_tpi_3.htm" target="_blank" rel="noopener"><span class="en">pro snake TPI 3 instrument cable, 3 m</span><span class="hr">pro snake TPI 3 instrumentalni kabel, 3 m</span></a><div class="why"><span class="en">guitar or bass → DI box</span><span class="hr">gitara ili bas → DI kutija</span></div></td><td class="num">6,70 €</td><td class="num">20,10 €</td></tr><tr><td class="img"><img src="https://www.thomann.de/thumb/opengraph/pics/prod/105250.jpg" alt="" loading="lazy"></td><td class="num">2×</td><td><a href="https://www.thomann.de/de/thomann_v2020.htm" target="_blank" rel="noopener"><span class="en">Thomann V2020 velcro ties, 10 pack</span><span class="hr">Thomann V2020 čičak vezice, 10 kom</span></a><div class="why"><span class="en">ties the four network cables into one run, closes every coil; coloured tape with the channel number on each end</span><span class="hr">veže četiri mrežna kabela u jedan vod, zatvara svaki kolut; obojena traka s brojem kanala na svakom kraju</span></div></td><td class="num">6,90 €</td><td class="num">13,80 €</td></tr></tbody>
+    <tfoot><tr><td class="img"></td><td colspan="3"><span class="en">Everything</span><span class="hr">Sve zajedno</span></td><td class="num">2 591,40 €</td></tr></tfoot>
+  </table></div>
+  <p><button class="btn" id="copyList" data-list="1x Flyht Pro Rack 12U Live 45 Wheels - https://www.thomann.de/de/flyht_pro_rack_12u_live_45_wheels.htm
+1x Thon Rackdrawer 1U — drawer 1, the camera tablet - https://www.thomann.de/de/thon_rackdrawer_1.htm
+1x Flyht Pro Rack Drawer 3U Alu 38 cm — drawer 2, the mixer - https://www.thomann.de/de/flyht_pro_rack_drawer_19_3u_alu_38_cm.htm
+1x Flyht Pro Rack Drawer 2U Alu 38 cm — drawer 3, the microphones - https://www.thomann.de/de/flyht_pro_rack_drawer_19_2u_alu_38_cm.htm
+1x Flyht Pro Rack Drawer 2U Alu 38 cm — drawer 4, the cables - https://www.thomann.de/de/flyht_pro_rack_drawer_19_2u_alu_38_cm.htm
+1x Flyht Pro Rack Drawer 3U Alu 38 cm — drawer 5, empty - https://www.thomann.de/de/flyht_pro_rack_drawer_19_3u_alu_38_cm.htm
+1x the t.racks Power 8 S USB — 1U power strip - https://www.thomann.de/de/the_t_racks_power_8_s_usb.htm
+5x Thon rack drawer mat - https://www.thomann.de/de/thon_rack_drawer_mat.htm
+5x Shure SM58 — vocals and harmonium - https://www.thomann.de/de/shure_sm58.htm
+2x Shure SM57 — mridangam and djembe - https://www.thomann.de/de/shure_sm57_lc.htm
+3x BSS AR133 active DI — Igor&#x27;s guitar, Snoopy&#x27;s guitar, the bass - https://www.thomann.de/de/bss_ar133.htm
+5x K&amp;M 210/9 boom stand - https://www.thomann.de/de/km_210-9_stativ.htm
+2x K&amp;M 25900 short boom stand - https://www.thomann.de/de/km_25900_basaltgrau.htm
+3x the sssnake Cat Snake 3FB — the stage box, inputs 1–12 - https://www.thomann.de/de/the_sssnake_cat_snake_3fb.htm
+1x the sssnake Cat Snake 3MB — the stage box, returns - https://www.thomann.de/de/the_sssnake_cat_snake_3mb.htm
+3x the sssnake Cat Snake 3MC — fan-out at the mixer, inputs - https://www.thomann.de/de/the_sssnake_cat_snake_3mc.htm
+1x the sssnake Cat Snake 3FC — fan-out at the mixer, outputs - https://www.thomann.de/de/the_sssnake_cat_snake_3fc.htm
+4x pro snake CAT6E network cable, shielded, 10 m - https://www.thomann.de/de/pro_snake_cat6e_cc_cable_100m_red.htm
+10x pro snake TPM 2,0 CC XLR cable, 2 m - https://www.thomann.de/de/pro_snake_tpm_20_cc_micro_cable_heavebl.htm
+4x pro snake TPM 5,0 CC XLR cable, 5 m - https://www.thomann.de/de/pro_snake_tpm_50_cc_micro_cable_green.htm
+3x pro snake TPI 3 instrument cable, 3 m - https://www.thomann.de/de/pro_snake_tpi_3.htm
+2x Thomann V2020 velcro ties, 10 pack - https://www.thomann.de/de/thomann_v2020.htm"><span class="en">Copy the list</span><span class="hr">Kopiraj popis</span></button></p>
+  <h2><span class="en">Cheaper or simpler</span><span class="hr">Jeftinije ili jednostavnije</span></h2>
+  <div class="alt"><ul style="margin:0;padding-left:20px"><li><a href="https://www.thomann.de/de/thon_rack_12_live_45_mit_rollen.htm" target="_blank" rel="noopener"><span class="en">Thon Rack 12U Live 45 Wheels (instead of the Flyht)</span><span class="hr">Thon Rack 12U Live 45 Wheels (umjesto Flyhta)</span></a>, 298,00 €: <span class="en">298 € instead of 222 €: made in Germany, phenol brown, the same 12U on wheels with both lids</span><span class="hr">298 € umjesto 222 €: proizveden u Njemačkoj, fenolno smeđi, istih 12U na kotačima s oba poklopca</span></li><li><a href="https://www.thomann.de/de/allen_heath_rackmount_for_cq12t.htm" target="_blank" rel="noopener"><span class="en">Allen &amp; Heath rackmount for CQ12T (instead of drawer 1)</span><span class="hr">Allen &amp; Heath nosač za rack za CQ12T (umjesto ladice 1)</span></a>, 65,00 €: <span class="en">the mixer fixed in the rack: the stage cables go into its back and never have to be unplugged</span><span class="hr">mikseta učvršćena u racku: kabeli s pozornice idu u njezina stražnja vrata i nikad ih ne treba iskopčati</span></li></ul></div>
+  <footer><span class="en">Santoshi Kirtan Band · equipment plan</span><span class="hr">Santoshi Kirtan Band · plan opreme</span>, 25.10.2026</footer>
+</div>
+</section>
+
+<section class="page" id="page-donate" hidden>
+<div class="wrap" id="donate">
+  <img class="band-hero" src="img/donate/garden.jpg" alt="" style="margin-top:28px">
+  <header style="padding:24px 0 8px">
+    <p class="kicker"><span class="en">Donations</span><span class="hr">Donacije</span></p>
+    <h1><span class="en">Support the band</span><span class="hr">Podržite bend</span></h1>
+    <p class="lead"><span class="en">Every concert is free. If you would like to help us keep singing, thank you.</span><span class="hr">Svaki koncert je besplatan. Ako nam želite pomoći da i dalje pjevamo, hvala vam.</span></p>
+  </header>
+  <p style="font-size:1.25em"><span class="en">To donate, please write to</span><span class="hr">Za donaciju pišite na</span> <a href="mailto:santoshi.bend@gmail.com?subject=Donacija%20%2F%20Donation" style="color:var(--saffron)">santoshi.bend@gmail.com</a>.</p>
+  <p><span class="en">We will thank you and send you the account details.</span><span class="hr">Zahvalit ćemo vam i poslati podatke o računu.</span></p>
+  <footer>Santoshi Kirtan Band · Zagreb</footer>
+</div>
+</section>
+
+<section class="page" id="page-photos" hidden>
+<div class="wrap" id="photos">
+  <header style="padding:40px 0 8px">
+    <p class="kicker"><span class="en">Photos</span><span class="hr">Fotografije</span></p>
+    <h1><span class="en">The concert in pictures</span><span class="hr">Koncert u slikama</span></h1>
+    <p class="lead"><span class="en">Navaratri Celebration, Czech National House, Zagreb, 17 October 2026</span><span class="hr">Proslava Navaratrija, Češki narodni dom, Zagreb, 17. listopada 2026.</span></p>
+    <p class="note"><span class="en">Photographs: Fela; the first two are from Marko's camera behind the band. Click a photo to see it large.</span><span class="hr">Fotografije: Fela; prve dvije su s Markove kamere iza benda. Kliknite fotografiju za veći prikaz.</span></p>
+  </header>
+  <div class="photogrid"><img src="img/photos/mcam4950_t.jpg" data-full="img/photos/mcam4950.jpg" alt="" loading="lazy"><img src="img/photos/mcam6090_t.jpg" data-full="img/photos/mcam6090.jpg" alt="" loading="lazy"><img src="img/photos/6700_t.jpg" data-full="img/photos/6700.jpg" alt="" loading="lazy"><img src="img/photos/6702_t.jpg" data-full="img/photos/6702.jpg" alt="" loading="lazy"><img src="img/photos/6686_t.jpg" data-full="img/photos/6686.jpg" alt="" loading="lazy"><img src="img/photos/6730_t.jpg" data-full="img/photos/6730.jpg" alt="" loading="lazy"><img src="img/photos/6760_t.jpg" data-full="img/photos/6760.jpg" alt="" loading="lazy"><img src="img/photos/6729_t.jpg" data-full="img/photos/6729.jpg" alt="" loading="lazy"><img src="img/photos/6766_t.jpg" data-full="img/photos/6766.jpg" alt="" loading="lazy"><img src="img/photos/6718_t.jpg" data-full="img/photos/6718.jpg" alt="" loading="lazy"><img src="img/photos/6715_t.jpg" data-full="img/photos/6715.jpg" alt="" loading="lazy"><img src="img/photos/6722_t.jpg" data-full="img/photos/6722.jpg" alt="" loading="lazy"><img src="img/photos/6725_t.jpg" data-full="img/photos/6725.jpg" alt="" loading="lazy"><img src="img/photos/6735_t.jpg" data-full="img/photos/6735.jpg" alt="" loading="lazy"><img src="img/photos/6739_t.jpg" data-full="img/photos/6739.jpg" alt="" loading="lazy"><img src="img/photos/6754_t.jpg" data-full="img/photos/6754.jpg" alt="" loading="lazy"><img src="img/photos/6755_t.jpg" data-full="img/photos/6755.jpg" alt="" loading="lazy"><img src="img/photos/6759_t.jpg" data-full="img/photos/6759.jpg" alt="" loading="lazy"><img src="img/photos/6767_t.jpg" data-full="img/photos/6767.jpg" alt="" loading="lazy"><img src="img/photos/6786_t.jpg" data-full="img/photos/6786.jpg" alt="" loading="lazy"><img src="img/photos/6788_t.jpg" data-full="img/photos/6788.jpg" alt="" loading="lazy"><img src="img/photos/6792_t.jpg" data-full="img/photos/6792.jpg" alt="" loading="lazy"><img src="img/photos/6794_t.jpg" data-full="img/photos/6794.jpg" alt="" loading="lazy"><img src="img/photos/6796_t.jpg" data-full="img/photos/6796.jpg" alt="" loading="lazy"><img src="img/photos/6817_t.jpg" data-full="img/photos/6817.jpg" alt="" loading="lazy"><img src="img/photos/6824_t.jpg" data-full="img/photos/6824.jpg" alt="" loading="lazy"><img src="img/photos/6829_t.jpg" data-full="img/photos/6829.jpg" alt="" loading="lazy"><img src="img/photos/6842_t.jpg" data-full="img/photos/6842.jpg" alt="" loading="lazy"><img src="img/photos/6844_t.jpg" data-full="img/photos/6844.jpg" alt="" loading="lazy"><img src="img/photos/6862_t.jpg" data-full="img/photos/6862.jpg" alt="" loading="lazy"><img src="img/photos/6866_t.jpg" data-full="img/photos/6866.jpg" alt="" loading="lazy"><img src="img/photos/6870_t.jpg" data-full="img/photos/6870.jpg" alt="" loading="lazy"><img src="img/photos/6876_t.jpg" data-full="img/photos/6876.jpg" alt="" loading="lazy"></div>
+  <footer><span class="en">Photographs</span><span class="hr">Fotografije</span> © Fela · Santoshi Kirtan Band</footer>
+</div>
+</section>
+
+<p class="visits" data-visits-box hidden><span class="en">Visits</span><span class="hr">Posjeta</span>: <span data-visits="santoshi-band"></span></p>
+<script src="https://mantra-visits.marko-bosko-925.workers.dev/counter.js" defer></script>
+<dialog id="posterDlg"><img src="img/poster.jpg" alt="The concert poster"></dialog>
+<audio id="audio" preload="none"></audio>
+
+<script type="application/json" id="songsData">[{"n": 1, "title": "Jai Ganesha Pahi Mam", "to": {"en": "Ganesha", "hr": "Ganešu"}, "lines": ["Jaya Gaṇeśa, Gaṇeśa, pāhi mām", "Śrī Gaṇeśa, Gaṇeśa, rakṣa mām", "Gaṃ Gaṇapataye namo namaḥ"], "meaning": {"en": "“Victory to Ganesha, protect me; holy Ganesha, guard me. Gam: to Ganapati, salutations again and again.” Ganesha, with the elephant head, removes obstacles and opens every beginning, so a kirtan starts with him.", "hr": "„Slava Ganeši, zaštiti me; sveti Ganeša, čuvaj me. Gam: Ganapatiju, poklon i opet poklon.“ Ganeša sa slonovskom glavom uklanja prepreke i otvara svaki početak, pa kirtan počinje s njim."}, "words": [{"w": "jaya", "en": "Victory, triumph. As a call it means “glory to …!”, “victory to …!”. From the root ji, “to conquer”. It shortens to jai in Hindi, as in the song's title.", "hr": "Pobjeda, trijumf. Kao zaziv znači „slava …!”, „pobjeda …!”. Od korijena ji, „pobijediti”. U hindskom se skraćuje u jai, kao u naslovu pjesme."}, {"w": "Gaṇeśa", "en": "Gaṇa, “the host, the crowd” (Shiva's attendants), + īśa, “lord”: the Lord of the hosts. The elephant-headed son of Shiva and Parvati, remover of obstacles, honoured first at every beginning.", "hr": "Gaṇa, „mnoštvo, četa” (Šivini pratioci), + īśa, „gospodar”: Gospodar mnoštva. Sin Šive i Parvati sa slonovskom glavom, onaj koji uklanja prepreke; slavi se prvi na svakom početku."}, {"w": "pāhi", "en": "“Protect!” The imperative of the root pā, “to protect, to keep”.", "hr": "„Zaštiti!” Imperativ korijena pā, „štititi, čuvati”."}, {"w": "mām", "en": "“Me”: the accusative of aham, “I”. Pāhi mām: “protect me”.", "hr": "„Mene”: akuzativ od aham, „ja”. Pāhi mām: „zaštiti me”."}, {"w": "Śrī", "en": "Radiance, beauty, good fortune, holiness. Placed before a divine name as a mark of honour (“holy”, “revered”); it is also a name of the goddess Lakshmi.", "hr": "Sjaj, ljepota, blagostanje, svetost. Stavlja se pred božansko ime kao znak poštovanja („sveti”, „časni”); to je i ime božice Lakšmi."}, {"w": "rakṣa", "en": "“Guard! Preserve!” The imperative of the root rakṣ, “to guard, to save”; rakṣā is “protection”. Rakṣa mām: “guard me”.", "hr": "„Čuvaj! Sačuvaj!” Imperativ korijena rakṣ, „čuvati, spasiti”; rakṣā je „zaštita”. Rakṣa mām: „čuvaj me”."}, {"w": "Gaṃ", "en": "The seed sound (bīja) of Ganesha: one syllable that holds his whole power, sung before his name.", "hr": "Sjemeni zvuk (bīja) Ganeše: jedan slog koji nosi svu njegovu snagu, pjeva se prije njegova imena."}, {"w": "Gaṇapataye", "en": "“To Ganapati”: gaṇa, “the host, the band of followers”, + pati, “lord”: Ganesha as lord of all beings; the ending -aye means “to”.", "hr": "„Ganapatiju“: gaṇa, „mnoštvo, družina“, + pati, „gospodar“: Ganeša kao gospodar svih bića; nastavak -aye znači „komu“."}, {"w": "namo namaḥ", "en": "Namaḥ, “bow, salutation” (literally “not mine”): said twice, “salutations again and again”.", "hr": "Namaḥ, „naklon, pozdrav“ (doslovno „ne moje“): rečeno dvaput, „poklon i opet poklon“."}]}, {"n": 2, "title": "Ambe Jagadambe", "to": {"en": "the Divine Mother", "hr": "Božansku Majku"}, "lines": ["Ambe, Jagadambe"], "meaning": {"en": "Ambā is “mother”, Jagadambā “mother of the whole world”. The song calls the Goddess whom Navaratri celebrates, the one mother behind all her forms.", "hr": "Ambā znači „majka“, Jagadambā „majka cijelog svijeta“. Pjesma zaziva Božicu koju Navaratri slavi, jednu majku iza svih njezinih oblika."}, "words": [{"w": "Ambe", "en": "“O Mother!”: the vocative (the form used to call someone) of Ambā, “mother”. A name of the Goddess, Durga.", "hr": "„O Majko!”: vokativ (oblik za dozivanje) od Ambā, „majka”. Ime Božice, Durge."}, {"w": "Jagadambe", "en": "Jagat, “the world, all that moves” (from gam, “to go”), + ambā, “mother”: “O Mother of the world!”, in the vocative.", "hr": "Jagat, „svijet, sve što se kreće” (od gam, „ići”), + ambā, „majka”: „O Majko svijeta!”, u vokativu."}]}, {"n": 3, "title": "Kali Kali Maha Maya", "to": {"en": "Kali", "hr": "Kali"}, "medley": {"en": "A medley: Kali Kali Mahamaya · Sarva Mangala · He Mata Kali · Kali Ma, Durga Ma · Jaya Jagadambe", "hr": "Splet: Kali Kali Mahamaya · Sarva Mangala · He Mata Kali · Kali Ma, Durga Ma · Jaya Jagadambe"}, "lines": ["Kālī Kālī Mahāmāyā Oṃ", "Bhavānī Śaṅkarī Oṃ", "Devī Devī Girijā, Hara Hara Devī", "Sarva maṅgala māṅgalye śive sarvārtha sādhike", "śaraṇye tryambake gauri nārāyaṇi namo'stu te", "He Mātā Kālī, He Mātā Durgā", "Kālī Durgā namo namaḥ", "Kālī Mā Kālī Mā, Kālī Kālī Kālī Mā", "Durgā Mā Durgā Mā, Durgā Durgā Durgā Mā", "Jaya Jaya Jagadambe, Jagadambe Mā Durgā", "Oṃ Nārāyaṇī Oṃ", "He Mā Durgā"], "meaning": {"en": "Kali is the fierce, loving mother who cuts away fear and the small self; Mahāmāyā is her great power that makes and unmakes the world. The verse Sarva Mangala, from the Devī Māhātmya, bows to her: “O auspicious one, source of all good, who fulfils every aim, our refuge, three-eyed Gauri, Narayani, we bow to you.”", "hr": "Kali je žestoka i nježna majka koja odsijeca strah i malo ja; Mahāmāyā je njezina velika moć koja stvara i rastvara svijet. Stih Sarva Mangala iz Devī Māhātmye klanja joj se: „O blagoslovljena, izvore svakog dobra, koja ispunjavaš svaku težnju, naše utočište, trooka Gauri, Narayani, klanjamo ti se.“"}, "words": [{"w": "Kālī", "en": "“The dark one”, and “she who is time”: kāla means both “black” and “time”. The fierce form of the Goddess who ends what must end.", "hr": "„Tamna”, i „ona koja je vrijeme”: kāla znači i „crn” i „vrijeme”. Silni oblik Božice koja dovršava ono što mora završiti."}, {"w": "Mahā", "en": "“Great”. Mahā Māyā: “the great Māyā”.", "hr": "„Velik, velika”. Mahā Māyā: „velika Māyā”."}, {"w": "Māyā", "en": "The power by which the One appears as the many: the Goddess's creative power, also called illusion, because the world is not what it seems.", "hr": "Moć kojom se Jedno pojavljuje kao mnoštvo: stvaralačka moć Božice, zvana i iluzija, jer svijet nije ono što se čini."}, {"w": "sarva", "en": "“All, every, whole”.", "hr": "„Sve, svaki, cijel”."}, {"w": "maṅgala", "en": "Auspiciousness, blessing, good fortune; whatever brings well-being.", "hr": "Blagoslov, sreća, ono što donosi dobro i napredak."}, {"w": "māṅgalye", "en": "Vocative of māṅgalyā, “she who is auspiciousness itself”. Sarva maṅgala māṅgalye: “O blessing of all blessings!”", "hr": "Vokativ od māṅgalyā, „ona koja je sam blagoslov”. Sarva maṅgala māṅgalye: „O blagoslove svih blagoslova!”"}, {"w": "śive", "en": "Vocative of Śivā, “the kind, the benevolent one”, the feminine of Śiva: the Goddess as Shiva's own power.", "hr": "Vokativ od Śivā, „dobrostiva, milostiva”, ženski oblik od Śiva: Božica kao Šivina vlastita moć."}, {"w": "sarvārtha", "en": "Sarva, “every”, + artha, “aim, purpose, wealth, meaning”: every aim of life.", "hr": "Sarva, „svaki”, + artha, „cilj, svrha, bogatstvo, smisao”: svaki cilj života."}, {"w": "sādhike", "en": "Vocative of sādhikā, “she who brings to fulfilment” (from sādh, “to accomplish”). Sarvārtha sādhike: “O you who fulfil every aim!”", "hr": "Vokativ od sādhikā, „ona koja dovodi do ispunjenja” (od sādh, „ostvariti”). Sarvārtha sādhike: „O ti koja ispunjavaš svaki cilj!”"}, {"w": "śaraṇye", "en": "Vocative of śaraṇyā, “she who gives refuge” (śaraṇa, “shelter, refuge”).", "hr": "Vokativ od śaraṇyā, „ona koja daje utočište” (śaraṇa, „zaklon, utočište”)."}, {"w": "tryambake", "en": "Tri, “three”, + ambaka, “eye”: “O three-eyed one!”, the eye of wisdom on the forehead, in the vocative.", "hr": "Tri, „tri”, + ambaka, „oko”: „O trooka!”, oko mudrosti na čelu, u vokativu."}, {"w": "gauri", "en": "Vocative of Gaurī, “the fair, the shining one”: a name of Parvati.", "hr": "Vokativ od Gaurī, „svijetla, blistava”: ime Parvati."}, {"w": "nārāyaṇi", "en": "Vocative of Nārāyaṇī, the power (śakti) of Nārāyaṇa, that is, of Vishnu.", "hr": "Vokativ od Nārāyaṇī, moć (śakti) Nārāyaṇe, to jest Višnua."}, {"w": "namo'stu", "en": "Namaḥ, “bowing, salutation”, + astu, “let it be” (from as, “to be”): “salutation be (to you)”.", "hr": "Namaḥ, „naklon, pozdrav”, + astu, „neka bude” (od as, „biti”): „neka je pozdrav (tebi)”."}, {"w": "te", "en": "“To you” (dative of tvam, “you”). The whole verse comes from the Devī Māhātmya (11.10), the great hymn to the Goddess.", "hr": "„Tebi” (dativ od tvam, „ti”). Cijeli stih je iz Devī Māhātmye (11.10), velikog hvalospjeva Božici."}, {"w": "Oṃ", "en": "The sacred syllable, the sound of the whole: beginning, middle and end in one breath. Every mantra opens and rests in it.", "hr": "Sveti slog, zvuk cjeline: početak, sredina i kraj u jednom dahu. Svaka mantra se njime otvara i u njemu počiva."}, {"w": "Bhavānī", "en": "“She who gives life”, from bhava, “being, becoming”: the Goddess as Śiva's wife, the mother of all that comes to be.", "hr": "„Ona koja daje život”, od bhava, „bivanje, nastajanje”: Božica kao Šivina supruga, majka svega što nastaje."}, {"w": "Śaṅkarī", "en": "The feminine of Śaṅkara, “the one who brings peace and good”, a name of Śiva: the Goddess as his gentle power.", "hr": "Ženski oblik od Śaṅkara, „onaj koji donosi mir i dobro”, ime Šive: Božica kao njegova blaga moć."}, {"w": "Devī", "en": "“The shining one”, the Goddess; devī is the feminine of deva, from div, “to shine”.", "hr": "„Sjajna”, Božica; devī je ženski oblik od deva, od div, „sjati”."}, {"w": "Girijā", "en": "“Born of the mountain”: Pārvatī, daughter of the Himālaya, Śiva's wife.", "hr": "„Rođena od planine”: Pārvatī, kći Himalaje, Šivina supruga."}, {"w": "Hara", "en": "“The one who takes away” (sorrow, fear, sin), a name of Śiva; here sung with the Goddess, who is his power: Hara Hara Devī.", "hr": "„Onaj koji odnosi” (tugu, strah, grijeh), ime Šive; ovdje pjevano s Božicom, koja je njegova moć: Hara Hara Devī."}, {"w": "He", "en": "“O!”: the call that opens a prayer or a name. He Mātā Kālī: “O Mother Kālī!”", "hr": "„O!”: zaziv kojim počinje molitva ili ime. He Mātā Kālī: „O Majko Kali!”"}, {"w": "Mātā", "en": "“Mother”. The Goddess is called first of all as mother.", "hr": "„Majka”. Božicu se prije svega zaziva kao majku."}, {"w": "Durgā", "en": "“The one hard to reach”, the invincible: the Goddess as the warrior who defeats every demon, riding a lion.", "hr": "„Ona do koje je teško doći”, nepobjediva: Božica kao ratnica koja pobjeđuje svakog demona, jašući lava."}, {"w": "namo namaḥ", "en": "“Bow, bow again”: namaḥ is “a bow, salutation”, said twice for full devotion. Kālī Durgā namo namaḥ: “to Kālī and Durgā, again and again our bow.”", "hr": "„Naklon, opet naklon”: namaḥ je „naklon, pozdrav”, rečeno dvaput za puninu predanosti. Kālī Durgā namo namaḥ: „Kali i Durgi, iznova naš naklon.”"}, {"w": "Mā", "en": "“Mother, Ma”: the short, tender word a child says. Kālī Mā, Durgā Mā: “Mother Kālī, Mother Durgā”.", "hr": "„Mama, majka”: kratka, nježna riječ koju kaže dijete. Kālī Mā, Durgā Mā: „Majko Kali, Majko Durga”."}, {"w": "Jaya", "en": "“Victory!”, “glory to”: Jaya Jaya, “glory, glory”.", "hr": "„Pobjeda!”, „slava”: Jaya Jaya, „slava, slava”."}, {"w": "Jagadambe", "en": "Vocative of Jagadambā: jagat, “the world, all that moves”, + ambā, “mother”: “O Mother of the world!”", "hr": "Vokativ od Jagadambā: jagat, „svijet, sve što se kreće”, + ambā, „majka”: „O Majko svijeta!”"}]}, {"n": 4, "title": "Sarasvati Maha Lakshmi", "to": {"en": "Sarasvati and Lakshmi", "hr": "Sarasvati i Lakšmi"}, "lines": ["Sarasvatī, Mahā Lakṣmī"], "meaning": {"en": "Sarasvati is the goddess of knowledge, speech and music, the patron of every singer; Lakshmi brings abundance, beauty and grace. The song begins with a soft voice alone before the band comes in.", "hr": "Sarasvati je božica znanja, govora i glazbe, zaštitnica svakog pjevača; Lakšmi donosi obilje, ljepotu i milost. Pjesma počinje tihim glasom samim, prije nego što uđe bend."}, "words": [{"w": "Sarasvatī", "en": "Saras, “lake, flowing water”, + -vatī, “she who has”: “she who flows”. The goddess of knowledge, speech, music and the arts, and a sacred river of the Veda.", "hr": "Saras, „jezero, tekuća voda”, + -vatī, „ona koja ima”: „ona koja teče”. Božica znanja, govora, glazbe i umjetnosti, i sveta rijeka Veda."}, {"w": "Mahā", "en": "“Great”.", "hr": "„Velik, velika”."}, {"w": "Lakṣmī", "en": "From lakṣ, “to mark, to aim”: “the auspicious sign”, good fortune. The goddess of prosperity, beauty and abundance, wife of Vishnu.", "hr": "Od lakṣ, „označiti, ciljati”: „sretan znak”, blagostanje. Božica obilja, ljepote i napretka, Višnuova žena."}]}, {"n": 5, "title": "Kailasha Vasa Maha Deva", "to": {"en": "Shiva", "hr": "Šivu"}, "lines": ["Kailāsa vāsa, Mahā Deva"], "meaning": {"en": "“Great God who dwells on Kailash.” Shiva sits in stillness on the sacred mountain in the Himalaya: the silence from which all the music comes.", "hr": "„Veliki Bože koji prebivaš na Kailašu.“ Šiva sjedi u tišini na svetoj planini na Himalaji: u tišini iz koje dolazi sva glazba."}, "words": [{"w": "Kailāsa", "en": "Mount Kailash in Tibet, the snow peak where Shiva dwells.", "hr": "Planina Kailaš na Tibetu, snježni vrh na kojem prebiva Šiva."}, {"w": "vāsa", "en": "“Dwelling, abode” (from vas, “to live, to stay”). Kailāsa vāsa: “you who dwell on Kailash”.", "hr": "„Prebivalište, boravak” (od vas, „živjeti, boraviti”). Kailāsa vāsa: „ti koji prebivaš na Kailašu”."}, {"w": "Mahā", "en": "“Great”.", "hr": "„Velik”."}, {"w": "Deva", "en": "“God”, literally “the shining one” (from div, “to shine”). Mahā Deva: “the great God”, Shiva.", "hr": "„Bog”, doslovno „onaj koji sja” (od div, „sjati”). Mahā Deva: „veliki Bog”, Šiva."}]}, {"n": 6, "title": "Uma Parvati Ananda Ma", "to": {"en": "Parvati", "hr": "Parvati"}, "lines": ["Umā, Pārvatī, Ānanda Mā"], "meaning": {"en": "Uma and Parvati are names of Shiva's beloved, the daughter of the mountain; Ānanda Mā is “mother of bliss”. After Shiva's song, his other half.", "hr": "Uma i Parvati imena su Šivine voljene, kćeri planine; Ānanda Mā je „majka blaženstva“. Nakon Šivine pjesme, njegova druga polovica."}, "words": [{"w": "Umā", "en": "A name of Parvati. The old story reads it as u mā, “oh, do not!”, her mother's plea when the girl went to the forest for her austerities; it also means light and calm.", "hr": "Ime Parvati. Stara priča tumači ga kao u mā, „oh, nemoj!”, molbu njezine majke kad je djevojka otišla u šumu na pokoru; znači i svjetlost i mir."}, {"w": "Pārvatī", "en": "“Daughter of the mountain” (parvata, “mountain”): the daughter of the Himalaya, Shiva's wife, mother of Ganesha.", "hr": "„Kći planine” (parvata, „planina”): kći Himalaje, Šivina žena, Ganešina majka."}, {"w": "Ānanda", "en": "“Bliss, joy” (ā + nand, “to rejoice”); the joy that is our true nature.", "hr": "„Blaženstvo, radost” (ā + nand, „radovati se”); radost koja je naša prava narav."}, {"w": "Mā", "en": "“Mother”, the loving word of Hindi and Bengali. Ānanda Mā: “Mother of bliss”.", "hr": "„Majka”, nježna riječ hindskog i bengalskog. Ānanda Mā: „Majko blaženstva”."}]}, {"n": 7, "title": "Rama Rama Jaya Raja Ram", "to": {"en": "Rama", "hr": "Ramu"}, "lines": ["Rāma Rāma jaya rājā Rām", "Rāma Rāma jaya Sītā Rām", "Śrī Kṛṣṇa Govinda Hare Murāre", "He Nātha Nārāyaṇa Vāsudeva", "Śrī Rām jaya Rām jaya jaya Rām", "Sītā Rām"], "meaning": {"en": "“Rama, Rama, victory to Rama the king; victory to Sita and Rama.” In the middle the song turns to Krishna: “Holy Krishna, Govinda, Hari, who defeated the demon Mura; O Lord, Narayana, son of Vasudeva”, and comes back to Rama with the old mantra Śrī Rām jaya Rām. Rama and Krishna are two faces of the same Vishnu, the one who keeps the world.", "hr": "„Rama, Rama, slava Rami kralju; slava Siti i Rami.“ U sredini se pjesma okreće Krišni: „Sveti Krišna, Govinda, Hari, koji je pobijedio demona Muru; o Gospodine, Narayana, sine Vasudeve“, i vraća se Rami starom mantrom Śrī Rām jaya Rām. Rama i Krišna dva su lica istog Višnua, onoga koji čuva svijet."}, "words": [{"w": "Rāma", "en": "“He who delights, who gives joy” (from ram, “to delight, to rest”). Vishnu's seventh coming, the hero of the Rāmāyaṇa.", "hr": "„Onaj koji raduje, koji daje radost” (od ram, „radovati se, počivati”). Sedmi Višnuov dolazak, junak Rāmāyaṇe."}, {"w": "jaya", "en": "“Victory, glory to …!”, from ji, “to conquer”.", "hr": "„Pobjeda, slava …!”, od ji, „pobijediti”."}, {"w": "rājā", "en": "“King” (from rāj, “to rule, to shine”). Rājā Rām: “King Rama”.", "hr": "„Kralj” (od rāj, „vladati, sjati”). Rājā Rām: „kralj Rama”."}, {"w": "Rām", "en": "The same name as Rāma, spoken the Hindi way, without the last a.", "hr": "Isto ime kao Rāma, izgovoreno na hindski način, bez završnog a."}, {"w": "Sītā", "en": "Rama's wife, daughter of the earth; love and faithfulness. Sītā Rām: the two named together, as one.", "hr": "Ramina žena, kći zemlje; ljubav i vjernost. Sītā Rām: oboje imenovani zajedno, kao jedno."}, {"w": "Śrī", "en": "“Holy, radiant, beautiful”: a word of honour before a divine name.", "hr": "„Sveti, sjajni, lijepi“: riječ poštovanja ispred božanskog imena."}, {"w": "Kṛṣṇa", "en": "“The dark one, the all-attractive”: Vishnu born as the cowherd who plays the flute and speaks the Bhagavad Gita.", "hr": "„Tamni, svima privlačni“: Višnu rođen kao pastir koji svira frulu i izgovara Bhagavad Gitu."}, {"w": "Govinda", "en": "“The one who finds and protects the cows”: Krishna as the cowherd, protector of all that lives.", "hr": "„Onaj koji pronalazi i štiti krave“: Krišna kao pastir, zaštitnik svega živoga."}, {"w": "Hare", "en": "“O Hari!”: the one who takes away (sorrow); a name of Vishnu and Krishna, in the form used to call him.", "hr": "„O Hari!“: onaj koji odnosi (tugu); ime Višnua i Krišne, u obliku kojim ga se zaziva."}, {"w": "Murāre", "en": "“O enemy of Mura!”: Krishna, who defeated the demon Mura.", "hr": "„O neprijatelju Mure!“: Krišna, koji je pobijedio demona Muru."}, {"w": "He", "en": "“O!”: the call before a name.", "hr": "„O!“: zaziv ispred imena."}, {"w": "Nātha", "en": "“Lord, protector, refuge”.", "hr": "„Gospodin, zaštitnik, utočište“."}, {"w": "Nārāyaṇa", "en": "“The refuge of all beings”, or “the one who rests on the waters”: Vishnu.", "hr": "„Utočište svih bića“, ili „onaj koji počiva na vodama“: Višnu."}, {"w": "Vāsudeva", "en": "“Son of Vasudeva”, Krishna; also “the god who dwells in all”.", "hr": "„Sin Vasudeve“, Krišna; također „bog koji prebiva u svemu“."}], "medley": {"en": "Three parts, each back to the first: Rama Rama Jaya Raja Ram · Sri Krishna Govinda · Sri Ram Jay Ram", "hr": "Tri dijela, svaki se vraća prvom: Rama Rama Jaya Raja Ram · Sri Krishna Govinda · Sri Ram Jay Ram"}}, {"n": 8, "title": "Asatoma Sadgamaya", "to": {"en": "everyone", "hr": "sve"}, "lines": ["Asato mā sad gamaya", "tamaso mā jyotir gamaya", "mṛtyor mā amṛtaṁ gamaya", "Oṁ śāntiḥ śāntiḥ śāntiḥ"], "meaning": {"en": "From the Brihadaranyaka Upanishad, one of the oldest prayers there is: “Lead me from the unreal to the real, from darkness to light, from death to immortality. Om, peace, peace, peace.” We always end with it.", "hr": "Iz Brihadaranyaka Upanišade, jedna od najstarijih molitvi: „Vodi me od nestvarnog k stvarnom, od tame k svjetlu, od smrti k besmrtnosti. Om, mir, mir, mir.“ Uvijek završavamo s njom."}, "words": [{"w": "asato", "en": "Asataḥ, “from the unreal”: the ablative (the “from” case) of asat, non-being (a-, “not”, + sat, “being”).", "hr": "Asataḥ, „od nestvarnog”: ablativ (padež „od”) od asat, nebitak (a-, „ne”, + sat, „bitak”)."}, {"w": "mā", "en": "“Me”, a short form of mām.", "hr": "„Mene”, kratki oblik od mām."}, {"w": "sad", "en": "Sat, “being, the real, the true”; it sounds sad before the g of gamaya.", "hr": "Sat, „bitak, stvarno, istinito”; ispred g u gamaya izgovara se sad."}, {"w": "gamaya", "en": "“Lead! Make go!”, the causative imperative of gam, “to go”. Asato mā sad gamaya: “lead me from the unreal to the real”.", "hr": "„Vodi! Učini da idem!”, kauzativni imperativ od gam, „ići”. Asato mā sad gamaya: „vodi me od nestvarnog k stvarnom”."}, {"w": "tamaso", "en": "Tamasaḥ, “from darkness” (tamas, “darkness, inertia”).", "hr": "Tamasaḥ, „od tame” (tamas, „tama, tromost”)."}, {"w": "jyotir", "en": "Jyotiḥ, “light”.", "hr": "Jyotiḥ, „svjetlost”."}, {"w": "mṛtyor", "en": "Mṛtyoḥ, “from death” (mṛtyu, “death”).", "hr": "Mṛtyoḥ, „od smrti” (mṛtyu, „smrt”)."}, {"w": "amṛtaṁ", "en": "A-, “not”, + mṛta, “dead”: deathlessness, immortality; also the nectar of the gods.", "hr": "A-, „ne”, + mṛta, „mrtav”: besmrtnost; i nektar bogova."}, {"w": "Oṁ", "en": "The sacred syllable, the sound of the whole of being, said at the start and the end of prayers.", "hr": "Sveti slog, zvuk cjelokupnog bitka, izgovara se na početku i na kraju molitve."}, {"w": "śāntiḥ", "en": "“Peace”. Said three times: peace in ourselves, peace with the world around us, peace from the powers above. The verse is from the Bṛhadāraṇyaka Upaniṣad (1.3.28).", "hr": "„Mir”. Izgovara se tri puta: mir u nama, mir sa svijetom oko nas, mir od viših sila. Stih je iz Bṛhadāraṇyaka Upaniṣade (1.3.28)."}]}]</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.13/hls.light.min.js"></script>
+<script>
+const TRACKS = [
+  ["01", "Jai Ganesha Pahi Mam", 535.0],
+  ["02", "Ambe Jagadambe", 552.5],
+  ["03", "Kali Kali Maha Maya", 1233.0],
+  ["04", "Sarasvati Maha Lakshmi", 665.0],
+  ["05", "Kailasha Vasa Maha Deva", 527.0],
+  ["06", "Uma Parvati Ananda Ma", 911.5],
+  ["07", "Rama Rama Jaya Raja Ram", 875.0],
+  ["08", "Asatoma Sadgamaya", 760.0],
+];
+const $ = id => document.getElementById(id);
+const audio = $("audio"), bar = $("bar"), canvas = $("wave"), ctx = canvas.getContext("2d");
+const fmt = s => { s = Math.max(0, Math.floor(s || 0)); const h = Math.floor(s / 3600), m = Math.floor(s / 60) % 60, x = String(s % 60).padStart(2, "0"); return h ? `${h}:${String(m).padStart(2, "0")}:${x}` : `${m}:${x}`; };
+const nativeHls = audio.canPlayType("application/vnd.apple.mpegurl");
+let hls = null, idx = -1, peaks = {}, dragging = false;
+
+// the track list
+const list = $("tracks");
+const SONGS = JSON.parse($("songsData").textContent || "[]");
+const esc = x => String(x ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const both = o => o ? `<span class="en">${esc(o.en)}</span><span class="hr">${esc(o.hr)}</span>` : "";
+const rows = [];
+TRACKS.forEach(([n, title, d], i) => {
+  const so = SONGS.find(x => x.n === +n) || {};
+  const li = document.createElement("li");
+  li.className = "track"; li.tabIndex = 0;
+  li.innerHTML = `<span class="n"><span class="num">${+n}</span><span class="eq"><i></i><i></i><i></i></span></span>`
+    + `<span class="t">${esc(title)}${so.to ? `<small><span class="en">to ${esc(so.to.en)}</span><span class="hr">za ${esc(so.to.hr)}</span></small>` : ""}</span>`
+    + `<span class="d">${fmt(d)}</span>`
+    + `<button class="lyr" aria-expanded="false" aria-label="Lyrics and meaning"><svg viewBox="0 0 24 24"><path d="M4 5h11v2H4zm0 4h11v2H4zm0 4h7v2H4zm14-8v8.27A3 3 0 1 0 20 16V7h2V5z"/></svg></button>`;
+  const ly = document.createElement("li");
+  ly.className = "lyrics"; ly.hidden = true;
+  ly.innerHTML = (so.medley ? `<p class="medley">${both(so.medley)}</p>` : "")
+    + (so.lines ? `<blockquote>${so.lines.map(esc).join("<br>")}</blockquote>` : "")
+    + (so.meaning ? `<h4><span class="en">Meaning</span><span class="hr">Značenje</span></h4><p>${both(so.meaning)}</p>` : "")
+    + (so.words && so.words.length ? `<h4><span class="en">Every word</span><span class="hr">Svaka riječ</span></h4><dl>${so.words.map(w => `<dt>${esc(w.w)}</dt><dd>${both(w)}</dd>`).join("")}</dl>` : "");
+  const btn = li.querySelector(".lyr");
+  btn.onclick = e => { e.stopPropagation(); ly.hidden = !ly.hidden; btn.setAttribute("aria-expanded", String(!ly.hidden)); };
+  li.onclick = () => i === idx ? toggle() : load(i, true);
+  li.onkeydown = e => { if (e.key === "Enter" && e.target === li) li.click(); };
+  list.appendChild(li); list.appendChild(ly); rows.push(li);
+});
+// the playlist folds away, and stays as the listener left it
+const amp = $("bar");
+function setPl(open) { amp.classList.toggle("closed", !open); $("plToggle").setAttribute("aria-expanded", String(open)); try { localStorage.setItem("santoshi-pl", open ? "1" : "0"); } catch (e) {} }
+$("plToggle").onclick = () => setPl(amp.classList.contains("closed"));
+try { if (localStorage.getItem("santoshi-pl") === "0") setPl(false); } catch (e) {}
+$("vol").oninput = e => { audio.volume = +e.target.value; };
+const total = TRACKS.reduce((a, t) => a + t[2], 0);
+$("total").textContent = `${Math.floor(total / 3600)} h ${Math.round(total % 3600 / 60)} min`;
+
+function getPeaks(n) {
+  if (!peaks[n]) { peaks[n] = {}; peaks[n].p = fetch(`audio/v2/${n}/peaks.json`).then(r => r.json()).then(v => { peaks[n].v = v; }).catch(() => {}); }
+  return peaks[n].p;
+}
+
+function load(i, play, at = 0) {
+  idx = i;
+  const [n, title, d] = TRACKS[i], src = `audio/v2/${n}/index.m3u8`;
+  if (hls) { hls.destroy(); hls = null; }
+  if (!nativeHls && window.Hls && Hls.isSupported()) {
+    hls = new Hls({ startPosition: at });
+    hls.loadSource(src); hls.attachMedia(audio);
+  } else {
+    audio.src = src;
+    if (at) audio.addEventListener("loadedmetadata", () => { audio.currentTime = at; }, { once: true });
+  }
+  if (play) audio.play().catch(() => {});
+  $("now").textContent = title;
+  const so = SONGS.find(x => x.n === +n) || {};
+  $("nowK").textContent = `${n} / ${String(TRACKS.length).padStart(2, "0")}` + (so.to ? (document.documentElement.lang === "hr" ? ` · za ${so.to.hr}` : ` · to ${so.to.en}`) : "");
+  $("nowS").textContent = so.medley ? (document.documentElement.lang === "hr" ? so.medley.hr : so.medley.en) : "Santoshi Kirtan Band · Navaratri 17.10.2026";
+  $("dur").textContent = fmt(d);
+  document.title = `${title} · Santoshi Kirtan Band`;
+  rows.forEach((li, j) => li.classList.toggle("on", j === i));
+  $("prev").disabled = false; $("next").disabled = i === TRACKS.length - 1;
+  getPeaks(n).then(() => draw());
+  if ("mediaSession" in navigator) {
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title, artist: "Santoshi Kirtan Band", album: "Live at the Navaratri Celebration, Zagreb 17.10.2026",
+      artwork: [{ src: "img/cover-512.jpg", sizes: "512x512", type: "image/jpeg" }],
+    });
+  }
+  save();
+}
+
+function toggle() {
+  if (idx < 0) return load(0, true);
+  audio.paused ? audio.play().catch(() => {}) : audio.pause();
+}
+const step = k => { const j = idx + k; if (j >= 0 && j < TRACKS.length) load(j, !audio.paused || k > 0); else if (j < 0) audio.currentTime = 0; };
+const seekBy = s => { if (idx >= 0) audio.currentTime = Math.max(0, audio.currentTime + s); };
+
+$("play").onclick = toggle;
+if ($("playAll")) $("playAll").onclick = () => load(0, true);
+$("prev").onclick = () => audio.currentTime > 4 ? (audio.currentTime = 0) : step(-1);
+$("next").onclick = () => step(1);
+$("back").onclick = () => seekBy(-15);
+$("fwd").onclick = () => seekBy(15);
+audio.onended = () => idx < TRACKS.length - 1 && load(idx + 1, true);
+audio.onplay = audio.onpause = () => {
+  const playing = !audio.paused;
+  bar.classList.toggle("paused", !playing); list.classList.toggle("paused", !playing);
+  $("playIcon").setAttribute("d", playing ? "M6 5h4v14H6zm8 0h4v14h-4z" : "M8 5v14l11-7z");
+  $("play").setAttribute("aria-label", playing ? "Pause" : "Play");
+  if ("mediaSession" in navigator) navigator.mediaSession.playbackState = playing ? "playing" : "paused";
+};
+let lastSave = 0;
+audio.ontimeupdate = () => {
+  $("cur").textContent = fmt(audio.currentTime);
+  if (!dragging) draw();
+  if (Date.now() - lastSave > 5000) { lastSave = Date.now(); save(); }
+};
+
+if ("mediaSession" in navigator) {
+  const ms = navigator.mediaSession;
+  ms.setActionHandler("play", () => audio.play());
+  ms.setActionHandler("pause", () => audio.pause());
+  ms.setActionHandler("previoustrack", () => step(-1));
+  ms.setActionHandler("nexttrack", () => step(1));
+  ms.setActionHandler("seekbackward", () => seekBy(-15));
+  ms.setActionHandler("seekforward", () => seekBy(15));
+  try { ms.setActionHandler("seekto", e => { audio.currentTime = e.seekTime; }); } catch (e) {}
+}
+
+document.addEventListener("keydown", e => {
+  if (e.target.closest("button, a, input") || e.metaKey || e.ctrlKey) return;
+  if (e.code === "Space") { e.preventDefault(); toggle(); }
+  else if (e.key === "ArrowLeft") seekBy(-15);
+  else if (e.key === "ArrowRight") seekBy(15);
+});
+
+// the waveform, which is also the seek bar
+function draw() {
+  const dpr = devicePixelRatio || 1, w = canvas.clientWidth, h = canvas.clientHeight;
+  if (canvas.width !== w * dpr || canvas.height !== h * dpr) { canvas.width = w * dpr; canvas.height = h * dpr; }
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, w, h);
+  const css = getComputedStyle(canvas);
+  const off = css.getPropertyValue("--wave").trim(), on = css.getPropertyValue("--wave-on").trim();
+  const d = idx >= 0 ? TRACKS[idx][2] : 1, pos = idx >= 0 ? (dragging !== false ? dragging : audio.currentTime) / d : 0;
+  const p = idx >= 0 && peaks[TRACKS[idx][0]] && peaks[TRACKS[idx][0]].v;
+  const bars = Math.floor(w / 3);
+  for (let b = 0; b < bars; b++) {
+    const v = p ? p[Math.floor(b / bars * p.length)] / 255 : .15;
+    const bh = Math.max(2, v * (h - 4));
+    ctx.fillStyle = b / bars < pos ? on : off;
+    ctx.fillRect(b * 3, (h - bh) / 2, 2, bh);
+  }
+}
+function posAt(e) { const r = canvas.getBoundingClientRect(); return Math.min(1, Math.max(0, (e.clientX - r.left) / r.width)) * TRACKS[idx][2]; }
+canvas.onpointerdown = e => {
+  if (idx < 0) return load(0, true);
+  canvas.setPointerCapture(e.pointerId); dragging = posAt(e); draw();
+};
+canvas.onpointermove = e => { if (dragging !== false) { dragging = posAt(e); $("cur").textContent = fmt(dragging); draw(); } };
+canvas.onpointerup = () => { if (dragging !== false) { audio.currentTime = dragging; dragging = false; draw(); } };
+addEventListener("resize", draw);
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", draw);
+draw();
+
+// remember where the listener stopped
+function save() { try { localStorage.setItem("santoshi-pos", JSON.stringify([idx, audio.currentTime || 0])); } catch (e) {} }
+try {
+  const [i, t] = JSON.parse(localStorage.getItem("santoshi-pos") || "[-1,0]");
+  if (i >= 0 && i < TRACKS.length) { load(i, false, t); $("cur").textContent = fmt(t); }
+} catch (e) {}
+
+// the menu: #player and #equipment are two pages; the player bar stays and keeps playing
+function route() {
+  const h = location.hash.slice(1) || window.SANTOSHI_PAGE || "", page = ["player", "video", "coming", "songs", "band", "equipment", "donate", "photos"].includes(h) ? h : "coming";
+  document.querySelectorAll("section.page").forEach(sec => { sec.hidden = sec.id !== "page-" + page; });
+  const media = ["player", "video", "photos"].includes(page), main = media ? "media" : page;
+  document.querySelectorAll("nav.top a.tab, nav.top a.brand").forEach(a => { if (a.dataset.page === main) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
+  $("mediaNav").hidden = !media;
+  $("mediaNav").style.top = document.querySelector("nav.top").offsetHeight + "px";
+  document.querySelectorAll("nav.sub a").forEach(a => { if (a.dataset.sub === page) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
+  window.scrollTo(0, 0); requestAnimationFrame(() => window.scrollTo(0, 0)); setTimeout(() => window.scrollTo(0, 0), 60);
+}
+addEventListener("hashchange", route); addEventListener("resize", () => { $("mediaNav").style.top = document.querySelector("nav.top").offsetHeight + "px"; }); route();
+const copyBtn = $("copyList");
+if (copyBtn) copyBtn.onclick = () => navigator.clipboard.writeText(copyBtn.dataset.list).then(() => { copyBtn.classList.add("done"); copyBtn.dataset.was = copyBtn.innerHTML; copyBtn.textContent = "✓"; setTimeout(() => { copyBtn.innerHTML = copyBtn.dataset.was; }, 1500); });
+document.querySelectorAll("[data-play]").forEach(b => b.onclick = () => load(+b.dataset.play, true));
+
+// Croatian or English: the visitor's choice, else the browser's language
+function setLang(l) {
+  document.documentElement.lang = l;
+  try { localStorage.setItem("santoshi-lang", l); } catch (e) {}
+}
+let lang0 = null; try { lang0 = localStorage.getItem("santoshi-lang"); } catch (e) {}
+setLang(lang0 || ((navigator.language || "").toLowerCase().startsWith("hr") ? "hr" : "en"));
+document.querySelectorAll(".lang button").forEach(b => b.onclick = () => setLang(b.dataset.lang));
+
+// the video: a picture with a play button; the YouTube player loads only when it is pressed, and the album player stops
+document.querySelectorAll(".vplayer").forEach(v => v.addEventListener("click", () => {
+  if (v.querySelector("iframe")) return;
+  try { audio.pause(); } catch (e) {}
+  const f = document.createElement("iframe");
+  f.src = "https://www.youtube-nocookie.com/embed/" + v.dataset.yt + "?autoplay=1&rel=0&modestbranding=1&playsinline=1";
+  f.title = "Santoshi Kirtan Band"; f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen"; f.allowFullscreen = true;
+  v.innerHTML = ""; v.appendChild(f); v.style.cursor = "default";
+}));
+
+// an event whose end has passed leaves "coming up" and joins the history (newest first)
+(function rollEvents() {
+  const now = new Date();
+  document.querySelectorAll(".events").forEach(box => {
+    const hist = box.parentElement.querySelector(".history");
+    box.querySelectorAll(".event[data-end]").forEach(ev => {
+      if (!ev.dataset.end || new Date(ev.dataset.end) > now || !hist) return;
+      const li = document.createElement("li"); li.className = "h-item"; li.dataset.start = ev.dataset.start.slice(0, 10);
+      const img = ev.querySelector(".ev-poster"); li.innerHTML = (img ? `<img src="${img.getAttribute("src")}" alt="">` : `<span class="h-dot">❀</span>`)
+        + `<div><p class="h-date">${ev.querySelector(".ev-date").innerHTML}</p>${ev.querySelector("h3").outerHTML}${ev.querySelector(".ev-place").outerHTML}</div>`;
+      const after = [...hist.children].find(x => x.dataset.start < li.dataset.start);
+      hist.insertBefore(li, after || null); ev.remove();
+    });
+    if (!box.querySelector(".event") && !box.querySelector(".no-ev")) box.innerHTML = '<p class="note"><span class="en">The next dates are being added.</span><span class="hr">Sljedeći datumi upravo se dodaju.</span></p>';
+  });
+})();
+
+// the poster, large
+if ($("posterBtn")) $("posterBtn").onclick = () => $("posterDlg").showModal();
+$("posterDlg").onclick = () => $("posterDlg").close();
+</script>
+<div id="lightbox" hidden role="dialog" aria-label="Picture"><button aria-label="Close">×</button><img alt=""></div>
+<script>
+// every picture on the pages opens large; a click, × or Esc closes it
+(() => {
+  const box = document.getElementById("lightbox"), big = box.querySelector("img");
+  document.addEventListener("click", e => {
+    const im = e.target.closest("section.page img");
+    if (!im || e.target.closest("button, a")) return;
+    big.src = im.dataset.full || im.currentSrc || im.src; box.hidden = false; document.body.style.overflow = "hidden";
+  });
+  const close = () => { box.hidden = true; big.removeAttribute("src"); document.body.style.overflow = ""; };
+  box.addEventListener("click", close);
+  addEventListener("keydown", e => { if (e.key === "Escape" && !box.hidden) { e.stopPropagation(); close(); } }, true);
+})();
+</script>
+</body>
+</html>
