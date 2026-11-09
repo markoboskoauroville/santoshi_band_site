@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Santoshi Band · Admin</title>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<link rel="icon" href="/img/favicon.png?v=2" type="image/png" sizes="64x64">
+<link rel="icon" href="/img/favicon-32.png?v=2" type="image/png" sizes="32x32">
+<style>
+:root{--bg:#14110e;--fg:#f1e8d8;--mut:#a39a8a;--card:#201b16;--line:#3a3128;--acc:#e8a33d}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.4 system-ui,sans-serif;padding:24px 16px 48px}
+h1{font-size:1.4rem;margin:0 0 4px}h2{font-size:1rem;letter-spacing:.15em;color:var(--acc);margin:32px 0 12px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.sub{color:var(--mut);font-size:.85rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;overflow:hidden;cursor:pointer;padding:0;color:inherit;text-align:left;font:inherit}
+.card:focus-visible,.card:hover{border-color:var(--acc)}
+.card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:#000}
+.card div{padding:8px 10px;font-size:.85rem}.card b{display:block;font-size:.95rem}.card span{color:var(--mut)}
+.none{color:var(--mut)}
+#lb{position:fixed;inset:0;background:rgba(0,0,0,.94);display:none;flex-direction:column;align-items:center;justify-content:center;z-index:9;padding:12px}
+#lb.on{display:flex}#lb img{max-width:100%;max-height:calc(100% - 56px);object-fit:contain}
+#cap{margin-top:8px;color:var(--fg);font-size:.9rem;text-align:center}
+#lb button{position:absolute;background:none;border:0;color:var(--fg);font-size:2.2rem;cursor:pointer;padding:12px}
+#x{top:4px;right:8px}#pv{left:4px;top:50%}#nx{right:4px;top:50%}
+</style></head><body>
+<h1>Santoshi Band · Admin</h1><div class="sub">Reference sheets · not public</div>
+<h2>PEOPLE</h2><div class="grid" id="people"></div>
+<h2>INSTRUMENTS</h2><div class="grid" id="instruments"></div>
+<div id="lb"><button id="x" aria-label="Close">&times;</button><button id="pv" aria-label="Previous">&#8249;</button><button id="nx" aria-label="Next">&#8250;</button><img alt=""><div id="cap"></div></div>
+<script>
+var L=[],cur=0,lb=document.getElementById('lb'),im=lb.querySelector('img');
+function show(i){cur=(i+L.length)%L.length;var s=L[cur];im.src='/refs/sheets/'+s.file;document.getElementById('cap').textContent=s.name+' · '+(s.kind?s.kind+' · ':'')+'v'+s.version+' · '+s.date;lb.classList.add('on')}
+function close_(){lb.classList.remove('on');im.removeAttribute('src')}
+function fill(id,items){var g=document.getElementById(id);if(!items.length){g.innerHTML='<p class="none">No sheets yet</p>';return}
+items.forEach(function(s){var b=document.createElement('button');b.className='card';var i=L.length;L.push(s);
+var a=document.createElement('img');a.loading='lazy';a.alt=s.name;a.src='/refs/sheets/'+s.file;b.appendChild(a);
+var d=document.createElement('div');var n=document.createElement('b');n.textContent=s.name;var m=document.createElement('span');m.textContent=(s.kind?s.kind+' · ':'')+'v'+s.version+' · '+s.date;d.appendChild(n);d.appendChild(m);b.appendChild(d);
+b.onclick=function(){show(i)};g.appendChild(b)})}
+fetch('/refs/sheets/index.json?'+Date.now()).then(function(r){return r.ok?r.json():[]}).catch(function(){return[]}).then(function(a){
+fill('people',a.filter(function(s){return s.section==='people'}));fill('instruments',a.filter(function(s){return s.section!=='people'}))});
+document.getElementById('x').onclick=close_;document.getElementById('pv').onclick=function(){show(cur-1)};document.getElementById('nx').onclick=function(){show(cur+1)};
+lb.onclick=function(e){if(e.target===lb)close_()};
+document.addEventListener('keydown',function(e){if(!lb.classList.contains('on'))return;if(e.key==='Escape')close_();else if(e.key==='ArrowLeft')show(cur-1);else if(e.key==='ArrowRight')show(cur+1)});
+</script></body></html>

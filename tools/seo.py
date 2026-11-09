@@ -91,7 +91,7 @@ def page(path, route, title, desc):
 for path, (route, title, desc) in PAGES.items():
     page(path, route, title, desc)
 
-open(os.path.join(OUT, "robots.txt"), "w").write(f"User-agent: *\nAllow: /\n\nSitemap: {SITE}/sitemap.xml\n")
+open(os.path.join(OUT, "robots.txt"), "w").write(f"User-agent: *\nAllow: /\nDisallow: /admin/\nDisallow: /refs/\n\nSitemap: {SITE}/sitemap.xml\n")
 from datetime import date
 urls = "".join(f"  <url><loc>{SITE}/{p}</loc><lastmod>{date.today()}</lastmod><changefreq>{'weekly' if r in ('home','coming') else 'monthly'}</changefreq><priority>{'1.0' if not p else '0.8'}</priority></url>\n" for p, (r, *_) in PAGES.items())
 open(os.path.join(OUT, "sitemap.xml"), "w").write(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}</urlset>\n')
