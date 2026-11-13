@@ -3,9 +3,8 @@ import { readSession, json, getLive, viewUrl } from "./_lib.js";
 const OPEN = new Set(["/api/google", "/api/logout", "/api/live"]);
 const BANNER = (v) => `<div id="sb-live" style="position:relative;z-index:99999;background:#14110e;color:#f1e8d8;border-bottom:2px solid #e8a33d;padding:10px 12px;font:600 16px system-ui,sans-serif;text-align:center">
 <div><span style="color:#ff4d3d">&#9679;</span> The Santoshi Band is live streaming right now</div>
-<div style="max-width:720px;margin:8px auto 0;aspect-ratio:16/9;position:relative"><iframe id="sb-live-f" src="${v}" allow="autoplay; fullscreen" style="width:100%;height:100%;border:0;background:#000"></iframe></div>
-<button id="sb-un" style="margin:8px 0 0;padding:10px 18px;font:inherit;background:#e8a33d;color:#14110e;border:0;border-radius:6px" onclick="var f=document.getElementById('sb-live-f');f.src=f.src.replace('&muted','');this.remove()">Tap to unmute</button>
-<script>setInterval(function(){fetch('/api/live').then(function(r){return r.json()}).then(function(j){if(!j.live){var e=document.getElementById('sb-live');if(e)e.remove()}}).catch(function(){})},30000)</script></div>`;
+<div id="sb-live-w" style="max-width:720px;margin:8px auto 0;aspect-ratio:16/9;position:relative"><iframe id="sb-live-f" src="${v}" allow="autoplay; fullscreen; picture-in-picture" style="width:100%;height:100%;border:0;background:#000;border-radius:10px"></iframe></div>
+<script src="/sbctl.js"></script><script>(function(){var w=document.getElementById('sb-live-w');if(window.SBCtl)SBCtl('view',w,{frame:document.getElementById('sb-live-f')});else document.addEventListener('DOMContentLoaded',function(){window.SBCtl&&SBCtl('view',w,{frame:document.getElementById('sb-live-f')})})})();setInterval(function(){fetch('/api/live').then(function(r){return r.json()}).then(function(j){if(!j.live){var e=document.getElementById('sb-live');if(e)e.remove()}}).catch(function(){})},30000)</script></div>`;
 export async function onRequest(context) {
   const { request, env } = context, p = new URL(request.url).pathname;
   // 9.11.2026 (Marko: the group picture is gone for good): the old hero files answer 410 before any edge cache

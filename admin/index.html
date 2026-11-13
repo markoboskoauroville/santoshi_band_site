@@ -29,7 +29,7 @@ button.go.stop{background:#c0392b;color:#fff}.tabs{display:flex;gap:8px;margin:1
 .tabs button.on{color:var(--fg);border-color:var(--acc)}.pane{display:none}.pane.on{display:block}
 #msg{color:var(--mut);margin:10px 0;min-height:1.4em;white-space:pre-wrap}#msg.bad{color:#ff7b6b}#msg.good{color:#8fd18f}
 .cam{width:100%;max-width:420px;aspect-ratio:3/4;background:#000;border-radius:8px;margin:8px 0}
-iframe#snd{width:100%;max-width:420px;height:420px;border:0;background:#000;border-radius:8px}
+iframe#snd{width:100%;height:420px;border:0;background:#000;border-radius:8px}
 </style></head><body>
 <h1>Santoshi Band &middot; Admin</h1><div class="sub" id="sub">Private &middot; sign in</div>
 <div id="in"><button class="go" id="g">Sign in with Google</button><div id="msg0" class="sub"></div></div>
@@ -38,11 +38,12 @@ iframe#snd{width:100%;max-width:420px;height:420px;border:0;background:#000;bord
 <div class="pane on" id="p1"><div class="sub">Private collection &middot; reference sheets &middot; not public</div>
 <h2>PEOPLE</h2><div class="grid" id="people"></div><h2>INSTRUMENTS</h2><div class="grid" id="instruments"></div></div>
 <div class="pane" id="p2"><button class="go" id="go">GO LIVE</button><div id="msg"></div>
-<iframe id="snd" allow="camera; microphone; autoplay" style="display:none" title="Sender"></iframe>
+<div id="sndw" style="position:relative;max-width:420px;display:none"><iframe id="snd" allow="camera; microphone; autoplay" style="display:block" title="Sender"></iframe></div>
 <div class="sub" id="recinfo"></div><button class="go" id="out" style="background:var(--card);color:var(--mut);border:1px solid var(--line)">Sign out</button></div>
 </div>
 <div id="lb"><button id="x" aria-label="Close">&times;</button><button id="pv" aria-label="Previous">&#8249;</button><button id="nx" aria-label="Next">&#8250;</button><img alt=""><div id="cap"></div></div>
 <script src="https://accounts.google.com/gsi/client" async></script>
-<script src="/admin/live.js?v=1"></script>
+<script src="/sbctl.js?v=1"></script>
+<script src="/admin/live.js?v=2"></script>
 <script src="/admin/pics.js?v=1"></script>
 </body></html>

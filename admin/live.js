@@ -54,13 +54,15 @@ function start(){
  .then(function(){return navigator.mediaDevices.getUserMedia({video:{facingMode:'environment',width:{ideal:1280},height:{ideal:720}},audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}})})
  .then(function(s){stream=s;return call('go')}).then(function(j){
   if(!j.live)throw new Error('server did not go live');
-  $('snd').style.display='block';$('snd').src=j.push;setBtn(true);
+  $('sndw').style.display='block';$('snd').src=j.push;setBtn(true);
+  if(!$('snd').dataset.ctl){$('snd').dataset.ctl=1;var fr=$('snd'),nz=function(on){fr.src=fr.src.replace(/&(denoise|echocancellation)=[^&]*/g,'')+'&denoise='+(on?1:0)+'&echocancellation='+(on?1:0)};
+   window.SBCtl('send',$('sndw'),{frame:fr,stream:stream,onNoise:nz})}
   if(rec_ok&&window.MediaRecorder){rec=new MediaRecorder(stream,{mimeType:FMT.mime||undefined,videoBitsPerSecond:3e6,audioBitsPerSecond:192000});since=Date.now();
    rec.ondataavailable=function(e){if(e.data&&e.data.size){buf.push(e.data);bytes+=e.data.size}if(bytes>=4e6||Date.now()-since>=5000)flush()};rec.onstop=flush;rec.start(1000)}
   say('The Santoshi Band is live. The banner shows on the site.','good');recinfo()})
  .catch(function(e){say('Could not start: '+e.message,'bad');if(stream){stream.getTracks().forEach(function(t){t.stop()});stream=null}})}
 function stop(){say('Stopping…');
  var done=function(){return sending.then(function(){return call('stop')}).then(function(){
-  if(stream){stream.getTracks().forEach(function(t){t.stop()});stream=null}$('snd').removeAttribute('src');$('snd').style.display='none';setBtn(false);recinfo();say('Stopped. The banner is gone.'+(n?' '+n+' pieces are in Drive.':''),'good')})};
+  if(stream){stream.getTracks().forEach(function(t){t.stop()});stream=null}$('snd').removeAttribute('src');$('sndw').style.display='none';setBtn(false);recinfo();say('Stopped. The banner is gone.'+(n?' '+n+' pieces are in Drive.':''),'good')})};
  if(rec&&rec.state!=='inactive'){rec.onstop=function(){flush();done()};rec.stop()}else done()}
 })();
