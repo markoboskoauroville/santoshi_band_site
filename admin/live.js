@@ -21,7 +21,7 @@ var FMT=[['video/mp4;codecs=avc1.64001F,mp4a.40.2','mp4'],['video/webm;codecs=vp
 function getToken(gesture){return new Promise(function(res,rej){
  if(token&&Date.now()-tokenAt<45*60e3)return res(token);
  if(!window.google||!google.accounts)return rej(new Error('Google did not load'));
- google.accounts.oauth2.initTokenClient({client_id:CLIENT,scope:'https://www.googleapis.com/auth/drive.file',prompt:gesture?'':'',hint:'the auroville.community account',
+ google.accounts.oauth2.initTokenClient({client_id:CLIENT,scope:'https://www.googleapis.com/auth/drive.file',prompt:gesture?'':'',
   callback:function(t){t.access_token?(token=t.access_token,tokenAt=Date.now(),res(token)):rej(new Error('Google said no'))},error_callback:function(e){rej(new Error('Google popup: '+(e&&e.type)))}}).requestAccessToken()})}
 function drive(path,init){init=init||{};return getToken().then(function(t){init.headers=Object.assign({authorization:'Bearer '+t},init.headers||{});return fetch('https://www.googleapis.com'+path,init)})}
 function mkFolder(name,parent){
