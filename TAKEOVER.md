@@ -16,3 +16,7 @@ CLOUDFLARE_API_TOKEN (pasted by Marko). Flow: edit in santoshi_band → tools/bu
   an iframe, and records the same camera in 5 s pieces to Drive "Santoshi Band live / YYYY-MM-DD HH-MM" (as MPA's rec.js). The
   middleware injects the banner + viewer at the top of every public HTML page while the flag exists (HTMLRewriter), GET /api/live is public.
 - Needs once: origin https://santoshi-band.pages.dev in the Google client's Authorised JavaScript origins (Cloud project mantra-login-513105).
+
+## State at close, 13.11.2026
+
+13.11.2026: admin with Google login, private PICTURES in KV, LIVE tab with VDO.Ninja, live banner, Drive recording; overlay controls on the live viewer and sender (double-tap full screen, landscape lock, Esc). live.js carries no address in public code; provision soft-fails when the token has no KV rights; /img/band/hero* reaches the 410 rule again. Another agent is changing the LIVE UI: this note is docs only. The Chrome window sending the live stream (VDO.Ninja) must stay open.
