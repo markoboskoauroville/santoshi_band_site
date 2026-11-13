@@ -87,15 +87,22 @@
     btn('pip', svg('pip'), 'Picture in picture (small window, top right)', false, function (b) {
       wrap.classList.remove('full'); b.classList.toggle('on', wrap.classList.toggle('mini'));
     });
-    btn('fs', svg('fs'), 'Full screen', false, function (b) {
-      var d = document, on = wrap.classList.contains('full') || d.fullscreenElement;
-      if (on) { if (d.fullscreenElement) d.exitFullscreen(); wrap.classList.remove('full'); b.classList.remove('on'); return; }
-      wrap.classList.remove('mini'); document.getElementById('sbo-pip').classList.remove('on');
-      if (wrap.requestFullscreen) wrap.requestFullscreen().catch(function () { wrap.classList.add('full'); });
-      else wrap.classList.add('full');
-      b.classList.add('on');
-    });
+    function isFull() { return wrap.classList.contains('full') || document.fullscreenElement === wrap; }
+    function toggleFull() {
+      var d = document, fb = document.getElementById('sbo-fs');
+      if (isFull()) { if (d.fullscreenElement) d.exitFullscreen(); wrap.classList.remove('full'); fb && fb.classList.remove('on'); try { screen.orientation.unlock(); } catch (e) {} return; }
+      wrap.classList.remove('mini'); var pb = document.getElementById('sbo-pip'); pb && pb.classList.remove('on');
+      if (wrap.requestFullscreen) wrap.requestFullscreen().then(function () { try { screen.orientation.lock('landscape').catch(function () {}); } catch (e) {} }).catch(function () { wrap.classList.add('full'); });
+      else wrap.classList.add('full');   // iPhone Safari: no element fullscreen, the picture fills the screen instead
+      fb && fb.classList.add('on');
+    }
+    btn('fs', svg('fs'), 'Full screen (or double-tap the picture; Esc leaves)', false, function () { toggleFull(); });
     document.addEventListener('fullscreenchange', function () { if (!document.fullscreenElement) { var b = document.getElementById('sbo-fs'); b && b.classList.remove('on'); } });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && wrap.classList.contains('full')) toggleFull(); });
+    // double-click / double-tap on the picture: a transparent layer over the picture (the buttons stand above it)
+    var hit = document.createElement('div'); hit.style.cssText = 'position:absolute;inset:0;z-index:7;touch-action:manipulation'; wrap.insertBefore(hit, bar);
+    var lt = 0; hit.addEventListener('dblclick', function () { toggleFull(); });
+    hit.addEventListener('touchend', function (e) { var n = Date.now(); if (n - lt < 350) { e.preventDefault(); toggleFull(); lt = 0; } else lt = n; });
     var ov = ls('ov') !== '0';
     var sw = btn('ov', 'Overlay', 'Overlay on / off', ov, function (b) { ov = !ov; ls('ov', ov ? '1' : '0'); b.classList.toggle('on', ov); bar.classList.toggle('hid', !ov); }, 'sw');
     bar.classList.toggle('hid', !ov);
