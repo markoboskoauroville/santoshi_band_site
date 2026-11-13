@@ -16,14 +16,19 @@ def need(r, what):
     if not r.get("success"):
         print("PROVISION FAILED:", what, [e.get("message") for e in r.get("errors", [])]); sys.exit(1)
     return r.get("result")
-ns = next((n for n in need(api("GET", "/storage/kv/namespaces?per_page=100"), "list KV") if n["title"] == P), None)
-if not ns: ns = need(api("POST", "/storage/kv/namespaces", {"title": P}), "create KV"); print("KV namespace made")
-nid = ns["id"]
 env = {k: {"type": "secret_text", "value": os.environ[k]} for k in ("SESSION_SECRET", "ADMIN_EMAILS") if os.environ.get(k)}
 if len(env) < 2: print("PROVISION FAILED: GitHub secrets SESSION_SECRET and ADMIN_EMAILS must both be set"); sys.exit(1)
-cfg = {"kv_namespaces": {"KV": {"namespace_id": nid}}, "env_vars": env}
-need(api("PATCH", "/pages/projects/" + P, {"deployment_configs": {"production": cfg, "preview": cfg}}), "bind KV and secrets")
-print("KV bound, secrets set")
+cfg = {"env_vars": env}
+r = api("GET", "/storage/kv/namespaces?per_page=100"); nid = None
+if r.get("success"):
+    ns = next((n for n in r["result"] if n["title"] == P), None)
+    if not ns: ns = need(api("POST", "/storage/kv/namespaces", {"title": P}), "create KV"); print("KV namespace made")
+    nid = ns["id"]; cfg["kv_namespaces"] = {"KV": {"namespace_id": nid}}
+else:
+    print("WARNING: the Cloudflare token cannot use Workers KV (%s): live flag and pictures stay off until the token gets 'Workers KV Storage: Edit'" % [e.get("message") for e in r.get("errors", [])])
+rr = api("PATCH", "/pages/projects/" + P, {"deployment_configs": {"production": cfg, "preview": cfg}})
+print("secrets set" if rr.get("success") else "WARNING: could not set Pages secrets: %s" % [e.get("message") for e in rr.get("errors", [])], "; KV bound" if nid else "")
+if not nid: sys.exit(0)
 d = sys.argv[1] if len(sys.argv) > 1 else ""
 if d and os.path.isdir(d):
     r = urllib.request.Request("https://api.cloudflare.com/client/v4/accounts/%s/storage/kv/namespaces/%s/values/pic:index.json" % (A, nid), headers={"Authorization": "Bearer " + T})
