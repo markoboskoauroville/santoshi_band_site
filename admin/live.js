@@ -4,7 +4,7 @@
 (function(){
 var $=function(i){return document.getElementById(i)},CLIENT='260195292447-iucr95n1oc2burmm9o598ilh43vhompd.apps.googleusercontent.com';
 function say(t,c){var m=$('msg');m.textContent=t;m.className=c||''}
-function enter(){$('in').style.display='none';$('app').style.display='block';$('sub').textContent='Private';window.loadPics&&window.loadPics();status()}
+function enter(){$('in').style.display='none';$('app').style.display='block';$('sub').textContent='Private';window.loadPics&&window.loadPics();status();cams()}
 fetch('/api/me').then(function(r){if(r.ok)enter()});
 $('g').onclick=function(){var m=$('msg0');
  if(!window.google||!google.accounts||!google.accounts.oauth2){m.textContent='Google did not load: try again';return}
@@ -57,7 +57,6 @@ $('pair').onclick=function(){var nm=prompt('Name of the camera','Pixel 7');if(nm
   if(!j.token){say('Pairing failed','bad');return}
   $('pairbox').style.display='block';$('ptok').textContent=j.token;var q=$('qr');q.textContent='';
   if(window.QRCode)new QRCode(q,{text:j.qr,width:220,height:220,correctLevel:QRCode.CorrectLevel.L});else q.textContent='(QR library did not load: use the token)';cams()})};
-cams();
 function setBtn(on){live=on;var b=$('go');b.textContent=on?'STOP':'GO LIVE';b.classList.toggle('stop',on)}
 function call(a){return fetch('/api/live',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({action:a})}).then(function(r){return r.json()})}
 $('go').onclick=function(){live?stop():start()};
