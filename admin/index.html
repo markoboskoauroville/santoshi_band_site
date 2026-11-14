@@ -30,6 +30,10 @@ button.go.stop{background:#c0392b;color:#fff}.tabs{display:flex;gap:8px;margin:1
 #msg{color:var(--mut);margin:10px 0;min-height:1.4em;white-space:pre-wrap}#msg.bad{color:#ff7b6b}#msg.good{color:#8fd18f}
 .cam{width:100%;max-width:420px;aspect-ratio:3/4;background:#000;border-radius:8px;margin:8px 0}
 iframe#snd{width:100%;aspect-ratio:16/9;height:auto;border:0;background:#000;border-radius:8px}
+#chatw{max-width:720px;margin:8px 0}#chatw h2{margin-top:20px}#chl{height:min(46vh,380px);overflow-y:auto;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 12px;overscroll-behavior:contain}
+#chf{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}#chf select,#chf input{padding:12px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--fg);font:16px system-ui}
+#chf select{flex:0 1 150px;min-width:0}#chf input{flex:1 1 180px;min-width:0}#chf button{flex:none;padding:0 18px;min-height:46px;border:0;border-radius:10px;background:var(--acc);color:#14110e;font:700 14px system-ui;letter-spacing:.06em;cursor:pointer}
+#chst{color:#ff7b6b;font-size:.85rem;min-height:1.2em;margin-top:4px}
 </style></head><body>
 <h1>Santoshi Band &middot; Admin</h1><div class="sub" id="sub">Private &middot; sign in</div>
 <div id="in"><button class="go" id="g">Sign in with Google</button><div id="msg0" class="sub"></div></div>
@@ -39,11 +43,15 @@ iframe#snd{width:100%;aspect-ratio:16/9;height:auto;border:0;background:#000;bor
 <h2>PEOPLE</h2><div class="grid" id="people"></div><h2>INSTRUMENTS</h2><div class="grid" id="instruments"></div></div>
 <div class="pane" id="p2"><button class="go" id="go">GO LIVE</button><div id="msg"></div>
 <div id="sndw" style="position:relative;width:100%;max-width:1100px;margin:12px auto 0;display:none"><iframe id="snd" allow="camera; microphone; autoplay" style="display:block" title="Sender"></iframe></div>
-<div class="sub" id="recinfo"></div><button class="go" id="out" style="background:var(--card);color:var(--mut);border:1px solid var(--line)">Sign out</button></div>
+<div class="sub" id="recinfo"></div>
+<div id="chatw" style="display:none"><h2>CHAT &middot; <span id="cnt">0 watching</span></h2><div id="chl"><div class="sub" id="chempty">No messages yet.</div></div>
+<form id="chf"><select id="chn" aria-label="Write as"><option>Santoshi Band</option><option>Marko</option></select><input id="cht" maxlength="300" autocomplete="off" placeholder="Write to the viewers" aria-label="Message"><button type="submit">SEND</button></form>
+<div id="chst"></div><div class="sub" id="docinfo"></div></div><button class="go" id="out" style="background:var(--card);color:var(--mut);border:1px solid var(--line)">Sign out</button></div>
 </div>
 <div id="lb"><button id="x" aria-label="Close">&times;</button><button id="pv" aria-label="Previous">&#8249;</button><button id="nx" aria-label="Next">&#8250;</button><img alt=""><div id="cap"></div></div>
 <script src="https://accounts.google.com/gsi/client" async></script>
-<script src="/sbctl.js?v=1"></script>
-<script src="/admin/live.js?v=2"></script>
+<script src="/sbctl.js?v=2"></script>
+<script src="/sbchat.js?v=1"></script>
+<script src="/admin/live.js?v=3"></script>
 <script src="/admin/pics.js?v=1"></script>
 </body></html>

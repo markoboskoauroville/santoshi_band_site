@@ -41,7 +41,7 @@ function flush(){if(!bytes)return;var blob=new Blob(buf,{type:FMT.mime.split(';'
  sending=sending.then(function(){return sendPiece(blob,name)}).then(function(){pending--;recinfo()})}
 function recinfo(){$('recinfo').textContent=live?('Recording to Drive: Santoshi Band live / '+stamp+' · '+n+' pieces sent'+(failed?(' · '+failed+' failed'):'')):''}
 function status(){fetch('/api/live',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({action:'status'})}).then(function(r){return r.json()}).then(function(j){
- if(j.live&&!stream){setBtn(true);say('Live is on (started on another device). STOP ends it.','good')}})}
+ if(j.live&&!stream){setBtn(true);say('Live is on (started on another device). STOP ends it.','good');chatOn()}})}
 function setBtn(on){live=on;var b=$('go');b.textContent=on?'STOP':'GO LIVE';b.classList.toggle('stop',on)}
 function call(a){return fetch('/api/live',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({action:a})}).then(function(r){return r.json()})}
 $('go').onclick=function(){live?stop():start()};
@@ -59,10 +59,49 @@ function start(){
    window.SBCtl('send',$('sndw'),{frame:fr,stream:stream,onNoise:nz})}
   if(rec_ok&&window.MediaRecorder){rec=new MediaRecorder(stream,{mimeType:FMT.mime||undefined,videoBitsPerSecond:3e6,audioBitsPerSecond:192000});since=Date.now();
    rec.ondataavailable=function(e){if(e.data&&e.data.size){buf.push(e.data);bytes+=e.data.size}if(bytes>=4e6||Date.now()-since>=5000)flush()};rec.onstop=flush;rec.start(1000)}
-  say('The Santoshi Band is live. The banner shows on the site.','good');recinfo()})
+  chat=[];chatSeen={};docId=null;chatOn();if(folder)saveDoc();
+  say('The Santoshi Band is live. The banner shows on the site.'+(j.room===false?' (The chat room did not answer.)':''),'good');recinfo()})
  .catch(function(e){say('Could not start: '+e.message,'bad');if(stream){stream.getTracks().forEach(function(t){t.stop()});stream=null}})}
 function stop(){say('Stopping…');
- var done=function(){return sending.then(function(){return call('stop')}).then(function(){
-  if(stream){stream.getTracks().forEach(function(t){t.stop()});stream=null}$('snd').removeAttribute('src');$('sndw').style.display='none';setBtn(false);recinfo();say('Stopped. The banner is gone.'+(n?' '+n+' pieces are in Drive.':''),'good')})};
+ var done=function(){return sending.then(function(){return saveDoc(true)}).then(function(){return call('stop')}).then(function(){chatOff();
+  if(stream){stream.getTracks().forEach(function(t){t.stop()});stream=null}$('snd').removeAttribute('src');$('sndw').style.display='none';setBtn(false);recinfo();say('Stopped. The banner is gone.'+(n?' '+n+' pieces are in Drive.':'')+(docId?' The chat is in Drive as a Google Doc.':''),'good')})};
  if(rec&&rec.state!=='inactive'){rec.onstop=function(){flush();done()};rec.stop()}else done()}
+// CHAT (14.11.2026): the band's seat in the live room (/api/room, signed in, not counted as a viewer) and the watching count, plus the
+// chat history as a Google Doc "Santoshi live chat YYYY-MM-DD HH-MM" in the same Drive folder as the recording: made at GO LIVE,
+// rewritten every 45 s while something new came in, and once more at STOP (before the room is emptied). Drive API with the same
+// drive.file token: multipart upload of text/html converted to application/vnd.google-apps.document, then files.update (media).
+var room=null,chat=[],chatSeen={},docId=null,docDirty=false,docBusy=Promise.resolve(),docTimer=null,setCnt=null;
+function chatOn(){if(room||!window.SBChat)return;SBChat.css();$('chatw').style.display='block';
+ if(!setCnt)setCnt=SBChat.badge($('sndw'));
+ try{var nm=localStorage.getItem('sb.adminname');if(nm)$('chn').value=nm}catch(e){}
+ room=SBChat.connect(function(j){
+  if(j.t==='hist'){j.msgs.forEach(addMsg);$('chst').textContent=j.band?'':'Not signed in as the band: sign in again.'}
+  else if(j.t==='msg')addMsg(j.m);
+  else if(j.t==='count'){$('cnt').textContent=j.n+' watching';setCnt(j.n)}
+  else if(j.t==='reset'){[].slice.call($('chl').querySelectorAll('.sbc-m')).forEach(function(d){d.remove()});$('chempty').hidden=false}
+  else if(j.t==='down')$('chst').textContent='Chat connection lost, reconnecting…';
+  else if(j.t==='open')$('chst').textContent='';
+  else if(j.t==='err')$('chst').textContent='Not sent ('+j.e+')'});
+ clearInterval(docTimer);docTimer=setInterval(function(){if(docDirty)saveDoc()},45000)}
+function chatOff(){if(room){room.close();room=null}clearInterval(docTimer);setCnt&&setCnt(null);$('chatw').style.display='none'}
+function addMsg(m){if(chatSeen[m.id])return;chatSeen[m.id]=1;chat.push(m);docDirty=true;$('chempty').hidden=true;
+ var l=$('chl'),near=l.scrollHeight-l.scrollTop-l.clientHeight<80;l.appendChild(SBChat.row(m));if(near||m.band)l.scrollTop=l.scrollHeight}
+$('chf').onsubmit=function(e){e.preventDefault();var v=$('cht').value.trim(),nm=$('chn').value;if(!v)return;
+ try{localStorage.setItem('sb.adminname',nm)}catch(x){}
+ if(room&&room.send({t:'msg',name:nm,text:v.slice(0,300)})){$('cht').value='';$('chst').textContent=''}else $('chst').textContent='Not connected yet, try again in a moment.'};
+function esc(t){return String(t).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function docHtml(){var d=function(ts){var x=new Date(ts);return two(x.getHours())+':'+two(x.getMinutes())+':'+two(x.getSeconds())};
+ return '<html><head><meta charset="utf-8"></head><body><h1>Santoshi live chat '+esc(stamp)+'</h1><p>'+chat.length+' messages · updated '+esc(new Date().toLocaleString())+'</p>'+
+  (chat.length?chat.map(function(m){return '<p><b>'+d(m.ts)+'</b>&nbsp;&nbsp;<b>'+esc(m.name)+(m.band?' (band)':'')+'</b>: '+esc(m.text)+'</p>'}).join(''):'<p><i>No messages yet.</i></p>')+'</body></html>'}
+function saveDoc(last){if(!folder)return Promise.resolve();
+ docBusy=docBusy.then(function(){docDirty=false;var html=docHtml();
+  if(!docId){var b='sb'+Math.random().toString(36).slice(2),meta={name:'Santoshi live chat '+stamp,mimeType:'application/vnd.google-apps.document',parents:[folder]};
+   return drive('/upload/drive/v3/files?uploadType=multipart&fields=id',{method:'POST',headers:{'content-type':'multipart/related; boundary='+b},
+    body:'--'+b+'\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n'+JSON.stringify(meta)+'\r\n--'+b+'\r\nContent-Type: text/html; charset=UTF-8\r\n\r\n'+html+'\r\n--'+b+'--'})
+   .then(function(r){if(!r.ok)throw new Error('create '+r.status);return r.json()}).then(function(j){docId=j.id})}
+  return drive('/upload/drive/v3/files/'+docId+'?uploadType=media&fields=id',{method:'PATCH',headers:{'content-type':'text/html; charset=UTF-8'},body:html})
+   .then(function(r){if(!r.ok)throw new Error('update '+r.status)})})
+ .then(function(){$('docinfo').textContent='Chat saved to Drive as "Santoshi live chat '+stamp+'" ('+chat.length+' messages, '+new Date().toLocaleTimeString()+')'})
+ .catch(function(e){docDirty=true;$('docinfo').textContent='Chat document not saved yet ('+e.message+'), next try in 45 s')});
+ return docBusy}
 })();
