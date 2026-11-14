@@ -102,6 +102,6 @@ function saveDoc(last){if(!folder)return Promise.resolve();
   return drive('/upload/drive/v3/files/'+docId+'?uploadType=media&fields=id',{method:'PATCH',headers:{'content-type':'text/html; charset=UTF-8'},body:html})
    .then(function(r){if(!r.ok)throw new Error('update '+r.status)})})
  .then(function(){$('docinfo').textContent='Chat saved to Drive as "Santoshi live chat '+stamp+'" ('+chat.length+' messages, '+new Date().toLocaleTimeString()+')'})
- .catch(function(e){docDirty=true;$('docinfo').textContent='Chat document not saved yet ('+e.message+'), next try in 45 s')});
+ .catch(function(e){docDirty=true;$('docinfo').textContent='Chat document not saved yet ('+e.message+'), next try in 45 s'});
  return docBusy}
 })();

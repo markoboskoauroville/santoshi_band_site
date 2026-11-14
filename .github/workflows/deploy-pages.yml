@@ -13,6 +13,11 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: Syntax check of every script (14.11.2026, a stray ")" in admin/live.js killed the sign-in button)
+        run: |
+          set -e
+          for f in admin/*.js sbchat.js sbctl.js; do node --check "$f"; done
+          for f in functions/*.js functions/api/*.js room/*.js; do node --input-type=module --check < "$f" || { echo "::error::syntax error in $f"; exit 1; }; done
       - name: Deploy the live room (chat + watching count, Durable Object worker room/)
         id: room
         continue-on-error: true
