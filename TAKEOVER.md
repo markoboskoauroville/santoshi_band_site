@@ -77,3 +77,11 @@ watching, to check the badge, the chat both ways and the Doc "Santoshi live chat
 - KV `live` now has `source` and (camera) `name`. While a camera is live the admin gets no push address (no second publisher): the page
   says "LIVE from camera <name>", its own iframe does not start. Banner and viewer are identical for both sources.
 - Token compare: lookup by hash plus a constant-time compare (safeEq in _lib.js). No new secret.
+
+## 15.11.2026: stream folder layout and stream statistics
+
+Requests word for word in momentaryupdates.md (14.11.2026 ~23:45 and ~23:50).
+- **Drive layout**: "Santoshi Band live" / "Santoshi live YYYY-MM-DD HH-MM" (green) / "Video" (blue) holds the 5 s pieces; the stream folder holds two Google Docs, "Chat" and "Stream statistics" (HTML import: headings, tables, bold labels). Both rewritten every 45 s and at STOP (admin/live.js saveDoc/putDoc).
+- **Statistics**: collected in the room Durable Object (room/worker.js, tables c = one row per viewer connection, e = viewer count at every change, cm = chat messages; emptied at GO LIVE, kept after STOP). GET /stats in the room, reached by functions/api/stats.js (admin only). Viewer tab id `vid` (random, sessionStorage) goes in the socket URL; country (request.cf.country) and device class are set by functions/api/room.js as x-sb-cc / x-sb-dev. No IPs, no user agents stored.
+- **Contents**: start/stop (Croatia time), duration, peak and when, average, unique viewers, joins and reconnects, average and median watch time, longest viewer, stayed 5 min+, viewers per minute (5 or 10 min when long) with a text bar, chat counts and busiest minute, countries, devices.
+- **Test 15.11.2026**: room run locally with wrangler dev and 3 simulated viewers (one reconnect) plus chat: all numbers right, kept after STOP.

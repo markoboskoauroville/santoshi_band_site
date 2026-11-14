@@ -10,6 +10,12 @@ export async function onRequest({ request, env }) {
   const origin = request.headers.get("origin");
   // the band seat needs the sign-in cookie AND this site as the page that opened the socket (no cross-site socket with his cookie)
   if (origin === new URL(request.url).origin) { const who = await readSession(env, request); if (who) h.set("x-sb-admin", who.email); }
+  // statistics (15.11.2026): anonymous tab id, country code, device class; never an IP or the user agent itself
+  const u = new URL(request.url), vid = (u.searchParams.get("vid") || "").replace(/[^A-Za-z0-9_-]/g, "").slice(0, 40);
+  if (vid) h.set("x-sb-vid", vid);
+  const cc = request.cf && request.cf.country; if (cc) h.set("x-sb-cc", String(cc));
+  const ua = request.headers.get("user-agent") || "";
+  h.set("x-sb-dev", /ipad|tablet/i.test(ua) ? "tablet" : /mobi|android|iphone/i.test(ua) ? "phone" : "desktop");
   const live = await getLive(env);
   if (live) h.set("x-sb-sid", String(live.since));
   return env.ROOM.fetch("https://room/ws", { headers: h });
