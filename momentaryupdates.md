@@ -7,3 +7,6 @@
 
 ## 14.11.2026 ~23:45 (Marko, word for word)
 "We are recording the stream from Santoshi's web page in our drive. Beautiful. There will be a text file with the chats. But also, I want to have stream statistics. I want to see how many people were watching that, at what time, and any other statistic related to the stream that you find useful. It should be in that document"
+
+## 14.11.2026 ~23:50 (Marko, word for word, change of layout)
+"each stream gets its date and time, and inside is the folder "Video," where we have all the video files. In the root folder are two documents. They are nicely formatted as Google Documents: one is the chat stream, and another is the stream statistics"
