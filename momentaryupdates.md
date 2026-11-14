@@ -14,3 +14,8 @@
 ## 14.11.2026 ~23:40
 
 "I got some QR code to be scanned with my manual camera, but I cannot scan it. It's on the same phone"
+
+## 14.11.2026 ~23:58, one stream to a relay in Frankfurt (Marko, word for word)
+
+"absolutely, my phone will not handle all these streams. I just want to send one stream, and then it is relayed somewhere ... we need to have something which works: one stream to somewhere"
+"yes, Frankfurt delay, without YouTube branding, please"
