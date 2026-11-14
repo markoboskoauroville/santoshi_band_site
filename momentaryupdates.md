@@ -10,3 +10,7 @@
 
 ## 14.11.2026 ~23:50 (Marko, word for word, change of layout)
 "each stream gets its date and time, and inside is the folder "Video," where we have all the video files. In the root folder are two documents. They are nicely formatted as Google Documents: one is the chat stream, and another is the stream statistics"
+
+## 14.11.2026 ~23:40
+
+"I got some QR code to be scanned with my manual camera, but I cannot scan it. It's on the same phone"

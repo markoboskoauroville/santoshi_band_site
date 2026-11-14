@@ -55,7 +55,7 @@ function cams(){fetch('/api/cam').then(function(r){return r.json()}).then(functi
 $('pair').onclick=function(){var nm=prompt('Name of the camera','Pixel 7');if(nm===null)return;
  fetch('/api/cam',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({action:'pair',name:nm})}).then(function(r){return r.json()}).then(function(j){
   if(!j.token){say('Pairing failed','bad');return}
-  $('pairbox').style.display='block';$('ptok').textContent=j.token;var q=$('qr');q.textContent='';
+  $('pairbox').style.display='block';$('ptok').textContent=j.token;$('plink').href=j.qr;var q=$('qr');q.textContent='';
   if(window.QRCode)new QRCode(q,{text:j.qr,width:220,height:220,correctLevel:QRCode.CorrectLevel.L});else q.textContent='(QR library did not load: use the token)';cams()})};
 function setBtn(on){live=on;var b=$('go');b.textContent=on?'STOP':'GO LIVE';b.classList.toggle('stop',on)}
 function call(a){return fetch('/api/live',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({action:a})}).then(function(r){return r.json()})}
