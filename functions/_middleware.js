@@ -1,6 +1,6 @@
 import { readSession, json, getLive, viewUrl } from "./_lib.js";
 // Closed without the Google sign-in: /api/* (except the sign-in itself and the public live flag). /admin is its own sign-in page.
-const OPEN = new Set(["/api/google", "/api/logout", "/api/live", "/api/room"]);
+const OPEN = new Set(["/api/google", "/api/logout", "/api/live", "/api/room", "/api/relay"]);   // /api/relay checks the cookie or the relay key itself
 const BANNER = (v) => `<div id="sb-live" style="position:relative;z-index:99999;background:#14110e;color:#f1e8d8;border-bottom:2px solid #e8a33d;padding:10px 12px;font:600 16px system-ui,sans-serif;text-align:center">
 <div><span style="color:#ff4d3d">&#9679;</span> The Santoshi Band is live streaming right now</div>
 <div id="sb-live-w" style="max-width:720px;margin:8px auto 0;aspect-ratio:16/9;position:relative"><iframe id="sb-live-f" src="${v}" allow="autoplay; fullscreen; picture-in-picture" style="width:100%;height:100%;border:0;background:#000;border-radius:10px"></iframe></div>
@@ -16,7 +16,7 @@ export async function onRequest(context) {
     return context.next();
   }
   const res = await context.next();
-  if (request.method !== "GET" || p.startsWith("/admin") || p.startsWith("/api/") || !(res.headers.get("content-type") || "").includes("text/html")) return res;
+  if (request.method !== "GET" || p.startsWith("/admin") || p.startsWith("/api/") || p.startsWith("/live/") || !(res.headers.get("content-type") || "").includes("text/html")) return res;
   const live = await getLive(env);
   if (!live) return res;
   const out = new Response(res.body, res); out.headers.set("cache-control", "no-store");

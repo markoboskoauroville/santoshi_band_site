@@ -37,6 +37,7 @@ export class Room extends DurableObject {
   set(k, v) { this.sql.exec("INSERT INTO s (k, v) VALUES (?, ?) ON CONFLICT(k) DO UPDATE SET v = excluded.v", k, String(v)); }
   live() { return this.get("live") === "1" && Date.now() - Number(this.get("since") || 0) < LIVE_MAX; }
   history() {
+    if (!this.live()) return [];
     return this.sql.exec("SELECT id, ts, name, text, band FROM m ORDER BY id DESC LIMIT ?", HISTORY).toArray().reverse()
       .map((r) => ({ id: r.id, ts: r.ts, name: r.name, text: r.text, band: !!r.band }));
   }
@@ -90,9 +91,11 @@ export class Room extends DurableObject {
     const url = new URL(request.url);
     if (url.pathname === "/state" && request.method === "POST") {
       const b = await request.json().catch(() => ({}));
-      this.sql.exec("DELETE FROM m");                       // every stream starts and ends with an empty chat
+      // every stream starts with an empty chat; since 15.11.2026 the messages stay after STOP (viewers are closed, history() sends
+      // nothing while not live) so the relay's uploader can write the last minute into the Chat Doc; the next GO LIVE empties them
       const nowT = Date.now();
       if (b.live) {
+        this.sql.exec("DELETE FROM m");
         this.sql.exec("DELETE FROM c"); this.sql.exec("DELETE FROM e"); this.sql.exec("DELETE FROM cm"); this.set("stop", 0);
         this.set("live", "1"); this.set("since", Date.now()); this.set("sid", clean(b.sid, 40));
         this.all({ t: "reset" });
@@ -106,6 +109,8 @@ export class Room extends DurableObject {
       return Response.json({ ok: true, live: this.live(), viewers: this.viewers() });
     }
     if (url.pathname === "/stats") return Response.json(this.stats());
+    // 15.11.2026: the whole chat of the current (or last) stream, for the relay's Chat Doc (only through /api/relay with the relay key)
+    if (url.pathname === "/chat") return Response.json(this.sql.exec("SELECT id, ts, name, text, band FROM m ORDER BY id").toArray().map((r) => ({ id: r.id, ts: r.ts, name: r.name, text: r.text, band: !!r.band })));
     if (url.pathname === "/count") return Response.json({ live: this.live(), viewers: this.viewers() });
     if (url.pathname !== "/ws" || (request.headers.get("upgrade") || "").toLowerCase() !== "websocket")
       return new Response("websocket only", { status: 426 });

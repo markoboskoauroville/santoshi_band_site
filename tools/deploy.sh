@@ -8,6 +8,8 @@ for n in 01 02 03 04 05 06 07 08; do [ -s "$ROOT/${V}$n/index.m3u8" ] || { echo 
 cp "$ROOT/index.html" "$ROOT/_headers" "$ROOT/sbctl.js" "$ROOT/sbchat.js" "$OUT/"; cp -r "$ROOT/img" "$ROOT/audio" "$OUT/"
 # /admin (13.11.2026): sign-in page + its scripts only; the pictures are NOT published, they live in KV behind the sign-in
 cp -r "$ROOT/admin" "$OUT/"; cp "$ROOT/_routes.json" "$OUT/"
+# /live (15.11.2026): the own player of the Santoshi relay (WHEP + LL-HLS), shown in the live banner's iframe
+cp -r "$ROOT/live" "$OUT/"
 python3 -I "$ROOT/tools/seo.py" "$OUT"
 (cd "$ROOT" && npx --yes wrangler@3 pages deploy "$OUT" --project-name santoshi-band --branch main --commit-dirty=true)
 (cd "$ROOT/concerts" && npx --yes wrangler@3 pages deploy "$ROOT/concerts" --project-name mantrasantoshiconcerts --branch main --commit-dirty=true)

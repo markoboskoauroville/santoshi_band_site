@@ -61,6 +61,15 @@ function dropBrowser(j){if(rec&&rec.state!=='inactive'){rec.onstop=flush;rec.sto
  if(stream){stream.getTracks().forEach(function(t){t.stop()});stream=null}$('snd').removeAttribute('src');
  say('Camera '+(j.name||'')+' took over the live: this browser\'s camera is off.','good')}
 setInterval(function(){if($('app')&&$('app').style.display==='block')status()},5000);
+// THE SANTOSHI RELAY (15.11.2026): MediaMTX on chromium-vm (Frankfurt). The camera sends ONE stream there, every viewer watches it there.
+// /api/relay (admin cookie) reads the relay's own numbers; the line shows whether the relay is up, whether the camera publishes, how many
+// watch by WebRTC and by HLS, and where the recording goes (the VM uploads it, the Docs too).
+function mb(b){return b>1e9?(b/1e9).toFixed(2)+' GB':(b/1e6).toFixed(1)+' MB'}
+function relayLine(){fetch('/api/relay').then(function(r){return r.json()}).then(function(j){var e=$('relayst');if(!e)return;
+ if(!j.relay){e.textContent='Relay: not set up';return}
+ if(!j.up){e.textContent='Relay '+j.host+': NOT REACHABLE ('+(j.error||'?')+')';e.style.color='#ef4444';return}
+ e.style.color='';e.textContent='Relay '+j.host+': up · '+(j.publishing?('camera publishing ('+(j.tracks||[]).join(' + ')+', '+mb(j.bytesIn||0)+' in) · '+(j.webrtcReaders||0)+' watching by WebRTC'+(j.hls&&j.hls.lastRequest?' · HLS in use':'')+' · '+mb(j.bytesOut||0)+' out · recording → Drive "Santoshi Band live (relay)"'):'no camera on the relay')}).catch(function(){})}
+setInterval(function(){if($('app')&&$('app').style.display==='block')relayLine()},5000);
 // camera pairing (14.11.2026): token made by /api/cam, shown once as text + QR; KV keeps only its hash
 function esc2(t){return String(t).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
 function cams(){fetch('/api/cam').then(function(r){return r.json()}).then(function(j){var b=$('cams');b.textContent='';

@@ -18,6 +18,9 @@ def need(r, what):
     return r.get("result")
 env = {k: {"type": "secret_text", "value": os.environ[k]} for k in ("SESSION_SECRET", "ADMIN_EMAILS") if os.environ.get(k)}
 if len(env) < 2: print("PROVISION FAILED: GitHub secrets SESSION_SECRET and ADMIN_EMAILS must both be set"); sys.exit(1)
+# 15.11.2026: the Santoshi relay (MediaMTX on chromium-vm): its address and publish key, only when both GitHub secrets exist
+for k in ("RELAY_KEY", "RELAY_HOST"):
+    if os.environ.get(k): env[k] = {"type": "secret_text", "value": os.environ[k]}
 cfg = {"env_vars": env}
 r = api("GET", "/storage/kv/namespaces?per_page=100"); nid = None
 if r.get("success"):
