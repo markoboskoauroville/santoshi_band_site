@@ -24,3 +24,15 @@
 - 14.11.2026: a GIS token client needs an error_callback; without it a blocked or closed popup is silent.
 
 - 14.11.2026: a bearer device token for an app is stored only as its SHA-256 in KV (never the token), looked up by hash and compared constant-time; the public repo then holds no secret.
+
+## 15.11.2026
+
+- 15.11.2026: a WebRTC relay on a VM that is also a Tailscale node must offer only its public address (listeners on the Oracle interface):
+  with Tailscale candidates, phones and Macs on Tailscale picked IPv6 link-local Tailscale pairs that dropped every 5–30 s.
+- 15.11.2026: MediaMTX publishes a WebRTC path with only the tracks it saw within webrtcTrackGatherTimeout (2 s): a phone's H.264 can come
+  later than its Opus, and the path is then audio only. 8 s fixed it.
+- 15.11.2026: drive.file (rclone, the admin page) means each app sees only its own Drive files: the VM keeps its own folder tree.
+- 15.11.2026: rclone's shared Google client has a tiny per-minute quota (403 "Queries per minute"): batch the files into one rclone call
+  and use 64 MB chunks, or the uploads crawl at ~3 Mbit/s.
+- 15.11.2026: sbctl's sound button toggles "&muted" in the iframe's src, so the relay's view URL carries another parameter first
+  (/live/?p=santoshi&muted): "?muted" alone would never be removed.

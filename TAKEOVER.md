@@ -90,3 +90,34 @@ Requests word for word in momentaryupdates.md (14.11.2026 ~23:45 and ~23:50).
 - **Statistics**: collected in the room Durable Object (room/worker.js, tables c = one row per viewer connection, e = viewer count at every change, cm = chat messages; emptied at GO LIVE, kept after STOP). GET /stats in the room, reached by functions/api/stats.js (admin only). Viewer tab id `vid` (random, sessionStorage) goes in the socket URL; country (request.cf.country) and device class are set by functions/api/room.js as x-sb-cc / x-sb-dev. No IPs, no user agents stored.
 - **Contents**: start/stop (Croatia time), duration, peak and when, average, unique viewers, joins and reconnects, average and median watch time, longest viewer, stayed 5 min+, viewers per minute (5 or 10 min when long) with a text bar, chat counts and busiest minute, countries, devices.
 - **Test 15.11.2026**: room run locally with wrangler dev and 3 simulated viewers (one reconnect) plus chat: all numbers right, kept after STOP.
+
+## 15.11.2026: the Santoshi relay (one stream from the phone, every viewer from Frankfurt)
+
+Request word for word in momentaryupdates.md (14.11.2026 ~23:58). VDO.Ninja made the phone send one copy per viewer.
+- **Relay**: MediaMTX v1.21.3 on chromium-vm, https://relay.ples-duse.org (Let's Encrypt; the zone ples-duse.org is Marko's at
+  Cloudflare, renews 13.6.2027). WHIP in and WHEP out on :8889, LL-HLS :8888, API :8443 (key), media 8189/udp+tcp, SRT 8890/udp.
+  Source, install and units: repo vm-chromium/santoshi-relay (core vmctl service SRELAY). Recording: 1 min pieces on the VM (3 days),
+  uploaded by santoshi-rec-upload to Drive "Santoshi Band live (relay)/Santoshi live <date time>/Video" plus the Docs "Chat" and
+  "Stream statistics" (drive.file: the VM cannot write into the admin page's "Santoshi Band live" folder, so it has its own tree).
+  A YouTube/RTMP forward is prepared and OFF (santoshi-forward, runOnReady commented out in mediamtx.yml).
+- **Secrets** (GitHub → provision.py → Pages): RELAY_KEY (the publish key; MediaMTX keeps only its sha256) and RELAY_HOST.
+- **/api/live**: a camera's go with {via:"relay"} makes KV live.via = "relay" and returns whip + whipUser + whipKey (only to a bearer
+  camera). GET names the relay's public reading doors (relay.whep/hls) and, while via relay, view = "/live/?p=santoshi&muted".
+- **/live/** (live/index.html + player.js): the site's own player in the banner's iframe: WHEP, LL-HLS after 8 s without a picture,
+  hls.js 1.5.13 from cdnjs; follows the live flag every 20 s (back to VDO.Ninja, or "ended"). `?stats` shows numbers, `?force` plays
+  the relay whatever the flag says (tests). The middleware does not put the banner into /live/.
+- **/api/relay**: admin cookie → the relay's numbers for the LIVE tab (line under the chat); Bearer RELAY_KEY (the VM) → chat + stats.
+- **Room**: the chat now stays after STOP (history() sends nothing while not live) and is emptied at the next GO LIVE, so the VM can write
+  the last minute into its Chat Doc. New route /chat (only through /api/relay).
+- **Proof 15.11.2026 00:29–00:39**, Sony ILCE-7M5 on the Pixel (Manual Camera v212): one publisher connection, ~4.2 Mbit/s, 8 viewers
+  (4 WebRTC in Firefox incl. this site's banner, 4 HLS on the VM), 1920x1080 at 23–26 fps, 0 lost, jitter buffer 140–180 ms,
+  MediaMTX 13 % of one core, ~4.5 Mbit/s egress per WebRTC viewer. Watching count checked with two anonymous sockets (1 → 2).
+  Public live stopped at 00:39:48. Sound was silence that night (the Mac's Sound Link was the source, nothing playing).
+
+## State at close, 15.11.2026
+
+The relay is live and core on the VM; the site runs it when a camera goes live with SANTOSHI RELAY (the app's default since v212).
+Waiting for Marko, in the morning with the Sony: Manual Camera → Settings → STREAMING → SANTOSHI RELAY; open
+https://santoshi-band.pages.dev on another device (the banner plays it; tap the speaker); hold LIVE 2 s to stop; the recording is in
+Drive "Santoshi Band live (relay)". Free limits: Oracle Always Free gives 10 TB egress a month (~4.5 Mbit/s per viewer ≈ 2 GB per
+viewer-hour, so ~5000 viewer-hours); the VM's 2 OCPU carry MediaMTX easily (13 % of one core at 8 viewers).
