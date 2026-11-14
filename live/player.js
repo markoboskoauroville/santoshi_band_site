@@ -77,8 +77,10 @@
   }
   v.addEventListener('playing', function () { gotFrames = true; say(''); });
   v.addEventListener('loadeddata', function () { gotFrames = true; say(''); });
+  var force = /[?&]force/.test(q);   // tests: play the relay whatever the site's live flag says
   function check() {
     return fetch('/api/live', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (j) {
+      if (force && j.relay) return { live: true, via: 'relay', whep: j.relay.whep, hls: j.relay.hls };
       if (!j.live) { stop(); say('The stream has ended. Thank you for watching.'); return null; }
       if (j.via !== 'relay') { location.replace(j.view.replace(/&muted/g, '') + (muted ? '&muted' : '')); return null; }
       return j;

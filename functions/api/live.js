@@ -11,9 +11,11 @@ export async function onRequest({ request, env }) {
   if (!env.KV) return json({ live: false });
   if (request.method === "GET") {
     const l = await getLive(env);
-    if (!l) return json({ live: false });
-    const out = { live: true, view: viewUrl(l), since: l.since };
-    if (l.via === "relay" && relayOn(env)) { const u = relayUrls(env); out.via = "relay"; out.whep = u.whep; out.hls = u.hls; }
+    // the relay's two public reading doors (no key needed to watch), also while not live: /live/?force plays them for tests
+    const rel = relayOn(env) ? (({ whep, hls }) => ({ whep, hls }))(relayUrls(env)) : undefined;
+    if (!l) return json({ live: false, relay: rel });
+    const out = { live: true, view: viewUrl(l), since: l.since, relay: rel };
+    if (l.via === "relay" && rel) { out.via = "relay"; out.whep = rel.whep; out.hls = rel.hls; }
     return json(out);
   }
   if (request.method !== "POST") return json({ error: "method" }, 405);

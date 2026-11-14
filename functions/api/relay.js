@@ -20,7 +20,8 @@ export async function onRequest({ request, env }) {
       env.ROOM.fetch("https://room/stats").then((r) => r.json()).catch(() => null),
       env.ROOM.fetch("https://room/chat").then((r) => r.json()).catch(() => []),
     ]) : [null, []];
-    return json({ live: !!l, since: l ? l.since : null, via: l ? l.via || "vdo" : null, stats, chat });
+    const p = await api(env, "/paths/get/santoshi").catch((e) => ({ error: String(e.message || e) }));
+    return json({ live: !!l, since: l ? l.since : null, via: l ? l.via || "vdo" : null, relay: { publishing: !!p.ready, error: p.error, inboundBytes: p.inboundBytes, readers: (p.readers || []).length }, stats, chat });
   }
   if (!(await readSession(env, request))) return json({ error: "login" }, 401);
   const out = { relay: true, host: String(env.RELAY_HOST).replace(/^https:\/\//, "") };
