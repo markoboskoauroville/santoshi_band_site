@@ -96,7 +96,7 @@ Requests word for word in momentaryupdates.md (14.11.2026 ~23:45 and ~23:50).
 Request word for word in momentaryupdates.md (14.11.2026 ~23:58). VDO.Ninja made the phone send one copy per viewer.
 - **Relay**: MediaMTX v1.21.3 on chromium-vm, https://relay.ples-duse.org (Let's Encrypt; the zone ples-duse.org is Marko's at
   Cloudflare, renews 13.6.2027). WHIP in and WHEP out on :8889, LL-HLS :8888, API :8443 (key), media 8189/udp+tcp, SRT 8890/udp.
-  Source, install and units: repo vm-chromium/santoshi-relay (core vmctl service SRELAY). Recording: 1 min pieces on the VM (3 days),
+  Source, install and units: repo vm-chromium/santoshi-relay (core vmctl service SRELAY). Recording: 1 min pieces on the VM (7 days),
   uploaded by santoshi-rec-upload to Drive "Santoshi Band live (relay)/Santoshi live <date time>/Video" plus the Docs "Chat" and
   "Stream statistics" (drive.file: the VM cannot write into the admin page's "Santoshi Band live" folder, so it has its own tree).
   A YouTube/RTMP forward is prepared and OFF (santoshi-forward, runOnReady commented out in mediamtx.yml).
@@ -121,3 +121,6 @@ Waiting for Marko, in the morning with the Sony: Manual Camera → Settings → 
 https://santoshi-band.pages.dev on another device (the banner plays it; tap the speaker); hold LIVE 2 s to stop; the recording is in
 Drive "Santoshi Band live (relay)". Free limits: Oracle Always Free gives 10 TB egress a month (~4.5 Mbit/s per viewer ≈ 2 GB per
 viewer-hour, so ~5000 viewer-hours); the VM's 2 OCPU carry MediaMTX easily (13 % of one core at 8 viewers).
+Drive upload caveat (15.11.2026 00:47): the VM's rclone uses rclone's public Google client, whose GLOBAL per-minute quota was exhausted
+(403 "Queries per minute", project 202264815644), so uploads lag; pieces wait on the VM 7 days and the uploader retries. The cure is an
+own OAuth client (Desktop app) for rclone in Marko's Google Cloud project, then `rclone config reconnect gdrive:` on the VM (his consent).
