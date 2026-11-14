@@ -77,6 +77,11 @@ watching, to check the badge, the chat both ways and the Doc "Santoshi live chat
 - KV `live` now has `source` and (camera) `name`. While a camera is live the admin gets no push address (no second publisher): the page
   says "LIVE from camera <name>", its own iframe does not start. Banner and viewer are identical for both sources.
 - Token compare: lookup by hash plus a constant-time compare (safeEq in _lib.js). No new secret.
+- **Camera takes over (14.11.2026 23:45)**: Marko pressed GO LIVE on the Pixel's admin page first (KV source "browser", 23:39:18, the
+  phone's own camera by getUserMedia), then the app went live on the SAME id: two publishers, the admin page showing the phone camera.
+  Now a camera "go" while a browser live is on flips KV to source "camera" (same id, viewers stay); POST {action:"usecam"} (admin cookie)
+  does the same by hand. admin/live.js asks status every 5 s: camera live = the page shows the public view (muted iframe #camv), stops its
+  own camera/recorder/push frame, and GO LIVE never opens the browser camera while a camera is live. Browser mode is unchanged otherwise.
 
 ## 15.11.2026: stream folder layout and stream statistics
 

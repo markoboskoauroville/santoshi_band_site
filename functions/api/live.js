@@ -18,6 +18,13 @@ export async function onRequest({ request, env }) {
   let l = await getLive(env);
   let r = !!env.ROOM;
   if (action === "go" && !l) { l = newLive(cam ? "camera" : "browser", cam && cam.name); await env.KV.put("live", JSON.stringify(l), { expirationTtl: 12 * 3600 }); r = await room(env, { live: true, sid: String(l.since) }); }
+  // 14.11.2026 23:45 (Marko: the viewers got the phone's browser camera, not the Sony): a paired camera that goes live while a BROWSER
+  // live is on takes it over, same id (viewers stay connected); the admin page sees source "camera" on its next status poll and stops its own
+  // getUserMedia publisher. "usecam" does the same from the admin page (cookie) for a camera already publishing on the id.
+  if (l && (l.source || "browser") !== "camera" && ((action === "go" && cam) || (action === "usecam" && !cam))) {
+    l = { ...l, source: "camera", name: cam ? cam.name : (l.name || "camera"), took: Date.now() };
+    await env.KV.put("live", JSON.stringify(l), { expirationTtl: 12 * 3600 });
+  }
   if (!l) return json({ live: false, room: r });
   const source = l.source || "browser", out = { live: true, source, view: viewUrl(l), since: l.since, room: r };
   if (source === "camera") out.name = l.name || "camera";

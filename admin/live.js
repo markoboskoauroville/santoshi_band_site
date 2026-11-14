@@ -44,7 +44,23 @@ function flush(){if(!bytes)return;var blob=new Blob(buf,{type:FMT.mime.split(';'
  sending=sending.then(function(){return sendPiece(blob,name)}).then(function(){pending--;recinfo()})}
 function recinfo(){$('recinfo').textContent=live?('Recording to Drive: Santoshi Band live / Santoshi live '+stamp+' / Video · '+n+' pieces sent'+(failed?(' · '+failed+' failed'):'')):''}
 function status(){fetch('/api/live',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({action:'status'})}).then(function(r){return r.json()}).then(function(j){
- if(j.live&&!stream){setBtn(true);say(j.source==='camera'?'LIVE from camera '+(j.name||'')+'. STOP ends it.':'Live is on (started on another device). STOP ends it.','good');chatOn()}})}
+ if(j.live&&j.source==='camera'){if(stream)dropBrowser(j);camMode(j);return}
+ if(!j.live&&camOn){camOff();setBtn(false);chatOff();say('The camera live has ended.','good');return}
+ if(j.live&&!stream&&!live){setBtn(true);say('Live is on (started on another device). STOP ends it.','good');chatOn()}}).catch(function(){})}
+// CAMERA LIVE (14.11.2026 23:45): while a paired camera (Mantra Manual Camera) is LIVE the admin shows ITS picture (the public view,
+// muted) and never its own camera. The page asks every 5 s; a browser live that a camera took over stops here (tracks, push frame,
+// recorder). The browser mode stays for when no camera is live: GO LIVE then opens this browser's camera as before.
+var camOn=false,camView='';
+function camMode(j){setBtn(true);chatOn();var f=$('camv');
+ if(!f){f=document.createElement('iframe');f.id='camv';f.allow='autoplay; fullscreen; picture-in-picture';f.title='Camera';f.style.cssText='display:block;width:100%;aspect-ratio:16/9;border:0;background:#000;border-radius:8px';$('sndw').appendChild(f)}
+ $('snd').style.display='none';$('sndw').style.display='block';
+ if(camView!==j.view){camView=j.view;f.src=j.view}
+ if(!camOn)say('LIVE from camera '+(j.name||'')+'. This page shows its picture; STOP ends the live.','good');camOn=true}
+function camOff(){camOn=false;camView='';var f=$('camv');if(f)f.remove();$('snd').style.display='block';$('sndw').style.display='none'}
+function dropBrowser(j){if(rec&&rec.state!=='inactive'){rec.onstop=flush;rec.stop()}rec=null;
+ if(stream){stream.getTracks().forEach(function(t){t.stop()});stream=null}$('snd').removeAttribute('src');
+ say('Camera '+(j.name||'')+' took over the live: this browser\'s camera is off.','good')}
+setInterval(function(){if($('app')&&$('app').style.display==='block')status()},5000);
 // camera pairing (14.11.2026): token made by /api/cam, shown once as text + QR; KV keeps only its hash
 function esc2(t){return String(t).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
 function cams(){fetch('/api/cam').then(function(r){return r.json()}).then(function(j){var b=$('cams');b.textContent='';
@@ -63,6 +79,9 @@ $('go').onclick=function(){live?stop():start()};
 function start(){
  var d=new Date();stamp=d.getFullYear()+'-'+two(d.getMonth()+1)+'-'+two(d.getDate())+' '+two(d.getHours())+'-'+two(d.getMinutes());n=0;failed=0;
  say('Starting…');var rec_ok=true;
+ // 14.11.2026 23:45: a paired camera that is already LIVE is the stream; this browser's camera is never opened over it
+ call('status').then(function(j){if(j.live&&j.source==='camera'){camMode(j);return}start2()}).catch(function(){start2()})}
+function start2(){var rec_ok=true;
  // the Drive permission first (it needs this tap), then the camera, then the stream
  // layout (Marko 14.11.2026): Santoshi Band live / Santoshi live <date time> / Video (all video pieces) + two Google Docs in the stream folder
  getToken(true).then(function(){return mkFolder('Santoshi Band live')}).then(function(root){return mkFolder('Santoshi live '+stamp,root,'#16a766')}).then(function(id){sfolder=id;return mkFolder('Video',id,'#4986e7')}).then(function(id){folder=id})
@@ -70,7 +89,7 @@ function start(){
  .then(function(){return navigator.mediaDevices.getUserMedia({video:{facingMode:'environment',width:{ideal:1280},height:{ideal:720}},audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}})})
  .then(function(s){stream=s;return call('go')}).then(function(j){
   if(!j.live)throw new Error('server did not go live');
-  if(j.source==='camera'){setBtn(true);say('LIVE from camera '+(j.name||'')+'. STOP ends it.','good');chatOn();if(stream){stream.getTracks().forEach(function(t){t.stop()});stream=null}return}
+  if(j.source==='camera'){if(stream){stream.getTracks().forEach(function(t){t.stop()});stream=null}camMode(j);return}
   $('sndw').style.display='block';$('snd').src=j.push;setBtn(true);
   if(!$('snd').dataset.ctl){$('snd').dataset.ctl=1;var fr=$('snd'),nz=function(on){fr.src=fr.src.replace(/&(denoise|echocancellation)=[^&]*/g,'')+'&denoise='+(on?1:0)+'&echocancellation='+(on?1:0)};
    window.SBCtl('send',$('sndw'),{frame:fr,stream:stream,onNoise:nz})}
@@ -81,7 +100,7 @@ function start(){
  .catch(function(e){say('Could not start: '+e.message,'bad');if(stream){stream.getTracks().forEach(function(t){t.stop()});stream=null}})}
 function stop(){say('Stopping…');
  var done=function(){return sending.then(function(){return saveDoc(true)}).then(function(){return call('stop')}).then(function(){chatOff();
-  if(stream){stream.getTracks().forEach(function(t){t.stop()});stream=null}$('snd').removeAttribute('src');$('sndw').style.display='none';setBtn(false);recinfo();say('Stopped. The banner is gone.'+(n?' '+n+' pieces are in Drive.':'')+(docId?' The chat and the statistics are in Drive as Google Docs.':''),'good')})};
+  if(stream){stream.getTracks().forEach(function(t){t.stop()});stream=null}$('snd').removeAttribute('src');camOff();setBtn(false);recinfo();say('Stopped. The banner is gone.'+(n?' '+n+' pieces are in Drive.':'')+(docId?' The chat and the statistics are in Drive as Google Docs.':''),'good')})};
  if(rec&&rec.state!=='inactive'){rec.onstop=function(){flush();done()};rec.stop()}else done()}
 // CHAT (14.11.2026): the band's seat in the live room (/api/room, signed in, not counted as a viewer) and the watching count, plus the
 // chat history as a Google Doc "Santoshi live chat YYYY-MM-DD HH-MM" in the same Drive folder as the recording: made at GO LIVE,
