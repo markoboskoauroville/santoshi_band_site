@@ -20,3 +20,35 @@ CLOUDFLARE_API_TOKEN (pasted by Marko). Flow: edit in santoshi_band → tools/bu
 ## State at close, 13.11.2026
 
 13.11.2026: admin with Google login, private PICTURES in KV, LIVE tab with VDO.Ninja, live banner, Drive recording; overlay controls on the live viewer and sender (double-tap full screen, landscape lock, Esc). live.js carries no address in public code; provision soft-fails when the token has no KV rights; /img/band/hero* reaches the 410 rule again. Another agent is changing the LIVE UI: this note is docs only. The Chrome window sending the live stream (VDO.Ninja) must stay open.
+
+## 14.11.2026: live chat, watching count, chat as a Google Doc
+
+Request word for word in momentaryupdates.md (14.11.2026).
+- **The room**: room/worker.js, worker `santoshi-live-room`, ONE Durable Object (SQLite-backed, free plan) named "santoshi". Every open
+  viewer page holds one WebSocket to it: the open viewer sockets are the watching count; the same socket carries the chat. Messages of the
+  current stream in its SQLite table (last 200 sent to a newcomer, 1000 kept), emptied at GO LIVE and STOP; STOP also sends "end" and
+  closes the viewers. Limits in the room: name 1-30, text 300, 5 messages per 10 s and 0.7 s apart per connection, visitors cannot be
+  named "Santoshi Band"/"admin"/"moderator", chat only while live. Why not KV: eventually consistent and ~1000 writes/day on the free plan.
+- **No public address**: workers_dev and preview URLs off; Pages reaches it only through the service binding ROOM (tools/provision.py
+  binds it after the workflow step "Deploy the live room" succeeds, `npx wrangler@4 deploy` in room/). The token has the Workers rights
+  (run 43625803479: "Uploaded santoshi-live-room", "room bound as ROOM").
+- **The door**: functions/api/room.js (public in the middleware's OPEN list) forwards only the WebSocket headers and sets the two headers
+  the room trusts: x-sb-admin (signed-in admin AND Origin = this site; the band seat, not counted) and x-sb-sid (the KV live flag).
+  functions/api/live.js tells the room at GO LIVE / STOP (POST /state).
+- **Viewer UI**: sbchat.js (published by tools/deploy.sh), loaded by the banner after sbctl.js: badge "N watching" top left of the
+  picture, CHAT button in the overlay bar (red dot for new messages), side panel (full width up to 380 px, inside the picture while in
+  real full screen), name first (localStorage sb.chatname, try/catch), then list + input; ✕ / Esc close; reconnects 1 s → 15 s;
+  https://santoshi-band.pages.dev/#chat opens the panel at once. All user text by textContent.
+- **Admin**: LIVE tab shows CHAT · N watching under the sender and the badge on the sender picture; write as "Santoshi Band" or "Marko"
+  (remembered). The Google Doc: admin/live.js saveDoc() — at GO LIVE a multipart upload (text/html → application/vnd.google-apps.document)
+  named "Santoshi live chat YYYY-MM-DD HH-MM" into the recording folder, then files.update (uploadType=media, text/html) every 45 s when
+  something new came in, and once more at STOP before the room is emptied. Uses the same drive.file token as the recording. A page
+  reloaded in the middle of a stream rejoins the chat but makes no Doc (it no longer knows the folder).
+- **Tests 14.11.2026**: locally (wrangler dev + pages dev) the full path GO LIVE → admin seat → 2 viewers → chat both ways → forged
+  headers refused → STOP "end"; on production the count 1→2→1, forged x-sb-admin ignored, chat refused while not live, ping/pong.
+  Not testable without Marko: the camera stream with real viewers and the Google Doc in his Drive.
+
+## State at close, 14.11.2026
+
+Chat and watching count deployed (run 43625803479, green). Waiting for Marko: one real GO LIVE on the phone with a second device
+watching, to check the badge, the chat both ways and the Doc "Santoshi live chat …" in Drive next to the pieces.
