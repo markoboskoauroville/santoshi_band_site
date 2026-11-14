@@ -4,3 +4,6 @@
 
 ## 14.11.2026 (Marko, word for word)
 "you need to work on Santoshi page  So we need to improve the live stream window which is Video Ninja. It needs to show how many people are watching it at this moment. And also there should be option to open the side panel with chat. And when user open that panel it needs to enter his name. And then while we are streaming they can also chat. And also when you record the snippets on the G drive you also need to generate the file. Chat file, it's just normal Google document file with the chat history"
+
+## 14.11.2026 ~23:45 (Marko, word for word)
+"We are recording the stream from Santoshi's web page in our drive. Beautiful. There will be a text file with the chats. But also, I want to have stream statistics. I want to see how many people were watching that, at what time, and any other statistic related to the stream that you find useful. It should be in that document"
