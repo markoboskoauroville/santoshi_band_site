@@ -1,0 +1,16 @@
+# The live room of santoshi-band.pages.dev (14.11.2026): chat + watching count during a live stream, one Durable Object.
+# Deployed by .github/workflows/deploy-pages.yml (wrangler deploy). No public address: workers_dev and preview URLs are off,
+# the Pages Functions reach it only through the service binding ROOM (functions/api/room.js, functions/api/live.js).
+name = "santoshi-live-room"
+main = "worker.js"
+compatibility_date = "2025-04-01"
+workers_dev = false
+preview_urls = false
+
+[[durable_objects.bindings]]
+name = "ROOM"
+class_name = "Room"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["Room"]

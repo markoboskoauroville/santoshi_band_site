@@ -13,12 +13,28 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: Deploy the live room (chat + watching count, Durable Object worker room/)
+        id: room
+        continue-on-error: true
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          # needs the token rights "Workers Scripts: Edit" (Durable Objects come with it); without them the site still deploys, chat off
+          set -o pipefail; cd room
+          if ! npx --yes wrangler@4 deploy 2>&1 | tee "$RUNNER_TEMP/room.log"; then
+            if grep -qiE "authentication|10000|permission|not authorized|forbidden" "$RUNNER_TEMP/room.log"; then
+              echo "::error::The Cloudflare token cannot deploy Workers: add the permission 'Account > Workers Scripts > Edit' to CLOUDFLARE_API_TOKEN"
+            else echo "::error::The live room worker did not deploy (see the log above)"; fi
+            exit 1
+          fi
       - name: Deploy both sites
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
           ADMIN_EMAILS: ${{ secrets.ADMIN_EMAILS }}
+          ROOM_DEPLOYED: ${{ steps.room.outcome }}
         run: |
           if [ -z "$CLOUDFLARE_API_TOKEN" ]; then echo "::error::CLOUDFLARE_API_TOKEN secret is not set"; exit 1; fi
           # the private reference sheets leave the public tree: on the first run they are moved from history into KV

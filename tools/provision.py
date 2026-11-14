@@ -28,6 +28,14 @@ else:
     print("WARNING: the Cloudflare token cannot use Workers KV (%s): live flag and pictures stay off until the token gets 'Workers KV Storage: Edit'" % [e.get("message") for e in r.get("errors", [])])
 rr = api("PATCH", "/pages/projects/" + P, {"deployment_configs": {"production": cfg, "preview": cfg}})
 print("secrets set" if rr.get("success") else "WARNING: could not set Pages secrets: %s" % [e.get("message") for e in rr.get("errors", [])], "; KV bound" if nid else "")
+# 14.11.2026: the live room (room/worker.js, deployed by the step before) is bound as the service ROOM; its own PATCH, so a refusal
+# here never undoes the secrets and KV above
+if os.environ.get("ROOM_DEPLOYED") == "success":
+    svc = {"services": {"ROOM": {"service": "santoshi-live-room", "environment": "production"}}}
+    rs = api("PATCH", "/pages/projects/" + P, {"deployment_configs": {"production": svc, "preview": svc}})
+    print("room bound as ROOM" if rs.get("success") else "WARNING: could not bind the live room: %s" % [e.get("message") for e in rs.get("errors", [])])
+else:
+    print("WARNING: the live room worker was not deployed (see the step before): chat and watching count stay off")
 if not nid: sys.exit(0)
 d = sys.argv[1] if len(sys.argv) > 1 else ""
 if d and os.path.isdir(d):
