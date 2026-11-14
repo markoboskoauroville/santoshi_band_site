@@ -52,3 +52,16 @@ Request word for word in momentaryupdates.md (14.11.2026).
 
 Chat and watching count deployed (run 43625803479, green). Waiting for Marko: one real GO LIVE on the phone with a second device
 watching, to check the badge, the chat both ways and the Doc "Santoshi live chat …" in Drive next to the pieces.
+
+## 14.11.2026: "Sign in with Google" did nothing (fixed)
+
+- **Cause**: commit 232e85f (chat Doc) left a stray `)` in admin/live.js saveDoc() (`…next try in 45 s')});`). The whole script was a
+  SyntaxError (Chrome DevTools on the Pixel: "Unexpected token ')'" live.js line 105), so the button never got its click handler, on
+  every browser, phone and desktop. Not the popup, not the origin, not the cookie: the origin is accepted and the cookie works.
+- **Fix**: the `)` removed (live.js?v=4, then v=5); the workflow now runs `node --check` on every script before deploying (a syntax error
+  stops the deploy); the sign-in has an error_callback, so a blocked/closed Google window and "Opening Google…" show under the button.
+- **Proof on the Pixel 7, 14.11.2026**: Chrome: tap → account chooser → the auroville.community account → PICTURES/LIVE with the
+  sheets (/api/google 200, /api/pics 200). Brave and Firefox: tap → Google's own chooser opens (the popup works) → Google asks for the
+  account password, because those browsers are not signed in to Google. Marko types it once in each; then the same tap signs in.
+- If a phone browser ever loses the popup's answer, the robust way is a full-page redirect, which needs a redirect URI added to the
+  client "Mantra pages" (Google Cloud console, Marko) and a /api/google callback; not built, because the popup works.

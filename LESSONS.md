@@ -19,3 +19,7 @@
 - 14.11.2026: `.sbc form{display:flex}` beats the [hidden] attribute; add `[hidden]{display:none!important}` in the component's CSS.
 - 14.11.2026: wrangler dev + wrangler pages dev --service ROOM=<worker> test the whole Pages + Durable Object path offline, and an
   admin cookie can be minted locally with a throwaway SESSION_SECRET binding.
+- 14.11.2026: "the button does nothing" is first a script that never ran: read the console (adb DevTools on the phone) before suspecting
+  popups, origins or cookies. One stray `)` in admin/live.js killed the sign-in for everyone. Every deploy now runs `node --check` first.
+- 14.11.2026: a GIS token client needs an error_callback; without it a blocked or closed popup is silent.
+

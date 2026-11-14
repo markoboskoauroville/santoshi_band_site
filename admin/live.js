@@ -11,7 +11,10 @@ $('g').onclick=function(){var m=$('msg0');
  google.accounts.oauth2.initTokenClient({client_id:CLIENT,scope:'openid email profile',prompt:'select_account',callback:function(t){
   if(!t.access_token){m.textContent='Google said no';return}
   fetch('/api/google',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({access_token:t.access_token})}).then(function(r){
-   if(r.ok)enter();else m.textContent=r.status===403?'This Google address is not allowed.':'Sign-in failed, try again'})}}).requestAccessToken()};
+   if(r.ok)enter();else m.textContent=r.status===403?'This Google address is not allowed.':'Sign-in failed, try again'})},
+  // 14.11.2026: a blocked or closed Google window says so instead of doing nothing
+  error_callback:function(e){var k=e&&e.type;m.textContent=k==='popup_failed_to_open'?'The browser blocked the Google window: allow pop-ups for this site and tap again.':k==='popup_closed'?'The Google window was closed: tap again.':'Google sign-in did not finish ('+(k||'unknown')+'): tap again.'}}).requestAccessToken();
+ m.textContent='Opening Google…'};
 function tab(n){[1,2].forEach(function(i){$('t'+i).classList.toggle('on',i===n);$('p'+i).classList.toggle('on',i===n)})}
 $('t1').onclick=function(){tab(1)};$('t2').onclick=function(){tab(2)};
 $('out').onclick=function(){fetch('/api/logout').then(function(){location.reload()})};
