@@ -39,6 +39,22 @@ const rnd = (n) => hex(crypto.getRandomValues(new Uint8Array(n)));
 export async function getLive(env) {
   try { return env.KV ? JSON.parse((await env.KV.get("live")) || "null") : null; } catch { return null; }
 }
-export const newLive = () => ({ id: "sb" + rnd(6), pw: rnd(6), since: Date.now() });
+export const newLive = (source = "browser", name) => ({ id: "sb" + rnd(6), pw: rnd(6), since: Date.now(), source, ...(name ? { name } : {}) });
+// camera pairing (14.11.2026): the app holds a random device token; KV keeps only its SHA-256 (camtoken:<hex>), never the token
+export const sha256hex = async (t) => hex(await crypto.subtle.digest("SHA-256", enc.encode(t)));
+export function safeEq(a, b) {
+  a = enc.encode(String(a)); b = enc.encode(String(b));
+  let d = a.length ^ b.length;
+  for (let i = 0; i < Math.max(a.length, b.length); i++) d |= (a[i] || 0) ^ (b[i] || 0);
+  return d === 0;
+}
+export async function readCamera(env, request) {
+  const m = (request.headers.get("authorization") || "").match(/^Bearer ([A-Za-z0-9_-]{32,128})$/);
+  if (!m || !env.KV) return null;
+  const h = await sha256hex(m[1]);
+  let rec = null;
+  try { rec = JSON.parse((await env.KV.get("camtoken:" + h)) || "null"); } catch {}
+  return rec && safeEq(rec.hash || "", h) ? { name: rec.name || "camera", hash: h } : null;
+}
 export const viewUrl = (l) => `https://vdo.ninja/?view=${l.id}&password=${l.pw}&cleanoutput&autoplay&muted`;
 export const pushUrl = (l) => `https://vdo.ninja/?push=${l.id}&password=${l.pw}&webcam&autostart&cleanoutput`;

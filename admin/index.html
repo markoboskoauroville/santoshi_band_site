@@ -33,6 +33,7 @@ iframe#snd{width:100%;aspect-ratio:16/9;height:auto;border:0;background:#000;bor
 #chatw{max-width:720px;margin:8px 0}#chatw h2{margin-top:20px}#chl{height:min(46vh,380px);overflow-y:auto;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 12px;overscroll-behavior:contain}
 #chf{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}#chf select,#chf input{padding:12px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--fg);font:16px system-ui}
 #chf select{flex:0 1 150px;min-width:0}#chf input{flex:1 1 180px;min-width:0}#chf button{flex:none;padding:0 18px;min-height:46px;border:0;border-radius:10px;background:var(--acc);color:#14110e;font:700 14px system-ui;letter-spacing:.06em;cursor:pointer}
+.cam1{display:flex;gap:10px;align-items:center;margin:6px 0}.cam1 button{padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:#ff7b6b;font:600 .8rem system-ui;cursor:pointer}
 #chst{color:#ff7b6b;font-size:.85rem;min-height:1.2em;margin-top:4px}
 </style></head><body>
 <h1>Santoshi Band &middot; Admin</h1><div class="sub" id="sub">Private &middot; sign in</div>
@@ -44,6 +45,9 @@ iframe#snd{width:100%;aspect-ratio:16/9;height:auto;border:0;background:#000;bor
 <div class="pane" id="p2"><button class="go" id="go">GO LIVE</button><div id="msg"></div>
 <div id="sndw" style="position:relative;width:100%;max-width:1100px;margin:12px auto 0;display:none"><iframe id="snd" allow="camera; microphone; autoplay" style="display:block" title="Sender"></iframe></div>
 <div class="sub" id="recinfo"></div>
+<h2>CAMERAS</h2><button class="go" id="pair" style="background:var(--card);color:var(--fg);border:1px solid var(--acc)">PAIR CAMERA</button>
+<div id="pairbox" style="display:none;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px;max-width:420px"><div class="sub">Shown once. Scan with Mantra Manual Camera:</div><div id="qr" style="background:#fff;padding:10px;display:inline-block;margin:10px 0"></div><div class="sub">Token:</div><code id="ptok" style="word-break:break-all;user-select:all"></code></div>
+<div id="cams" class="sub"></div>
 <div id="chatw" style="display:none"><h2>CHAT &middot; <span id="cnt">0 watching</span></h2><div id="chl"><div class="sub" id="chempty">No messages yet.</div></div>
 <form id="chf"><select id="chn" aria-label="Write as"><option>Santoshi Band</option><option>Marko</option></select><input id="cht" maxlength="300" autocomplete="off" placeholder="Write to the viewers" aria-label="Message"><button type="submit">SEND</button></form>
 <div id="chst"></div><div class="sub" id="docinfo"></div></div><button class="go" id="out" style="background:var(--card);color:var(--mut);border:1px solid var(--line)">Sign out</button></div>
@@ -52,6 +56,7 @@ iframe#snd{width:100%;aspect-ratio:16/9;height:auto;border:0;background:#000;bor
 <script src="https://accounts.google.com/gsi/client" async></script>
 <script src="/sbctl.js?v=2"></script>
 <script src="/sbchat.js?v=1"></script>
-<script src="/admin/live.js?v=5"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="/admin/live.js?v=6"></script>
 <script src="/admin/pics.js?v=1"></script>
 </body></html>

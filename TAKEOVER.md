@@ -65,3 +65,15 @@ watching, to check the badge, the chat both ways and the Doc "Santoshi live chat
   account password, because those browsers are not signed in to Google. Marko types it once in each; then the same tap signs in.
 - If a phone browser ever loses the popup's answer, the robust way is a full-page redirect, which needs a redirect URI added to the
   client "Mantra pages" (Google Cloud console, Marko) and a /api/google callback; not built, because the popup works.
+
+## 14.11.2026: camera pairing API (Mantra Manual Camera starts GO LIVE without a browser)
+
+- **Pair**: /admin > LIVE > PAIR CAMERA (admin cookie). POST /api/cam {action:"pair",name} makes a 32-byte base64url device token, KV keeps
+  only its SHA-256 as `camtoken:<hex>` → {name, created, hash}; the token is shown once as text + QR (qrcodejs 1.0.0 from cdnjs) carrying
+  `mantracam://pair?site=https://santoshi-band.pages.dev&token=<token>`. GET /api/cam lists, POST {action:"revoke",id} removes (REVOKE button).
+- **Use**: POST /api/live with `Authorization: Bearer <token>` (or the sbadm cookie as before), body {action:"go"|"stop"|"status"}.
+  Response when live: {live:true, source:"camera"|"browser", view, since, room, id, password, push, name?(camera)}; not live: {live:false, room}.
+  `id`+`password` are the VDO.Ninja `?push=<id>&password=<pw>` values. No/bad auth: 401 {error:"login"}. GET /api/live stays public and unchanged.
+- KV `live` now has `source` and (camera) `name`. While a camera is live the admin gets no push address (no second publisher): the page
+  says "LIVE from camera <name>", its own iframe does not start. Banner and viewer are identical for both sources.
+- Token compare: lookup by hash plus a constant-time compare (safeEq in _lib.js). No new secret.

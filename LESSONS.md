@@ -23,3 +23,4 @@
   popups, origins or cookies. One stray `)` in admin/live.js killed the sign-in for everyone. Every deploy now runs `node --check` first.
 - 14.11.2026: a GIS token client needs an error_callback; without it a blocked or closed popup is silent.
 
+- 14.11.2026: a bearer device token for an app is stored only as its SHA-256 in KV (never the token), looked up by hash and compared constant-time; the public repo then holds no secret.

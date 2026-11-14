@@ -44,7 +44,20 @@ function flush(){if(!bytes)return;var blob=new Blob(buf,{type:FMT.mime.split(';'
  sending=sending.then(function(){return sendPiece(blob,name)}).then(function(){pending--;recinfo()})}
 function recinfo(){$('recinfo').textContent=live?('Recording to Drive: Santoshi Band live / '+stamp+' · '+n+' pieces sent'+(failed?(' · '+failed+' failed'):'')):''}
 function status(){fetch('/api/live',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({action:'status'})}).then(function(r){return r.json()}).then(function(j){
- if(j.live&&!stream){setBtn(true);say('Live is on (started on another device). STOP ends it.','good');chatOn()}})}
+ if(j.live&&!stream){setBtn(true);say(j.source==='camera'?'LIVE from camera '+(j.name||'')+'. STOP ends it.':'Live is on (started on another device). STOP ends it.','good');chatOn()}})}
+// camera pairing (14.11.2026): token made by /api/cam, shown once as text + QR; KV keeps only its hash
+function esc2(t){return String(t).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function cams(){fetch('/api/cam').then(function(r){return r.json()}).then(function(j){var b=$('cams');b.textContent='';
+ if(!j.cameras||!j.cameras.length){b.textContent='No camera paired.';return}
+ j.cameras.forEach(function(c){var d=document.createElement('div');d.className='cam1';var s=document.createElement('span');s.textContent=c.name+' · paired '+new Date(c.created).toLocaleString();
+  var x=document.createElement('button');x.textContent='REVOKE';x.onclick=function(){if(!confirm('Revoke '+c.name+'?'))return;fetch('/api/cam',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({action:'revoke',id:c.id})}).then(cams)};
+  d.appendChild(s);d.appendChild(x);b.appendChild(d)})})}
+$('pair').onclick=function(){var nm=prompt('Name of the camera','Pixel 7');if(nm===null)return;
+ fetch('/api/cam',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({action:'pair',name:nm})}).then(function(r){return r.json()}).then(function(j){
+  if(!j.token){say('Pairing failed','bad');return}
+  $('pairbox').style.display='block';$('ptok').textContent=j.token;var q=$('qr');q.textContent='';
+  if(window.QRCode)new QRCode(q,{text:j.qr,width:220,height:220,correctLevel:QRCode.CorrectLevel.L});else q.textContent='(QR library did not load: use the token)';cams()})};
+cams();
 function setBtn(on){live=on;var b=$('go');b.textContent=on?'STOP':'GO LIVE';b.classList.toggle('stop',on)}
 function call(a){return fetch('/api/live',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({action:a})}).then(function(r){return r.json()})}
 $('go').onclick=function(){live?stop():start()};
@@ -57,6 +70,7 @@ function start(){
  .then(function(){return navigator.mediaDevices.getUserMedia({video:{facingMode:'environment',width:{ideal:1280},height:{ideal:720}},audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}})})
  .then(function(s){stream=s;return call('go')}).then(function(j){
   if(!j.live)throw new Error('server did not go live');
+  if(j.source==='camera'){setBtn(true);say('LIVE from camera '+(j.name||'')+'. STOP ends it.','good');chatOn();if(stream){stream.getTracks().forEach(function(t){t.stop()});stream=null}return}
   $('sndw').style.display='block';$('snd').src=j.push;setBtn(true);
   if(!$('snd').dataset.ctl){$('snd').dataset.ctl=1;var fr=$('snd'),nz=function(on){fr.src=fr.src.replace(/&(denoise|echocancellation)=[^&]*/g,'')+'&denoise='+(on?1:0)+'&echocancellation='+(on?1:0)};
    window.SBCtl('send',$('sndw'),{frame:fr,stream:stream,onNoise:nz})}
