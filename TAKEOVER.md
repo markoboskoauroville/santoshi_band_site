@@ -139,3 +139,11 @@ Request word for word in momentaryupdates.md (15.11.2026). Only when /live/ is o
   centre round button: RESTART THE STREAM → /live/ when /api/live says live, else "Not live right now" and BACK TO THE SITE → /. Polls /api/live every 15 s.
   Pictures: live/closed/sleep-landscape.jpg and sleep-portrait.jpg (<picture> by orientation). noindex,follow (a transient state page), og tags set.
 - Tested in Firefox (BiDi, :9223) 15.11.2026: overlay centre = viewport centre to the pixel; tap unmutes; bar appears, hides, returns on a tap; mute both ways; chat opens; PiP button; exit → closed; restart → /live/.
+
+## 15.11.2026: CLOUD MIXER, the VM as a camera (repo CLOUD_MIXER)
+- A paired camera **"Cloud Mixer (VM)"** exists in KV (camtoken:6fc92c3c9d04…, made with the local Cloudflare token, not via
+  /admin); the token lives only on chromium-vm (~/.config/cloud-mixer/site-camera-token, 600). The CLOUD MIXER daemon calls
+  POST /api/live {action:"go"|"stop", via:"relay"} with it, so the site switches to the relay player when the VM's program
+  starts and back when it ends. Revoke on /admin > LIVE when it is not needed any more.
+- First use: the noon test stream of 15.11.2026 (12:00 CET), the Navaratri concert of 17.10.2026 (Češki narodni dom) with
+  the 21.11.2026 poster between songs. Request word for word in momentaryupdates.md.
