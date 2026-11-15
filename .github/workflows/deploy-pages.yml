@@ -49,4 +49,5 @@ jobs:
           mkdir -p "$RUNNER_TEMP/sheets"
           if [ -n "$OLD" ]; then git archive "$OLD^" refs/sheets | tar -x -C "$RUNNER_TEMP"; mv "$RUNNER_TEMP"/refs/sheets/* "$RUNNER_TEMP/sheets/" 2>/dev/null || true; fi
           python3 tools/provision.py "$RUNNER_TEMP/sheets"
+          python3 tools/domains.py || true   # santoshiband.org + www as custom domains (15.11.2026), soft-fail
           bash tools/deploy.sh

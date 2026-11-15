@@ -79,3 +79,6 @@ Marko, word for word: "The lifestyle image is great when we are sleeping. Let it
 viewers always get AAC audio (iPhones). A camera that goes live gets its own private path (`cam-<id>`) from /api/live, the mixer
 switches to it with a short fade, shows a fallback picture with silence while no camera is there, and a scheduled show keeps
 precedence. Deadline: well before the concert of 21.11.2026.
+
+## 15.11.2026, connect the domain santoshiband.org (Marko, word for word)
+"Please now connect this domain with my webpage."
