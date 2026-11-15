@@ -41,7 +41,9 @@
     var c = new RTCPeerConnection({ iceServers: [{ urls: 'stun:stun.cloudflare.com:3478' }], bundlePolicy: 'max-bundle' }); pc = c;
     c.addTransceiver('video', { direction: 'recvonly' }); c.addTransceiver('audio', { direction: 'recvonly' });
     var ms = new MediaStream();
-    c.ontrack = function (e) { ms.addTrack(e.track); if (v.srcObject !== ms) { v.srcObject = ms; play(); } };
+    // 15.11.2026 (audio fix): a viewer on a mobile line got packets in bursts (11 to 85 a second) and the browser's buffer
+    // started at about 100 ms, so the first 15 s had holes of up to 0.6 s. Both tracks wait at least 400 ms from the start.
+    c.ontrack = function (e) { try { e.receiver.jitterBufferTarget = 400; } catch (x) {} ms.addTrack(e.track); if (v.srcObject !== ms) { v.srcObject = ms; play(); } };
     var deadline = setTimeout(function () { if (pc === c && !gotFrames) { console.warn('WHEP: no picture in 8 s, HLS'); toHls(); } }, 8000);
     c.onconnectionstatechange = function () {
       if (pc !== c) return;
