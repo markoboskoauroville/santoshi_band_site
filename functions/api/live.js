@@ -18,7 +18,9 @@ export async function onRequest({ request, env }) {
     const studio = relayOn(env) ? { hls: relayUrls(env).studio } : undefined;
     if (!l) return json({ live: false, relay: rel, studio });
     const out = { live: true, view: viewUrl(l), since: l.since, relay: rel, studio };
-    if (l.via === "relay" && rel) { out.via = "relay"; out.whep = rel.whep; out.hls = rel.hls; }
+    // 15.11.2026: viewers read HLS through Cloudflare's cache: live.santoshiband.org (Cloudflare Tunnel → santoshi-hls-proxy → MediaMTX
+    // on chromium-vm, vm-chromium santoshi-relay/hls-tunnel); hlsDirect = the relay's own door, the player's fallback after two failures
+    if (l.via === "relay" && rel) { out.via = "relay"; out.whep = rel.whep; out.hls = relayUrls(env).hlsCdn; out.hlsDirect = rel.hls; }
     if (l.via === "studio" && studio) out.via = "studio";
     // 15.11.2026, the switch to HLS (Marko: "Let's switch everything to HLS right now."): the new /live/ player asks with ?c=hls. An open
     // page of the OLD player (player.js?v=4, WebRTC first) asks without it, from the page /live/; it reloads to any view whose via is not

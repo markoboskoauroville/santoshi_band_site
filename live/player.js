@@ -92,6 +92,9 @@
   function start() {
     check().then(function (j) {
       if (!j) return; cfg = j;
+      // 15.11.2026: the HLS comes through Cloudflare's cache (live.santoshiband.org, a Cloudflare Tunnel to the relay); after two failed
+      // tries in a row the page reads the relay's own HLS door instead (j.hlsDirect), until a picture plays again (fails back to 0)
+      if (fails >= 2 && j.hlsDirect) { console.warn('player: cached HLS failed twice, relay direct'); cfg.hls = j.hlsDirect; }
       // 15.11.2026, the Studio route: the Mac's master, the VM's quality ladder (HLS, 10-15 s), the gear (studio.js)
       if (j.via === 'studio' && window.sbStudio) { stop(); setMode('studio'); if (window.sbStudio.play(j, play)) return; }
       toHls();

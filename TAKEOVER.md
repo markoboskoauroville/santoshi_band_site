@@ -237,3 +237,12 @@ Rule: never drop an item below in a refactor; verify each on home /, /live/ and 
 | 15 | Pictures never resize on hover/tap; PiP only by the PiP button (15.11) | ui.js | kept |
 | 16 | Quality/volume/zoom/pan remembered per viewer | ui.js, player.js | sb.q, sb.vol, sb.muted, sb.zoom, sb.panx, sb.pany |
 Removed by his explicit word (stay out): the OVERLAY/Hide button, LOW DELAY/WebRTC, the bottom sound bar, the hover shrink.
+
+## 15.11.2026: viewers read HLS through Cloudflare's cache (live.santoshiband.org)
+- `/api/live` (via relay) gives `hls` = https://live.santoshiband.org/santoshi/index.m3u8 and `hlsDirect` = the relay's own :8888 door.
+  live/player.js v11: after two failed tries in a row it reads hlsDirect until a picture plays again (fails → 0).
+- The chain: Cloudflare edge (default cache, .mp4 kept 60 s) → Cloudflare Tunnel santoshi-hls → santoshi-hls-proxy 127.0.0.1:18888
+  (one MediaMTX session, ?session= removed, segments public max-age=60, playlists no-cache) → MediaMTX :8888. Source, units and the
+  reasons: repo vm-chromium santoshi-relay/hls-tunnel (TAKEOVER there). Only /santoshi/*.m3u8|mp4 pass; everything else 404.
+- The /hls/ Pages Function of the morning (functions/hls/[[path]].js) stays unused; viewers never go through it (the 100k/day limit).
+- OPEN: the HIT proof (two clients, same segment, second `cf-cache-status: HIT`) at the next live on santoshi.

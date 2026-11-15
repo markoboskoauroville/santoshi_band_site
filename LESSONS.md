@@ -138,3 +138,15 @@
 - 15.11.2026: EXIT (sleeping band, /live/closed/) is on every page; from the home frame it navigates the TOP window (window.top.location), never the frame; the admin camera view passes &noexit. Double tap/click on the picture = full screen again, with landscape lock on phones.
 - 15.11.2026: seven round buttons need 44 px and 6 px gaps to fit a 366 px frame (home on a phone). A test phone's "Chrome is loading flags" toast hides the bottom of a page in screenshots: wait it out or test in the frame.
 - 15.11.2026: tests on the Pixel_7_API_35 emulator: `adb -s emulator-5554` (his real phones are also on adb over the network: never a bare `adb`), `adb reverse tcp:PORT tcp:PORT` for the local server, `adb forward tcp:9555 localabstract:chrome_devtools_remote` for CDP into the phone's Chrome, `adb emu kill` at the end.
+
+## 15.11.2026: the cached HLS door (Cloudflare Tunnel)
+- 15.11.2026: `cloudflared tunnel login` authorizes ONE zone, and its URL expires after about 10 minutes: open it only when Marko is at
+  the computer (two pages expired unclicked). Its token can create tunnels and DNS records but NOT Cache Rules (403 Authentication error).
+- 15.11.2026: no Cache Rule needed: make the URLs cacheable at the origin. A tiny proxy on the VM holds one MediaMTX session, strips
+  ?session= from the playlists and sends segments `public, max-age=60`; Cloudflare's default cache keeps .mp4 by extension.
+- 15.11.2026: through cloudflared every request reaches the origin from 127.0.0.1, so MediaMTX's IP-bound sessions hold. Limit the
+  ingress by path, because 127.0.0.1 has extra MediaMTX permissions (api, pixel).
+- 15.11.2026: a freshly registered .org takes ~30 min until the registry delegates it; Cloudflare's own NS answer at once. Test meanwhile
+  with `curl --resolve host:443:<edge IP>` (in a bash script: zsh does not split "$R"). The Mac's resolver kept a negative answer longer.
+- 15.11.2026: a cached door can fail on its own: the player keeps the relay's direct door (hlsDirect) as the fallback after two failures.
+- 15.11.2026: never `git reset --hard` in a tree another worker shares; park your diff as a patch and `git checkout <your files>`.
