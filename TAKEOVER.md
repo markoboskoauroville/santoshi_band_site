@@ -153,3 +153,7 @@ Request word for word in momentaryupdates.md (15.11.2026). Only when /live/ is o
 studio.py `--go-live`, paired at /admin as "Mac Studio"). Viewers then get live/studio.js: hls.js ladder 1080/720/480/360, audio
 Q:160 S (default) / Q:80 S / Q:40 S / Q:160 M / Q:80 M / Q:40 M, Delay Normal (~10 s) / Low (~5 s), kept per viewer. The phone's
 relay route (via "relay", WebRTC) is unchanged. Test without going live: /live/?studio&stats. Open: the public port 2053 (Oracle ingress).
+
+**15.11.2026, audio fix (Sound Link stream):** /live/ player waits at least 400 ms (jitterBufferTarget on the WHEP tracks). The holes
+came from the Mac→phone leg (fixed in Manual Camera v216–v217 and Sound Link v7, see MANTRA_NDI LESSONS). Measured after: 716 s of
+1 kHz on the relay recording with 0 drops. Open: BlackHole 2ch device volume −18.8 dB, so the stream is ~19 dB quieter than the source.

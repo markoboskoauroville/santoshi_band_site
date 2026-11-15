@@ -50,3 +50,11 @@
   (hash-object + update-index), so their work was never committed under our name nor overwritten.
 - Six round buttons do not fit a 390 px phone at 56 px with 12 px gaps: under 440 px they are 48 px with 8 px gaps.
 - Players are tested in a headless Firefox (own profile, BiDi port 9333): a background tab in Marko's Firefox keeps the video paused.
+
+## 15.11.2026: audio drops on the live stream, measured (Sound Link → Pixel → relay → viewer)
+- Viewer leg in Firefox over the Mac's 4G SIM, audio-only WHEP probe + getStats: before, 1.5 % loss, 5.2 s concealed and 2.5 s
+  time-compressed in 168 s, click arrival std 43 ms, holes up to 0.6 s in the first 15 s (the browser's buffer starts near 100 ms and
+  the line delivered 11 to 85 packets a second). player.js now sets `receiver.jitterBufferTarget = 400` on both WHEP tracks
+  (Firefox 160 and Chrome take it; wrapped in try). After: 0.6–0.95 % loss, 1.5–1.9 s concealed, 0.4–0.5 s compressed, one or
+  three holes of 80–210 ms, all on the viewer's own line (the relay recording had none at the same seconds).
+- An audio-only WHEP client (one recvonly audio transceiver) costs about 3 MB for three minutes: measure audio that way on the SIM.
