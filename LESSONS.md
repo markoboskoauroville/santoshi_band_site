@@ -123,3 +123,10 @@
 - 15.11.2026: CHAT beside or below the picture: ui.js sets body.cw (page >= 900 px wide: panel docked right 360 px) or body.cn (panel below, 320 px) while the panel is open (MutationObserver on its `hidden`). In the home page's frame the iframe cannot grow itself: ui.js posts {sbChat:'wide'|'narrow'|'closed'} to the banner script (functions/_middleware.js) which sets the wrapper to 1080 px wide (video stays 720x405) or adds 320 px of height. Full screen is the whole document so the chat can sit beside; upright full screen closes the chat.
 - 15.11.2026: a tap on the picture TOGGLES the controls: only `click` on #hit (no pointerdown/touchstart handlers, they would show first and hide on the click); mouse moves are ignored for 1.2 s after a hide-by-tap; keys show.
 - 15.11.2026: test traps: `[aria-label=Volume]` also matches the drawer group, use `.ft[aria-label=Volume]`; in zsh loop over "a b c" with `${=a}`; measure the video with offsetWidth/offsetHeight (getBoundingClientRect includes the zoom transform).
+
+## 15.11.2026 (domain)
+
+- 15.11.2026: a Pages custom domain on the same Cloudflare account can be attached entirely from the deploy workflow (token already there): POST .../pages/projects/<p>/domains, then proxied CNAMEs on the zone; the local API file had no working token, so use the GitHub secret through a soft-failing workflow step.
+- 15.11.2026: www -> apex as a Host check in the Pages middleware needs no zone rule or extra token right; Response.redirect(url, 301) keeps path and query.
+- 15.11.2026: a fresh domain shows status "initializing/pending" for minutes while the certificate is issued; curl gives 000 until DNS and TLS are ready.
+- 15.11.2026: the admin Google sign-in needs the new origin added to the OAuth client; the room door's Origin check already uses the request's own origin, so it follows the domain.

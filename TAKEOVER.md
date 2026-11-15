@@ -203,3 +203,15 @@ Request word for word in momentaryupdates.md ("Let's switch everything to HLS ri
 - **Rule**: changes go ONLY into live/ (player.js, ui.js, index.html, studio.js, sbchat.js); never a control in the banner, the middleware or admin. Before every deploy verify EVERY importing page and take a screenshot of each (home desktop 1440x900, home phone 390x800, /live/ phone 390x800, the drawer open); report "applied in: home, /live/, admin camera view". Cache busters live in live/index.html (ui.js, player.js); the banner needs no buster because it loads /live/.
 - Controls: no hide button; appear on tap, click, mouse move or key, fade 5 s after the last. State per viewer: sb.vol, sb.muted, sb.zoom, sb.low. Caption strip: `#stage.ctl video` leaves 88 px for the buttons. Request word for word in momentaryupdates.md.
 - **Since the evening of 15.11.2026**: HLS only (top rendition locked, 30 s buffer, live edge 4 segments; no LOW DELAY, no WHEP in the viewer); round row: speaker (VOLUME + MUTE) | Zoom and move (ZOOM, PAN X, PAN Y, RESET, drag-to-pan) | CHAT | PiP | FULL SCREEN (frame) or EXIT (/live/); the picture never resizes; a tap on it toggles the controls; chat docks right (page >= 900 px) or below, and in the home frame the banner grows (postMessage, functions/_middleware.js). Audio finding: relay HLS audio is Opus, iPhone risk, AAC wanted from the relay/mixer (master's decision).
+
+## 15.11.2026: the domain santoshiband.org
+
+Request word for word in momentaryupdates.md. Registered on Cloudflare Registrar the same day (same account as the Pages project).
+- **Attached by the workflow**, not by hand: tools/domains.py runs after provision.py (soft-fail, idempotent). It POSTs santoshiband.org and
+  www.santoshiband.org to /accounts/{id}/pages/projects/santoshi-band/domains and makes proxied CNAME records (@ and www -> santoshi-band.pages.dev)
+  when the zone has none. The deploy token (GitHub secret) has the Pages and DNS rights; the local ~/Downloads/API/Cloudflare.api.txt has no usable token.
+  It never touches other records ("live" is another worker's tunnel; ples-duse.org is another zone).
+- **www -> apex**: 301 in functions/_middleware.js by Host (keeps path and query). Chosen over a zone Redirect Rule because it needs no extra token right and lives in git.
+- **Canonical / og:url / sitemap / robots / JSON-LD** = https://santoshiband.org (tools/seo.py SITE, index.html, live/closed/index.html).
+  santoshi-band.pages.dev still serves the same site, NOT redirected (Marko is asked first). Functional calls stay relative; cam.js's pairing QR still names pages.dev.
+- **Needs once from Marko**: https://santoshiband.org (and www) as Authorised JavaScript origins of the Google client "Mantra pages" (project mantra-login-513105), or sign-in on the new domain fails. /admin works on pages.dev meanwhile.
