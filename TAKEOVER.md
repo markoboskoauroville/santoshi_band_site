@@ -124,3 +124,18 @@ viewer-hour, so ~5000 viewer-hours); the VM's 2 OCPU carry MediaMTX easily (13 %
 Drive upload caveat (15.11.2026 00:47): the VM's rclone uses rclone's public Google client, whose GLOBAL per-minute quota was exhausted
 (403 "Queries per minute", project 202264815644), so uploads lag; pieces wait on the VM 7 days and the uploader retries. The cure is an
 own OAuth client (Desktop app) for rclone in Marko's Google Cloud project, then `rclone config reconnect gdrive:` on the VM (his consent).
+
+## 15.11.2026: /live/ full view (sound overlay, round buttons, exit) and /live/closed/
+
+Request word for word in momentaryupdates.md (15.11.2026). Only when /live/ is opened by itself; inside the banner's iframe nothing changed (sbctl.js).
+- **live/ui.js** (full view only, `window.top === window`): big round TAP FOR SOUND in the centre (the whole layer is the tap target; the page always starts muted),
+  then a row of round 56 px buttons at the bottom inside env(safe-area-inset-*): Chat (opens sbchat.js's panel, its own CHAT button is hidden, red dot mirrored),
+  Small window (requestPictureInPicture, Safari webkitSetPresentationMode, else the corner fallback `body.mini`, tap the small picture to enlarge), Sound on/off
+  (always reversible), Hide, Exit. Auto-hide after 4 s; a tap/click on the picture (#hit) shows them again and never touches the sound. Keys: M sound, C chat, Esc
+  (closes chat first, else hides/shows the buttons). The Speechify keys script is NOT on /live/ (no text to read, and Esc/Space stay ours).
+- **player.js** hooks: `window.sbPlayer {video, setMuted, embedded}`, event `sb-sound-blocked` (browser refused sound after a reconnect: the centre overlay returns);
+  nothing live in full view → `location.replace('/live/closed/')`.
+- **/live/closed/**: lifestyle picture (the band asleep in a living room, Gemini on chromium-vm, refs = the seven approved portraits img/band, one person each),
+  centre round button: RESTART THE STREAM → /live/ when /api/live says live, else "Not live right now" and BACK TO THE SITE → /. Polls /api/live every 15 s.
+  Pictures: live/closed/sleep-landscape.jpg and sleep-portrait.jpg (<picture> by orientation). noindex,follow (a transient state page), og tags set.
+- Tested in Firefox (BiDi, :9223) 15.11.2026: overlay centre = viewport centre to the pixel; tap unmutes; bar appears, hides, returns on a tap; mute both ways; chat opens; PiP button; exit → closed; restart → /live/.

@@ -36,3 +36,10 @@
   and use 64 MB chunks, or the uploads crawl at ~3 Mbit/s.
 - 15.11.2026: sbctl's sound button toggles "&muted" in the iframe's src, so the relay's view URL carries another parameter first
   (/live/?p=santoshi&muted): "?muted" alone would never be removed.
+
+## 15.11.2026 (live full view)
+
+- 15.11.2026: `firefoxctl click` is a JS click, not a pointer event: a "tap to show" layer must listen to `click` as well as `pointerdown`, or the test (and keyboard-synthesised clicks) never reach it.
+- 15.11.2026: sbchat.js can drive a player that has no sbctl bar: `SBChat(wrap)` appends its own CHAT button to the wrap (hide it with CSS) and returns `{conn, show}`, so another control row can open the panel.
+- 15.11.2026: a full-view page and its own iframe use the same file: branch on `window.top !== window` before adding UI, so the banner's embedded copy is unchanged.
+- 15.11.2026: Gemini worker with seven single-person portrait refs and "exactly seven people" in the prompt gave seven sleepers first time, 64 s; it lays the djembe on its side when the prompt says "leaning on it": say "sitting behind it, upright, between his knees" next time.
