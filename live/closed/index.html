@@ -24,6 +24,7 @@ html,body{margin:0;height:100%;background:#1d130d;color:var(--ink);font:20px/1.4
 body{background:radial-gradient(900px 600px at 50% 40%,#3a2616,#1d130d)}
 picture,img{position:fixed;inset:0;width:100%;height:100%;display:block}
 img{object-fit:cover;object-position:center}
+@media (orientation:portrait){picture,img{bottom:auto;height:34vh}img{object-fit:contain}h1{top:calc(50% - 142px)}}   /* a phone held upright: the whole room above the button, nothing cropped */
 .shade{position:fixed;inset:0;background:radial-gradient(closest-side at 50% 50%,rgba(15,9,5,.55),rgba(15,9,5,.15) 70%),linear-gradient(rgba(15,9,5,.35),rgba(15,9,5,0) 30%,rgba(15,9,5,0) 70%,rgba(15,9,5,.45))}
 main{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
 h1{position:absolute;left:16px;right:16px;top:calc(50% - 178px);margin:0;text-align:center;font:700 clamp(22px,5.5vw,38px)/1.1 "Cinzel",serif;letter-spacing:.14em;text-transform:uppercase;text-shadow:0 2px 14px #000,0 0 3px #000}
@@ -41,7 +42,7 @@ h1{position:absolute;left:16px;right:16px;top:calc(50% - 178px);margin:0;text-al
 @media (max-height:480px){h1{top:calc(50% - 142px);font-size:20px}#go{width:150px;height:150px}#sub{top:calc(50% + 90px)}}
 </style></head>
 <body>
-<picture><source media="(orientation:portrait)" srcset="sleep-portrait.jpg"><img src="sleep-landscape.jpg" alt="The seven members of the Santoshi Band fast asleep in a living room with their instruments" onerror="this.remove()"></picture>
+<picture><img src="sleep-landscape.jpg" alt="The seven members of the Santoshi Band fast asleep in a living room with their instruments" onerror="this.remove()"></picture>
 <div class="shade"></div>
 <main>
 <h1 id="h">Stream closed</h1>
