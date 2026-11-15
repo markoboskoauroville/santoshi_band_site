@@ -27,13 +27,20 @@
   function mk(id, icon, label) {
     var b = document.createElement('button'); b.type = 'button'; b.className = 'rb'; b.id = id; b.title = label; b.setAttribute('aria-label', label); b.innerHTML = svg(icon); bar.appendChild(b); return b;
   }
-  var bChat = mk('b-chat', 'chat', 'Chat'), bPip = mk('b-pip', 'pip', 'Small window'), bMute = mk('b-mute', 'snd', 'Mute'), bHide = mk('b-hide', 'hide', 'Hide the buttons'), bExit = mk('b-exit', 'exit', 'Exit');
+  var bChat = mk('b-chat', 'chat', 'Chat'), bPip = mk('b-pip', 'pip', 'Small window'), bMute = mk('b-mute', 'snd', 'Mute'), bHide = mk('b-hide', 'hide', 'Hide everything'), bExit = mk('b-exit', 'exit', 'Exit');
   bChat.appendChild(document.createElement('i'));
   stage.appendChild(bar);
 
   var timer = null, entered = false;
   function showBar() { if (!entered) return; bar.classList.remove('off'); clearTimeout(timer); timer = setTimeout(hideBar, 4000); }
   function hideBar() { clearTimeout(timer); bar.classList.add('off'); if (bar.contains(document.activeElement)) document.activeElement.blur(); }
+  // CLEAN (Marko, 15.11.2026): the Hide button removes EVERYTHING drawn over the picture (round buttons, chat panel, watching badge, studio menu,
+  // stats); a tap/click on the picture or any key brings it back. Pure CSS: body.clean hides them, nothing is removed from the page.
+  function clean(on) {
+    if (on === body.classList.contains('clean')) return;
+    if (on) { if (chat && chatOpen()) chat.show(false); var g = document.getElementById('gm'); if (g) g.hidden = true; clearTimeout(timer); if (document.activeElement && document.activeElement !== body) document.activeElement.blur(); bar.classList.add('off'); }
+    body.classList.toggle('clean', on);
+  }
   function chatOpen() { var p = document.querySelector('.sbc'); return !!p && !p.hidden; }
 
   // sound state on the button
@@ -50,11 +57,12 @@
   }
   ov.addEventListener('click', enter);
   // the browser refused sound later (a reconnect): ask again in the middle
-  window.addEventListener('sb-sound-blocked', function () { ov.hidden = false; ov.classList.remove('gone'); entered = false; hideBar(); syncMute(); });
+  window.addEventListener('sb-sound-blocked', function () { clean(false); ov.hidden = false; ov.classList.remove('gone'); entered = false; hideBar(); syncMute(); });
 
   bMute.onclick = function () { setSound(v.muted); showBar(); };
-  bHide.onclick = hideBar;
-  hit.addEventListener('pointerdown', function () { showBar(); }); hit.addEventListener('click', function () { showBar(); });   // brings the buttons back; never touches the sound
+  bHide.onclick = function () { clean(true); };
+  function tapPicture() { clean(false); showBar(); }
+  hit.addEventListener('pointerdown', tapPicture); hit.addEventListener('click', tapPicture);   // brings the buttons back; never touches the sound
   bar.addEventListener('pointerdown', function () { clearTimeout(timer); });
   bar.addEventListener('pointerup', showBar);
   bar.addEventListener('focusin', function () { clearTimeout(timer); });
@@ -104,6 +112,7 @@
   // 6. keys (not while typing in the chat; Speechify's keys are not loaded on this page, so Space and the arrows stay free)
   document.addEventListener('keydown', function (e) {
     if (e.ctrlKey || e.metaKey || e.altKey) return;
+    if (body.classList.contains('clean')) { if (/^(Shift|Control|Alt|Meta|CapsLock)$/.test(e.key)) return; clean(false); showBar(); e.stopPropagation(); e.preventDefault(); return; }
     var t = e.target, typing = t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable);
     if (e.key === 'Escape') { if (typing || chatOpen() || ov.hidden === false) return; if (body.classList.contains('mini')) mini(false); else if (bar.classList.contains('off')) showBar(); else hideBar(); return; }
     if (typing) return;

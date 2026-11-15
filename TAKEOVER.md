@@ -168,3 +168,6 @@ Proof: see the commit message / SESSIONS of 15.11.2026.
 
 ## 15.11.2026: admin opens on LIVE
 admin/index.html only: tabs LIVE | PICTURES, LIVE pane first and selected after sign-in; pair button, ?band=1 seat unchanged; live.js?v=9.
+
+## 15.11.2026: Hide removes every overlay on /live/
+Request word for word in momentaryupdates.md (15.11.2026). live/ui.js clean(): the Hide button puts `body.clean` (closes chat and studio menu first); CSS in live/index.html hides bar, studio menu, chat panel, watching badge, stats, mini hint. Tap on the picture, any key or Esc brings it back (then the normal 4 s auto-hide). ui.js?v=3. Verified in headless Chrome on a local copy (hide → nothing over the picture, click/key/Esc restore, no console errors).

@@ -39,7 +39,8 @@ body.top #msg{top:calc(50% + 124px);transform:none}
 /* small window fallback: the picture shrinks into the corner, a tap makes it big again */
 body.mini video{inset:auto;right:calc(12px + env(safe-area-inset-right));bottom:calc(12px + env(safe-area-inset-bottom));width:min(46vw,360px);height:auto;aspect-ratio:16/9;border-radius:12px;border:1px solid var(--amber);z-index:6;cursor:pointer;box-shadow:0 6px 24px #000c}
 body.mini #bar,body.mini #ov{display:none}
+body.clean #bar,body.clean #gm,body.clean .sbc,body.clean .sbc-badge,body.clean #st,body.clean #minihint,body.clean #stage>.b{display:none!important}
 #minihint{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;padding:0 24px;color:#a39a8a;font-size:15px}
 </style></head>
 <body><div id="stage"><video id="v" playsinline autoplay></video><div id="msg">Connecting to the stream…</div><button id="snd" hidden>Tap for sound</button><div id="st" hidden></div></div>
-<script src="/live/studio.js?v=1"></script><script src="/live/player.js?v=4"></script><script src="/live/ui.js?v=2"></script></body></html>
+<script src="/live/studio.js?v=1"></script><script src="/live/player.js?v=4"></script><script src="/live/ui.js?v=3"></script></body></html>

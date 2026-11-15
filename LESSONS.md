@@ -67,3 +67,9 @@
 - Test a count with two `new WebSocket('wss://…/api/room?vid=x', {headers:{origin:…}})` in node 24 (no browser needed).
 
 - 15.11.2026: /admin opens on LIVE (Marko: live is used more often). Tab buttons LIVE, PICTURES; p2 (LIVE) is before p1 and has class "on"; tab() in live.js is id-based so order needs no JS change. Sign out lives inside the LIVE pane.
+
+## 15.11.2026: Hide on /live/ hides everything
+- 15.11.2026: Hide used to hide only the round bar (the chat panel, "N watching" badge and studio menu stayed). It now sets `body.clean` (ui.js clean()), and one CSS rule in live/index.html hides #bar, #gm, .sbc, .sbc-badge, #st, #minihint. A tap/click on the picture (#hit), any key, or Esc removes it; the 4 s auto-hide is unchanged; the TAP FOR SOUND overlay (#ov) is untouched and `sb-sound-blocked` clears clean.
+- 15.11.2026: a new overlay added later must be added to that one CSS rule, or Hide will leave it behind.
+- 15.11.2026: the open chat panel (up to 380 px, fixed) covers the round bar on a phone, so Hide cannot be tapped while chat is open (close it with its ✕ first); clean() also closes the chat.
+- 15.11.2026: test a local /live/ in headless Chrome with python3 http.server plus a tiny handler answering /api/live with {"live":true,"relay":{...}} and ?force; drive it over CDP (Input.dispatchMouseEvent / dispatchKeyEvent), read computed styles.
