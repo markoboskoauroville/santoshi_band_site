@@ -174,3 +174,6 @@ Request word for word in momentaryupdates.md (15.11.2026). live/ui.js clean(): t
 
 ## 15.11.2026: sound bar on /live/
 Request word for word in momentaryupdates.md (15.11.2026). live/ui.js: #vol with MUTE/UNMUTE (44 px) and a volume slider (44 px) above the round buttons, shown with them on a tap, gone with the 4 s auto-hide and Hide; volume and mute remembered per viewer (sb.vol, sb.muted). ui.js?v=4. Verified in headless Chrome on a local copy.
+
+## 15.11.2026: one sound drawer on /live/
+Request word for word in momentaryupdates.md (15.11.2026, "One drawer please"). live/ui.js: the speaker (b-mute) is the first round button; its drawer #sd holds vertical VOLUME and ZOOM faders and MUTE. The separate bottom sound bar is gone. Zoom is CSS scale on the video (sb.zoom). ui.js?v=6. Verified in headless Chrome at 390x800 with real pointer input; screenshot with the drawer open checked by eye.

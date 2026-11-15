@@ -35,20 +35,30 @@ body.top #msg{top:calc(50% + 124px);transform:none}
 .rb i{position:absolute;top:4px;right:4px;width:12px;height:12px;border-radius:50%;background:#ff4d3d;border:2px solid #0B0D10;display:none}.rb.new i{display:block}
 #stage>.b.ch{display:none}
 .sbc-badge{top:calc(8px + env(safe-area-inset-top))!important;left:calc(8px + env(safe-area-inset-left))!important}
-#vol{position:absolute;z-index:4;left:50%;transform:translateX(-50%);bottom:calc(16px + 56px + 12px + env(safe-area-inset-bottom));width:min(380px,calc(100% - 32px - env(safe-area-inset-left) - env(safe-area-inset-right)));min-height:52px;box-sizing:border-box;display:flex;align-items:center;gap:12px;padding:4px 14px 4px 4px;border-radius:30px;border:1px solid var(--edge);background:var(--disc);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 2px 10px rgba(0,0,0,.45);transition:opacity .3s,visibility 0s}
-#vol.off{opacity:0;visibility:hidden;pointer-events:none;transition:opacity .3s,visibility 0s .3s}
-#stage:has(#gm:not([hidden])) #vol{display:none}
-.vm{flex:none;min-width:44px;height:44px;border-radius:24px;border:1px solid var(--edge);background:rgba(255,255,255,.08);color:#fff;display:flex;align-items:center;justify-content:center;gap:6px;padding:0 14px 0 10px;cursor:pointer;font:700 12px system-ui,sans-serif;letter-spacing:.1em}
+/* the ONE sound drawer: the speaker is the first round button, the drawer slides UP from it */
+.sw{position:relative;flex:none}
+#sd{position:absolute;left:0;bottom:calc(100% + 12px);z-index:5;display:flex;flex-direction:column;align-items:center;gap:10px;padding:12px 12px 10px;border-radius:28px;border:1px solid var(--edge);background:var(--disc);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 2px 14px rgba(0,0,0,.55);animation:sdup .22s ease-out;max-width:calc(100vw - 32px);box-sizing:border-box}
+@keyframes sdup{from{opacity:0;transform:translateY(14px) scaleY(.85)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){#sd{animation:none}}
+#sd .fr{display:flex;gap:14px}
+.fc{display:flex;flex-direction:column;align-items:center;gap:6px;width:64px}
+.fv{font:700 12px system-ui,sans-serif;color:var(--fg);height:16px}.fl{font:700 10px system-ui,sans-serif;letter-spacing:.12em;color:#a39a8a}
+.ft{position:relative;width:44px;height:clamp(110px,calc(100vh - 330px),180px);border-radius:22px;background:rgba(255,255,255,.14);border:1px solid var(--edge);cursor:pointer;touch-action:none;outline:none}
+.ft i{position:absolute;left:0;right:0;bottom:0;border-radius:0 0 22px 22px;background:var(--amber);opacity:.85;pointer-events:none}
+.ft b{position:absolute;left:50%;width:30px;height:18px;margin-left:-15px;border-radius:9px;background:#fff;box-shadow:0 1px 4px #000a;pointer-events:none}
+.ft:focus-visible{border-color:var(--amber);box-shadow:0 0 0 2px var(--amber)}
+.vm{flex:none;width:100%;min-width:44px;height:44px;border-radius:24px;border:1px solid var(--edge);background:rgba(255,255,255,.08);color:#fff;display:flex;align-items:center;justify-content:center;gap:6px;padding:0 14px 0 10px;cursor:pointer;font:700 12px system-ui,sans-serif;letter-spacing:.1em}
 .vm svg{width:22px;height:22px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .vm:hover,.vm:focus-visible{border-color:var(--amber);outline:none}
-#vb-range{flex:1;min-width:0;height:44px;margin:0;accent-color:var(--amber);cursor:pointer;background:transparent}
-@media (max-width:440px){#vol{bottom:calc(16px + 48px + 12px + env(safe-area-inset-bottom))}}
+.rb.open{border-color:var(--amber)}
+video{transform:scale(var(--z,1));transform-origin:50% 50%}
 @media (max-width:380px){#bar{gap:8px}}
 /* small window fallback: the picture shrinks into the corner, a tap makes it big again */
 body.mini video{inset:auto;right:calc(12px + env(safe-area-inset-right));bottom:calc(12px + env(safe-area-inset-bottom));width:min(46vw,360px);height:auto;aspect-ratio:16/9;border-radius:12px;border:1px solid var(--amber);z-index:6;cursor:pointer;box-shadow:0 6px 24px #000c}
-body.mini #bar,body.mini #vol,body.mini #ov{display:none}
-body.clean #vol,body.clean #bar,body.clean #gm,body.clean .sbc,body.clean .sbc-badge,body.clean #st,body.clean #minihint,body.clean #stage>.b{display:none!important}
+body.mini #bar,body.mini #ov{display:none}
+body.mini video{transform:none}
+body.clean #bar,body.clean #gm,body.clean .sbc,body.clean .sbc-badge,body.clean #st,body.clean #minihint,body.clean #stage>.b{display:none!important}
 #minihint{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;padding:0 24px;color:#a39a8a;font-size:15px}
 </style></head>
 <body><div id="stage"><video id="v" playsinline autoplay></video><div id="msg">Connecting to the stream…</div><button id="snd" hidden>Tap for sound</button><div id="st" hidden></div></div>
-<script src="/live/studio.js?v=1"></script><script src="/live/player.js?v=5"></script><script src="/live/ui.js?v=4"></script></body></html>
+<script src="/live/studio.js?v=1"></script><script src="/live/player.js?v=5"></script><script src="/live/ui.js?v=6"></script></body></html>
