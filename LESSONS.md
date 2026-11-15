@@ -150,3 +150,8 @@
   with `curl --resolve host:443:<edge IP>` (in a bash script: zsh does not split "$R"). The Mac's resolver kept a negative answer longer.
 - 15.11.2026: a cached door can fail on its own: the player keeps the relay's direct door (hlsDirect) as the fallback after two failures.
 - 15.11.2026: never `git reset --hard` in a tree another worker shares; park your diff as a patch and `git checkout <your files>`.
+
+## 15.11.2026: a commit left unpushed in the shared clone ships with someone else's push
+d8905c7 (live.js, needed the relay config first) sat unpushed on local main; another worker's `pull --rebase` + push sent it live
+before the VM was ready, and the master had to revert it. A site change that must wait is kept as a patch (git format-patch) and
+committed in a temporary worktree at its push moment, then pushed at once.

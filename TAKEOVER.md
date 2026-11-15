@@ -246,3 +246,10 @@ Removed by his explicit word (stay out): the OVERLAY/Hide button, LOW DELAY/WebR
   reasons: repo vm-chromium santoshi-relay/hls-tunnel (TAKEOVER there). Only /santoshi/*.m3u8|mp4 pass; everything else 404.
 - The /hls/ Pages Function of the morning (functions/hls/[[path]].js) stays unused; viewers never go through it (the 100k/day limit).
 - OPEN: the HIT proof (two clients, same segment, second `cf-cache-status: HIT`) at the next live on santoshi.
+
+## 15.11.2026: mixer only on the relay (Marko: "Yes, mixer only (Recommended)")
+- /api/live gives a paired camera (via "relay") the WHIP door of its OWN relay path `cam-<first 10 hex of its token hash>` (camPath in
+  functions/api/live.js), never `santoshi`; KV relay:campath is no longer read. The relay lets the camera key publish only on cam-*;
+  the CLOUD MIXER on chromium-vm (cloud-mixer-live) fades to the camera and is the only publisher on `santoshi`, so every viewer gets
+  H.264 + AAC. GO LIVE / STOP, the chat clearing and the viewers' count are unchanged. Not live: the relay block's hls is the
+  Cloudflare door (hlsCdn). Commits 897201d (after an early ship d8905c7 and its revert 86c599c), 5c15258.
