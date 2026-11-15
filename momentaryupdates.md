@@ -61,3 +61,15 @@ Marko, word for word: "The lifestyle image is great when we are sleeping. Let it
 
 ## 15.11.2026, one shared player module, always (Marko, word for word, as relayed)
 "Always we use shared players in the same website. Always. Never different. ... We work with modules. If module is there, you just plug it everywhere, it's always the same."
+
+## 15.11.2026, HLS only, no low delay; pan and zoom button (Marko, word for word)
+"Please downgrade the player. I don't want to have low delay mode. Only HLS and high quality, nothing real time. This is not real time thing. and also by, I don't know who ordered this, I didn't, there is a zoom control in the volume. Okay, let it be there. Then there must be also the pan control for X and Y axis. and then this get separate button, it looks like circle with four squares each looking a different direction and then when user clicks there he can zoom pan left and right"
+
+## 15.11.2026, the picture must not squeeze on hover (Marko, word for word)
+"There is another annoying behavior. When I roll over the image, it squeezes. It becomes smaller and then I can detach it. Who asked for that? I don't need that. I have the touch button, that's enough for me."
+
+## 15.11.2026, chat beside the picture like YouTube (Marko, word for word)
+"When I press on the chat icon, strange thing happen, the chat is opening at top of the stream itself, hiding the image. That's total disaster. What needs to be happening, same is on YouTube. There will be a chat window attached to the right side of the picture, the stream."
+
+## 15.11.2026, a tap on the picture toggles the controls (Marko, word for word)
+"So we have controls which are hiding after 5 seconds, but user can press click it, image, controls showing. Clicking again, immediately they are hiding."
