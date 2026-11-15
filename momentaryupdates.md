@@ -22,3 +22,6 @@
 
 ## 15.11.2026, test stream from the VM, then the Mac with the Sony (Marko, word for word)
 "https://www.youtube.com/channel/UCBULR-vqvM3nxHP94KXLL5A Please use this channel videos for next text stream. Test stream. Test stream from virtual machine. Please stream this through virtual machine and through our Mantoshi page for next ten minutes. And then turn off the stream from the virtual machine, and stream from my Mac machine with Sony camera for next three point three minutes."
+
+## 15.11.2026, Sony stream with the Mac's sound over Sound Link (Marko, word for word)
+"Now, let's stream from my Sony camera my web page Santoshi with the sound from Mac, with the SoundLink."
