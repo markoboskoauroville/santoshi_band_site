@@ -49,3 +49,6 @@ Marko, word for word: "The lifestyle image is great when we are sleeping. Let it
 
 ## 15.11.2026, sound volume and mute on tap (Marko, word for word)
 "Please update my Video Ninja in my santoshi-band.pages.dev, that when user clicks on the image, sound opens the sound volume and mute at the bottom, so user can also regulate the sound volume."
+
+## 15.11.2026, everything to HLS (Marko, word for word)
+"Let's switch everything to HLS right now."
