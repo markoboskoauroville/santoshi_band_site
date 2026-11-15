@@ -157,3 +157,6 @@ relay route (via "relay", WebRTC) is unchanged. Test without going live: /live/?
 **15.11.2026, audio fix (Sound Link stream):** /live/ player waits at least 400 ms (jitterBufferTarget on the WHEP tracks). The holes
 came from the Mac→phone leg (fixed in Manual Camera v216–v217 and Sound Link v7, see MANTRA_NDI LESSONS). Measured after: 716 s of
 1 kHz on the relay recording with 0 drops. Open: BlackHole 2ch device volume −18.8 dB, so the stream is ~19 dB quieter than the source.
+- 15.11.2026 ~05:25: KV **relay:campath** (functions/api/live.js): when set (e.g. "pixel"), a camera's GO returns the WHIP door of
+  that relay path instead of santoshi; CLOUD MIXER reads it and publishes the program (text over the picture) on santoshi.
+  Set to "pixel" with expiry 15.11.2026 13:00 UTC; without the key nothing changes.
