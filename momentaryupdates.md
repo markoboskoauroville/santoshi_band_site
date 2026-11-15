@@ -43,3 +43,6 @@ Marko, word for word: "The lifestyle image is great when we are sleeping. Let it
 
 ## 15.11.2026, admin opens on LIVE (Marko, word for word)
 "please fix my admin page. It's a bit annoying that this picture gallery hidden one is coming first. We're doing live more often. Let Live be the first thing inside the my admin page"
+
+## 15.11.2026, overlay button must remove all overlays (Marko, word for word)
+"Also, please fix nonsense. I have overlay button in my user interface in my stream on my Santoshi Band page, correct? And then when I disable it, overlay button stays. That's nonsense. I want to remove overlays. So when I press overlay, everything disappears and when I click on the image, overlay appears. That's the thing."
