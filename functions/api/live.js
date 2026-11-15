@@ -7,6 +7,8 @@ import { json, readSession, readCamera, getLive, newLive, viewUrl, pushUrl, rela
 // Since 15.11.2026 also via "studio": the Mac (studio.py, paired like a camera) sends ONE master to chromium-vm, the VM builds the
 // quality ladder (HLS 1080/720/480/360, audio Q:160/80/40 S/M) and /live/ plays it with the gear (live/studio.js).
 // One publisher per id: while a camera is live the admin page gets no push address (a second publisher on the same id would fight).
+// a paired camera's private relay path: stable per camera (its token hash), not secret (10 hex of a sha256 say nothing about the token)
+const camPath = (cam) => "cam-" + String(cam.hash || "").slice(0, 10);
 const room = (env, body) => env.ROOM ? env.ROOM.fetch("https://room/state", { method: "POST", body: JSON.stringify(body) }).then((r) => r.ok).catch(() => false) : Promise.resolve(false);
 const count = (env) => env.ROOM ? env.ROOM.fetch("https://room/count").then((r) => r.json()).then((j) => j.viewers).catch(() => null) : Promise.resolve(null);
 export async function onRequest({ request, env }) {
@@ -65,11 +67,12 @@ export async function onRequest({ request, env }) {
   // the push address goes to the camera (bearer) and to the browser that owns a browser live; never to the admin page while a camera publishes
   if (cam || source === "browser") { out.push = pushUrl(l); out.id = l.id; out.password = l.pw; }
   // the relay's publish door and key: only to a paired camera, only server side here (Pages secret RELAY_KEY)
-  // 15.11.2026 (CLOUD MIXER): KV "relay:campath" (e.g. "pixel") sends the camera's WHIP to that relay path instead of "santoshi", so the
-  // VM's mixer reads the camera there and publishes the mixed program (text over the picture) on "santoshi", which the viewers watch.
+  // 15.11.2026 "mixer only" (Marko: "Yes, mixer only"): a camera NEVER gets the santoshi door. Its WHIP goes to its own private relay path
+  // cam-<first 10 hex of its token hash> (MediaMTX lets the camera user publish only on cam-*); the CLOUD MIXER on the VM
+  // (cloud_mixer/live_program.py --auto) reads it, fades to it and is the only publisher on "santoshi", which the viewers watch (H.264 + AAC).
+  // KV relay:campath (the morning's hand-set path) is no longer read.
   if (cam && l.via === "relay") {
-    const u = relayUrls(env), p = (await env.KV.get("relay:campath")) || "";
-    out.whip = /^[a-z0-9_-]{1,32}$/.test(p) && p !== "santoshi" ? u.whip.replace(/\/santoshi\/whip$/, "/" + p + "/whip") : u.whip;
+    out.whip = relayUrls(env).whip.replace(/\/santoshi\/whip$/, "/" + camPath(cam) + "/whip");
     out.whipUser = "santoshi"; out.whipKey = env.RELAY_KEY;
   }
   if (action === "status") out.viewers = await count(env);
