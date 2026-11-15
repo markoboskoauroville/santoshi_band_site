@@ -147,3 +147,9 @@ Request word for word in momentaryupdates.md (15.11.2026). Only when /live/ is o
   starts and back when it ends. Revoke on /admin > LIVE when it is not needed any more.
 - First use: the noon test stream of 15.11.2026 (12:00 CET), the Navaratri concert of 17.10.2026 (Češki narodni dom) with
   the 21.11.2026 poster between songs. Request word for word in momentaryupdates.md.
+
+## 15.11.2026: the Studio route on /live/
+`/api/live` always returns `studio.hls` (RELAY_HOST + ":2053/studio/master.m3u8"); a paired camera may GO with `via:"studio"` (the Mac's
+studio.py `--go-live`, paired at /admin as "Mac Studio"). Viewers then get live/studio.js: hls.js ladder 1080/720/480/360, audio
+Q:160 S (default) / Q:80 S / Q:40 S / Q:160 M / Q:80 M / Q:40 M, Delay Normal (~10 s) / Low (~5 s), kept per viewer. The phone's
+relay route (via "relay", WebRTC) is unchanged. Test without going live: /live/?studio&stats. Open: the public port 2053 (Oracle ingress).

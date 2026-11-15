@@ -43,3 +43,10 @@
 - 15.11.2026: sbchat.js can drive a player that has no sbctl bar: `SBChat(wrap)` appends its own CHAT button to the wrap (hide it with CSS) and returns `{conn, show}`, so another control row can open the panel.
 - 15.11.2026: a full-view page and its own iframe use the same file: branch on `window.top !== window` before adding UI, so the banner's embedded copy is unchanged.
 - 15.11.2026: Gemini worker with seven single-person portrait refs and "exactly seven people" in the prompt gave seven sleepers first time, 64 s; it lays the djembe on its side when the prompt says "leaning on it": say "sitting behind it, upright, between his knees" next time.
+
+## 15.11.2026: the Studio gear
+- live/studio.js owns the Studio HLS (hls.js 1.5.13) and the ⚙ round button; player.js only hands over when /api/live says via "studio"
+  (or ?studio for tests). Another worker's uncommitted player.js change was left in the working tree: only our hunks were staged
+  (hash-object + update-index), so their work was never committed under our name nor overwritten.
+- Six round buttons do not fit a 390 px phone at 56 px with 12 px gaps: under 440 px they are 48 px with 8 px gaps.
+- Players are tested in a headless Firefox (own profile, BiDi port 9333): a background tab in Marko's Firefox keeps the video paused.
