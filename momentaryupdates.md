@@ -19,3 +19,6 @@
 
 "absolutely, my phone will not handle all these streams. I just want to send one stream, and then it is relayed somewhere ... we need to have something which works: one stream to somewhere"
 "yes, Frankfurt delay, without YouTube branding, please"
+
+## 15.11.2026, test stream from the VM, then the Mac with the Sony (Marko, word for word)
+"https://www.youtube.com/channel/UCBULR-vqvM3nxHP94KXLL5A Please use this channel videos for next text stream. Test stream. Test stream from virtual machine. Please stream this through virtual machine and through our Mantoshi page for next ten minutes. And then turn off the stream from the virtual machine, and stream from my Mac machine with Sony camera for next three point three minutes."
