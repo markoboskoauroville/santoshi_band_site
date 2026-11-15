@@ -54,7 +54,7 @@
 
   bMute.onclick = function () { setSound(v.muted); showBar(); };
   bHide.onclick = hideBar;
-  hit.addEventListener('pointerdown', function () { showBar(); });   // brings the buttons back; never touches the sound
+  hit.addEventListener('pointerdown', function () { showBar(); }); hit.addEventListener('click', function () { showBar(); });   // brings the buttons back; never touches the sound
   bar.addEventListener('pointerdown', function () { clearTimeout(timer); });
   bar.addEventListener('pointerup', showBar);
   bar.addEventListener('focusin', function () { clearTimeout(timer); });
