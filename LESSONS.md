@@ -86,3 +86,24 @@
 - 15.11.2026: faders are div role=slider on pointer events with setPointerCapture (44 px wide, 110 to 180 px tall by viewport height, arrow keys work), not `<input type=range>` rotated: vertical range inputs differ per browser. localStorage sb.vol / sb.muted / sb.zoom, all in try/catch. iOS (video.volume ignored, read back after setting 0.5) gets no volume fader; MUTE and zoom stay.
 - 15.11.2026: the LOW DELAY pill belongs to player.js (#lowd, top right), written by another worker the same hour; my first sound bar had a LOW DELAY button of the same worker inside it, which went when the bar went. Two workers on live/ui.js: the other's uncommitted hunks disappeared from the working tree between two of my edits (they were committed under player.js only). Always `git status`/`git diff HEAD` right before editing a shared file, and re-run the edit script against the new HEAD.
 - 15.11.2026: a local test with the new HLS-default player.js cannot unmute (no real media: play() fails, sb-sound-blocked re-shows TAP FOR SOUND); the test replaces `sbPlayer.setMuted` with a plain `v.muted=` to exercise the drawer.
+
+## 15.11.2026: HLS for everyone, and why Cloudflare cannot simply cache MediaMTX
+- 15.11.2026: an open page only runs the code it loaded. To move open viewers to a new player without waiting for a reload, use what the
+  OLD code already does on its poll: the old player reloads to `j.view` when `j.via` is not relay/studio, so /api/live answers via "switch"
+  only to old pages (no `?c=` marker, Referer /live/). Guard against loops (a Referer still carrying &switch is never moved again).
+- 15.11.2026: a Pages Function CAN fetch https://relay.ples-duse.org:8888 (grey-cloud host, non-standard port): the port is not the problem.
+- 15.11.2026: MediaMTX HLS answers 302 cookieCheck, then gives every reader a session (?session=… on each URI, cookie hlsSession), and a
+  session is BOUND TO THE CLIENT IP: the same session id from another address answers 401 (tested: VM localhost with the Mac's session → 401).
+  Cloudflare Worker subrequests leave from changing addresses, so playlists work but segments 401. Do not "fix" it with trustedProxies +
+  X-Forwarded-For: any Cloudflare Worker could then claim 127.0.0.1, and 127.0.0.1 has the API permission without a password.
+- 15.11.2026: the clean doors: (a) a Cloudflare Tunnel (cloudflared on the VM, outbound only, no Oracle port), ingress limited by path to
+  ^/santoshi/[A-Za-z0-9_.-]+\.(m3u8|mp4)$ → https://localhost:8888, every request from one address; needs Marko's Cloudflare authorization
+  (cloudflared login, or a token with Tunnel + DNS edit). (b) a small reverse proxy on the VM on 2083/2087/2096, same path limit, needs an
+  Oracle ingress rule (Marko's approval). Then point RELAY_HLS for the Function at it.
+- 15.11.2026: LL-HLS through a Function is about 20 requests a second per viewer (2 playlists + 2 parts every 0.2 s); plain HLS with 2 s
+  segments is about 2. Every request, HIT or not, is a Function invocation (free plan: 100 000 a day ≈ 14 viewer-hours of plain HLS).
+  Serve plain HLS from the cache; LL stays possible straight from the relay.
+- 15.11.2026: a test headless Chrome with autoplay allowed played the concert out of Marko's speakers: always --mute-audio, kill it and
+  the local server at the end of the test, check with pgrep. Port 8765 is Queen's, not free for test servers.
+- 15.11.2026: two workers in one working tree: keep your UI in your own file (the LOW DELAY pill went into player.js, not ui.js), stage only
+  your hunks, `git pull --rebase` before every commit and push.

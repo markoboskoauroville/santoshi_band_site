@@ -177,3 +177,21 @@ Request word for word in momentaryupdates.md (15.11.2026). live/ui.js: #vol with
 
 ## 15.11.2026: one sound drawer on /live/
 Request word for word in momentaryupdates.md (15.11.2026, "One drawer please"). live/ui.js: the speaker (b-mute) is the first round button; its drawer #sd holds vertical VOLUME and ZOOM faders and MUTE. The separate bottom sound bar is gone. Zoom is CSS scale on the video (sb.zoom). ui.js?v=6. Verified in headless Chrome at 390x800 with real pointer input; screenshot with the drawer open checked by eye.
+
+## 15.11.2026: HLS for every viewer (step 1 live; the Cloudflare cache waits for a VM door)
+Request word for word in momentaryupdates.md ("Let's switch everything to HLS right now.").
+- **Player** (live/player.js v5): a relay live starts LL-HLS straight from the relay (:8888; hls.js 1.5.13, Safari's own player).
+  WHEP only as the fallback (HLS fatal error or no picture in 15 s; one try each way, then a restart from HLS in 3 s) or by choice:
+  the LOW DELAY pill top right in full view (shown and hidden with ui.js's #bar, gone with Hide/small window; sb.low) or `?low`.
+  The pill lives in player.js on purpose: the sound drawer is ui.js's. Events: `sb-mode` (hls/webrtc/studio), `sbPlayer.mode()/low()/setLow()`.
+- **Open pages switched on their next poll**: the new player asks `/api/live?c=hls`. A GET without `c` whose Referer is /live/ (the old
+  v4 player) gets via "switch" and view `/live/?p=santoshi&switch`; old code reloads to any non-relay view, so it lands on the new page.
+  `&switch` = keep the sound when the browser allows (else TAP FOR SOUND); a Referer that still carries &switch is never moved twice.
+  Seen on the relay: WebRTC sessions closed at 11:44:21 and 11:44:34 UTC, right after the run finished (11:44:29 UTC).
+- **/hls/* Function** (functions/hls/[[path]].js, deployed, NOT used by the player yet): relay HLS through caches.default, segments 60 s,
+  media playlists 1 s, index 10 s, playlists served as plain HLS (LL lines removed), _HLS_msn/_HLS_part passed uncached, ?session= removed,
+  one upstream fetch per file per isolate, header x-sb-cache HIT/MISS/PASS and x-sb-up (the relay's status codes on a miss).
+  Playlists work and HIT; **segments get 401**: MediaMTX binds an HLS session to the client IP and Cloudflare's subrequests leave from
+  changing IPs (x-sb-up "s200 401 s200 401"). Needs a door on the VM where every request reaches MediaMTX from ONE address, see LESSONS.
+  The player change for /hls/ (plain-HLS hls.js settings, `c=hls2`, /api/live hls → /hls/santoshi/index.m3u8) is kept as a patch,
+  not committed, until segments HIT.
