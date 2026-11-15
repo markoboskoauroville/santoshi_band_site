@@ -52,3 +52,6 @@ Marko, word for word: "The lifestyle image is great when we are sleeping. Let it
 
 ## 15.11.2026, everything to HLS (Marko, word for word)
 "Let's switch everything to HLS right now."
+
+## 15.11.2026, one sound drawer with volume and zoom (Marko, word for word)
+"You didn't understand me quite. Now I have another fader on my streaming page. The speaker icon should open this fader and there is option for zoom and volume and it goes up. Goes up vertically. It's like a drawer to pull the controls up. and it's first in the row on the left side. Sound. Not two separate sounds. One drawer please."
