@@ -160,3 +160,8 @@ came from the Mac→phone leg (fixed in Manual Camera v216–v217 and Sound Link
 - 15.11.2026 ~05:25: KV **relay:campath** (functions/api/live.js): when set (e.g. "pixel"), a camera's GO returns the WHIP door of
   that relay path instead of santoshi; CLOUD MIXER reads it and publishes the program (text over the picture) on santoshi.
   Set to "pixel" with expiry 15.11.2026 13:00 UTC; without the key nothing changes.
+
+## 15.11.2026: "0 watching" fix
+Request in momentaryupdates.md. Cause: a signed-in admin on /live/ got the band seat (not counted). Fix: the seat only with `?band=1`
+(sbchat.js connect(on, asBand), admin/live.js, functions/api/room.js); sbchat.js?v=3, admin live.js?v=8. Room, KV, relay untouched.
+Proof: see the commit message / SESSIONS of 15.11.2026.

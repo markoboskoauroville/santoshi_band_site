@@ -63,7 +63,7 @@
   var chat = null;
   function loadChat(cb) {
     if (chat) return cb(); if (window.SBChat) { chat = SBChat(stage); return cb(); }
-    var s = document.createElement('script'); s.src = '/sbchat.js?v=2'; s.onload = function () { chat = SBChat(stage); watchDot(); cb(); }; document.head.appendChild(s);
+    var s = document.createElement('script'); s.src = '/sbchat.js?v=3'; s.onload = function () { chat = SBChat(stage); watchDot(); cb(); }; document.head.appendChild(s);
   }
   function watchDot() {
     var cb = stage.querySelector(':scope > .b.ch'); if (!cb) return;

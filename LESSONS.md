@@ -58,3 +58,10 @@
   (Firefox 160 and Chrome take it; wrapped in try). After: 0.6–0.95 % loss, 1.5–1.9 s concealed, 0.4–0.5 s compressed, one or
   three holes of 80–210 ms, all on the viewer's own line (the relay recording had none at the same seconds).
 - An audio-only WHEP client (one recvonly audio transceiver) costs about 3 MB for three minutes: measure audio that way on the SIM.
+
+## 15.11.2026: "0 watching" on /live/
+- 15.11.2026: the count is the open viewer WebSockets of the Durable Object (not KV, no heartbeat; the 25 s "ping" is auto-answered).
+  The server was right (two sockets → count 2, also after hibernation). The only way a page shows 0 is the BAND SEAT: /api/room gave x-sb-admin
+  (not counted) to every signed-in admin socket, so Marko watching /live/ while signed in was "nobody". Now only a socket opened with
+  ?band=1 (admin/live.js passes it) can take the seat; the public player never asks. Cause found by reading, not reproduced (no live stream at the time).
+- Test a count with two `new WebSocket('wss://…/api/room?vid=x', {headers:{origin:…}})` in node 24 (no browser needed).

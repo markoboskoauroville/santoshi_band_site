@@ -126,7 +126,7 @@ function chatOn(){if(room||!window.SBChat)return;SBChat.css();$('chatw').style.d
   else if(j.t==='reset'){[].slice.call($('chl').querySelectorAll('.sbc-m')).forEach(function(d){d.remove()});$('chempty').hidden=false}
   else if(j.t==='down')$('chst').textContent='Chat connection lost, reconnecting…';
   else if(j.t==='open')$('chst').textContent='';
-  else if(j.t==='err')$('chst').textContent='Not sent ('+j.e+')'});
+  else if(j.t==='err')$('chst').textContent='Not sent ('+j.e+')'},true);
  clearInterval(docTimer);docTimer=setInterval(function(){if(live)saveDoc()},45000)}
 function chatOff(){if(room){room.close();room=null}clearInterval(docTimer);setCnt&&setCnt(null);$('chatw').style.display='none'}
 function addMsg(m){if(chatSeen[m.id])return;chatSeen[m.id]=1;chat.push(m);docDirty=true;$('chempty').hidden=true;

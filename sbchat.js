@@ -41,11 +41,11 @@
 
   // anonymous id of this tab for the viewer statistics (random, per tab, no personal data)
   function vid() { try { var v = sessionStorage.getItem('sb.vid'); if (!v) { v = Math.random().toString(36).slice(2, 12) + Date.now().toString(36); sessionStorage.setItem('sb.vid', v); } return v; } catch (e) { return 'x' + Math.random().toString(36).slice(2, 10); } }
-  function connect(on) {
+  function connect(on, asBand) {
     var ws = null, dead = false, tries = 0, ping = null;
     function open() {
       if (dead) return;
-      try { ws = new WebSocket((location.protocol === 'https:' ? 'wss://' : 'ws://') + location.host + '/api/room?vid=' + vid()); } catch (e) { return later(); }
+      try { ws = new WebSocket((location.protocol === 'https:' ? 'wss://' : 'ws://') + location.host + '/api/room?vid=' + vid() + (asBand ? '&band=1' : '')); } catch (e) { return later(); }
       ws.onopen = function () { tries = 0; clearInterval(ping); ping = setInterval(function () { try { ws.send('ping'); } catch (e) {} }, 25000); on({ t: 'open' }); };
       ws.onmessage = function (e) { if (e.data === 'pong') return; var j; try { j = JSON.parse(e.data); } catch (x) { return; } if (j.t === 'end') dead = true; on(j); };
       ws.onclose = function () { clearInterval(ping); if (!dead) on({ t: 'down' }); later(); };

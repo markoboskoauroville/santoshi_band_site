@@ -9,7 +9,9 @@ export async function onRequest({ request, env }) {
   for (const [k, v] of request.headers) if (/^(upgrade|connection|sec-websocket-)/i.test(k)) h.set(k, v);
   const origin = request.headers.get("origin");
   // the band seat needs the sign-in cookie AND this site as the page that opened the socket (no cross-site socket with his cookie)
-  if (origin === new URL(request.url).origin) { const who = await readSession(env, request); if (who) h.set("x-sb-admin", who.email); }
+  const u0 = new URL(request.url);
+  // 15.11.2026: only the admin page asks for the band seat (?band=1); a signed-in admin WATCHING /live/ is a counted viewer (he saw "0 watching")
+  if (u0.searchParams.get("band") === "1" && origin === u0.origin) { const who = await readSession(env, request); if (who) h.set("x-sb-admin", who.email); }
   // statistics (15.11.2026): anonymous tab id, country code, device class; never an IP or the user agent itself
   const u = new URL(request.url), vid = (u.searchParams.get("vid") || "").replace(/[^A-Za-z0-9_-]/g, "").slice(0, 40);
   if (vid) h.set("x-sb-vid", vid);
