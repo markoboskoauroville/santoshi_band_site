@@ -171,3 +171,6 @@ admin/index.html only: tabs LIVE | PICTURES, LIVE pane first and selected after 
 
 ## 15.11.2026: Hide removes every overlay on /live/
 Request word for word in momentaryupdates.md (15.11.2026). live/ui.js clean(): the Hide button puts `body.clean` (closes chat and studio menu first); CSS in live/index.html hides bar, studio menu, chat panel, watching badge, stats, mini hint. Tap on the picture, any key or Esc brings it back (then the normal 4 s auto-hide). ui.js?v=3. Verified in headless Chrome on a local copy (hide → nothing over the picture, click/key/Esc restore, no console errors).
+
+## 15.11.2026: sound bar on /live/
+Request word for word in momentaryupdates.md (15.11.2026). live/ui.js: #vol with MUTE/UNMUTE (44 px) and a volume slider (44 px) above the round buttons, shown with them on a tap, gone with the 4 s auto-hide and Hide; volume and mute remembered per viewer (sb.vol, sb.muted). ui.js?v=4. Verified in headless Chrome on a local copy.

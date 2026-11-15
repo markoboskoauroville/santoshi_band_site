@@ -74,3 +74,9 @@
 - 15.11.2026: the open chat panel (up to 380 px, fixed) covers the round bar on a phone, so Hide cannot be tapped while chat is open (close it with its ✕ first); clean() also closes the chat.
 - 15.11.2026: test a local /live/ in headless Chrome with python3 http.server plus a tiny handler answering /api/live with {"live":true,"relay":{...}} and ?force; drive it over CDP (Input.dispatchMouseEvent / dispatchKeyEvent), read computed styles.
 - 15.11.2026: two pushes seconds apart start two parallel deploy runs and the OLDER commit can finish last and become production (the first run served ui.js?v=2 after the new commit's run was green). Push once, or after a green run check the live cache-buster and `gh run rerun` the newest run if it is old.
+
+## 15.11.2026: sound bar (MUTE + volume slider) on /live/
+- 15.11.2026: WHEP, LL-HLS and the Studio ladder all play in the one `<video id="v">`, so ui.js sets `v.volume` / `v.muted` directly; no per-path code. The bar #vol (live/ui.js, CSS in live/index.html) sits above the round buttons, fades with them (4 s, Hide, clean) and is hidden while the studio menu #gm is open (`:has`).
+- 15.11.2026: localStorage `sb.vol` (0-1) and `sb.muted` ('1' only when the viewer pressed MUTE / dragged to 0), all in try/catch. TAP FOR SOUND gives sound unless the viewer last chose MUTE; a tap on the picture unmutes a page that started muted unless the viewer chose MUTE.
+- 15.11.2026: iOS Safari ignores `video.volume` (always 1): there the slider has no effect and the device buttons rule; not testable here.
+- 15.11.2026: tested in headless Chrome over CDP: slider click at 30 % gave volume 0.29, MUTE toggles, state survives reload, no console errors. One push for the momentaryupdates and code commits avoids the parallel-deploy race.

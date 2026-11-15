@@ -31,14 +31,32 @@
   bChat.appendChild(document.createElement('i'));
   stage.appendChild(bar);
 
+  // 2b. the sound bar above the round buttons (Marko, 15.11.2026): MUTE/UNMUTE + volume slider, one #v element serves WHEP, HLS and the Studio ladder
+  function store(k, val) { try { localStorage.setItem(k, val); } catch (e) {} }
+  function load(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  var vol = document.createElement('div'); vol.id = 'vol'; vol.className = 'off'; vol.setAttribute('role', 'group'); vol.setAttribute('aria-label', 'Sound');
+  vol.innerHTML = '<button type="button" id="vb-mute" class="vm"></button><input id="vb-range" type="range" min="0" max="100" step="1" aria-label="Volume">';
+  stage.appendChild(vol);
+  var vMute = vol.querySelector('#vb-mute'), vRange = vol.querySelector('#vb-range');
+  var savedVol = parseFloat(load('sb.vol')); if (!(savedVol >= 0 && savedVol <= 1)) savedVol = 1;
+  var userMuted = load('sb.muted') === '1';
+  try { v.volume = savedVol; } catch (e) {}
+  function syncVol() {
+    var m = v.muted || v.volume === 0;
+    vMute.innerHTML = svg(m ? 'mute' : 'snd') + '<span>' + (m ? 'UNMUTE' : 'MUTE') + '</span>';
+    vMute.setAttribute('aria-label', m ? 'Unmute' : 'Mute'); vMute.setAttribute('aria-pressed', m ? 'true' : 'false');
+    vRange.value = Math.round((v.muted ? 0 : v.volume) * 100); vRange.setAttribute('aria-valuetext', vRange.value + ' percent');
+  }
+  v.addEventListener('volumechange', syncVol);
+
   var timer = null, entered = false;
-  function showBar() { if (!entered) return; bar.classList.remove('off'); clearTimeout(timer); timer = setTimeout(hideBar, 4000); }
-  function hideBar() { clearTimeout(timer); bar.classList.add('off'); if (bar.contains(document.activeElement)) document.activeElement.blur(); }
+  function showBar() { if (!entered) return; bar.classList.remove('off'); vol.classList.remove('off'); clearTimeout(timer); timer = setTimeout(hideBar, 4000); }
+  function hideBar() { clearTimeout(timer); bar.classList.add('off'); vol.classList.add('off'); if (bar.contains(document.activeElement) || vol.contains(document.activeElement)) document.activeElement.blur(); }
   // CLEAN (Marko, 15.11.2026): the Hide button removes EVERYTHING drawn over the picture (round buttons, chat panel, watching badge, studio menu,
   // stats); a tap/click on the picture or any key brings it back. Pure CSS: body.clean hides them, nothing is removed from the page.
   function clean(on) {
     if (on === body.classList.contains('clean')) return;
-    if (on) { if (chat && chatOpen()) chat.show(false); var g = document.getElementById('gm'); if (g) g.hidden = true; clearTimeout(timer); if (document.activeElement && document.activeElement !== body) document.activeElement.blur(); bar.classList.add('off'); }
+    if (on) { if (chat && chatOpen()) chat.show(false); var g = document.getElementById('gm'); if (g) g.hidden = true; clearTimeout(timer); if (document.activeElement && document.activeElement !== body) document.activeElement.blur(); bar.classList.add('off'); vol.classList.add('off'); }
     body.classList.toggle('clean', on);
   }
   function chatOpen() { var p = document.querySelector('.sbc'); return !!p && !p.hidden; }
@@ -49,19 +67,28 @@
     bMute.title = m ? 'Sound on' : 'Mute'; bMute.setAttribute('aria-label', bMute.title); bMute.setAttribute('aria-pressed', m ? 'true' : 'false');
   }
   v.addEventListener('volumechange', syncMute); syncMute();
-  function setSound(on) { P.setMuted(!on); syncMute(); }
+  function setSound(on, byUser) { if (byUser) { userMuted = !on; store('sb.muted', userMuted ? '1' : '0'); } if (on && v.volume === 0) { try { v.volume = 0.5; } catch (e) {} store('sb.vol', v.volume); } P.setMuted(!on); syncMute(); syncVol(); }
 
   function enter() {
     entered = true; ov.classList.add('gone'); setTimeout(function () { ov.hidden = true; }, 500);
-    setSound(true); showBar();
+    setSound(!userMuted); showBar();   // TAP FOR SOUND gives sound, unless this viewer last chose MUTE
   }
   ov.addEventListener('click', enter);
   // the browser refused sound later (a reconnect): ask again in the middle
   window.addEventListener('sb-sound-blocked', function () { clean(false); ov.hidden = false; ov.classList.remove('gone'); entered = false; hideBar(); syncMute(); });
 
-  bMute.onclick = function () { setSound(v.muted); showBar(); };
+  bMute.onclick = function () { setSound(v.muted, true); showBar(); };
+  vMute.onclick = function () { setSound(v.muted || v.volume === 0, true); showBar(); };
+  vRange.addEventListener('input', function () {
+    var x = vRange.value / 100; try { v.volume = x; } catch (e) {} store('sb.vol', x);
+    if (x > 0 && v.muted) setSound(true, true); else if (x === 0) { userMuted = true; store('sb.muted', '1'); }
+    showBar();
+  });
+  ['pointerdown', 'touchstart', 'focusin'].forEach(function (t) { vol.addEventListener(t, function () { clearTimeout(timer); }, { passive: true }); });
+  vol.addEventListener('pointerup', showBar); vol.addEventListener('change', showBar);
+  syncVol();
   bHide.onclick = function () { clean(true); };
-  function tapPicture() { clean(false); showBar(); }
+  function tapPicture() { clean(false); if (entered && v.muted && !userMuted) setSound(true); showBar(); }   // a tap also gives sound when the page started muted and the viewer did not choose MUTE
   hit.addEventListener('pointerdown', tapPicture); hit.addEventListener('click', tapPicture);   // brings the buttons back; never touches the sound
   bar.addEventListener('pointerdown', function () { clearTimeout(timer); });
   bar.addEventListener('pointerup', showBar);
@@ -117,7 +144,7 @@
     if (e.key === 'Escape') { if (typing || chatOpen() || ov.hidden === false) return; if (body.classList.contains('mini')) mini(false); else if (bar.classList.contains('off')) showBar(); else hideBar(); return; }
     if (typing) return;
     var k = e.key.toLowerCase();
-    if (k === 'm' && entered) { setSound(v.muted); showBar(); }
+    if (k === 'm' && entered) { setSound(v.muted, true); showBar(); }
     else if (k === 'c' && entered) bChat.click();
   }, true);
 })();
