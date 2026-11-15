@@ -10,7 +10,7 @@
 // window.sbStats() returns them as an object.
 (function () {
   var v = document.getElementById('v'), msg = document.getElementById('msg'), sndB = document.getElementById('snd'), stB = document.getElementById('st');
-  var q = location.search, embedded = window.top !== window, showStats = /[?&]stats/.test(q);
+  var q = location.search, framed = window.top !== window, embedded = framed && !/[?&]ui/.test(q), showStats = /[?&]stats/.test(q);
   function load(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
   // &switch: an open page of the old player was moved to this one by /api/live (15.11.2026, the switch to HLS); the viewer had already
   // tapped for sound, so the full view tries to keep the sound (the browser may refuse: then the TAP FOR SOUND overlay comes back).
@@ -119,7 +119,7 @@
     return fetch('/api/live?c=hls', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (j) {
       if (force && j.relay) return { live: true, via: 'relay', whep: j.relay.whep, hls: j.relay.hls };
       if (/[?&]studio/.test(q) && j.studio) return { live: true, via: 'studio', studio: j.studio };   // tests: the Studio ladder
-      if (!j.live) { stop(); if (!embedded) { location.replace('/live/closed/'); return null; } say('The stream has ended. Thank you for watching.'); return null; }
+      if (!j.live) { stop(); if (!framed) { location.replace('/live/closed/'); return null; } say('The stream has ended. Thank you for watching.'); return null; }
       if (j.via !== 'relay' && j.via !== 'studio') { location.replace(j.view.replace(/&muted/g, '') + (muted ? '&muted' : '')); return null; }
       return j;
     });

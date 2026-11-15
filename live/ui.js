@@ -1,9 +1,12 @@
 // Full-view controls of /live/ (Marko, 15.11.2026): a big round TAP FOR SOUND in the centre on the first visit, then a row of round buttons at the
-// bottom (chat, small window, sound on/off, hide, exit). The buttons hide by themselves after 4 s; a tap anywhere on the picture brings them back
-// (that tap never touches the sound). Keys: M sound, C chat, Esc hides the buttons (it first closes the chat, which sbchat.js does itself).
-// Does nothing inside the live banner's iframe (there sbctl.js has the controls). All icons are inline SVG on a 24 box, centred on 12,12.
+// bottom (sound drawer, chat, small window, full screen in a frame, exit). There is NO hide button (Marko, 15.11.2026): the buttons appear on a tap, click,
+// mouse move or key and fade out by themselves 5 s after the last one; a tap on the picture while they are hidden just shows them.
+// ONE module for both viewers: /live/ itself and the home page's banner, which loads this page in an iframe as /live/?p=santoshi&ui (the
+// iframe shows the same buttons plus FULL SCREEN, no exit door). Without &ui an iframe gets no controls (old open pages). Keys: M sound, C chat.
+// All icons are inline SVG on a 24 box, centred on 12,12.
 (function () {
-  if (window.top !== window || !window.sbPlayer) return;
+  var framed = window.top !== window;
+  if (!window.sbPlayer || (framed && !/[?&]ui/.test(location.search))) return;
   var P = window.sbPlayer, v = P.video, stage = document.getElementById('stage'), body = document.body;
   body.classList.add('top');
   var IC = {
@@ -11,7 +14,7 @@
     mute: '<path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5z"/><path d="M16 9.5l5 5M21 9.5l-5 5"/>',
     chat: '<path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8z"/>',
     pip: '<rect x="3" y="5" width="18" height="14" rx="2"/><rect x="12" y="11" width="6.5" height="4.5" rx="1"/>',
-    hide: '<path d="M6 9.5l6 6 6-6"/>',
+    fs: '<path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/>',
     exit: '<path d="M10 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h4"/><path d="M15 8l4 4-4 4M19 12H9"/>'
   };
   function svg(k) { return '<svg viewBox="0 0 24 24" aria-hidden="true">' + IC[k] + '</svg>'; }
@@ -27,7 +30,7 @@
   function mk(id, icon, label) {
     var b = document.createElement('button'); b.type = 'button'; b.className = 'rb'; b.id = id; b.title = label; b.setAttribute('aria-label', label); b.innerHTML = svg(icon); bar.appendChild(b); return b;
   }
-  var bChat = mk('b-chat', 'chat', 'Chat'), bPip = mk('b-pip', 'pip', 'Small window'), bMute = mk('b-mute', 'snd', 'Sound'), bHide = mk('b-hide', 'hide', 'Hide everything'), bExit = mk('b-exit', 'exit', 'Exit');
+  var bChat = mk('b-chat', 'chat', 'Chat'), bPip = mk('b-pip', 'pip', 'Small window'), bMute = mk('b-mute', 'snd', 'Sound'), bFs = framed ? mk('b-fs', 'fs', 'Full screen') : null, bExit = framed ? null : mk('b-exit', 'exit', 'Exit');
   bChat.appendChild(document.createElement('i'));
   stage.appendChild(bar);
 
@@ -39,7 +42,7 @@
   var sw = document.createElement('div'); sw.className = 'sw'; bar.insertBefore(sw, bar.firstChild); sw.appendChild(bMute);
   bMute.setAttribute('aria-haspopup', 'true'); bMute.setAttribute('aria-expanded', 'false');
   var drawer = document.createElement('div'); drawer.id = 'sd'; drawer.hidden = true; drawer.setAttribute('role', 'group'); drawer.setAttribute('aria-label', 'Sound and zoom');
-  drawer.innerHTML = '<div class="fr"></div><button type="button" id="vb-mute" class="vm"></button>';
+  drawer.innerHTML = '<div class="fr"></div><button type="button" id="vb-mute" class="vm"></button><button type="button" id="vb-done" class="vm dn" aria-label="Close the sound drawer">DONE</button>';
   sw.appendChild(drawer);
   var vMute = drawer.querySelector('#vb-mute'), fr = drawer.querySelector('.fr');
   // a vertical fader on pointer events (the same on every browser; the track is 44 px wide, up to 180 px tall)
@@ -86,19 +89,16 @@
     if (on && !entered) return; drawer.hidden = !on; bMute.setAttribute('aria-expanded', on ? 'true' : 'false'); bMute.classList.toggle('open', on);
     if (on) { syncVol(); showBar(); }
   }
+  drawer.querySelector('#vb-done').onclick = function () { openDrawer(false); };   // only shown when the picture is small (compact drawer fills the frame)
   // closes on a tap outside it
   document.addEventListener('pointerdown', function (e) { if (!drawer.hidden && !sw.contains(e.target)) openDrawer(false); }, true);
+  window.addEventListener('blur', function () { openDrawer(false); });   // in the home page's frame a tap outside the frame blurs it
 
   var timer = null, entered = false;
-  function showBar() { if (!entered) return; bar.classList.remove('off'); clearTimeout(timer); timer = setTimeout(hideBar, 4000); }
-  function hideBar() { clearTimeout(timer); bar.classList.add('off'); openDrawer(false); if (bar.contains(document.activeElement)) document.activeElement.blur(); }
-  // CLEAN (Marko, 15.11.2026): the Hide button removes EVERYTHING drawn over the picture (round buttons, chat panel, watching badge, studio menu,
-  // stats); a tap/click on the picture or any key brings it back. Pure CSS: body.clean hides them, nothing is removed from the page.
-  function clean(on) {
-    if (on === body.classList.contains('clean')) return;
-    if (on) { if (chat && chatOpen()) chat.show(false); var g = document.getElementById('gm'); if (g) g.hidden = true; clearTimeout(timer); if (document.activeElement && document.activeElement !== body) document.activeElement.blur(); bar.classList.add('off'); openDrawer(false); }
-    body.classList.toggle('clean', on);
-  }
+  // the buttons come and go by themselves: 5 s after the last tap, click, mouse move or key (Marko, 15.11.2026). While they show, the picture
+  // gives up a strip at the bottom (stage.ctl, CSS), so a caption burned into the picture's lower edge never sits under the buttons.
+  function showBar() { if (!entered) return; bar.classList.remove('off'); stage.classList.add('ctl'); clearTimeout(timer); timer = setTimeout(hideBar, 5000); }
+  function hideBar() { clearTimeout(timer); bar.classList.add('off'); stage.classList.remove('ctl'); openDrawer(false); if (bar.contains(document.activeElement)) document.activeElement.blur(); }
   function chatOpen() { var p = document.querySelector('.sbc'); return !!p && !p.hidden; }
 
   // sound state on the button
@@ -115,16 +115,18 @@
   }
   ov.addEventListener('click', enter);
   // the browser refused sound later (a reconnect): ask again in the middle
-  window.addEventListener('sb-sound-blocked', function () { clean(false); ov.hidden = false; ov.classList.remove('gone'); entered = false; hideBar(); syncMute(); });
+  window.addEventListener('sb-sound-blocked', function () { ov.hidden = false; ov.classList.remove('gone'); entered = false; hideBar(); syncMute(); });
 
   bMute.onclick = function () { openDrawer(drawer.hidden); showBar(); };
   vMute.onclick = function () { setSound(v.muted || v.volume === 0, true); showBar(); };
   drawer.addEventListener('pointerdown', function () { clearTimeout(timer); });
   drawer.addEventListener('pointerup', showBar);
   syncVol();
-  bHide.onclick = function () { clean(true); };
-  function tapPicture() { clean(false); openDrawer(false); if (entered && v.muted && !userMuted) setSound(true); showBar(); }   // a tap also gives sound when the page started muted and the viewer did not choose MUTE
+  function tapPicture() { openDrawer(false); if (entered && v.muted && !userMuted) setSound(true); showBar(); }   // a tap also gives sound when the page started muted and the viewer did not choose MUTE
   hit.addEventListener('pointerdown', tapPicture); hit.addEventListener('click', tapPicture);   // brings the buttons back; never touches the sound
+  var lastMove = 0;
+  function moved() { var n = Date.now(); if (n - lastMove > 250) { lastMove = n; showBar(); } }
+  document.addEventListener('mousemove', moved, true); document.addEventListener('touchstart', function () { showBar(); }, { capture: true, passive: true });
   bar.addEventListener('pointerdown', function () { clearTimeout(timer); });
   bar.addEventListener('pointerup', showBar);
   bar.addEventListener('focusin', function () { clearTimeout(timer); });
@@ -168,15 +170,26 @@
     showBar();
   };
 
-  // 5. exit door: the page for when nobody streams
-  bExit.onclick = function () { try { if (document.fullscreenElement) document.exitFullscreen(); } catch (e) {} location.href = '/live/closed/'; };
+  // 4b. full screen (the home page's frame only; /live/ already fills the window): the stage, so the buttons and the chat go with it
+  if (bFs) bFs.onclick = function () {
+    var d = document, on = d.fullscreenElement || d.webkitFullscreenElement;
+    if (on) { (d.exitFullscreen || d.webkitExitFullscreen).call(d); }
+    else if (stage.requestFullscreen) stage.requestFullscreen().catch(function () {});
+    else if (stage.webkitRequestFullscreen) stage.webkitRequestFullscreen();
+    else if (v.webkitEnterFullscreen) v.webkitEnterFullscreen();   // iPhone: only the video can go full screen
+    showBar();
+  };
+  document.addEventListener('fullscreenchange', function () { if (bFs) bFs.setAttribute('aria-pressed', document.fullscreenElement ? 'true' : 'false'); });
+
+  // 5. exit door: the page for when nobody streams (not in the frame)
+  if (bExit) bExit.onclick = function () { try { if (document.fullscreenElement) document.exitFullscreen(); } catch (e) {} location.href = '/live/closed/'; };
 
   // 6. keys (not while typing in the chat; Speechify's keys are not loaded on this page, so Space and the arrows stay free)
   document.addEventListener('keydown', function (e) {
     if (e.ctrlKey || e.metaKey || e.altKey) return;
-    if (body.classList.contains('clean')) { if (/^(Shift|Control|Alt|Meta|CapsLock)$/.test(e.key)) return; clean(false); showBar(); e.stopPropagation(); e.preventDefault(); return; }
+    if (!/^(Shift|Control|Alt|Meta|CapsLock)$/.test(e.key)) showBar();   // any key brings the buttons
     var t = e.target, typing = t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable);
-    if (e.key === 'Escape') { if (typing || chatOpen() || ov.hidden === false) return; if (body.classList.contains('mini')) mini(false); else if (bar.classList.contains('off')) showBar(); else hideBar(); return; }
+    if (e.key === 'Escape') { if (typing || chatOpen() || ov.hidden === false) return; if (body.classList.contains('mini')) mini(false); return; }
     if (typing) return;
     var k = e.key.toLowerCase();
     if (k === 'm' && entered) { setSound(v.muted || v.volume === 0, true); showBar(); }

@@ -51,14 +51,24 @@ body.top #msg{top:calc(50% + 124px);transform:none}
 .vm svg{width:22px;height:22px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .vm:hover,.vm:focus-visible{border-color:var(--amber);outline:none}
 .rb.open{border-color:var(--amber)}
+.vm.dn{display:none}
+/* a small picture (the home page's frame on a phone, a phone held sideways): the drawer fills the picture, the faders take the height, DONE closes it */
+@media (max-height:360px){#sd{position:fixed;left:8px;right:8px;top:8px;bottom:8px;max-width:none;z-index:7;padding:10px 14px;gap:10px;display:grid;grid-template-columns:auto 1fr;grid-template-rows:1fr 1fr;align-items:center;justify-items:stretch}
+#sd .fr{grid-row:1/3;grid-column:1;height:100%;align-self:stretch;justify-content:center}.fc{height:100%}.ft{flex:1;height:auto;min-height:0}.fl{display:none}
+#sd #vb-mute{grid-column:2;grid-row:1;align-self:end}.vm.dn{display:flex;grid-column:2;grid-row:2;align-self:start}#bar:has(#sd:not([hidden])) ~ #lowd{display:none}}
 video{transform:scale(var(--z,1));transform-origin:50% 50%}
+/* while the buttons show, the picture leaves a strip at the bottom for them: a caption burned into the picture stays clear of the buttons */
+#stage.ctl video{height:calc(100% - 88px - env(safe-area-inset-bottom));transform-origin:50% 50%}
+@media (max-width:440px){#stage.ctl video{height:calc(100% - 80px - env(safe-area-inset-bottom))}}
+video{transition:height .25s ease}
+#stage.ctl #msg{visibility:hidden}   /* the status line never sits under the buttons */
+body.mini video,body.mini #stage.ctl video{transition:none;height:auto}
 @media (max-width:380px){#bar{gap:8px}}
 /* small window fallback: the picture shrinks into the corner, a tap makes it big again */
 body.mini video{inset:auto;right:calc(12px + env(safe-area-inset-right));bottom:calc(12px + env(safe-area-inset-bottom));width:min(46vw,360px);height:auto;aspect-ratio:16/9;border-radius:12px;border:1px solid var(--amber);z-index:6;cursor:pointer;box-shadow:0 6px 24px #000c}
 body.mini #bar,body.mini #ov{display:none}
 body.mini video{transform:none}
-body.clean #bar,body.clean #gm,body.clean .sbc,body.clean .sbc-badge,body.clean #st,body.clean #minihint,body.clean #stage>.b{display:none!important}
 #minihint{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;padding:0 24px;color:#a39a8a;font-size:15px}
 </style></head>
 <body><div id="stage"><video id="v" playsinline autoplay></video><div id="msg">Connecting to the stream…</div><button id="snd" hidden>Tap for sound</button><div id="st" hidden></div></div>
-<script src="/live/studio.js?v=1"></script><script src="/live/player.js?v=5"></script><script src="/live/ui.js?v=6"></script></body></html>
+<script src="/live/studio.js?v=1"></script><script src="/live/player.js?v=6"></script><script src="/live/ui.js?v=8"></script></body></html>

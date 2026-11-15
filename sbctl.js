@@ -13,7 +13,7 @@
     '.sbo .b.sw{width:auto;min-width:0;flex-direction:row;border-radius:28px;padding:0 16px 0 12px;gap:8px;font:600 14px system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#fff;white-space:nowrap;height:56px}' +
     '.sbo .b.sw::before{content:"";flex:none;width:38px;height:21px;border-radius:11px;background:#3a4048;background-image:radial-gradient(circle at 10.5px 10.5px,#9aa0a6 7.5px,transparent 8px)}' +
     '.sbo .b.sw.on{background:#0B0D10b0;border-color:#ffffff40;color:#fff}.sbo .b.sw.on::before{background-color:#e8a33d;background-image:radial-gradient(circle at 27.5px 10.5px,#0B0D10 7.5px,transparent 8px)}' +
-    '.sbo.hid .b:not(.sw){display:none}' +
+    '.sbo{transition:opacity .3s}.sbo.fade{opacity:0;pointer-events:none}' +
     '.sbv{position:absolute;left:50%;bottom:78px;transform:translateX(-50%);z-index:9;background:#0B0D10e6;border:1px solid #ffffff40;border-radius:14px;padding:10px 14px;width:min(92%,320px);font:13px system-ui,sans-serif;color:#fff;text-align:left}' +
     '.sbv[hidden]{display:none}.sbv label{display:flex;align-items:center;gap:8px;margin:6px 0;text-transform:uppercase;letter-spacing:.06em;font-size:12px}.sbv label span{width:84px;flex:none}.sbv input{flex:1;accent-color:#e8a33d;min-width:0}.sbv p{margin:6px 0 0;color:#a39a8a;font-size:12px}' +
     '.sbo .b.vd{font:700 12px system-ui,sans-serif;color:#fff;letter-spacing:.04em}.sbo .b.vd.on{color:#0B0D10}' +
@@ -103,9 +103,9 @@
     var hit = document.createElement('div'); hit.style.cssText = 'position:absolute;inset:0;z-index:7;touch-action:manipulation'; wrap.insertBefore(hit, bar);
     var lt = 0; hit.addEventListener('dblclick', function () { toggleFull(); });
     hit.addEventListener('touchend', function (e) { var n = Date.now(); if (n - lt < 350) { e.preventDefault(); toggleFull(); lt = 0; } else lt = n; });
-    var ov = ls('ov') !== '0';
-    var sw = btn('ov', 'Overlay', 'Overlay on / off', ov, function (b) { ov = !ov; ls('ov', ov ? '1' : '0'); b.classList.toggle('on', ov); bar.classList.toggle('hid', !ov); }, 'sw');
-    bar.classList.toggle('hid', !ov);
+    // no Overlay button (Marko, 15.11.2026): the buttons fade out by themselves 5 s after the last tap, click, mouse move or key, and come back with the next one
+    var ft = null; function wake() { bar.classList.remove('fade'); clearTimeout(ft); ft = setTimeout(function () { if (!bar.contains(document.activeElement) && (!panel || panel.hidden)) bar.classList.add('fade'); else wake(); }, 5000); }
+    ['mousemove', 'click', 'touchstart', 'pointerdown'].forEach(function (t) { wrap.addEventListener(t, wake, { passive: true }); }); document.addEventListener('keydown', wake); wake();
     return st;
   };
 })();

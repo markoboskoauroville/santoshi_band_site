@@ -52,9 +52,9 @@ function status(){fetch('/api/live',{method:'POST',headers:{'content-type':'appl
 // recorder). The browser mode stays for when no camera is live: GO LIVE then opens this browser's camera as before.
 var camOn=false,camView='';
 function camMode(j){setBtn(true);chatOn();var f=$('camv');
- if(!f){f=document.createElement('iframe');f.id='camv';f.allow='autoplay; fullscreen; picture-in-picture';f.title='Camera';f.style.cssText='display:block;width:100%;aspect-ratio:16/9;border:0;background:#000;border-radius:8px';$('sndw').appendChild(f)}
+ if(!f){f=document.createElement('iframe');f.id='camv';f.allow='autoplay; fullscreen; picture-in-picture';f.allowFullscreen=true;f.title='Camera';f.style.cssText='display:block;width:100%;aspect-ratio:16/9;border:0;background:#000;border-radius:8px';$('sndw').appendChild(f)}
  $('snd').style.display='none';$('sndw').style.display='block';
- if(camView!==j.view){camView=j.view;f.src=j.view}
+ if(camView!==j.view){camView=j.view;f.src=/^\/live\//.test(j.view)?j.view.replace('&muted','')+'&ui':j.view}   /* the SAME player module as the home page and /live/ (live/ui.js, &ui) */
  if(!camOn)say('LIVE from camera '+(j.name||'')+'. This page shows its picture; STOP ends the live.','good');camOn=true}
 function camOff(){camOn=false;camView='';var f=$('camv');if(f)f.remove();$('snd').style.display='block';$('sndw').style.display='none'}
 function dropBrowser(j){if(rec&&rec.state!=='inactive'){rec.onstop=flush;rec.stop()}rec=null;

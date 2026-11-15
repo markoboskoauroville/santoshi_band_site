@@ -107,3 +107,10 @@
   the local server at the end of the test, check with pgrep. Port 8765 is Queen's, not free for test servers.
 - 15.11.2026: two workers in one working tree: keep your UI in your own file (the LOW DELAY pill went into player.js, not ui.js), stage only
   your hunks, `git pull --rebase` before every commit and push.
+
+## 15.11.2026: the site has TWO viewers and they now share ONE module
+- 15.11.2026: the home page's live banner (functions/_middleware.js) had its own controls (sbctl.js outside an iframe, a second SBChat socket, an OVERLAY switch), so none of the /live/ work (HLS default, speaker drawer, zoom, LOW DELAY, 5 s fade) reached the page Marko watches. Now the banner iframe loads `/live/?p=santoshi&ui`: the SAME live/player.js + live/ui.js; `&ui` switches on the full controls inside a frame (plus FULL SCREEN, no exit door). sbctl.js remains only for the admin SENDER and a VDO.Ninja source.
+- 15.11.2026: any change to the player or its controls goes into live/ only and is checked on EVERY importing page (home, /live/, admin camera view) before deploy. See TAKEOVER "One player module".
+- 15.11.2026: no hide/overlay button anywhere; controls come on tap, click, mouse move or key, go 5 s after the last one (ui.js showBar; sbctl.js wake()). A frame does not see the parent's mouse, so the drawer also closes on the frame's window blur.
+- 15.11.2026: a caption burned into the picture (cloud mixer) cannot be moved by the page: while the controls show, the picture shrinks by a bottom strip (`#stage.ctl video`), so the caption sits above the buttons; the status line is hidden then.
+- 15.11.2026: small frames (home page on a phone: 366x206) cannot hold a vertical drawer above the buttons: under 360 px of height the drawer fills the frame (faders left, MUTE and DONE right). Test a banner locally by evaluating the BANNER template from the middleware into index.html.

@@ -55,3 +55,9 @@ Marko, word for word: "The lifestyle image is great when we are sleeping. Let it
 
 ## 15.11.2026, one sound drawer with volume and zoom (Marko, word for word)
 "You didn't understand me quite. Now I have another fader on my streaming page. The speaker icon should open this fader and there is option for zoom and volume and it goes up. Goes up vertically. It's like a drawer to pull the controls up. and it's first in the row on the left side. Sound. Not two separate sounds. One drawer please."
+
+## 15.11.2026, the home page's player has none of it; overlay button deleted (Marko, word for word)
+"Now the stream is playing inside my browser. I give so many updates for overlays and volume buttons and everything and now nothing is applied in this view. I don't know if it's applied in a full screen view but this is like a lot of effort for nothing. ... and actually overlay button should be completely deleted because these blocks will appear and fade out by themselves after few seconds. When user click they wait for user interaction for 5 seconds and then they are gone."
+
+## 15.11.2026, one shared player module, always (Marko, word for word, as relayed)
+"Always we use shared players in the same website. Always. Never different. ... We work with modules. If module is there, you just plug it everywhere, it's always the same."
