@@ -1,14 +1,45 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Santoshi Band live</title><meta name="robots" content="noindex">
+<meta name="description" content="Santoshi Kirtan Band, live. The band's own player.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="/img/favicon.png?v=2" type="image/png" sizes="64x64">
+<link rel="icon" href="/img/favicon-32.png?v=2" type="image/png" sizes="32x32">
+<link rel="shortcut icon" href="/img/favicon.ico?v=2">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png?v=2">
 <style>
-:root{--bg:#000;--fg:#f1e8d8;--amber:#e8a33d}
-html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font:600 15px system-ui,sans-serif;overflow:hidden}
+:root{--bg:#000;--fg:#f1e8d8;--amber:#e8a33d;--disc:rgba(11,13,16,.62);--edge:rgba(255,255,255,.38)}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font:600 15px system-ui,sans-serif;overflow:hidden;-webkit-tap-highlight-color:transparent}
+#stage{position:fixed;inset:0;overflow:hidden}
 video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000}
 #msg{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;padding:0 16px;text-shadow:0 1px 3px #000}
+body.top #msg{top:calc(50% + 124px);transform:none}
 #snd{position:absolute;top:12px;left:50%;transform:translateX(-50%);border:1px solid var(--amber);background:#0B0D10c0;color:var(--fg);border-radius:22px;padding:8px 16px;font:600 14px system-ui,sans-serif;cursor:pointer}
 #st{position:absolute;right:8px;top:8px;font:12px ui-monospace,Menlo,monospace;background:#000a;padding:4px 6px;border-radius:6px;white-space:pre}
 [hidden]{display:none!important}
+/* full view (not inside the banner) */
+#hit{position:absolute;inset:0;z-index:1}
+#ov{position:absolute;inset:0;z-index:3;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:opacity .45s}
+#ov.gone{opacity:0;pointer-events:none}
+#big{position:relative;width:176px;height:176px;border-radius:50%;border:2px solid var(--amber);background:var(--disc);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:0;cursor:pointer;font:700 14px/1.15 system-ui,sans-serif;letter-spacing:.12em;text-align:center;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 6px 28px rgba(0,0,0,.5)}
+#big svg{width:60px;height:60px;display:block;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+#big::after{content:"";position:absolute;inset:-2px;border-radius:50%;border:2px solid var(--amber);animation:ring 2.2s ease-out infinite}
+@keyframes ring{from{transform:scale(1);opacity:.7}to{transform:scale(1.35);opacity:0}}
+@media (prefers-reduced-motion:reduce){#big::after{animation:none;display:none}}
+#bar{position:absolute;z-index:4;left:0;right:0;bottom:calc(16px + env(safe-area-inset-bottom));padding:0 calc(16px + env(safe-area-inset-right)) 0 calc(16px + env(safe-area-inset-left));display:flex;justify-content:center;gap:12px;transition:opacity .3s,visibility 0s}
+#bar.off{opacity:0;visibility:hidden;pointer-events:none;transition:opacity .3s,visibility 0s .3s}
+.rb{position:relative;flex:none;width:56px;height:56px;border-radius:50%;border:1px solid var(--edge);background:var(--disc);display:flex;align-items:center;justify-content:center;padding:0;cursor:pointer;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 2px 10px rgba(0,0,0,.45);color:#fff}
+.rb svg{width:28px;height:28px;display:block;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.rb:hover{border-color:var(--amber)}.rb:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+.rb[aria-pressed="true"]{background:var(--amber);border-color:var(--amber)}.rb[aria-pressed="true"] svg{stroke:#0B0D10}
+.rb i{position:absolute;top:4px;right:4px;width:12px;height:12px;border-radius:50%;background:#ff4d3d;border:2px solid #0B0D10;display:none}.rb.new i{display:block}
+#stage>.b.ch{display:none}
+.sbc-badge{top:calc(8px + env(safe-area-inset-top))!important;left:calc(8px + env(safe-area-inset-left))!important}
+@media (max-width:380px){#bar{gap:8px}}
+/* small window fallback: the picture shrinks into the corner, a tap makes it big again */
+body.mini video{inset:auto;right:calc(12px + env(safe-area-inset-right));bottom:calc(12px + env(safe-area-inset-bottom));width:min(46vw,360px);height:auto;aspect-ratio:16/9;border-radius:12px;border:1px solid var(--amber);z-index:6;cursor:pointer;box-shadow:0 6px 24px #000c}
+body.mini #bar,body.mini #ov{display:none}
+#minihint{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;padding:0 24px;color:#a39a8a;font-size:15px}
 </style></head>
-<body><video id="v" playsinline autoplay></video><div id="msg">Connecting to the stream…</div><button id="snd" hidden>Tap for sound</button><div id="st" hidden></div>
-<script src="/live/player.js?v=2"></script></body></html>
+<body><div id="stage"><video id="v" playsinline autoplay></video><div id="msg">Connecting to the stream…</div><button id="snd" hidden>Tap for sound</button><div id="st" hidden></div></div>
+<script src="/live/player.js?v=3"></script><script src="/live/ui.js?v=1"></script></body></html>

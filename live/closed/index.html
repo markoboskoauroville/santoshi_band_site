@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Santoshi Band · Stream closed</title>
+<meta name="robots" content="noindex,follow">
+<meta name="description" content="The Santoshi Kirtan Band stream is closed: the band fell asleep in the living room. Restart the stream when they are live again.">
+<meta property="og:title" content="Santoshi Band · Stream closed">
+<meta property="og:description" content="The band fell asleep in the living room. Shh.">
+<meta property="og:image" content="https://santoshi-band.pages.dev/live/closed/sleep-landscape.jpg">
+<meta property="og:url" content="https://santoshi-band.pages.dev/live/closed/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://santoshi-band.pages.dev/live/closed/">
+<meta name="theme-color" content="#1d130d">
+<link rel="icon" href="/img/favicon.png?v=2" type="image/png" sizes="64x64">
+<link rel="icon" href="/img/favicon-32.png?v=2" type="image/png" sizes="32x32">
+<link rel="shortcut icon" href="/img/favicon.ico?v=2">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png?v=2">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--amber:#e8a33d;--ink:#f4e6cc;--disc:rgba(20,13,8,.66)}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#1d130d;color:var(--ink);font:20px/1.4 "EB Garamond",Georgia,serif;overflow:hidden;-webkit-tap-highlight-color:transparent}
+body{background:radial-gradient(900px 600px at 50% 40%,#3a2616,#1d130d)}
+picture,img{position:fixed;inset:0;width:100%;height:100%;display:block}
+img{object-fit:cover;object-position:center}
+.shade{position:fixed;inset:0;background:radial-gradient(closest-side at 50% 50%,rgba(15,9,5,.55),rgba(15,9,5,.15) 70%),linear-gradient(rgba(15,9,5,.35),rgba(15,9,5,0) 30%,rgba(15,9,5,0) 70%,rgba(15,9,5,.45))}
+main{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+h1{position:absolute;left:16px;right:16px;top:calc(50% - 178px);margin:0;text-align:center;font:700 clamp(22px,5.5vw,38px)/1.1 "Cinzel",serif;letter-spacing:.14em;text-transform:uppercase;text-shadow:0 2px 14px #000,0 0 3px #000}
+#go{position:relative;width:176px;height:176px;border-radius:50%;border:2px solid var(--amber);background:var(--disc);color:#fff;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 22px;text-decoration:none;font:700 15px/1.25 system-ui,sans-serif;letter-spacing:.12em;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 6px 28px rgba(0,0,0,.55);transition:opacity .3s,transform .15s;opacity:0}
+#go.ready{opacity:1}
+#go:hover{transform:scale(1.04)}#go:active{transform:scale(.97)}
+#go:focus-visible{outline:3px solid var(--amber);outline-offset:4px}
+#go.live::after{content:"";position:absolute;inset:-2px;border-radius:50%;border:2px solid var(--amber);animation:ring 2.2s ease-out infinite}
+@keyframes ring{from{transform:scale(1);opacity:.7}to{transform:scale(1.35);opacity:0}}
+@media (prefers-reduced-motion:reduce){#go.live::after{animation:none;display:none}}
+#sub{position:absolute;left:16px;right:16px;top:calc(50% + 112px);margin:0;text-align:center;font-size:clamp(18px,3.6vw,24px);font-style:italic;text-shadow:0 2px 10px #000,0 0 3px #000}
+#home{position:fixed;left:0;right:0;bottom:calc(18px + env(safe-area-inset-bottom));text-align:center;font:600 13px system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase}
+#home a{color:var(--ink);opacity:.8;text-decoration:none;border-bottom:1px solid #f4e6cc66;padding:6px 2px;text-shadow:0 1px 6px #000}
+#home a:hover{opacity:1}
+@media (max-height:480px){h1{top:calc(50% - 142px);font-size:20px}#go{width:150px;height:150px}#sub{top:calc(50% + 90px)}}
+</style></head>
+<body>
+<picture><source media="(orientation:portrait)" srcset="sleep-portrait.jpg"><img src="sleep-landscape.jpg" alt="The seven members of the Santoshi Band fast asleep in a living room with their instruments" onerror="this.remove()"></picture>
+<div class="shade"></div>
+<main>
+<h1 id="h">Stream closed</h1>
+<a id="go" href="/live/">RESTART THE STREAM</a>
+<p id="sub">Shh. The band fell asleep.</p>
+</main>
+<div id="home"><a href="/">Santoshi Band</a></div>
+<script>
+// The button follows the real state (/api/live): live → RESTART THE STREAM (back to /live/); nothing live → says so and goes to the main page.
+(function () {
+  var go = document.getElementById('go'), h = document.getElementById('h'), sub = document.getElementById('sub'), shown = false;
+  function set(live) {
+    if (live) { h.textContent = 'Stream closed'; go.textContent = 'RESTART THE STREAM'; go.href = '/live/'; go.className = 'live ready'; sub.textContent = 'The band is awake again. Shh, or not.'; }
+    else { h.textContent = 'Not live right now'; go.textContent = 'BACK TO THE SITE'; go.href = '/'; go.className = 'ready'; sub.textContent = 'Shh. The band fell asleep.'; }
+    shown = true;
+  }
+  function poll() {
+    fetch('/api/live', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (j) { set(!!j.live); }).catch(function () { if (!shown) set(false); });
+  }
+  poll(); setInterval(poll, 15000);
+})();
+</script>
+<script src="https://speechifykeys.pages.dev/speechify-keys.js" defer></script>
+</body></html>

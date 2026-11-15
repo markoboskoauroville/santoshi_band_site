@@ -7,7 +7,8 @@
 // window.sbStats() returns them as an object.
 (function () {
   var v = document.getElementById('v'), msg = document.getElementById('msg'), sndB = document.getElementById('snd'), stB = document.getElementById('st');
-  var q = location.search, muted = /[?&]muted/.test(q), showStats = /[?&]stats/.test(q);
+  var q = location.search, embedded = window.top !== window, muted = embedded ? /[?&]muted/.test(q) : true, showStats = /[?&]stats/.test(q);
+  // Full view (opened by itself, not inside the banner): always starts silent, ui.js shows the centre TAP FOR SOUND, the round buttons and the exit.
   var pc = null, hls = null, mode = '', cfg = null, retry = null, gotFrames = false, sess = null;
   function say(t) { msg.textContent = t || ''; msg.hidden = !t; }
   function stereo(sdp) {
@@ -17,7 +18,7 @@
   function play() {
     v.muted = muted;
     var p = v.play();
-    if (p && p.catch) p.catch(function () { if (!v.muted) { v.muted = true; v.play().catch(function () {}); sndB.hidden = false; } });
+    if (p && p.catch) p.catch(function () { if (!v.muted) { v.muted = true; muted = true; v.play().catch(function () {}); if (embedded) sndB.hidden = false; else window.dispatchEvent(new Event('sb-sound-blocked')); } });
   }
   sndB.onclick = function () { v.muted = false; muted = false; v.play().catch(function () {}); sndB.hidden = true; };
   function stop() {
@@ -81,7 +82,7 @@
   function check() {
     return fetch('/api/live', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (j) {
       if (force && j.relay) return { live: true, via: 'relay', whep: j.relay.whep, hls: j.relay.hls };
-      if (!j.live) { stop(); say('The stream has ended. Thank you for watching.'); return null; }
+      if (!j.live) { stop(); if (!embedded) { location.replace('/live/closed/'); return null; } say('The stream has ended. Thank you for watching.'); return null; }
       if (j.via !== 'relay') { location.replace(j.view.replace(/&muted/g, '') + (muted ? '&muted' : '')); return null; }
       return j;
     });
@@ -112,6 +113,8 @@
     });
   };
   if (showStats) { stB.hidden = false; setInterval(function () { window.sbStats().then(function (o) { stB.textContent = o.mode + ' ' + o.width + 'x' + o.height + (o.fps != null ? ' ' + o.fps + ' fps' : '') + (o.kbps ? ' ' + o.kbps + ' kb/s' : '') + (o.jitterBufferMs != null ? '\nbuffer ' + o.jitterBufferMs + ' ms' : '') + (o.rttMs != null ? ' rtt ' + o.rttMs + ' ms' : '') + (o.behindLive != null ? '\nbehind live ' + o.behindLive.toFixed(1) + ' s' : ''); }); }, 1000); }
+  // hooks for ui.js (full view only)
+  window.sbPlayer = { video: v, setMuted: function (m) { muted = !!m; v.muted = muted; if (!muted) v.play().catch(function () {}); }, embedded: embedded };
   window.addEventListener('pagehide', stop);
   start();
 })();
