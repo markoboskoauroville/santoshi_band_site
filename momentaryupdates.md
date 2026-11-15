@@ -73,3 +73,9 @@ Marko, word for word: "The lifestyle image is great when we are sleeping. Let it
 
 ## 15.11.2026, a tap on the picture toggles the controls (Marko, word for word)
 "So we have controls which are hiding after 5 seconds, but user can press click it, image, controls showing. Clicking again, immediately they are hiding."
+
+## 15.11.2026, Marko (his answer to the question "who publishes on the public path santoshi?"), the mixer-only live route
+"Yes, mixer only (Recommended)". Meaning, as approved: the CLOUD MIXER becomes the ONLY publisher on relay path `santoshi`, so HLS
+viewers always get AAC audio (iPhones). A camera that goes live gets its own private path (`cam-<id>`) from /api/live, the mixer
+switches to it with a short fade, shows a fallback picture with silence while no camera is there, and a scheduled show keeps
+precedence. Deadline: well before the concert of 21.11.2026.
