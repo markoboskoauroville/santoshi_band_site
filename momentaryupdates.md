@@ -37,3 +37,6 @@
 
 ## 15.11.2026: sleeping-band picture approved
 Marko, word for word: "The lifestyle image is great when we are sleeping. Let it stay like this. Confirmed, approved." (live/closed/sleep-landscape.jpg stays as it is.)
+
+## 15.11.2026, 0 watching bug (Marko, word for word)
+"0 watching bug: the live page shows 0 watching while people watch (Marko, 15.11.2026)."
