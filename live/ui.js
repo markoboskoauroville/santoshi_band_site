@@ -15,6 +15,7 @@
     chat: '<path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8z"/>',
     pip: '<rect x="3" y="5" width="18" height="14" rx="2"/><rect x="12" y="11" width="6.5" height="4.5" rx="1"/>',
     move: '<circle cx="12" cy="12" r="10"/><path d="M12 4.5l-2 2.6h4zM12 19.5l-2-2.6h4zM4.5 12l2.6-2v4zM19.5 12l-2.6-2v4z" fill="#fff" stroke="none"/><rect x="10" y="10" width="4" height="4" rx="1" fill="#fff" stroke="none"/>',
+    gear: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>',
     fs: '<path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/>',
     exit: '<path d="M10 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h4"/><path d="M15 8l4 4-4 4M19 12H9"/>'
   };
@@ -31,7 +32,8 @@
   function mk(id, icon, label) {
     var b = document.createElement('button'); b.type = 'button'; b.className = 'rb'; b.id = id; b.title = label; b.setAttribute('aria-label', label); b.innerHTML = svg(icon); bar.appendChild(b); return b;
   }
-  var bChat = mk('b-chat', 'chat', 'Chat'), bPip = mk('b-pip', 'pip', 'Small window'), bMute = mk('b-mute', 'snd', 'Sound'), bPan = mk('b-pan', 'move', 'Zoom and move'), bFs = framed ? mk('b-fs', 'fs', 'Full screen') : null, bExit = framed ? null : mk('b-exit', 'exit', 'Exit');
+  var bChat = mk('b-chat', 'chat', 'Chat'), bPip = mk('b-pip', 'pip', 'Small window'), bMute = mk('b-mute', 'snd', 'Sound'), bPan = mk('b-pan', 'move', 'Zoom and move'), bFs = mk('b-fs', 'fs', 'Full screen'), bQual = mk('b-qual', 'gear', 'Quality'), bExit = /[?&]noexit/.test(location.search) ? null : mk('b-exit', 'exit', 'Exit');
+  bQual.hidden = true;   // shown when the stream has renditions to choose from (relay HLS through hls.js)
   bChat.appendChild(document.createElement('i'));
   stage.appendChild(bar);
 
@@ -42,7 +44,7 @@
   var timer = null, entered = false;
   var drawers = [];
   function mkDrawer(btn, id, label, after) {
-    var w = document.createElement('div'); w.className = 'sw'; bar.insertBefore(w, after ? after.nextSibling : bar.firstChild); w.appendChild(btn);
+    var w = document.createElement('div'); w.className = 'sw'; bar.insertBefore(w, after === 'here' ? btn : after ? after.nextSibling : bar.firstChild); w.appendChild(btn);
     btn.setAttribute('aria-haspopup', 'true'); btn.setAttribute('aria-expanded', 'false');
     var d = document.createElement('div'); d.id = id; d.className = 'dr'; d.hidden = true; d.setAttribute('role', 'group'); d.setAttribute('aria-label', label);
     d.innerHTML = '<div class="fr"></div><div class="ac"></div>'; w.appendChild(d);
@@ -83,6 +85,24 @@
     });
     return { draw: draw, tr: tr };
   }
+  // --- quality drawer (the gear): AUTO plus every rendition the relay really sends, and the audio tracks when there are several ---
+  var qd = mkDrawer(bQual, 'qd', 'Quality', 'here');
+  function buildQuality() {
+    var L = P.levels ? P.levels() : [], show = P.mode && P.mode() === 'hls' && L.length > 0 && P.level() !== -2;
+    bQual.hidden = qd.w.hidden = !show; if (!show) { if (!qd.d.hidden) closeDrawers(); return; }
+    var cur = P.level(), box = qd.fr; box.innerHTML = '';
+    var list = document.createElement('div'); list.className = 'ql'; box.appendChild(list);
+    function head(t) { var h = document.createElement('div'); h.className = 'fl qh'; h.textContent = t; list.appendChild(h); }
+    function opt(t, on, fn) { var b = document.createElement('button'); b.type = 'button'; b.className = 'vm opt'; b.textContent = t; b.setAttribute('aria-pressed', on ? 'true' : 'false'); b.onclick = function () { fn(); buildQuality(); showBar(); }; list.appendChild(b); }
+    head('QUALITY');
+    opt('Auto', cur === -1, function () { P.setLevel(-1); });
+    L.slice().sort(function (a, b) { return b.h - a.h; }).forEach(function (l) { opt(l.h + 'p' + (l.kbps ? ' · ' + Math.round(l.kbps / 100) / 10 + ' Mbit/s' : ''), cur === l.i, function () { P.setLevel(l.i); }); });
+    if (L.length === 1) { var n = document.createElement('div'); n.className = 'qn'; n.textContent = 'The stream is sent in this one quality.'; list.appendChild(n); }
+    var A = P.audioTracks ? P.audioTracks() : [];
+    if (A.length > 1) { head('AUDIO'); A.forEach(function (t) { opt(t.name, P.audio() === t.i, function () { P.setAudio(t.i); }); }); }
+  }
+  bQual.onclick = function () { buildQuality(); toggleDrawer(qd); showBar(); };
+  window.addEventListener('sb-levels', buildQuality); window.addEventListener('sb-mode', buildQuality);
   // --- sound drawer: VOLUME + MUTE ---
   var vMute = document.createElement('button'); vMute.type = 'button'; vMute.id = 'vb-mute'; vMute.className = 'vm'; sd.ac.insertBefore(vMute, sd.ac.firstChild);
   var savedVol = parseFloat(load('sb.vol')); if (!(savedVol >= 0 && savedVol <= 1)) savedVol = 1;
@@ -151,13 +171,14 @@
   v.addEventListener('volumechange', syncMute); syncMute();
   function setSound(on, byUser) { if (byUser) { userMuted = !on; store('sb.muted', userMuted ? '1' : '0'); } if (on && v.volume === 0) { try { v.volume = 0.5; } catch (e) {} store('sb.vol', v.volume); } P.setMuted(!on); syncMute(); syncVol(); }
 
+  var ovTimer = null;
   function enter() {
-    entered = true; ov.classList.add('gone'); setTimeout(function () { ov.hidden = true; }, 500);
+    entered = true; ov.classList.add('gone'); clearTimeout(ovTimer); ovTimer = setTimeout(function () { ov.hidden = true; }, 500);
     setSound(!userMuted); showBar();   // TAP FOR SOUND gives sound, unless this viewer last chose MUTE
   }
   ov.addEventListener('click', enter);
   // the browser refused sound later (a reconnect): ask again in the middle
-  window.addEventListener('sb-sound-blocked', function () { ov.hidden = false; ov.classList.remove('gone'); entered = false; hideBar(); syncMute(); });
+  window.addEventListener('sb-sound-blocked', function () { clearTimeout(ovTimer); ov.hidden = false; ov.classList.remove('gone'); entered = false; hideBar(); syncMute(); });
 
   bMute.onclick = function () { toggleDrawer(sd); showBar(); };
   bPan.onclick = function () { toggleDrawer(zd); showBar(); };
@@ -177,7 +198,8 @@
   hit.addEventListener('click', tapPicture);
   var lastMove = 0;
   function moved() { var n = Date.now(); if (n < quietUntil) return; if (n - lastMove > 250) { lastMove = n; showBar(); } }
-  document.addEventListener('mousemove', moved, true);
+  // only a REAL mouse shows the buttons by moving: a touch makes the browser invent a mousemove just before its click, which showed the buttons and let the same tap hide them again
+  document.addEventListener('pointermove', function (e) { if (e.pointerType === 'mouse') moved(); }, true);
   bar.addEventListener('pointerdown', function () { clearTimeout(timer); });
   bar.addEventListener('pointerup', showBar);
   bar.addEventListener('focusin', function () { clearTimeout(timer); });
@@ -234,23 +256,26 @@
     showBar();
   };
 
-  // 4b. full screen (the home page's frame only; /live/ already fills the window): the stage, so the buttons and the chat go with it
-  if (bFs) bFs.onclick = function () {
+  // 4b. full screen (button, or a double tap/click on the picture as before): the whole document, so the buttons and the chat go with it; landscape lock on phones
+  function toggleFs() {
     var d = document, on = d.fullscreenElement || d.webkitFullscreenElement;
     if (on) { (d.exitFullscreen || d.webkitExitFullscreen).call(d); }
     else if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(function () {});
     else if (stage.webkitRequestFullscreen) stage.webkitRequestFullscreen();
     else if (v.webkitEnterFullscreen) v.webkitEnterFullscreen();   // iPhone: only the video can go full screen
     showBar();
-  };
+  }
+  bFs.onclick = toggleFs;
+  hit.addEventListener('dblclick', function () { toggleFs(); });
   document.addEventListener('fullscreenchange', function () {
-    if (bFs) bFs.setAttribute('aria-pressed', document.fullscreenElement ? 'true' : 'false');
+    bFs.setAttribute('aria-pressed', document.fullscreenElement ? 'true' : 'false');
+    try { if (document.fullscreenElement && screen.orientation && screen.orientation.lock && /Mobi|Android/.test(navigator.userAgent)) screen.orientation.lock('landscape').catch(function () {}); else if (!document.fullscreenElement && screen.orientation && screen.orientation.unlock) screen.orientation.unlock(); } catch (e) {}
     if (document.fullscreenElement && chat && chatOpen() && window.innerWidth < window.innerHeight) chat.show(false);   // full screen upright: no chat, the picture only
     applyView();
   });
 
-  // 5. exit door: the page for when nobody streams (not in the frame)
-  if (bExit) bExit.onclick = function () { try { if (document.fullscreenElement) document.exitFullscreen(); } catch (e) {} location.href = '/live/closed/'; };
+  // 5. exit door: the sleeping-band page for when nobody streams, on EVERY page; from the home page's frame it leaves through the top window, never inside the frame
+  if (bExit) bExit.onclick = function () { try { if (document.fullscreenElement) document.exitFullscreen(); } catch (e) {} try { (framed ? window.top : window).location.href = '/live/closed/'; } catch (x) { window.open('/live/closed/', '_top'); } };
 
   // 6. keys (not while typing in the chat; Speechify's keys are not loaded on this page, so Space and the arrows stay free)
   document.addEventListener('keydown', function (e) {

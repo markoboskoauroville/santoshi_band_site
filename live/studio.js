@@ -139,13 +139,13 @@
     if (on) { main(); var bar = document.getElementById('bar'); if (bar) bar.classList.remove('off'); }
   }
   function showGear() {
-    if (window.top !== window || gear) return;
+    if ((window.top !== window && !/[?&]ui/.test(location.search)) || gear) return;   // the home page's frame (&ui) has the same gear
     var bar = document.getElementById('bar'), stage = document.getElementById('stage'); if (!bar || !stage) return;
     css();
     gear = document.createElement('button'); gear.type = 'button'; gear.className = 'rb'; gear.id = 'b-gear'; gear.title = 'Settings';
     gear.setAttribute('aria-label', 'Settings: quality, audio, delay'); gear.setAttribute('aria-haspopup', 'true'); gear.setAttribute('aria-expanded', 'false');
     gear.innerHTML = GEAR;
-    var hide = document.getElementById('b-hide'); bar.insertBefore(gear, hide || null);
+    bar.insertBefore(gear, document.getElementById('b-exit') || null);   // before the exit door
     panel = document.createElement('div'); panel.id = 'gm'; panel.hidden = true; panel.setAttribute('role', 'menu'); stage.appendChild(panel);
     gear.onclick = function (e) { e.stopPropagation(); open(panel.hidden); };
     panel.addEventListener('pointerdown', function (e) { e.stopPropagation(); });

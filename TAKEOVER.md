@@ -215,3 +215,25 @@ Request word for word in momentaryupdates.md. Registered on Cloudflare Registrar
 - **Canonical / og:url / sitemap / robots / JSON-LD** = https://santoshiband.org (tools/seo.py SITE, index.html, live/closed/index.html).
   santoshi-band.pages.dev still serves the same site, NOT redirected (Marko is asked first). Functional calls stay relative; cam.js's pairing QR still names pages.dev.
 - **Needs once from Marko**: https://santoshiband.org (and www) as Authorised JavaScript origins of the Google client "Mantra pages" (project mantra-login-513105), or sign-in on the new domain fails. /admin works on pages.dev meanwhile.
+
+### Feature list of the player (audit of 15.11.2026: git log of live/*, sbctl.js, the home banner, momentaryupdates.md 13.11 to 15.11)
+Rule: never drop an item below in a refactor; verify each on home /, /live/ and the admin camera view. Status as of ui.js?v=12.
+| # | Marko asked / approved | Where | Status |
+|---|---|---|---|
+| 1 | TAP FOR SOUND in the centre on the first visit, sound starts, controls come (15.11) | ui.js | on all |
+| 2 | Round buttons: chat, small window (PiP), sound, exit (15.11) | ui.js | on all |
+| 3 | Short tap on the picture shows the controls, again hides them; fade 5 s (15.11) | ui.js | fixed 15.11 (synthetic mousemove bug) |
+| 4 | EXIT door to the sleeping band /live/closed/ (RESTART THE STREAM) (15.11) | ui.js, live/closed | restored on all; from the home frame it leaves through the top window; admin view hides it (&noexit) |
+| 5 | Double-tap / double-click = full screen, landscape lock, Esc (13.11) | ui.js | restored |
+| 6 | Full screen button (13.11) | ui.js | on all |
+| 7 | "N watching" badge, chat side panel with name first, #chat link (14.11) | sbchat.js | on all; chat beside (wide) or below the picture |
+| 8 | Chat as Google Doc, stream statistics, Drive folders (14.11) | admin/live.js, functions | unchanged (server side) |
+| 9 | Speaker drawer VOLUME + MUTE, one sound control (15.11) | ui.js | on all |
+| 10 | Zoom and move drawer: ZOOM 1-3x, PAN X/Y, RESET, drag-to-pan (15.11) | ui.js | on all |
+| 11 | HLS only, top quality, deep buffer; no LOW DELAY, no WebRTC for viewers (15.11) | player.js | on all |
+| 12 | QUALITY gear (YouTube-style) (15.11: "copy YouTube system, the gear icon, quality") | ui.js (relay HLS), studio.js (Studio ladder) | restored 15.11; relay has ONE rendition (720p), a ladder needs VM transcoding |
+| 13 | Audio options Q:160/80/40 S/M, Delay (Studio route) | studio.js | restored in the home frame; relay shows audio tracks when several exist |
+| 14 | The band seat (?band=1, admin only, not counted) | sbchat.js, admin/live.js | unchanged |
+| 15 | Pictures never resize on hover/tap; PiP only by the PiP button (15.11) | ui.js | kept |
+| 16 | Quality/volume/zoom/pan remembered per viewer | ui.js, player.js | sb.q, sb.vol, sb.muted, sb.zoom, sb.panx, sb.pany |
+Removed by his explicit word (stay out): the OVERLAY/Hide button, LOW DELAY/WebRTC, the bottom sound bar, the hover shrink.

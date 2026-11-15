@@ -14,13 +14,15 @@
   var muted = embedded ? /[?&]muted/.test(q) : !(switched && load('sb.muted') !== '1');
   if (switched) try { history.replaceState(null, '', location.pathname + q.replace(/[?&]switch\b/, function (m) { return m[0] === '?' ? '?' : ''; }).replace(/\?&/, '?').replace(/\?$/, '')); } catch (e) {}
     // Full view (opened by itself, not inside the banner): always starts silent, ui.js shows the centre TAP FOR SOUND, the round buttons and the exit.
-  var hls = null, mode = '', cfg = null, retry = null, gotFrames = false, hlsWatch = null, fails = 0, stalls = [];
+  var chosen = null, hls = null, mode = '', cfg = null, retry = null, gotFrames = false, hlsWatch = null, fails = 0, stalls = [];
+  function announce() { try { window.dispatchEvent(new Event('sb-levels')); } catch (e) {} }
   function setMode(m) { mode = m; try { window.dispatchEvent(new CustomEvent('sb-mode', { detail: m })); } catch (e) {} }
   function say(t) { msg.textContent = t || ''; msg.hidden = !t; }
   function play() {
     v.muted = muted;
     var p = v.play();
-    if (p && p.catch) p.catch(function () { if (!v.muted) { v.muted = true; muted = true; v.play().catch(function () {}); if (embedded) sndB.hidden = false; else window.dispatchEvent(new Event('sb-sound-blocked')); } });
+    if (p && p.catch) p.catch(function (err) { if (err && err.name && err.name !== 'NotAllowedError') return;   // only a refused sound counts (a load in progress is not a refusal)
+      if (!v.muted) { v.muted = true; muted = true; v.play().catch(function () {}); if (embedded) sndB.hidden = false; else window.dispatchEvent(new Event('sb-sound-blocked')); } });
   }
   sndB.onclick = function () { v.muted = false; muted = false; v.play().catch(function () {}); sndB.hidden = true; };
   function stop() {
@@ -37,7 +39,7 @@
     stop(); say('Reconnecting…'); later(start, [3000, 5000, 8000, 10000][Math.min(fails++, 3)]);
   }
   function toHls() {
-    stop(); setMode('hls'); gotFrames = false;
+    stop(); setMode('hls'); gotFrames = false; chosen = null;
     hlsWatch = setTimeout(function () { if (mode === 'hls' && !gotFrames) retryHls('hls no picture in 20 s'); }, 20000);
     // Safari (and any browser without Media Source) plays HLS itself; every other browser through hls.js
     var hasMse = !!(window.MediaSource || window.ManagedMediaSource), apple = /Apple/.test(navigator.vendor || '');
@@ -50,11 +52,17 @@
       hls = new Hls({ lowLatencyMode: false, startLevel: 99, capLevelToPlayerSize: false, maxBufferLength: 30, maxMaxBufferLength: 60,
         liveSyncDurationCount: 4, liveMaxLatencyDurationCount: 10, backBufferLength: 10 });
       var media = 0, locked = false;
-      hls.on(Hls.Events.MANIFEST_PARSED, function (e, d) { var top = d.levels.length - 1; hls.startLevel = top; hls.currentLevel = top; locked = true; });
+      // the viewer's choice (QUALITY in the gear, sb.q): 'auto' or a height; the default is the top rendition, locked
+      hls.on(Hls.Events.MANIFEST_PARSED, function (e, d) {
+        var top = d.levels.length - 1, pref = load('sb.q'), i = top;
+        if (pref === 'auto') i = -1; else if (pref) { for (var k = 0; k < d.levels.length; k++) if (String(d.levels[k].height) === pref) i = k; }
+        hls.startLevel = i < 0 ? top : i; hls.currentLevel = i; chosen = i; locked = i === top; announce();
+      });
+      hls.on(Hls.Events.AUDIO_TRACKS_UPDATED, announce);
       hls.on(Hls.Events.ERROR, function (e, d) {
         if (d.details === 'bufferStalledError' && locked) {
           var n = Date.now(); stalls = stalls.filter(function (t) { return n - t < 60000; }); stalls.push(n);
-          if (stalls.length >= 3) { locked = false; hls.currentLevel = -1; console.warn('player: 3 stalls in a minute, automatic quality'); }
+          if (stalls.length >= 3 && hls.levels.length > 1) { locked = false; hls.currentLevel = -1; chosen = -1; announce(); console.warn('player: 3 stalls in a minute, automatic quality'); }
         }
         if (!d.fatal) return;
         if (d.type === Hls.ErrorTypes.MEDIA_ERROR && media++ < 2) { hls.recoverMediaError(); return; }
@@ -101,7 +109,14 @@
   if (showStats) { stB.hidden = false; setInterval(function () { window.sbStats().then(function (o) { stB.textContent = o.mode + ' ' + o.width + 'x' + o.height + (o.fps != null ? ' ' + o.fps + ' fps' : '') + (o.kbps ? ' ' + o.kbps + ' kb/s' : '') + (o.jitterBufferMs != null ? '\nbuffer ' + o.jitterBufferMs + ' ms' : '') + (o.rttMs != null ? ' rtt ' + o.rttMs + ' ms' : '') + (o.behindLive != null ? '\nbehind live ' + o.behindLive.toFixed(1) + ' s' : ''); }); }, 1000); }
   // hooks for ui.js (full view only)
   window.sbPlayer = { video: v, setMuted: function (m) { muted = !!m; v.muted = muted; if (!muted) v.play().catch(function () {}); }, embedded: embedded,
-    mode: function () { return mode; }, switched: switched };
+    mode: function () { return mode; }, switched: switched,
+    // the gear (ui.js): the renditions the relay really sends and the audio tracks; setLevel(-1) = Auto
+    levels: function () { return hls ? hls.levels.map(function (l, i) { return { i: i, h: l.height, kbps: Math.round((l.bitrate || 0) / 1000) }; }) : []; },
+    level: function () { return hls ? (chosen !== null ? chosen : hls.levels.length - 1) : -2; },   // the viewer's setting: -1 Auto, else a level index (the top one until chosen)
+    setLevel: function (i) { if (!hls) return; hls.currentLevel = i; chosen = i; try { localStorage.setItem('sb.q', i < 0 ? 'auto' : String(hls.levels[i].height)); } catch (e) {} announce(); },
+    audioTracks: function () { return hls && hls.audioTracks ? hls.audioTracks.map(function (t, i) { return { i: i, name: t.name || t.lang || ('Audio ' + (i + 1)) }; }) : []; },
+    audio: function () { return hls ? hls.audioTrack : -1; },
+    setAudio: function (i) { if (hls) { hls.audioTrack = i; announce(); } } };
   window.addEventListener('pagehide', stop);
   start();
 })();

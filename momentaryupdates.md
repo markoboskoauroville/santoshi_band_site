@@ -82,3 +82,6 @@ precedence. Deadline: well before the concert of 21.11.2026.
 
 ## 15.11.2026, connect the domain santoshiband.org (Marko, word for word)
 "Please now connect this domain with my webpage."
+
+## 15.11.2026, missing features: quality, tap, exit (Marko, word for word)
+"Missing features I ask you to do. There is no quality settings at all in the player. Zero. Also, tapping doesn't open buttons. You need to tap... You need to put the the finger on the phone, and you need to hold for certain number of seconds. No. Short tap is opening the overlays. And I don't have an exit button anymore where we are sleeping. It was so funny. It is also gone. Please, don't remove my ideas from my projects. Fix this."
