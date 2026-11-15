@@ -4,6 +4,8 @@ import { json, readSession, readCamera, getLive, newLive, viewUrl, pushUrl, rela
 // (room/worker.js, service binding ROOM). The KV value "live" carries source "browser"|"camera" (and name for a camera) and,
 // since 15.11.2026, via "relay" when the camera sends ONE stream to the Santoshi relay (MediaMTX on chromium-vm, Frankfurt) and the
 // viewers watch it there (WHEP, LL-HLS fallback) instead of one VDO.Ninja peer connection per viewer from the phone.
+// Since 15.11.2026 also via "studio": the Mac (studio.py, paired like a camera) sends ONE master to chromium-vm, the VM builds the
+// quality ladder (HLS 1080/720/480/360, audio Q:160/80/40 S/M) and /live/ plays it with the gear (live/studio.js).
 // One publisher per id: while a camera is live the admin page gets no push address (a second publisher on the same id would fight).
 const room = (env, body) => env.ROOM ? env.ROOM.fetch("https://room/state", { method: "POST", body: JSON.stringify(body) }).then((r) => r.ok).catch(() => false) : Promise.resolve(false);
 const count = (env) => env.ROOM ? env.ROOM.fetch("https://room/count").then((r) => r.json()).then((j) => j.viewers).catch(() => null) : Promise.resolve(null);
@@ -13,9 +15,11 @@ export async function onRequest({ request, env }) {
     const l = await getLive(env);
     // the relay's two public reading doors (no key needed to watch), also while not live: /live/?force plays them for tests
     const rel = relayOn(env) ? (({ whep, hls }) => ({ whep, hls }))(relayUrls(env)) : undefined;
-    if (!l) return json({ live: false, relay: rel });
-    const out = { live: true, view: viewUrl(l), since: l.since, relay: rel };
+    const studio = relayOn(env) ? { hls: relayUrls(env).studio } : undefined;
+    if (!l) return json({ live: false, relay: rel, studio });
+    const out = { live: true, view: viewUrl(l), since: l.since, relay: rel, studio };
     if (l.via === "relay" && rel) { out.via = "relay"; out.whep = rel.whep; out.hls = rel.hls; }
+    if (l.via === "studio" && studio) out.via = "studio";
     return json(out);
   }
   if (request.method !== "POST") return json({ error: "method" }, 405);
@@ -24,7 +28,7 @@ export async function onRequest({ request, env }) {
   const { action = "", via: wish = "" } = await request.json().catch(() => ({}));
   if (action === "stop") { await env.KV.delete("live"); return json({ live: false, room: await room(env, { live: false }) }); }
   // the camera chooses: SANTOSHI RELAY (via "relay", when the relay is set up) or VDO NINJA (via "vdo"); a browser is always VDO.Ninja
-  const via = cam && wish === "relay" && relayOn(env) ? "relay" : undefined;
+  const via = cam && relayOn(env) && (wish === "relay" || wish === "studio") ? wish : undefined;
   let l = await getLive(env);
   let r = !!env.ROOM;
   if (action === "go" && !l) {
@@ -46,7 +50,7 @@ export async function onRequest({ request, env }) {
   if (!l) return json({ live: false, room: r });
   const source = l.source || "browser", out = { live: true, source, view: viewUrl(l), since: l.since, room: r };
   if (source === "camera") out.name = l.name || "camera";
-  if (l.via === "relay") out.via = "relay";
+  if (l.via === "relay" || l.via === "studio") out.via = l.via;
   // the push address goes to the camera (bearer) and to the browser that owns a browser live; never to the admin page while a camera publishes
   if (cam || source === "browser") { out.push = pushUrl(l); out.id = l.id; out.password = l.pw; }
   // the relay's publish door and key: only to a paired camera, only server side here (Pages secret RELAY_KEY)

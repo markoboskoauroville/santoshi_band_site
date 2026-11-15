@@ -25,6 +25,7 @@
     if (pc) { try { pc.close(); } catch (e) {} pc = null; }
     if (sess) { fetch(sess, { method: 'DELETE' }).catch(function () {}); sess = null; }
     if (hls) { try { hls.destroy(); } catch (e) {} hls = null; }
+    if (window.sbStudio) window.sbStudio.stop();   // the Studio ladder (studio.js)
     v.removeAttribute('src'); v.srcObject = null; mode = '';
   }
   function later(fn, ms) { clearTimeout(retry); retry = setTimeout(fn, ms); }
@@ -82,18 +83,25 @@
   function check() {
     return fetch('/api/live', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (j) {
       if (force && j.relay) return { live: true, via: 'relay', whep: j.relay.whep, hls: j.relay.hls };
+      if (/[?&]studio/.test(q) && j.studio) return { live: true, via: 'studio', studio: j.studio };   // tests: the Studio ladder
       if (!j.live) { stop(); if (!embedded) { location.replace('/live/closed/'); return null; } say('The stream has ended. Thank you for watching.'); return null; }
-      if (j.via !== 'relay') { location.replace(j.view.replace(/&muted/g, '') + (muted ? '&muted' : '')); return null; }
+      if (j.via !== 'relay' && j.via !== 'studio') { location.replace(j.view.replace(/&muted/g, '') + (muted ? '&muted' : '')); return null; }
       return j;
     });
   }
   function start() {
-    check().then(function (j) { if (!j) return; cfg = j; /[?&]hls/.test(q) ? toHls() : whep(); }).catch(function () { say('Reconnecting…'); later(start, 3000); });
+    check().then(function (j) {
+      if (!j) return; cfg = j;
+      // 15.11.2026, the Studio route: the Mac's master, the VM's quality ladder (HLS, 10-15 s), the gear (studio.js)
+      if (j.via === 'studio' && window.sbStudio) { stop(); mode = 'studio'; if (window.sbStudio.play(j, play)) return; }
+      /[?&]hls/.test(q) ? toHls() : whep();
+    }).catch(function () { say('Reconnecting…'); later(start, 3000); });
   }
   setInterval(function () { check().catch(function () {}); }, 20000);
   // numbers for tests and the curious (?stats)
   var last = null;
   window.sbStats = function () {
+    if (mode === 'studio' && window.sbStudio) return Promise.resolve(window.sbStudio.stats());
     var o = { mode: mode, width: v.videoWidth, height: v.videoHeight, muted: v.muted, time: v.currentTime };
     if (mode === 'hls') { o.behindLive = hls && hls.latency != null ? hls.latency : (v.seekable.length ? v.seekable.end(v.seekable.length - 1) - v.currentTime : null); return Promise.resolve(o); }
     if (!pc) return Promise.resolve(o);
