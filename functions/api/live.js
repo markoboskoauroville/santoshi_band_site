@@ -20,6 +20,15 @@ export async function onRequest({ request, env }) {
     const out = { live: true, view: viewUrl(l), since: l.since, relay: rel, studio };
     if (l.via === "relay" && rel) { out.via = "relay"; out.whep = rel.whep; out.hls = rel.hls; }
     if (l.via === "studio" && studio) out.via = "studio";
+    // 15.11.2026, the switch to HLS (Marko: "Let's switch everything to HLS right now."): the new /live/ player asks with ?c=hls. An open
+    // page of the OLD player (player.js?v=4, WebRTC first) asks without it, from the page /live/; it reloads to any view whose via is not
+    // relay/studio, so it gets via "switch" and the view /live/?p=santoshi&switch (the new page then keeps the sound when the browser lets
+    // it). Nothing else reads GET /api/live from /live/ (the banner script and /live/closed/ only read "live"). Harmless once no old page is open.
+    if (out.via === "relay" && !new URL(request.url).searchParams.has("c")) {
+      let ref = null; try { ref = new URL(request.headers.get("referer") || ""); } catch (e) {}
+      // a page that already came through the switch (&switch still in its address = an old copy from a cache) is never moved twice: no reload loop
+      if (ref && ref.pathname === "/live/" && !/[?&]switch/.test(ref.search)) { out.via = "switch"; out.view = "/live/?p=santoshi&switch"; }
+    }
     return json(out);
   }
   if (request.method !== "POST") return json({ error: "method" }, 405);
