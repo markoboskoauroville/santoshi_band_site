@@ -65,3 +65,5 @@
   (not counted) to every signed-in admin socket, so Marko watching /live/ while signed in was "nobody". Now only a socket opened with
   ?band=1 (admin/live.js passes it) can take the seat; the public player never asks. Cause found by reading, not reproduced (no live stream at the time).
 - Test a count with two `new WebSocket('wss://…/api/room?vid=x', {headers:{origin:…}})` in node 24 (no browser needed).
+
+- 15.11.2026: /admin opens on LIVE (Marko: live is used more often). Tab buttons LIVE, PICTURES; p2 (LIVE) is before p1 and has class "on"; tab() in live.js is id-based so order needs no JS change. Sign out lives inside the LIVE pane.

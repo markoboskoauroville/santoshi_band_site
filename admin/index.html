@@ -39,10 +39,8 @@ iframe#snd{width:100%;aspect-ratio:16/9;height:auto;border:0;background:#000;bor
 <h1>Santoshi Band &middot; Admin</h1><div class="sub" id="sub">Private &middot; sign in</div>
 <div id="in"><button class="go" id="g">Sign in with Google</button><div id="msg0" class="sub"></div></div>
 <div id="app" style="display:none">
-<div class="tabs"><button id="t1" class="on">PICTURES</button><button id="t2">LIVE</button></div>
-<div class="pane on" id="p1"><div class="sub">Private collection &middot; reference sheets &middot; not public</div>
-<h2>PEOPLE</h2><div class="grid" id="people"></div><h2>INSTRUMENTS</h2><div class="grid" id="instruments"></div></div>
-<div class="pane" id="p2"><button class="go" id="go">GO LIVE</button><div id="msg"></div>
+<div class="tabs"><button id="t2" class="on">LIVE</button><button id="t1">PICTURES</button></div>
+<div class="pane on" id="p2"><button class="go" id="go">GO LIVE</button><div id="msg"></div>
 <div id="sndw" style="position:relative;width:100%;max-width:1100px;margin:12px auto 0;display:none"><iframe id="snd" allow="camera; microphone; autoplay" style="display:block" title="Sender"></iframe></div>
 <div class="sub" id="recinfo"></div>
 <h2>CAMERAS</h2><button class="go" id="pair" style="background:var(--card);color:var(--fg);border:1px solid var(--acc)">PAIR CAMERA</button>
@@ -51,12 +49,14 @@ iframe#snd{width:100%;aspect-ratio:16/9;height:auto;border:0;background:#000;bor
 <div id="chatw" style="display:none"><h2>CHAT &middot; <span id="cnt">0 watching</span></h2><div id="chl"><div class="sub" id="chempty">No messages yet.</div></div>
 <form id="chf"><select id="chn" aria-label="Write as"><option>Santoshi Band</option><option>Marko</option></select><input id="cht" maxlength="300" autocomplete="off" placeholder="Write to the viewers" aria-label="Message"><button type="submit">SEND</button></form>
 <div id="chst"></div><div class="sub" id="docinfo"></div><div class="sub" id="relayst"></div></div><button class="go" id="out" style="background:var(--card);color:var(--mut);border:1px solid var(--line)">Sign out</button></div>
+<div class="pane" id="p1"><div class="sub">Private collection &middot; reference sheets &middot; not public</div>
+<h2>PEOPLE</h2><div class="grid" id="people"></div><h2>INSTRUMENTS</h2><div class="grid" id="instruments"></div></div>
 </div>
 <div id="lb"><button id="x" aria-label="Close">&times;</button><button id="pv" aria-label="Previous">&#8249;</button><button id="nx" aria-label="Next">&#8250;</button><img alt=""><div id="cap"></div></div>
 <script src="https://accounts.google.com/gsi/client" async></script>
 <script src="/sbctl.js?v=2"></script>
 <script src="/sbchat.js?v=3"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<script src="/admin/live.js?v=8"></script>
+<script src="/admin/live.js?v=9"></script>
 <script src="/admin/pics.js?v=1"></script>
 </body></html>

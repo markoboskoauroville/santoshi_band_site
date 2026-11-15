@@ -165,3 +165,6 @@ came from the Mac→phone leg (fixed in Manual Camera v216–v217 and Sound Link
 Request in momentaryupdates.md. Cause: a signed-in admin on /live/ got the band seat (not counted). Fix: the seat only with `?band=1`
 (sbchat.js connect(on, asBand), admin/live.js, functions/api/room.js); sbchat.js?v=3, admin live.js?v=8. Room, KV, relay untouched.
 Proof: see the commit message / SESSIONS of 15.11.2026.
+
+## 15.11.2026: admin opens on LIVE
+admin/index.html only: tabs LIVE | PICTURES, LIVE pane first and selected after sign-in; pair button, ?band=1 seat unchanged; live.js?v=9.
