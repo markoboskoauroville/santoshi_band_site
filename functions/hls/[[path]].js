@@ -15,11 +15,14 @@ const TYPES = { m3u8: "application/vnd.apple.mpegurl", mp4: "video/mp4", m4s: "v
 async function newSession(base, stream) {
   // the cookieCheck=1 answer is the multivariant playlist with ?session=<id> on every URI
   const r = await fetch(`${base}/${stream}/index.m3u8?cookieCheck=1`, { redirect: "manual" });
+  trail.push("s" + r.status);
   if (r.status !== 200) return null;
   const m = (await r.text()).match(/[?&]session=([0-9a-f-]{8,64})/);
   return m ? (sess[stream] = m[1]) : null;
 }
+let trail = [];   // the relay's answers on the last miss, in the x-sb-up header (status codes only, for checks)
 async function upstream(base, stream, file, extra) {
+  trail = [];
   if (file === "index.m3u8") {   // the multivariant playlist always starts a session (cookieCheck): read it that way, keep its session
     const r = await fetch(`${base}/${stream}/index.m3u8?cookieCheck=1`, { redirect: "manual" });
     if (r.status !== 200) return r;
@@ -31,6 +34,7 @@ async function upstream(base, stream, file, extra) {
     if (!s) return new Response("not live", { status: 404 });
     const q = new URLSearchParams(extra); q.set("session", s);
     const r = await fetch(`${base}/${stream}/${file}?${q}`, { redirect: "manual" });
+    trail.push(String(r.status) + (r.headers.get("location") ? ">" + r.headers.get("location").slice(0, 60) : ""));
     if (r.status === 401 || r.status === 403 || (r.status >= 300 && r.status < 400)) { delete sess[stream]; continue; }
     return r;
   }
@@ -65,12 +69,12 @@ export async function onRequestGet({ request, env, waitUntil }) {
   const id = blocking ? null : key.url;
   let job = id && flying.get(id);
   if (!job) {
-    job = upstream(base, stream, file, ll).then(async (r) => ({ status: r.status, body: r.ok ? (list ? plain(await r.text()) : await r.arrayBuffer()) : null }));
+    job = upstream(base, stream, file, ll).then(async (r) => ({ status: r.status, up: trail.join(" "), body: r.ok ? (list ? plain(await r.text()) : await r.arrayBuffer()) : null }));
     if (id) { flying.set(id, job); job.finally(() => flying.delete(id)).catch(() => {}); }
   }
   const got = await job;
   const ok = got.status === 200;
-  const headers = { "content-type": TYPES[ext], "access-control-allow-origin": "*", "cache-control": ok ? `public, max-age=${ttl}` : "no-store", "x-sb-cache": blocking ? "PASS" : "MISS" };
+  const headers = { "content-type": TYPES[ext], "access-control-allow-origin": "*", "cache-control": ok ? `public, max-age=${ttl}` : "no-store", "x-sb-cache": blocking ? "PASS" : "MISS", "x-sb-up": got.up || "" };
   if (!ok) return new Response(got.status === 404 ? "not live" : "relay error", { status: got.status === 404 ? 404 : 502, headers });
   const out = new Response(got.body, { status: 200, headers });
   if (!blocking) waitUntil(cache.put(key, out.clone()));
