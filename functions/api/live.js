@@ -18,7 +18,8 @@ export async function onRequest({ request, env }) {
     // the relay's two public reading doors (no key needed to watch), also while not live: /live/?force plays them for tests
     const rel = relayOn(env) ? (({ whep, hls }) => ({ whep, hls }))(relayUrls(env)) : undefined;
     const studio = relayOn(env) ? { hls: relayUrls(env).studio } : undefined;
-    if (!l) return json({ live: false, relay: rel, studio });
+    // not live: the informational relay block names the Cloudflare door (tunnel) for HLS; whep stays the relay's own (15.11.2026)
+    if (!l) return json({ live: false, relay: rel && { ...rel, hls: relayUrls(env).hlsCdn }, studio });
     const out = { live: true, view: viewUrl(l), since: l.since, relay: rel, studio };
     // 15.11.2026: viewers read HLS through Cloudflare's cache: live.santoshiband.org (Cloudflare Tunnel → santoshi-hls-proxy → MediaMTX
     // on chromium-vm, vm-chromium santoshi-relay/hls-tunnel); hlsDirect = the relay's own door, the player's fallback after two failures
