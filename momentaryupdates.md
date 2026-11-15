@@ -40,3 +40,6 @@ Marko, word for word: "The lifestyle image is great when we are sleeping. Let it
 
 ## 15.11.2026, 0 watching bug (Marko, word for word)
 "0 watching bug: the live page shows 0 watching while people watch (Marko, 15.11.2026)."
+
+## 15.11.2026, admin opens on LIVE (Marko, word for word)
+"please fix my admin page. It's a bit annoying that this picture gallery hidden one is coming first. We're doing live more often. Let Live be the first thing inside the my admin page"
