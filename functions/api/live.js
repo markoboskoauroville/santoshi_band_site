@@ -54,7 +54,13 @@ export async function onRequest({ request, env }) {
   // the push address goes to the camera (bearer) and to the browser that owns a browser live; never to the admin page while a camera publishes
   if (cam || source === "browser") { out.push = pushUrl(l); out.id = l.id; out.password = l.pw; }
   // the relay's publish door and key: only to a paired camera, only server side here (Pages secret RELAY_KEY)
-  if (cam && l.via === "relay") { const u = relayUrls(env); out.whip = u.whip; out.whipUser = "santoshi"; out.whipKey = env.RELAY_KEY; }
+  // 15.11.2026 (CLOUD MIXER): KV "relay:campath" (e.g. "pixel") sends the camera's WHIP to that relay path instead of "santoshi", so the
+  // VM's mixer reads the camera there and publishes the mixed program (text over the picture) on "santoshi", which the viewers watch.
+  if (cam && l.via === "relay") {
+    const u = relayUrls(env), p = (await env.KV.get("relay:campath")) || "";
+    out.whip = /^[a-z0-9_-]{1,32}$/.test(p) && p !== "santoshi" ? u.whip.replace(/\/santoshi\/whip$/, "/" + p + "/whip") : u.whip;
+    out.whipUser = "santoshi"; out.whipKey = env.RELAY_KEY;
+  }
   if (action === "status") out.viewers = await count(env);
   return json(out);
 }
