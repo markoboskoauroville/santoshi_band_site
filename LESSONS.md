@@ -73,3 +73,4 @@
 - 15.11.2026: a new overlay added later must be added to that one CSS rule, or Hide will leave it behind.
 - 15.11.2026: the open chat panel (up to 380 px, fixed) covers the round bar on a phone, so Hide cannot be tapped while chat is open (close it with its ✕ first); clean() also closes the chat.
 - 15.11.2026: test a local /live/ in headless Chrome with python3 http.server plus a tiny handler answering /api/live with {"live":true,"relay":{...}} and ?force; drive it over CDP (Input.dispatchMouseEvent / dispatchKeyEvent), read computed styles.
+- 15.11.2026: two pushes seconds apart start two parallel deploy runs and the OLDER commit can finish last and become production (the first run served ui.js?v=2 after the new commit's run was green). Push once, or after a green run check the live cache-buster and `gh run rerun` the newest run if it is old.
