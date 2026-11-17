@@ -22,6 +22,7 @@ export async function onRequest({ request, env }) {
     if (!l) return json({ live: false, relay: rel && { ...rel, hls: relayUrls(env).hlsCdn }, studio });
     const out = { live: true, view: viewUrl(l), since: l.since, relay: rel, studio };
     // 15.11.2026: viewers read HLS through Cloudflare's cache: live.santoshiband.org (Cloudflare Tunnel → santoshi-hls-proxy → MediaMTX
+    // [17.11.2026: santoshiband.org given up; hlsCdn is the relay's own :8888 door again, see functions/_lib.js]
     // on chromium-vm, vm-chromium santoshi-relay/hls-tunnel); hlsDirect = the relay's own door, the player's fallback after two failures
     if (l.via === "relay" && rel) { out.via = "relay"; out.whep = rel.whep; out.hls = relayUrls(env).hlsCdn; out.hlsDirect = rel.hls; }
     if (l.via === "studio" && studio) out.via = "studio";

@@ -253,3 +253,15 @@ Removed by his explicit word (stay out): the OVERLAY/Hide button, LOW DELAY/WebR
   the CLOUD MIXER on chromium-vm (cloud-mixer-live) fades to the camera and is the only publisher on `santoshi`, so every viewer gets
   H.264 + AAC. GO LIVE / STOP, the chat clearing and the viewers' count are unchanged. Not live: the relay block's hls is the
   Cloudflare door (hlsCdn). Commits 897201d (after an early ship d8905c7 and its revert 86c599c), 5c15258.
+
+## 17.11.2026: santoshiband.org given up (Marko: "please make my domain santoshiband.org free ... Somebody else can take it over.")
+- Every address is back on **https://santoshi-band.pages.dev** (canonical, og:url, sitemap, robots, JSON-LD: tools/seo.py SITE, index.html,
+  live/closed/index.html). The www → apex 301 is gone from functions/_middleware.js.
+- HLS for viewers: `hlsCdn` (functions/_lib.js) is the relay's own door again (RELAY_HOST:8888, the relay hostname under ples-duse.org), no
+  Cloudflare cache in front: about 12 viewers before the VM's ~50 Mbit/s egress is full (vm-chromium TAKEOVER, load test 15.11.2026).
+  A cached door again would need a tunnel hostname in a zone of this account (e.g. hls.ples-duse.org, the original plan) and Marko's
+  `cloudflared login` authorization for that zone.
+- tools/domains.py is replaced by tools/release_domain.py (run by the workflow, soft-fail, idempotent): removes the two Pages custom domains,
+  deletes every DNS record of the zone (apex, www, live), turns Registrar auto-renew off and prints the expiry. The zone stays (a Cloudflare
+  Registrar domain needs it). No refund or early release exists at Cloudflare Registrar: the domain runs out at its expiry and is free then.
+- The santoshi-hls tunnel units on chromium-vm are stopped and disabled (vm-chromium TAKEOVER).

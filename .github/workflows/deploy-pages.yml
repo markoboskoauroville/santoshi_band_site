@@ -49,5 +49,5 @@ jobs:
           mkdir -p "$RUNNER_TEMP/sheets"
           if [ -n "$OLD" ]; then git archive "$OLD^" refs/sheets | tar -x -C "$RUNNER_TEMP"; mv "$RUNNER_TEMP"/refs/sheets/* "$RUNNER_TEMP/sheets/" 2>/dev/null || true; fi
           python3 tools/provision.py "$RUNNER_TEMP/sheets"
-          python3 tools/domains.py || true   # santoshiband.org + www as custom domains (15.11.2026), soft-fail
+          python3 tools/release_domain.py || true   # 17.11.2026: santoshiband.org given up (Pages domains, DNS records, auto-renew off), soft-fail
           bash tools/deploy.sh

@@ -1,4 +1,4 @@
-"""Search engine work for santoshiband.org (since 15.11.2026; was santoshi-band.pages.dev), run by tools/deploy.sh on the folder it publishes.
+"""Search engine work for santoshi-band.pages.dev (santoshiband.org 15-17.11.2026, given up by Marko 17.11.2026), run by tools/deploy.sh on the folder it publishes.
    python3 -I tools/seo.py <out dir>
 - every page of the site gets its own address (/songs/ …): a copy of index.html with its own title, description,
   canonical link and the page it opens on (window.SANTOSHI_PAGE); the in-page menu keeps working as before;
@@ -6,7 +6,7 @@
 - robots.txt, sitemap.xml, and the IndexNow key so Bing (and Yandex, Seznam …) can be told at once."""
 import json, os, re, sys, html
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
-OUT = sys.argv[1]; SITE = "https://santoshiband.org"
+OUT = sys.argv[1]; SITE = "https://santoshi-band.pages.dev"
 INDEXNOW_KEY = "5a7d1c9e3b8f4e2a9c6d0b1f7e4a2c8d"
 J = lambda f: json.load(open(os.path.join(ROOT, f)))
 e = html.escape

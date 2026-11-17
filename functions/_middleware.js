@@ -10,9 +10,6 @@ ${own ? `<script>(function(){var w=document.getElementById('sb-live-w'),m='close
 <script>setInterval(function(){fetch('/api/live').then(function(r){return r.json()}).then(function(j){if(!j.live){var e=document.getElementById('sb-live');if(e)e.remove()}}).catch(function(){})},30000)</script></div>`; };
 export async function onRequest(context) {
   const { request, env } = context, p = new URL(request.url).pathname;
-  // 15.11.2026: www.santoshiband.org -> the apex, 301 with path and query (pages.dev is NOT redirected, Marko decides that)
-  const u = new URL(request.url);
-  if (u.hostname === "www.santoshiband.org") { u.hostname = "santoshiband.org"; return Response.redirect(u.toString(), 301); }
   // 9.11.2026 (Marko: the group picture is gone for good): the old hero files answer 410 before any edge cache
   if (/^\/img\/band\/hero[^\/]*\.jpg$/.test(p)) return new Response("Gone", { status: 410, headers: { "cache-control": "no-store" } });
   if (p.startsWith("/api/") && !OPEN.has(p)) {

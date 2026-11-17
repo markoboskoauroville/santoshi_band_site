@@ -60,6 +60,7 @@ export async function readCamera(env, request) {
 // is watched in this site's own player /live/ (WHEP from MediaMTX on chromium-vm, LL-HLS fallback), not in VDO.Ninja. The relay's
 // address and publish key are Pages secrets (RELAY_HOST, RELAY_KEY), never in this public repo.
 export const relayOn = (env) => !!(env.RELAY_HOST && env.RELAY_KEY);
-export const relayUrls = (env) => { const h = String(env.RELAY_HOST || "").replace(/\/+$/, ""); return { whep: h + ":8889/santoshi/whep", hls: h + ":8888/santoshi/index.m3u8", whip: h + ":8889/santoshi/whip", api: h + ":8443/v3", studio: h + ":2053/studio/master.m3u8", hlsCdn: "https://live.santoshiband.org/santoshi/index.m3u8", studioHealth: h + ":2053/studio/health" }; };
+// 17.11.2026 (Marko gave up santoshiband.org): hlsCdn = the relay's own HLS door again (was https://live.santoshiband.org, the tunnel).
+export const relayUrls = (env) => { const h = String(env.RELAY_HOST || "").replace(/\/+$/, ""); return { whep: h + ":8889/santoshi/whep", hls: h + ":8888/santoshi/index.m3u8", whip: h + ":8889/santoshi/whip", api: h + ":8443/v3", studio: h + ":2053/studio/master.m3u8", hlsCdn: h + ":8888/santoshi/index.m3u8", studioHealth: h + ":2053/studio/health" }; };
 export const viewUrl = (l) => l.via === "relay" || l.via === "studio" ? "/live/?p=santoshi&muted" : `https://vdo.ninja/?view=${l.id}&password=${l.pw}&cleanoutput&autoplay&muted`;
 export const pushUrl = (l) => `https://vdo.ninja/?push=${l.id}&password=${l.pw}&webcam&autostart&cleanoutput`;
