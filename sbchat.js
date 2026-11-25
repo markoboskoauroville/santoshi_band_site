@@ -135,7 +135,7 @@
     });
     function gone() { conn.close(); pn.remove(); var b = document.getElementById('sb-live'); if (b) b.remove(); }
     // the banner's own 30 s check removes the banner when the stream ends: take the panel and the socket with it
-    if (location.hash === '#chat') show(true);   // a link straight into the chat: https://santoshi-band.pages.dev/#chat
+    if (location.hash === '#chat') show(true);   // a link straight into the chat: https://santoshi.markobosko.org/#chat
     var watch = setInterval(function () { if (!wrap.isConnected) { clearInterval(watch); conn.close(); pn.remove(); } }, 3000);
     return { conn: conn, show: show };
   }

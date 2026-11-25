@@ -1,4 +1,4 @@
-# The live room of santoshi-band.pages.dev (14.11.2026): chat + watching count during a live stream, one Durable Object.
+# The live room of santoshi.markobosko.org (14.11.2026): chat + watching count during a live stream, one Durable Object.
 # Deployed by .github/workflows/deploy-pages.yml (wrangler deploy). No public address: workers_dev and preview URLs are off,
 # the Pages Functions reach it only through the service binding ROOM (functions/api/room.js, functions/api/live.js).
 name = "santoshi-live-room"

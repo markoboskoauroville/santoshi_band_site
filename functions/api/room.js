@@ -1,5 +1,5 @@
 import { json, readSession, getLive } from "../_lib.js";
-// The live room's door (14.11.2026): wss://santoshi-band.pages.dev/api/room. Public (viewers: chat + watching count); a signed-in admin
+// The live room's door (14.11.2026): wss://santoshi.markobosko.org/api/room. Public (viewers: chat + watching count); a signed-in admin
 // joins as the band (not counted). The room itself is the Durable Object in room/worker.js, reached only through the service
 // binding ROOM; the x-sb-* headers it trusts are set here and nowhere else.
 export async function onRequest({ request, env }) {

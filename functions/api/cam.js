@@ -15,7 +15,7 @@ export async function onRequest({ request, env }) {
     const token = b64u(crypto.getRandomValues(new Uint8Array(32))), hash = await sha256hex(token);
     const nm = String(name).trim().slice(0, 40) || "Camera";
     await env.KV.put("camtoken:" + hash, JSON.stringify({ name: nm, created: Date.now(), hash }));
-    return json({ token, name: nm, qr: "mantracam://pair?site=https://santoshi-band.pages.dev&token=" + token });
+    return json({ token, name: nm, qr: "mantracam://pair?site=https://santoshi.markobosko.org&token=" + token });
   }
   if (action === "revoke" && /^[0-9a-f]{64}$/.test(id)) { await env.KV.delete("camtoken:" + id); return json({ ok: true }); }
   return json({ error: "action" }, 400);

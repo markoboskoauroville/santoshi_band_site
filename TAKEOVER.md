@@ -15,7 +15,7 @@ CLOUDFLARE_API_TOKEN (pasted by Marko). Flow: edit in santoshi_band → tools/bu
 - LIVE: GO LIVE makes a fresh VDO.Ninja stream id + password (KV key live, 12 h expiry), opens the camera, sends as VDO.Ninja push in
   an iframe, and records the same camera in 5 s pieces to Drive "Santoshi Band live / YYYY-MM-DD HH-MM" (as MPA's rec.js). The
   middleware injects the banner + viewer at the top of every public HTML page while the flag exists (HTMLRewriter), GET /api/live is public.
-- Needs once: origin https://santoshi-band.pages.dev in the Google client's Authorised JavaScript origins (Cloud project mantra-login-513105).
+- Needs once: origin https://santoshi.markobosko.org in the Google client's Authorised JavaScript origins (Cloud project mantra-login-513105).
 
 ## State at close, 13.11.2026
 
@@ -38,7 +38,7 @@ Request word for word in momentaryupdates.md (14.11.2026).
 - **Viewer UI**: sbchat.js (published by tools/deploy.sh), loaded by the banner after sbctl.js: badge "N watching" top left of the
   picture, CHAT button in the overlay bar (red dot for new messages), side panel (full width up to 380 px, inside the picture while in
   real full screen), name first (localStorage sb.chatname, try/catch), then list + input; ✕ / Esc close; reconnects 1 s → 15 s;
-  https://santoshi-band.pages.dev/#chat opens the panel at once. All user text by textContent.
+  https://santoshi.markobosko.org/#chat opens the panel at once. All user text by textContent.
 - **Admin**: LIVE tab shows CHAT · N watching under the sender and the badge on the sender picture; write as "Santoshi Band" or "Marko"
   (remembered). The Google Doc: admin/live.js saveDoc() — at GO LIVE a multipart upload (text/html → application/vnd.google-apps.document)
   named "Santoshi live chat YYYY-MM-DD HH-MM" into the recording folder, then files.update (uploadType=media, text/html) every 45 s when
@@ -70,7 +70,7 @@ watching, to check the badge, the chat both ways and the Doc "Santoshi live chat
 
 - **Pair**: /admin > LIVE > PAIR CAMERA (admin cookie). POST /api/cam {action:"pair",name} makes a 32-byte base64url device token, KV keeps
   only its SHA-256 as `camtoken:<hex>` → {name, created, hash}; the token is shown once as text + QR (qrcodejs 1.0.0 from cdnjs) carrying
-  `mantracam://pair?site=https://santoshi-band.pages.dev&token=<token>`. GET /api/cam lists, POST {action:"revoke",id} removes (REVOKE button).
+  `mantracam://pair?site=https://santoshi.markobosko.org&token=<token>`. GET /api/cam lists, POST {action:"revoke",id} removes (REVOKE button).
 - **Use**: POST /api/live with `Authorization: Bearer <token>` (or the sbadm cookie as before), body {action:"go"|"stop"|"status"}.
   Response when live: {live:true, source:"camera"|"browser", view, since, room, id, password, push, name?(camera)}; not live: {live:false, room}.
   `id`+`password` are the VDO.Ninja `?push=<id>&password=<pw>` values. No/bad auth: 401 {error:"login"}. GET /api/live stays public and unchanged.
@@ -118,7 +118,7 @@ Request word for word in momentaryupdates.md (14.11.2026 ~23:58). VDO.Ninja made
 
 The relay is live and core on the VM; the site runs it when a camera goes live with SANTOSHI RELAY (the app's default since v212).
 Waiting for Marko, in the morning with the Sony: Manual Camera → Settings → STREAMING → SANTOSHI RELAY; open
-https://santoshi-band.pages.dev on another device (the banner plays it; tap the speaker); hold LIVE 2 s to stop; the recording is in
+https://santoshi.markobosko.org on another device (the banner plays it; tap the speaker); hold LIVE 2 s to stop; the recording is in
 Drive "Santoshi Band live (relay)". Free limits: Oracle Always Free gives 10 TB egress a month (~4.5 Mbit/s per viewer ≈ 2 GB per
 viewer-hour, so ~5000 viewer-hours); the VM's 2 OCPU carry MediaMTX easily (13 % of one core at 8 viewers).
 Drive upload caveat (15.11.2026 00:47): the VM's rclone uses rclone's public Google client, whose GLOBAL per-minute quota was exhausted
@@ -255,7 +255,7 @@ Removed by his explicit word (stay out): the OVERLAY/Hide button, LOW DELAY/WebR
   Cloudflare door (hlsCdn). Commits 897201d (after an early ship d8905c7 and its revert 86c599c), 5c15258.
 
 ## 17.11.2026: santoshiband.org given up (Marko: "please make my domain santoshiband.org free ... Somebody else can take it over.")
-- Every address is back on **https://santoshi-band.pages.dev** (canonical, og:url, sitemap, robots, JSON-LD: tools/seo.py SITE, index.html,
+- Every address is back on **https://santoshi.markobosko.org** (canonical, og:url, sitemap, robots, JSON-LD: tools/seo.py SITE, index.html,
   live/closed/index.html). The www → apex 301 is gone from functions/_middleware.js.
 - HLS for viewers: `hlsCdn` (functions/_lib.js) is the relay's own door again (RELAY_HOST:8888, the relay hostname under ples-duse.org), no
   Cloudflare cache in front: about 12 viewers before the VM's ~50 Mbit/s egress is full (vm-chromium TAKEOVER, load test 15.11.2026).

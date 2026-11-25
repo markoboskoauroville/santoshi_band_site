@@ -1,5 +1,5 @@
 #!/bin/bash
-# Publishes santoshi-band.pages.dev (the page, img/, audio/, with SEO pages) and mantrasantoshiconcerts.pages.dev
+# Publishes santoshi.markobosko.org (the page, img/, audio/, with SEO pages) and santoshi-concerts.markobosko.org
 # (concerts/). Run by GitHub Actions on every push to main; needs CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID.
 set -e
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"; OUT="$(mktemp -d)"
